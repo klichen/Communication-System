@@ -1,14 +1,12 @@
 public class Message {
-    private int id;
     private String message;
     private Person sender;
     private Person receiver;
 
-    public Message(String message, Person sender, Person receiver, int id){
+    public Message(String message, Person sender, Person receiver){
         this.message = message;
         this.sender = sender;
         this.receiver = receiver;
-        this.id = id;
     }
 
     public String getMessage(){
