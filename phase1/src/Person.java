@@ -34,9 +34,7 @@ public abstract class Person<Public> {
     }
 
     // adds a message that was sent to Person to their storage
-    public void addToMessageStorage(Message newMessage){
-        String messageContent = newMessage.getMessage();
-        Person messageSender = newMessage.getSender();
+    public void addToMessageStorage(String messageContent, Person messageSender){
         this.messageStorage.add(("Sender: " + messageSender + " Message Contents: " + messageContent));
     }
 
