@@ -16,4 +16,10 @@ public class Organizer extends  Person{
     void addToContactList(String contact) {
         this.contactList.add(contact);
     }
+
+    // returns type of person
+
+    // returns list of events
+
+    // can add event? or in manager?
 }

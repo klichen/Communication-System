@@ -15,4 +15,6 @@ public class Attendee extends Person{
     void addToContactList(String contact) {
         this.contactList.add(contact);
     }
+
+    // returns type of person
 }
