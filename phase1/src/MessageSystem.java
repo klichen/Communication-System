@@ -9,7 +9,7 @@ public class MessageSystem {
         boolean singleRecipient = false;
         Person recipient = null;
         for(Person user: users){
-            if (receiver == user.getUsername) { // getUsername will be the get method in Person's class
+            if (receiver == user.getUsername()) { // getUsername will be the get method in Person's class
                 singleRecipient = true;
                 recipient = user;
                 break;
