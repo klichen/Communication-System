@@ -17,7 +17,7 @@ public class OrganizerText {
     public void messageAllSpeakers(String message, Person currentPerson) {
         for (Person user : people) {
             if (user instanceof Speaker) {
-                user.addMessage(new Message(message, currentPerson, user)); //this method will be the setter method
+                user.addToMessageStorage(new Message(message, currentPerson, user));
                 // defined in Person Class
             }
         }
@@ -32,7 +32,7 @@ public class OrganizerText {
     public void messageAllAttendees(String message, Person currentPerson) {
         for (Person user : people) {
             if (user instanceof Attendee) {
-                user.addMessage(new Message(message, currentPerson, user)); //this method will be the setter method
+                user.addToMessageStorage(new Message(message, currentPerson, user));
                 // defined in Person Class
             }
         }
@@ -46,6 +46,6 @@ public class OrganizerText {
      * @param recipient The recipient of the message
      */
     public void messageSingleRecipient(String message, Person currentPerson, Person recipient) {
-        recipient.addMessage(new Message(message, currentPerson, recipient)); //this method will be the setter method
+        recipient.addToMessageStorage(new Message(message, currentPerson, recipient)); //this method will be the setter method
     }
 }
