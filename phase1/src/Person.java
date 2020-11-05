@@ -4,31 +4,26 @@ public class Person {
     private String username;
     private String password;
     private ArrayList<Person> contactList;
+    private ArrayList<Message> messageStorage;
 
     public Person(String username, String password){
         this.username = username;
         this.password = password;
         this.contactList = new ArrayList<>();
-    }
-
-    public Person getTypePerson(){
-        return this;
+        this.messageStorage = new ArrayList<>();
     }
 
     public ArrayList<Person> getContactList(){
         return this.contactList;
     }
 
-    public void setContactList(ArrayList<Person> contactList) {
-        this.contactList = contactList;
+    public void addToContactList(Person contact) {
+        this.contactList.add(contact);
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void addToMessageStorage(Message newMessage){
+        this.messageStorage.add(newMessage);
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }
 
