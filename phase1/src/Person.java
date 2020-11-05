@@ -1,16 +1,16 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Person {
+public abstract class Person<Public> {
     private String username;
     private String password;
-    //private ArrayList<Person> contactList;
+    private ArrayList<Person> contactList;
     private ArrayList<String> messageStorage;
 
     public Person(String username, String password){
         this.username = username;
         this.password = password;
-        //this.contactList = new ArrayList<>();
+        this.contactList = new ArrayList<>();
         this.messageStorage = new ArrayList<>();
     }
 
@@ -20,14 +20,10 @@ public class Person {
     }
 
     // returns the list of people the Person can message
-    //public ArrayList<Person> getContactList(){
-        //return this.contactList;
-    //}
+    abstract ArrayList<Person> getContactList();
 
     // adds a person to Person's contact list
-    //public void addToContactList(Person contact) {
-        //this.contactList.add(contact);
-    //}
+    abstract void addToContactList(Person contact);
 
     // returns messages that has been sent to Person
     public String getStoredMessages(){
