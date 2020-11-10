@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 
-public class Speaker extends Person{
+public class Speaker extends Person {
+
+    private ArrayList<Event> schedule;
+
     public Speaker(String username, String password) {
         super(username, password);
-        ArrayList<String> contactList = new ArrayList<String>();
+        this.contactList = new ArrayList<String>();
         this.isSpeaker = true;
         this.isAttendee = false;
         this.isOrganizer = false;
+        this.schedule = new ArrayList<Event>();
     }
 
     @Override
@@ -32,6 +36,10 @@ public class Speaker extends Person{
     @Override
     boolean isOrganizerType() {
         return this.isOrganizer;
+    }
+
+    public ArrayList<Event> getSchedule(){
+        return this.schedule;
     }
 
 }

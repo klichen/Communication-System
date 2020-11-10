@@ -4,7 +4,7 @@ public class Organizer extends  Person{
     public Organizer(String username, String password) {
         super(username, password);
         // DOES NOT UPDATE WHEN NEW PEOPLE ARE MADE
-        ArrayList<String> contactList = Person.getAllPeople();
+        this.contactList = Person.getAllPeople();
         this.isSpeaker = false;
         this.isAttendee = false;
         this.isOrganizer = true;
