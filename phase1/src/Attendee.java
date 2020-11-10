@@ -1,19 +1,36 @@
 import java.util.ArrayList;
 
-public class Attendee extends Person {
-
+public class Attendee extends Person{
     public Attendee(String username, String password) {
         super(username, password);
-        contactList = new ArrayList<Person>();
+        ArrayList<String> contactList = new ArrayList<String>();
+        this.isSpeaker = false;
+        this.isAttendee = true;
+        this.isOrganizer = false;
     }
 
     @Override
-    ArrayList<Person> getContactList() {
+    ArrayList<String> getContactList() {
         return this.contactList;
     }
 
     @Override
-    void addToContactList(Person contact) {
+    void addToContactList(String contact) {
         this.contactList.add(contact);
+    }
+
+    @Override
+    boolean isSpeakerType() {
+        return this.isSpeaker;
+    }
+
+    @Override
+    boolean isAttendeeType() {
+        return this.isAttendee;
+    }
+
+    @Override
+    boolean isOrganizerType() {
+        return this.isOrganizer;
     }
 }

@@ -1,27 +1,44 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Person<Public> {
-    protected ArrayList<Person> contactList;
     private String username;
     private String password;
+    protected ArrayList<Person> contactList;
     private ArrayList<String> messageStorage;
+    protected boolean isSpeaker;
+    protected boolean isAttendee;
+    protected boolean isOrganizer;
+
+    static ArrayList<String> allPeople;
 
     public Person(String username, String password){
         this.username = username;
         this.password = password;
         this.messageStorage = new ArrayList<>();
-    }
-
-    // returns the Person's username
-    public String getUsername(){
-        return this.username;
+        allPeople.add(this.username);
     }
 
     // returns the list of people the Person can message
     abstract ArrayList<Person> getContactList();
 
-    // adds a person to Person's contact list
-    abstract void addToContactList(Person contact);
+    // adds a person's username to Person's contact list
+    abstract void addToContactList(String contact);
+
+    // returns true if person is a speaker
+    abstract boolean isSpeakerType();
+
+    // returns true if person is an attendee
+    abstract boolean isAttendeeType();
+
+    // returns true if person is an organizer
+    abstract boolean isOrganizerType();
+
+
+    // returns the Person's username
+    public String getUsername(){
+        return this.username;
+    }
 
     // returns messages that has been sent to Person
     public String getStoredMessages(){
@@ -30,12 +47,13 @@ public abstract class Person<Public> {
     }
 
     // adds a message that was sent to Person to their storage
-    public void addToMessageStorage(Message newMessage){
-        String messageContent = newMessage.getMessage();
-        Person messageSender = newMessage.getSender();
+    public void addToMessageStorage(String messageContent, Person messageSender){
         this.messageStorage.add(("Sender: " + messageSender + " Message Contents: " + messageContent));
     }
 
-
+    // returns a list with every person
+    public static ArrayList<String> getAllPeople() {
+        return allPeople;
+    }
 }
 
