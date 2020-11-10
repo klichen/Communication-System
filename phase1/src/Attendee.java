@@ -37,4 +37,8 @@ public class Attendee extends Person{
     boolean isOrganizerType() {
         return this.isOrganizer;
     }
+
+    public ArrayList<Event> getSchedule(){
+        return this.schedule;
+    }
 }

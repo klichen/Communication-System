@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class AttendeeManager {
 
     private Attendee attendee;
@@ -18,6 +20,9 @@ public class AttendeeManager {
     }
 
     // See schedule of the events for which they signed up
+    public ArrayList<Event> getSchedule(){
+        return attendee.getSchedule();
+    }
 
     // Send messages to and receive messages from other Attendees, and message with Speakers
 }
