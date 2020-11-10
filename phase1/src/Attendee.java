@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 
 public class Attendee extends Person{
+
+    private ArrayList<Event> schedule;
+
     public Attendee(String username, String password) {
         super(username, password);
-        ArrayList<String> contactList = new ArrayList<String>();
+        this.contactList = new ArrayList<String>();
         this.isSpeaker = false;
         this.isAttendee = true;
         this.isOrganizer = false;
+        this.schedule = new ArrayList<Event>();
     }
 
     @Override
