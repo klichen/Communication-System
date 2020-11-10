@@ -6,6 +6,9 @@ public abstract class Person<Public> {
     private String password;
     protected ArrayList<Person> contactList;
     private ArrayList<String> messageStorage;
+    protected boolean isSpeaker;
+    protected boolean isAttendee;
+    protected boolean isOrganizer;
 
     static ArrayList<String> allPeople;
 

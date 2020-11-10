@@ -5,6 +5,9 @@ public class Organizer extends  Person{
         super(username, password);
         // DOES NOT UPDATE WHEN NEW PEOPLE ARE MADE
         ArrayList<String> contactList = Person.getAllPeople();
+        this.isSpeaker = false;
+        this.isAttendee = false;
+        this.isOrganizer = true;
     }
 
     @Override
