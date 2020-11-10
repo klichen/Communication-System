@@ -19,5 +19,18 @@ public class Attendee extends Person{
         this.contactList.add(contact);
     }
 
-    // returns type of person
+    @Override
+    boolean isSpeakerType() {
+        return this.isSpeaker;
+    }
+
+    @Override
+    boolean isAttendeeType() {
+        return this.isAttendee;
+    }
+
+    @Override
+    boolean isOrganizerType() {
+        return this.isOrganizer;
+    }
 }

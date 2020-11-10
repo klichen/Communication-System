@@ -19,16 +19,26 @@ public abstract class Person<Public> {
         allPeople.add(this.username);
     }
 
-    // returns the Person's username
-    public String getUsername(){
-        return this.username;
-    }
-
     // returns the list of people the Person can message
     abstract ArrayList<Person> getContactList();
 
     // adds a person's username to Person's contact list
     abstract void addToContactList(String contact);
+
+    // returns true if person is a speaker
+    abstract boolean isSpeakerType();
+
+    // returns true if person is an attendee
+    abstract boolean isAttendeeType();
+
+    // returns true if person is an organizer
+    abstract boolean isOrganizerType();
+
+
+    // returns the Person's username
+    public String getUsername(){
+        return this.username;
+    }
 
     // returns messages that has been sent to Person
     public String getStoredMessages(){
