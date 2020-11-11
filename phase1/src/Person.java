@@ -40,6 +40,11 @@ public abstract class Person<Public> {
         return this.username;
     }
 
+    // returns Person's password
+    public String getPassword(){
+        return this.password;
+    }
+
     // returns messages that has been sent to Person
     public String getStoredMessages(){
         String delim = " ,";
