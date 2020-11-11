@@ -1,4 +1,3 @@
-package src;
 
 public class EventScheduler {
     private Event[] lst;
