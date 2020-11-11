@@ -4,36 +4,36 @@ import java.util.List;
 public abstract class Person<Public> {
     private String username;
     private String password;
-    protected ArrayList<Person> contactList;
     private ArrayList<String> messageStorage;
     protected boolean isSpeaker;
     protected boolean isAttendee;
     protected boolean isOrganizer;
 
-    static ArrayList<String> allPeople;
-
     public Person(String username, String password){
         this.username = username;
         this.password = password;
         this.messageStorage = new ArrayList<>();
-        allPeople.add(this.username);
     }
 
-    // returns the list of people the Person can message
-    abstract ArrayList<Person> getContactList();
-
-    // adds a person's username to Person's contact list
-    abstract void addToContactList(String contact);
-
     // returns true if person is a speaker
-    abstract boolean isSpeakerType();
+    boolean isSpeakerType() {
+        return this.isSpeaker;
+    }
 
     // returns true if person is an attendee
-    abstract boolean isAttendeeType();
+    boolean isAttendeeType() {
+        return this.isAttendee;
+    }
 
     // returns true if person is an organizer
-    abstract boolean isOrganizerType();
+    boolean isOrganizerType() {
+        return this.isOrganizer;
+    }
 
+    // returns true since person is a person
+    boolean isPersonType() {
+        return true;
+    }
 
     // returns the Person's username
     public String getUsername(){
@@ -49,11 +49,6 @@ public abstract class Person<Public> {
     // adds a message that was sent to Person to their storage
     public void addToMessageStorage(String messageContent, Person messageSender){
         this.messageStorage.add(("Sender: " + messageSender + " Message Contents: " + messageContent));
-    }
-
-    // returns a list with every person
-    public static ArrayList<String> getAllPeople() {
-        return allPeople;
     }
 }
 

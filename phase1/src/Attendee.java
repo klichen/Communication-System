@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Attendee extends Person{
-
+    private ArrayList<String> contactList;
     private ArrayList<Event> schedule;
 
     public Attendee(String username, String password) {
@@ -13,29 +13,14 @@ public class Attendee extends Person{
         this.schedule = new ArrayList<Event>();
     }
 
-    @Override
+    // returns the list of people the Person can message
     ArrayList<String> getContactList() {
         return this.contactList;
     }
 
-    @Override
+    // adds a person's username to Person's contact list
     void addToContactList(String contact) {
         this.contactList.add(contact);
-    }
-
-    @Override
-    boolean isSpeakerType() {
-        return this.isSpeaker;
-    }
-
-    @Override
-    boolean isAttendeeType() {
-        return this.isAttendee;
-    }
-
-    @Override
-    boolean isOrganizerType() {
-        return this.isOrganizer;
     }
 
     public ArrayList<Event> getSchedule(){

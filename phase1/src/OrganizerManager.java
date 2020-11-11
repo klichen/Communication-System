@@ -23,4 +23,6 @@ public class OrganizerManager {
     public void scheduleSpeakers(){
 
     }
+
+    // Returns list of events
 }
