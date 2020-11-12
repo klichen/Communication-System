@@ -1,0 +1,10 @@
+Events
+1,9,user,pass
+1,10,user,pass
+1,9,otheer,pass
+2,9,user,pass
+1,9,user,pass
+
+Logins
+attendee,user,pass
+attendee,user,pass
