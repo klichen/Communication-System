@@ -11,7 +11,13 @@ public class AttendeeManager {
 
     // Signup for events
     public void eventSignUp(Event event){
-
+        ArrayList<Event> attendeeSchedule = new ArrayList<Event> (attendee.getSchedule());
+        for (Event i: attendeeSchedule) {
+            if (i == event) {
+                event.updateInEvent(attendee);
+                attendee.updateSchedule(event);
+            }
+        }
     }
 
     // Cancel their enrolment in an event

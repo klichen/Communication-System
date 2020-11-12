@@ -26,4 +26,8 @@ public class Attendee extends Person{
     public ArrayList<Event> getSchedule(){
         return this.schedule;
     }
+
+    public void updateSchedule(Event event){
+        this.schedule.add(event);
+    }
 }
