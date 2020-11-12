@@ -17,14 +17,52 @@ public class SpeakerManager {
 
     //  Message all Attendees who are signed up for a particular event, at once or individually.
 
-    public void updateContactList(){
-        ArrayList<Event> schedule = getSchedule();
-        ArrayList<String> contactList = speaker.getContactList();
-        for (Event i: schedule){
-            List<Object> attendeeList = i.getInEvent();
-            for (Object j: attendeeList){
-                if (!contactList.contains(j.))
+    // See if a person is in contacts
+    public boolean isContact(String personUsername){
+        ArrayList<String> contactList = new ArrayList<>(this.speaker.getContactList());
+        for (String i: contactList){
+            if (i.equals(personUsername)){
+                return true;
             }
         }
+        return false;
+    }
+
+    // add attendees of all talks to contact list
+    public void addAttendeesToContactList(Event event){
+        ArrayList<String> contactList = this.speaker.getContactList();
+        List<Person> attendeeList = event.getInEvent();
+
+        for (Person i: attendeeList){
+            if (!(contactList.contains(i.getUsername()))){
+                this.speaker.addToContactList(i.getUsername());
+            }
+        }
+    }
+
+    // remove attendees of talk from contact list
+    // to be used in case of cancellation of an event
+    public void removeAttendeesFromContactList(Event event){
+        List<Person> attendeesToGetRid = event.getInEvent();
+        ArrayList<String> attendeesToKeep = getAllAttendees();
+
+        for (Person i: attendeesToGetRid){
+            if (!(attendeesToKeep.contains(i.getUsername()))){
+                this.speaker.removeFromContactList(i.getUsername());
+            }
+        }
+    }
+
+    private ArrayList<String> getAllAttendees() {
+        ArrayList<Event> schedule = new ArrayList<>(this.speaker.getSchedule());
+        ArrayList<String> AttendeeList = new ArrayList<>();
+
+        for (Event i: schedule){
+            for (Person j: i.getInEvent()){
+                AttendeeList.add(j.getUsername());
+            }
+        }
+
+        return AttendeeList;
     }
 }
