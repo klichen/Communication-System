@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class SpeakerManager {
 
@@ -20,7 +21,10 @@ public class SpeakerManager {
         ArrayList<Event> schedule = getSchedule();
         ArrayList<String> contactList = speaker.getContactList();
         for (Event i: schedule){
-            attendeeList =
+            List<Object> attendeeList = i.getInEvent();
+            for (Object j: attendeeList){
+                if (!contactList.contains(j.))
+            }
         }
     }
 }

@@ -3,7 +3,7 @@ public class Event {
     private String id;
     private int time;
     private Speaker speaker;
-    private List<Object> inEvent;
+    private List<Person> inEvent;
 
     public Event(String id, int time, Speaker speaker){
         this.id = id;
@@ -33,11 +33,11 @@ public class Event {
     }
 
     // Update the people who signed up for an event
-    public void updateInEvent(Object person){
+    public void updateInEvent(Person person){
         inEvent.add(person);
     }
 
-    public List<Object> getInEvent(){
+    public List<Person> getInEvent(){
         return this.inEvent;
     }
 }
