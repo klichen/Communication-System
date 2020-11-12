@@ -1,25 +1,39 @@
-
+import java.util.List;
 public class Event {
-    private int person;
+    private String id;
     private int time;
-    private Person speaker;
-    public Event(int _id, int time, Person speaker){
-        this.person = _id;
+    private Speaker speaker;
+    private List<Object> inEvent;
+
+    public Event(String id, int time, Speaker speaker){
+        this.id = id;
         this.time = time;
         this.speaker = speaker;
-    }
-    // getter for time
-    public int getTime() {
-        return this.time;
+        inEvent = null; // Contains Persons who signed up for event
     }
 
-    // getter for speaker_id
-    public String getSpeaker_id() {
-        return this.speaker.getUsername();
+    // Returns the Event's id
+    public String getID(){
+        return id;
     }
 
-    //getter for speaker
-    public Person getSpeaker(){
-        return this.speaker;
+    // Returns the start time of the event
+    public int getTime(){
+        return time;
+    }
+
+    // Returns the speaker object of the event
+    public Speaker getSpeaker(){
+        return speaker;
+    }
+
+    // Return how many people in certain Event
+    public int getCountInEvent(){
+        return inEvent.size();
+    }
+
+    // Update the people who signed up for an event
+    public void updateInEvent(Object person){
+        inEvent.add(person);
     }
 }
