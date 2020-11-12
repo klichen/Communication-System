@@ -9,13 +9,13 @@ public class MessageSystem {
         boolean singleRecipient = false;
         Person recipient = null;
         for(Person user: users){
-            if (receiver.equals(user.getUsername())) { // getUsername will be the get method in Person's class
+            if (receiver.equals(user.getUsername())) {
                 singleRecipient = true;
                 recipient = user;
                 break;
             }
         }
-        if(sender instanceof Organizer){
+        if(sender.isOrganizerType()){
             OrganizerText text = new OrganizerText(users);
             if(singleRecipient) {
                 text.messageSingleRecipient(message, currPerson, recipient);
@@ -27,13 +27,13 @@ public class MessageSystem {
                 text.messageAllAttendees(message, currPerson);
             }
         }
-        else if(sender instanceof Attendee){
+        else if(sender.isAttendeeType()){
             AttendeeText text = new AttendeeText(users); // Assuming the AttendeeText is implemented in the same way as
                                                          // OrganizerText.
             text.sendMessage(message, currPerson, recipient); // Assuming AttendeeText is implemented similar to
                                                               // OrganizerText
         }
-        else if(sender instanceof Speaker){
+        else if(sender.isSpeakerType()){
             // Waiting for SpeakerText class to be completed first
         }
     }
