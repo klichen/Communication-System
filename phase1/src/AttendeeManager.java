@@ -15,7 +15,7 @@ public class AttendeeManager {
         for (Event i: attendeeSchedule) {
             if (i == event) {
                 event.updateInEvent(attendee);
-                attendee.updateSchedule(event);
+                attendee.schedule.add(event);
             }
         }
     }

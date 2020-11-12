@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Attendee extends Person{
     private ArrayList<String> contactList;
-    private ArrayList<Event> schedule;
+    protected ArrayList<Event> schedule;
 
     public Attendee(String username, String password) {
         super(username, password);
@@ -27,7 +27,7 @@ public class Attendee extends Person{
         return this.schedule;
     }
 
-    public void updateSchedule(Event event){
-        this.schedule.add(event);
-    }
+    //public void updateSchedule(Event event){
+        //this.schedule.add(event);
+    //}
 }
