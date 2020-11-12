@@ -15,4 +15,12 @@ public class SpeakerManager {
     }
 
     //  Message all Attendees who are signed up for a particular event, at once or individually.
+
+    public void updateContactList(){
+        ArrayList<Event> schedule = getSchedule();
+        ArrayList<String> contactList = speaker.getContactList();
+        for (Event i: schedule){
+            attendeeList =
+        }
+    }
 }

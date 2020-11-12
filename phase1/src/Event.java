@@ -36,4 +36,8 @@ public class Event {
     public void updateInEvent(Object person){
         inEvent.add(person);
     }
+
+    public List<Object> getInEvent(){
+        return this.inEvent;
+    }
 }
