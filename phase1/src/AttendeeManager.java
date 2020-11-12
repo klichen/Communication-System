@@ -30,5 +30,14 @@ public class AttendeeManager {
         return attendee.getSchedule();
     }
 
-    // Send messages to and receive messages from other Attendees, and message with Speakers
+    // See if a person is in contacts
+    public boolean isContact(String personUsername){
+        ArrayList<String> contactList = new ArrayList<String>(attendee.getContactList());
+        for (String i: contactList){
+            if (i.equals(personUsername)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
