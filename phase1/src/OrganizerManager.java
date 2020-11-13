@@ -8,8 +8,8 @@ public class OrganizerManager {
     }
 
     // Enter rooms (events) into the system
-    public void createEvent(String id, int time, String speakerUsername){
-        Event event = new Event(id, time, speakerUsername);
+    public void createEvent(String id, int time, String speakerUsername, String speakerPassword){
+        Event event = new Event(id, time, speakerUsername, speakerPassword);
         // Not sure if this is somehow supposed to use EventScheduler (they are both use case classes so I decided
         // not to). It was not really specified if this means to just make an event or actually schedule one.
     }

@@ -37,7 +37,7 @@ public class AttendeeManager {
 
     // Cancel their enrolment in an event
     public void eventCancel(Event event){
-        ArrayList<Event> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
+        ArrayList<String> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
         // Check if they are actually enrolled in the event
         if (attendeeSchedule.contains(event.getID())){
             // Remove from list of events
