@@ -3,12 +3,14 @@ public class Event {
     private String id;
     private int time;
     private String speakerUsername;
-    private List<Person> inEvent;
+    private String speakerPassword;
+    private List<String> inEvent;
 
-    public Event(String id, int time, String speakerUsername){
+    public Event(String id, int time, String speakerUsername, String speakerPassword){
         this.id = id;
         this.time = time;
         this.speakerUsername = speakerUsername;
+        this.speakerPassword = speakerPassword;
         inEvent = null; // Contains Persons who signed up for event
     }
 
@@ -27,22 +29,29 @@ public class Event {
         return speakerUsername;
     }
 
+    // Returns the password of the speaker of the event
+    public String getSpeakerPassword(){
+        return speakerPassword;
+    }
+
     // Return how many people in certain Event
     public int getCountInEvent(){
         return inEvent.size();
     }
 
     // Update the people who signed up for an event
-    public void updateInEvent(Person person){
-        inEvent.add(person);
+    public void updateInEvent(String person){
+        if(getCountInEvent() != 2){
+            inEvent.add(person);
+        }
     }
 
     // Remove the people who cancelled their enrollment in an event
-    public void removeInEvent(Person person){
+    public void removeInEvent(String person){
         inEvent.remove(person);
     }
 
-    public List<Person> getInEvent(){
-        return this.inEvent;
+    public List<String> getInEvent(){
+        return inEvent;
     }
 }

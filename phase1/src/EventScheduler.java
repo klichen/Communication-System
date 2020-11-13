@@ -12,11 +12,13 @@ public class EventScheduler {
     }
 
     // Updates the main list of events
-    public void updateEvents(String id, int time, String speakerUsername){
+    public boolean updateEvents(String id, int time, String speakerUsername, String speakerPassword){
         if(validEvent(id, time, speakerUsername)){
-            Event s = new Event(id, time, speakerUsername);
+            Event s = new Event(id, time, speakerUsername, speakerPassword);
             ListOfEvents.add(s);
+            return true;
         }
+        return false;
     }
 
     // Checks whether the events being added are valid or not
@@ -50,7 +52,7 @@ public class EventScheduler {
         for (Event i : ListOfEvents){
             List<String> tempConvert = new ArrayList<String>();
             tempConvert.add(i.getID() + "," + i.getTime() + "," + i.getSpeaker()
-                    + ","+ i.getSpeaker().getPassword());
+                    + ","+ i.getSpeakerPassword());
             // This needs to be fixed
             convertedEvents.add(tempConvert);
         }

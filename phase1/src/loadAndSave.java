@@ -54,8 +54,11 @@ public class loadAndSave{
         for(List<String> i : arrEvents){
             for (String l : i){
                 String[] splitText = l.split(",");
-                Speaker tempSpeaker = new Speaker(splitText[2],splitText[3]);
-                scheduler.updateEvents(splitText[0], Integer.valueOf(splitText[1]), tempSpeaker);
+                boolean update = scheduler.updateEvents(splitText[0], Integer.valueOf(splitText[1]),
+                        splitText[2], splitText[3]);
+                if(update){
+                    login.updateLogins("speaker", splitText[2], splitText[3]);
+                }
             }
         }
         for(List<String> i : arrLogins){
