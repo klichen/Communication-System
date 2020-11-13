@@ -16,11 +16,14 @@ public class AttendeeManager {
         if (attendeeSchedule.contains(event)){
             canAdd = false;
         }
+
         for (Event i: attendeeSchedule){
             if (event.getTime() == i.getTime()) {
                 canAdd = false;
+                break;
             }
         }
+
         if (canAdd){
             event.updateInEvent(this.attendee);
             this.attendee.schedule.add(event);
