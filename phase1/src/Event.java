@@ -37,6 +37,11 @@ public class Event {
         inEvent.add(person);
     }
 
+    // Remove the people who cancelled their enrollment in an event
+    public void removeInEvent(Person person){
+        inEvent.remove(person);
+    }
+
     public List<Person> getInEvent(){
         return this.inEvent;
     }

@@ -32,7 +32,13 @@ public class AttendeeManager {
 
     // Cancel their enrolment in an event
     public void eventCancelSignUp(Event event){
-
+        ArrayList<Event> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
+        // Check if they are actually enrolled in the event
+        if (attendeeSchedule.contains(event)){
+            // Remove from list of events
+            event.removeInEvent(this.attendee);
+            this.attendee.schedule.remove(event);
+        }
     }
 
     // See schedule of the events for which they signed up
