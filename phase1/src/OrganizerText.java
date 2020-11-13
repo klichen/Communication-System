@@ -1,7 +1,9 @@
-public class OrganizerText {
-    private Person[] people;
+import java.util.ArrayList;
 
-    public OrganizerText(Person[] people){
+public class OrganizerText {
+    private ArrayList<Person> people;
+
+    public OrganizerText(ArrayList<Person> people){
         this.people = people;
     }
 
@@ -16,7 +18,7 @@ public class OrganizerText {
      */
     public void messageAllSpeakers(String message, Person currentPerson) {
         for (Person user : people) {
-            if (user instanceof Speaker) {
+            if (user.isSpeakerType()) {
                 Message m = new Message(message, currentPerson, user);
                 user.addToMessageStorage(m.getMessage(), m.getSender());
                 // defined in Person Class
@@ -32,7 +34,7 @@ public class OrganizerText {
      */
     public void messageAllAttendees(String message, Person currentPerson) {
         for (Person user : people) {
-            if (user instanceof Attendee) {
+            if (user.isAttendeeType()) {
                 Message m = new Message(message, currentPerson, user);
                 user.addToMessageStorage(m.getMessage(), m.getSender());
             }
