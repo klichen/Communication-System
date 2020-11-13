@@ -6,5 +6,7 @@ Events
 1,9,user,pass
 
 Logins
+attendee,user1,pass
 attendee,user,pass
-attendee,user,pass
+organizer,test,pass
+speaker,test1,pass

@@ -2,13 +2,15 @@ import java.util.List;
 public class Event {
     private String id;
     private int time;
-    private Speaker speaker;
-    private List<Person> inEvent;
+    private String speakerUsername;
+    private String speakerPassword;
+    private List<String> inEvent;
 
-    public Event(String id, int time, Speaker speaker){
+    public Event(String id, int time, String speakerUsername, String speakerPassword){
         this.id = id;
         this.time = time;
-        this.speaker = speaker;
+        this.speakerUsername = speakerUsername;
+        this.speakerPassword = speakerPassword;
         inEvent = null; // Contains Persons who signed up for event
     }
 
@@ -22,9 +24,14 @@ public class Event {
         return time;
     }
 
-    // Returns the speaker object of the event
-    public Speaker getSpeaker(){
-        return speaker;
+    // Returns the username of the speaker of the event
+    public String getSpeaker(){
+        return speakerUsername;
+    }
+
+    // Returns the password of the speaker of the event
+    public String getSpeakerPassword(){
+        return speakerPassword;
     }
 
     // Return how many people in certain Event
@@ -33,11 +40,18 @@ public class Event {
     }
 
     // Update the people who signed up for an event
-    public void updateInEvent(Person person){
-        inEvent.add(person);
+    public void updateInEvent(String person){
+        if(getCountInEvent() != 2){
+            inEvent.add(person);
+        }
     }
 
-    public List<Person> getInEvent(){
-        return this.inEvent;
+    // Remove the people who cancelled their enrollment in an event
+    public void removeInEvent(String person){
+        inEvent.remove(person);
+    }
+
+    public List<String> getInEvent(){
+        return inEvent;
     }
 }

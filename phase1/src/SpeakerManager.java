@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpeakerManager {
-
+    // Change after so that this is a String for the speakerUsername
     private Speaker speaker;
 
     public SpeakerManager(Speaker speaker){
@@ -10,16 +10,25 @@ public class SpeakerManager {
     }
     //  Log in
 
-    //  see a list of talks that they are giving.
-    public ArrayList<Event> getSchedule(){
-        return speaker.getSchedule();
+    // adds a person's username to Speaker's contact list
+    public void addToContactList(String contact) {
+        speaker.getContactList().add(contact);
     }
 
-    //  Message all Attendees who are signed up for a particular event, at once or individually.
+    // remove a person's username from Speaker's contact list
+    public void removeFromContactList(String contact){
+        speaker.getContactList().remove(contact);
+    }
+
+    //  see a list of talks that they are giving.
+    public ArrayList<String> getSchedule(){
+        return speaker.getSchedule();
+    }
 
     // See if a person is in contacts
     public boolean isContact(String personUsername){
         ArrayList<String> contactList = new ArrayList<>(this.speaker.getContactList());
+        // Simpler ? -> return contactList.contains(personUsername);
         for (String i: contactList){
             if (i.equals(personUsername)){
                 return true;
@@ -31,38 +40,40 @@ public class SpeakerManager {
     // add attendees of all talks to contact list
     public void addAttendeesToContactList(Event event){
         ArrayList<String> contactList = this.speaker.getContactList();
-        List<Person> attendeeList = event.getInEvent();
+        List<String> attendeeList = event.getInEvent();
 
-        for (Person i: attendeeList){
-            if (!(contactList.contains(i.getUsername()))){
-                this.speaker.addToContactList(i.getUsername());
+        for (String i: attendeeList){
+            if (!(contactList.contains(i))){
+                addToContactList(i);
             }
         }
     }
 
     // remove attendees of talk from contact list
     // to be used in case of cancellation of an event
-    public void removeAttendeesFromContactList(Event event){
-        List<Person> attendeesToGetRid = event.getInEvent();
-        ArrayList<String> attendeesToKeep = getAllAttendees();
-
-        for (Person i: attendeesToGetRid){
-            if (!(attendeesToKeep.contains(i.getUsername()))){
-                this.speaker.removeFromContactList(i.getUsername());
-            }
-        }
-    }
-
-    private ArrayList<String> getAllAttendees() {
-        ArrayList<Event> schedule = new ArrayList<>(this.speaker.getSchedule());
-        ArrayList<String> AttendeeList = new ArrayList<>();
-
-        for (Event i: schedule){
-            for (Person j: i.getInEvent()){
-                AttendeeList.add(j.getUsername());
-            }
-        }
-
-        return AttendeeList;
-    }
+//    public void removeAttendeesFromContactList(Event event){
+//        List<String> attendeesToGetRid = event.getInEvent();
+//        ArrayList<String> attendeesToKeep = getAllAttendees();
+//
+//        for (String i: attendeesToGetRid){
+//            if (!(attendeesToKeep.contains(i))){
+//                removeFromContactList(i);
+//            }
+//        }
+//    }
+//
+//    private ArrayList<String> getAllAttendees() {
+//        ArrayList<String> schedule = new ArrayList<>(this.speaker.getSchedule());
+//        ArrayList<String> AttendeeList = new ArrayList<>();
+//        EventScheduler eventScheduler = new EventScheduler();
+//
+//
+//        for (String i: schedule){
+//            for (Person j: i.getInEvent()){
+//                AttendeeList.add(j.getUsername());
+//            }
+//        }
+//
+//        return AttendeeList;
+//    }
 }
