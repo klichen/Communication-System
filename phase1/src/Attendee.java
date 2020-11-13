@@ -1,8 +1,10 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Attendee extends Person{
     private ArrayList<String> contactList;
-    protected ArrayList<Event> schedule;
+    protected ArrayList<String> schedule;
+    protected ArrayList<Integer> eventTimes;
 
     public Attendee(String username, String password) {
         super(username, password);
@@ -10,7 +12,8 @@ public class Attendee extends Person{
         this.isSpeaker = false;
         this.isAttendee = true;
         this.isOrganizer = false;
-        this.schedule = new ArrayList<Event>();
+        this.schedule = new ArrayList<String>();
+        this.eventTimes = new ArrayList<Integer>();
     }
 
     // returns the list of people the Person can message
@@ -18,8 +21,12 @@ public class Attendee extends Person{
         return this.contactList;
     }
 
-    public ArrayList<Event> getSchedule(){
+    public ArrayList<String> getSchedule(){
         return this.schedule;
+    }
+
+    public ArrayList<Integer> getEventTimes(){
+        return this.eventTimes;
     }
 
     //public void updateSchedule(Event event){

@@ -52,7 +52,8 @@ public abstract class Person<Public> {
     }
 
     // adds a message that was sent to Person to their storage
-    public void addToMessageStorage(String messageContent, Person messageSender){
+    // uses senders username
+    public void addToMessageStorage(String messageContent, String messageSender){
         this.messageStorage.add(("Sender: " + messageSender + " Message Contents: " + messageContent));
     }
 }

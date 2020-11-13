@@ -15,22 +15,23 @@ public class AttendeeManager {
 
     // Signup for events
     public void eventSignUp(Event event){
-        ArrayList<Event> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
+        ArrayList<String> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
+        ArrayList<Integer> eventTimes = new ArrayList<>(this.attendee.getEventTimes());
         boolean canAdd = true;
-        if (attendeeSchedule.contains(event)){
+        if (attendeeSchedule.contains(event.getID())){
             canAdd = false;
         }
 
-        for (Event i: attendeeSchedule){
-            if (event.getTime() == i.getTime()) {
+        for (Integer i: eventTimes){
+            if (event.getTime() == i) {
                 canAdd = false;
                 break;
             }
         }
 
         if (canAdd){
-            event.updateInEvent(this.attendee);
-            this.attendee.schedule.add(event);
+            event.updateInEvent(this.attendee.getUsername());
+            this.attendee.schedule.add(event.getID());
         }
     }
 
@@ -38,15 +39,15 @@ public class AttendeeManager {
     public void eventCancel(Event event){
         ArrayList<Event> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
         // Check if they are actually enrolled in the event
-        if (attendeeSchedule.contains(event)){
+        if (attendeeSchedule.contains(event.getID())){
             // Remove from list of events
-            event.removeInEvent(this.attendee);
-            this.attendee.schedule.remove(event);
+            event.removeInEvent(this.attendee.getUsername());
+            this.attendee.schedule.remove(event.getID());
         }
     }
 
     // See schedule of the events for which they signed up
-    public ArrayList<Event> getSchedule(){
+    public ArrayList<String> getSchedule(){
         return attendee.getSchedule();
     }
 
