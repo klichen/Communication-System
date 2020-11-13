@@ -15,8 +15,6 @@ public class SpeakerManager {
         return speaker.getSchedule();
     }
 
-    //  Message all Attendees who are signed up for a particular event, at once or individually.
-
     // See if a person is in contacts
     public boolean isContact(String personUsername){
         ArrayList<String> contactList = new ArrayList<>(this.speaker.getContactList());
