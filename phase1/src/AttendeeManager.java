@@ -11,12 +11,19 @@ public class AttendeeManager {
 
     // Signup for events
     public void eventSignUp(Event event){
-        ArrayList<Event> attendeeSchedule = new ArrayList<Event> (attendee.getSchedule());
-        for (Event i: attendeeSchedule) {
-            if (i == event) {
-                event.updateInEvent(attendee);
-                attendee.schedule.add(event);
+        ArrayList<Event> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
+        boolean canAdd = true;
+        if (attendeeSchedule.contains(event)){
+            canAdd = false;
+        }
+        for (Event i: attendeeSchedule){
+            if (event.getTime() == i.getTime()) {
+                canAdd = false;
             }
+        }
+        if (canAdd){
+            event.updateInEvent(this.attendee);
+            this.attendee.schedule.add(event);
         }
     }
 
