@@ -18,16 +18,6 @@ public class Speaker extends Person {
         return this.contactList;
     }
 
-    // adds a person's username to Speaker's contact list
-    public void addToContactList(String contact) {
-        this.contactList.add(contact);
-    }
-
-    // remove a person's username from Speaker's contact list
-    public void removeFromContactList(String contact){
-        this.contactList.remove(contact);
-    }
-
     public ArrayList<Event> getSchedule(){
         return this.schedule;
     }

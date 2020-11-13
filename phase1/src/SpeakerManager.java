@@ -2,13 +2,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SpeakerManager {
-
+    // Change after so that this is a String for the speakerUsername
     private Speaker speaker;
 
     public SpeakerManager(Speaker speaker){
         this.speaker = speaker;
     }
     //  Log in
+
+    // adds a person's username to Speaker's contact list
+    public void addToContactList(String contact) {
+        speaker.getContactList().add(contact);
+    }
+
+    // remove a person's username from Speaker's contact list
+    public void removeFromContactList(String contact){
+        speaker.getContactList().remove(contact);
+    }
 
     //  see a list of talks that they are giving.
     public ArrayList<Event> getSchedule(){
@@ -18,6 +28,7 @@ public class SpeakerManager {
     // See if a person is in contacts
     public boolean isContact(String personUsername){
         ArrayList<String> contactList = new ArrayList<>(this.speaker.getContactList());
+        // Simpler ? -> return contactList.contains(personUsername);
         for (String i: contactList){
             if (i.equals(personUsername)){
                 return true;
@@ -33,7 +44,7 @@ public class SpeakerManager {
 
         for (Person i: attendeeList){
             if (!(contactList.contains(i.getUsername()))){
-                this.speaker.addToContactList(i.getUsername());
+                addToContactList(i.getUsername());
             }
         }
     }
@@ -46,7 +57,7 @@ public class SpeakerManager {
 
         for (Person i: attendeesToGetRid){
             if (!(attendeesToKeep.contains(i.getUsername()))){
-                this.speaker.removeFromContactList(i.getUsername());
+                removeFromContactList(i.getUsername());
             }
         }
     }

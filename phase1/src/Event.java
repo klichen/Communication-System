@@ -2,13 +2,13 @@ import java.util.List;
 public class Event {
     private String id;
     private int time;
-    private Speaker speaker;
+    private String speakerUsername;
     private List<Person> inEvent;
 
-    public Event(String id, int time, Speaker speaker){
+    public Event(String id, int time, String speakerUsername){
         this.id = id;
         this.time = time;
-        this.speaker = speaker;
+        this.speakerUsername = speakerUsername;
         inEvent = null; // Contains Persons who signed up for event
     }
 
@@ -22,9 +22,9 @@ public class Event {
         return time;
     }
 
-    // Returns the speaker object of the event
-    public Speaker getSpeaker(){
-        return speaker;
+    // Returns the username of the speaker of the event
+    public String getSpeaker(){
+        return speakerUsername;
     }
 
     // Return how many people in certain Event

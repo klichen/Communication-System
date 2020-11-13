@@ -18,11 +18,6 @@ public class Attendee extends Person{
         return this.contactList;
     }
 
-    // adds a person's username to Person's contact list
-    void addToContactList(String contact) {
-        this.contactList.add(contact);
-    }
-
     public ArrayList<Event> getSchedule(){
         return this.schedule;
     }

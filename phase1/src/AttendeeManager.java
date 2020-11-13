@@ -1,13 +1,17 @@
 import java.util.ArrayList;
 
 public class AttendeeManager {
-
+    // Change after so that this is a String for the attendeeUsername
     private Attendee attendee;
 
     public AttendeeManager(Attendee attendee) {
         this.attendee = attendee;
     }
     // Log in and see a schedule of events for which they can sign up
+
+    // adds a person's username to Person's contact list
+    void addToContactList(String contact) {attendee.getContactList().add(contact);
+    }
 
     // Signup for events
     public void eventSignUp(Event event){
@@ -31,7 +35,7 @@ public class AttendeeManager {
     }
 
     // Cancel their enrolment in an event
-    public void eventCancelSignUp(Event event){
+    public void eventCancel(Event event){
         ArrayList<Event> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
         // Check if they are actually enrolled in the event
         if (attendeeSchedule.contains(event)){
