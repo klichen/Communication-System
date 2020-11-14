@@ -31,6 +31,11 @@ public class SpeakerManager {
         return usernameToSpeaker.get(speakerUsername).getSchedule();
     }
 
+    // Add event's id to speaker's schedule
+    public void updateSchedule(String speakerUsername, String eventId){
+        getSchedule(speakerUsername).add(eventId);
+    }
+
     // adds a person's username to Speaker's contact list
     public void addToContactList(String speakerUsername, String contact) {
         usernameToSpeaker.get(speakerUsername).getContactList().add(contact);
