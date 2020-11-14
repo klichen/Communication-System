@@ -5,7 +5,6 @@ public class OrganizerSystem {
     // Controller class (gets input from user)
     SpeakerManager sm;
     EventScheduler es;
-    public Map<String, Speaker> usernameToSpeaker;
 
     // Enter rooms (events) into the system
     public void createEvent(String id, int time, String speakerUsername){
@@ -21,7 +20,5 @@ public class OrganizerSystem {
     public ArrayList<Speaker> getAllSpeakers(){
         return sm.getAllSpeakers();
     }
-
-    // Get map for username -> object
 
 }
