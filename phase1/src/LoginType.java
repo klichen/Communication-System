@@ -29,6 +29,7 @@ public class LoginType {
                 }
                 else if(user.isSpeakerType()){
                     //show speaker presenter
+                    SpeakerMainScreen speakerMainScreen = new SpeakerMainScreen(user.getUsername());
                 }
                 else if(user.isOrganizerType()){
                     //show organizer presenter
