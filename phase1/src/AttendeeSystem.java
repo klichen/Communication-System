@@ -7,8 +7,9 @@ public class AttendeeSystem {
     AttendeeManager am;
     EventScheduler es;
 
-    public AttendeeSystem(AttendeeManager am){
+    public AttendeeSystem(AttendeeManager am, EventScheduler es){
         this.am = am;
+        this.es = es;
     }
 
     // can attendee create an account
