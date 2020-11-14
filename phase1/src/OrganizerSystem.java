@@ -1,22 +1,27 @@
 import java.util.ArrayList;
+import java.util.Map;
 
 public class OrganizerSystem {
     // Controller class (gets input from user)
-    String organizerUsername;
-    OrganizerManager og;
-
-    public OrganizerSystem(String organizerUsername, OrganizerManager og){
-        this.organizerUsername = organizerUsername;
-        this.og = new OrganizerManager(organizerUsername);
-    }
+    SpeakerManager sm;
+    EventScheduler es;
+    public Map<String, Speaker> usernameToSpeaker;
 
     // Enter rooms (events) into the system
     public void createEvent(String id, int time, String speakerUsername){
-        og.createEvent(id, time, speakerUsername);
+        es.updateEvents(id, time, speakerUsername);
     }
 
     // Create speaker accounts
     public void createSpeaker(String username, String password){
-        og.createSpeaker(username, password);
+        sm.createSpeaker(username, password);
     }
+
+    // Get all speakers
+    public ArrayList<Speaker> getAllSpeakers(){
+        return sm.getAllSpeakers();
+    }
+
+    // Get map for username -> object
+
 }
