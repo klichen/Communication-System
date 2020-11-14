@@ -7,6 +7,7 @@ public class AttendeeSystem {
     // Controller class (gets input from user)
     AttendeeManager am;
     EventScheduler es;
+    SpeakerManager sm;
 
     // can attendee create an account
     public boolean canCreateAccount(String username){
@@ -81,9 +82,12 @@ public class AttendeeSystem {
     public void addEvent(String username, String eventID){
         boolean canAdd = canAddEvent(username, eventID);
         Event event = getEventMap().get(eventID);
+        String speakerID = event.getSpeaker();
+        Speaker eventSpeaker = this.sm.getUsernameToSpeaker().get(speakerID);
         if(canAdd){
             this.am.eventSignUp(username,eventID);
             event.updateInEvent(username);
+            eventSpeaker.addToContact(username);
         }
     }
 

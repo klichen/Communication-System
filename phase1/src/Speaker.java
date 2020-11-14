@@ -22,4 +22,8 @@ public class Speaker extends Person {
         return this.schedule;
     }
 
+    public void addToContact(String contact){
+        this.contactList.add(contact);
+    }
+
 }
