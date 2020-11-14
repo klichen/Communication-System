@@ -4,17 +4,19 @@ public class Event {
     private int time;
     private String speakerUsername;
     private String speakerPassword;
+    private String roomNum;
     private List<String> inEvent;
 
-    public Event(String id, int time, String speakerUsername, String speakerPassword){
+    public Event(String roomNum, String id, int time, String speakerUsername, String speakerPassword){
         this.id = id;
+        this.roomNum = roomNum;
         this.time = time;
         this.speakerUsername = speakerUsername;
         this.speakerPassword = speakerPassword;
         inEvent = null; // Contains Persons who signed up for event
     }
 
-    // Returns the Event's id
+    // Returns the Event's id (Unique to each event)
     public String getID(){
         return id;
     }
@@ -23,6 +25,9 @@ public class Event {
     public int getTime(){
         return time;
     }
+
+    //Returns the room number
+    public String getRoomNum(){ return roomNum; }
 
     // Returns the username of the speaker of the event
     public String getSpeaker(){

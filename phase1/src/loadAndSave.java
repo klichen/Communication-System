@@ -54,10 +54,10 @@ public class loadAndSave{
         for(List<String> i : arrEvents){
             for (String l : i){
                 String[] splitText = l.split(",");
-                boolean update = scheduler.updateEvents(splitText[0], Integer.valueOf(splitText[1]),
-                        splitText[2], splitText[3]);
+                boolean update = scheduler.updateEvents(splitText[0], splitText[1], Integer.valueOf(splitText[2]),
+                        splitText[3], splitText[4]);
                 if(update){
-                    login.updateLogins("speaker", splitText[2], splitText[3]);
+                    login.updateLogins("speaker", splitText[3], splitText[4]);
                 }
             }
         }
@@ -68,6 +68,7 @@ public class loadAndSave{
             }
         }
         System.out.println(login.getLoginList());
+        System.out.println("MAP" + scheduler.getIdToEvent());
     }
 
     // Save events to text file
