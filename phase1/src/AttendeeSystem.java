@@ -1,3 +1,5 @@
+import com.sun.org.apache.xml.internal.utils.StringVector;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -43,6 +45,63 @@ public class AttendeeSystem {
             }
         }
         return fullSchedule;
+    }
+
+    // checks if valid event id
+    private boolean validEvent(String eventID) {
+        return getEventMap().containsKey(eventID);
+    }
+
+    // checks whether this event can be added
+    public boolean canAddEvent(String username, String eventID){
+        ArrayList<String> idSchedule =  this.am.getSchedule(username);
+        ArrayList<Event> fullSchedule = getSchedule(username);
+        boolean canAdd = false;
+        int eventTime;
+        if (validEvent(eventID)) {
+            eventTime = getEventMap().get(eventID).getTime();
+        }
+        else{
+            return false;
+        }
+
+        for (Event i: fullSchedule){
+            if(i.getTime() != eventTime && !idSchedule.contains(eventID)){
+                canAdd = true;
+            }
+            else{
+                canAdd = false;
+                break;
+            }
+        }
+        return canAdd;
+    }
+
+    // Add event to attendee schedule
+    public void addEvent(String username, String eventID){
+        boolean canAdd = canAddEvent(username, eventID);
+        Event event = getEventMap().get(eventID);
+        if(canAdd){
+            this.am.eventSignUp(username,eventID);
+            event.updateInEvent(username);
+        }
+    }
+
+    // check whether this event enrolment can be cancelled
+    public boolean canCancelEnrollment(String username, String eventID){
+        ArrayList<String> idSchedule =  this.am.getSchedule(username);
+        boolean validEvent = validEvent(eventID);
+        return (validEvent && idSchedule.contains(eventID));
+    }
+
+    // cancel attendee's enrolment in events
+    public void cancelEnrollment(String username, String eventID){
+        boolean canCancel = canCancelEnrollment(username, eventID);
+        Event event = getEventMap().get(eventID);
+        if (canCancel){
+            this.am.eventCancel(username, eventID);
+            event.removeInEvent(username);
+        }
     }
 
 
