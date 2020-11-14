@@ -27,6 +27,14 @@ public class EventScheduler {
         return false;
     }
 
+    // Removes an event from list of events and idToEvent
+    public void removeEvent(String id){
+        if (ListOfEvents.contains(id)){
+            ListOfEvents.remove(id);
+            idToEvent.remove(id);
+        }
+    }
+
     // Map (ID to Event)
     public Map<String, Event> getIdToEvent(){
         return idToEvent;

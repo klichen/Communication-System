@@ -6,8 +6,6 @@ public class AttendeeManager {
     // private String attendeeUsername;
     private Map<String, Attendee> attendeeMap;
 
-    public AttendeeManager() {
-    }
 
     // returns attendeeMap
     public Map<String, Attendee> getAttendeeMap() {
@@ -44,37 +42,16 @@ public class AttendeeManager {
     }
 
     // Signup for events
-//    public void eventSignUp(Event event){
-//        ArrayList<String> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
-//        ArrayList<Integer> eventTimes = new ArrayList<>(this.attendee.getEventTimes());
-//        boolean canAdd = true;
-//        if (attendeeSchedule.contains(event.getID())){
-//            canAdd = false;
-//        }
-//
-//        for (Integer i: eventTimes){
-//            if (event.getTime() == i) {
-//                canAdd = false;
-//                break;
-//            }
-//        }
-//
-//        if (canAdd){
-//            event.updateInEvent(this.attendee.getUsername());
-//            this.attendee.schedule.add(event.getID());
-//        }
-//    }
-//
-//    // Cancel their enrolment in an event
-//    public void eventCancel(Event event){
-//        ArrayList<String> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
-//        // Check if they are actually enrolled in the event
-//        if (attendeeSchedule.contains(event.getID())){
-//            // Remove from list of events
-//            event.removeInEvent(this.attendee.getUsername());
-//            this.attendee.schedule.remove(event.getID());
-//        }
-//    }
+    public void eventSignUp(String username, String eventID){
+        Attendee attendee = attendeeMap.get(username);
+        attendee.schedule.add(eventID);
+    }
+
+    // Cancel their enrolment in an event
+    public void eventCancel(String username, String eventID){
+        Attendee attendee = attendeeMap.get(username);
+        attendee.schedule.remove(eventID);
+    }
 
     // See schedule of the events for which they signed up
     public ArrayList<String> getSchedule(String username){
