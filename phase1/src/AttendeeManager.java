@@ -16,7 +16,7 @@ public class AttendeeManager {
 
     // Create attendee account
     public void createAccount(String username, String password){
-        if(!(attendeeMap.containsKey(username))){
+        if(canCreateAccount(username)){
             Attendee attendee = new Attendee(username, password);
             attendeeMap.put(username, attendee);
         }
@@ -32,8 +32,7 @@ public class AttendeeManager {
     // adds a person's username to Person's contact list
     public void addToContactList(String username, String contact) {
         Attendee attendee = attendeeMap.get(username);
-        ArrayList<String> contactList = attendee.getContactList();
-        if (!(contactList.contains(contact))){
+        if (canAddToContactList(username, contact)){
             attendee.addToContact(contact);
         }
 
