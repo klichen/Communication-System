@@ -1,64 +1,81 @@
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AttendeeManager {
     // Change after so that this is a String for the attendeeUsername
-    private Attendee attendee;
+    // private String attendeeUsername;
+    protected Map<String, Attendee> attendeeMap;
 
-    public AttendeeManager(Attendee attendee) {
-        this.attendee = attendee;
+    public AttendeeManager() {
     }
-    // Log in and see a schedule of events for which they can sign up
+
+    // returns whether attendee can create an account (checks if username is already taken)
+    public boolean canCreateAccount(String username){
+        return !attendeeMap.containsKey(username);
+    }
+
+    // Create attendee account
+    public void createAccount(String username, String password){
+        if(!(attendeeMap.containsKey(username))){
+            Attendee attendee = new Attendee(username, password);
+            attendeeMap.put(username, attendee);
+        }
+    }
+
+    // returns whether a contact can be added (if contact is already in list)
+    // same as checking if they are in your contacts
+    public boolean canAddToContactList(String username, String contact){
+        ArrayList<String> contactList = attendeeMap.get(username).getContactList();
+        return !contactList.contains(contact);
+    }
 
     // adds a person's username to Person's contact list
-    void addToContactList(String contact) {attendee.getContactList().add(contact);
+    public void addToContactList(String username, String contact) {
+        Attendee attendee = attendeeMap.get(username);
+        ArrayList<String> contactList = attendee.getContactList();
+        if (!(contactList.contains(contact))){
+            attendee.addToContact(contact);
+        }
+
     }
 
     // Signup for events
-    public void eventSignUp(Event event){
-        ArrayList<String> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
-        ArrayList<Integer> eventTimes = new ArrayList<>(this.attendee.getEventTimes());
-        boolean canAdd = true;
-        if (attendeeSchedule.contains(event.getID())){
-            canAdd = false;
-        }
-
-        for (Integer i: eventTimes){
-            if (event.getTime() == i) {
-                canAdd = false;
-                break;
-            }
-        }
-
-        if (canAdd){
-            event.updateInEvent(this.attendee.getUsername());
-            this.attendee.schedule.add(event.getID());
-        }
-    }
-
-    // Cancel their enrolment in an event
-    public void eventCancel(Event event){
-        ArrayList<String> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
-        // Check if they are actually enrolled in the event
-        if (attendeeSchedule.contains(event.getID())){
-            // Remove from list of events
-            event.removeInEvent(this.attendee.getUsername());
-            this.attendee.schedule.remove(event.getID());
-        }
-    }
+//    public void eventSignUp(Event event){
+//        ArrayList<String> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
+//        ArrayList<Integer> eventTimes = new ArrayList<>(this.attendee.getEventTimes());
+//        boolean canAdd = true;
+//        if (attendeeSchedule.contains(event.getID())){
+//            canAdd = false;
+//        }
+//
+//        for (Integer i: eventTimes){
+//            if (event.getTime() == i) {
+//                canAdd = false;
+//                break;
+//            }
+//        }
+//
+//        if (canAdd){
+//            event.updateInEvent(this.attendee.getUsername());
+//            this.attendee.schedule.add(event.getID());
+//        }
+//    }
+//
+//    // Cancel their enrolment in an event
+//    public void eventCancel(Event event){
+//        ArrayList<String> attendeeSchedule = new ArrayList<> (this.attendee.getSchedule());
+//        // Check if they are actually enrolled in the event
+//        if (attendeeSchedule.contains(event.getID())){
+//            // Remove from list of events
+//            event.removeInEvent(this.attendee.getUsername());
+//            this.attendee.schedule.remove(event.getID());
+//        }
+//    }
 
     // See schedule of the events for which they signed up
-    public ArrayList<String> getSchedule(){
+    public ArrayList<String> getSchedule(String username){
+        Attendee attendee = attendeeMap.get(username);
         return attendee.getSchedule();
     }
 
-    // See if a person is in contacts
-    public boolean isContact(String personUsername){
-        ArrayList<String> contactList = new ArrayList<String>(attendee.getContactList());
-        for (String i: contactList){
-            if (i.equals(personUsername)){
-                return true;
-            }
-        }
-        return false;
-    }
 }

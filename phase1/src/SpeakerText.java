@@ -14,7 +14,7 @@ public class SpeakerText {
                 for (Event talk: events){
                     if (((Attendee) user).getSchedule().contains(talk) && !sent){
                         Message m = new Message(message, currentPerson, user);
-                        user.addToMessageStorage(m.getMessage(), m.getSender());
+                        user.addToMessageStorage(m.getMessage(), m.getSender().getUsername());
                         sent = true;
                     }
                 }
@@ -22,7 +22,7 @@ public class SpeakerText {
         }
     }
 
-    public void individualMessage(ArrayList<Event> events, String message, Person currentPerson, Person recipient){
-        //redundant maybe
+        public void individualMessage(ArrayList<Event> events, String message, Person currentPerson, Person recipient){
+            //redundant maybe
     }
 }

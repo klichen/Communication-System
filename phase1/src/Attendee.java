@@ -21,6 +21,10 @@ public class Attendee extends Person{
         return this.contactList;
     }
 
+    public void addToContact(String contact){
+        this.contactList.add(contact);
+    }
+
     public ArrayList<String> getSchedule(){
         return this.schedule;
     }
