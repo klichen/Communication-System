@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Map;
 
 public class AttendeeSystem {
     // Controller class (gets input from user)
 
     AttendeeManager am;
+    EventScheduler es;
 
     public AttendeeSystem(AttendeeManager am){
         this.am = am;
@@ -29,10 +31,24 @@ public class AttendeeSystem {
         this.am.addToContactList(username, contact);
     }
 
-    // get attendee Schedule
-    // will change once eventScheduler map is created
-    public ArrayList<String> getSchedule(String username){
-        return this.am.getSchedule(username);
+    // get the event map
+    private Map<String, Event> getEventMap(){
+        return this.es.getIdToEvent();
     }
+
+    // get attendee Schedule
+    public ArrayList<Event> getSchedule(String username){
+        ArrayList<String> idSchedule =  this.am.getSchedule(username);
+        Map<String, Event> eventMap = getEventMap();
+        ArrayList<Event> fullSchedule = new ArrayList<>();
+
+        for (String i: idSchedule){
+            if (eventMap.containsKey(i)){
+                fullSchedule.add(eventMap.get(i));
+            }
+        }
+        return fullSchedule;
+    }
+
 
 }
