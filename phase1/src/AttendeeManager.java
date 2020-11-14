@@ -6,8 +6,6 @@ public class AttendeeManager {
     // private String attendeeUsername;
     private Map<String, Attendee> attendeeMap;
 
-    public AttendeeManager() {
-    }
 
     // returns attendeeMap
     public Map<String, Attendee> getAttendeeMap() {

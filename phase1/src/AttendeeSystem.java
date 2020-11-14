@@ -3,14 +3,8 @@ import java.util.Map;
 
 public class AttendeeSystem {
     // Controller class (gets input from user)
-
     AttendeeManager am;
     EventScheduler es;
-
-    public AttendeeSystem(AttendeeManager am, EventScheduler es){
-        this.am = am;
-        this.es = es;
-    }
 
     // can attendee create an account
     public boolean canCreateAccount(String username){
