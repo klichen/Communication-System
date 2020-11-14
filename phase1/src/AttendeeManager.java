@@ -4,9 +4,14 @@ import java.util.Map;
 public class AttendeeManager {
     // Change after so that this is a String for the attendeeUsername
     // private String attendeeUsername;
-    protected Map<String, Attendee> attendeeMap;
+    private Map<String, Attendee> attendeeMap;
 
     public AttendeeManager() {
+    }
+
+    // returns attendeeMap
+    public Map<String, Attendee> getAttendeeMap() {
+        return this.attendeeMap;
     }
 
     // returns whether attendee can create an account (checks if username is already taken)
