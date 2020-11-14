@@ -4,11 +4,11 @@ import java.util.*;
 public class loadAndSave{
 
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    private EventScheduler scheduler = new EventScheduler();
-    private LoginSystem login = new LoginSystem();
+    //private EventScheduler scheduler = new EventScheduler();
+    //private LoginSystem login = new LoginSystem();
 
     // Load events from text file
-    public void loadAll() throws IOException {
+    public void loadAll(EventScheduler scheduler, LoginSystem login) throws IOException {
         List<List<String>> arrEvents = new ArrayList<List<String>>();
         List<List<String>> arrLogins = new ArrayList<List<String>>();
         BufferedReader inputReader;
@@ -71,7 +71,7 @@ public class loadAndSave{
     }
 
     // Save events to text file
-    public void saveAll() throws IOException {
+    public void saveAll(EventScheduler scheduler, LoginSystem login) throws IOException {
         List<List<String>> convertedEvents = new ArrayList<List<String>>();
         List<List<String>> convertedLogins = new ArrayList<List<String>>();
         System.out.println("Enter file name to save to (.txt):");
