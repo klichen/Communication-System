@@ -21,6 +21,10 @@ public class LoginType {
         password = scan.nextLine();
     }
 
+    public String getUsername(){
+        return this.username;
+    }
+
     public void checkLogin(List<Person> logins){
         for (Person user: logins){
             if (user.getUsername().equals(username) && user.getPassword().equals(password)){
