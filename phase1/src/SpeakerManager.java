@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class SpeakerManager {
     // Change after so that this is a String for the speakerUsername
     private Speaker speaker;
+    private ArrayList<Speaker> allSpeakers;
+    public Map<String, Speaker> usernameToSpeaker;
 
     public SpeakerManager(Speaker speaker){
         this.speaker = speaker;
@@ -47,6 +50,18 @@ public class SpeakerManager {
                 addToContactList(i);
             }
         }
+    }
+
+    // Create speaker accounts
+    public void createSpeaker(String username, String password){
+        Speaker speaker = new Speaker(username, password);
+        allSpeakers.add(speaker);
+        usernameToSpeaker.put(username, speaker);
+    }
+
+    // Get all speakers
+    public ArrayList<Speaker> getAllSpeakers(){
+        return allSpeakers;
     }
 
     // remove attendees of talk from contact list
