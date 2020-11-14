@@ -1,14 +1,18 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EventScheduler {
 
     private List<Event> ListOfEvents;
+    private Map<String, Event> idToEvent;
 
     // Constructor for EventScheduler
     // Contains the main list of events
     public EventScheduler(){
         ListOfEvents =  new ArrayList<Event>();
+        idToEvent = new HashMap<>();
     }
 
     // Updates the main list of events
@@ -16,9 +20,15 @@ public class EventScheduler {
         if(validEvent(id, time, speakerUsername)){
             Event s = new Event(id, time, speakerUsername, speakerPassword);
             ListOfEvents.add(s);
+            idToEvent.put(id, s);
             return true;
         }
         return false;
+    }
+
+    // Map (ID to Event)
+    public Map<String, Event> getIdToEvent(){
+        return idToEvent;
     }
 
     // Checks whether the events being added are valid or not
