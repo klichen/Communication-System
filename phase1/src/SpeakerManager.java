@@ -4,53 +4,10 @@ import java.util.Map;
 
 public class SpeakerManager {
     // Change after so that this is a String for the speakerUsername
-    private Speaker speaker;
     private ArrayList<Speaker> allSpeakers;
-    public Map<String, Speaker> usernameToSpeaker;
+    private Map<String, Speaker> usernameToSpeaker;
 
-    public SpeakerManager(Speaker speaker){
-        this.speaker = speaker;
-    }
     //  Log in
-
-    // adds a person's username to Speaker's contact list
-    public void addToContactList(String contact) {
-        speaker.getContactList().add(contact);
-    }
-
-    // remove a person's username from Speaker's contact list
-    public void removeFromContactList(String contact){
-        speaker.getContactList().remove(contact);
-    }
-
-    //  see a list of talks that they are giving.
-    public ArrayList<String> getSchedule(){
-        return speaker.getSchedule();
-    }
-
-    // See if a person is in contacts
-    public boolean isContact(String personUsername){
-        ArrayList<String> contactList = new ArrayList<>(this.speaker.getContactList());
-        // Simpler ? -> return contactList.contains(personUsername);
-        for (String i: contactList){
-            if (i.equals(personUsername)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // add attendees of all talks to contact list
-    public void addAttendeesToContactList(Event event){
-        ArrayList<String> contactList = this.speaker.getContactList();
-        List<String> attendeeList = event.getInEvent();
-
-        for (String i: attendeeList){
-            if (!(contactList.contains(i))){
-                addToContactList(i);
-            }
-        }
-    }
 
     // Create speaker accounts
     public void createSpeaker(String username, String password){
@@ -62,6 +19,49 @@ public class SpeakerManager {
     // Get all speakers
     public ArrayList<Speaker> getAllSpeakers(){
         return allSpeakers;
+    }
+
+    // Get map (username -> Speaker object)
+    public Map<String, Speaker> getUsernameToSpeaker() {
+        return usernameToSpeaker;
+    }
+
+    // Get schedule
+    public ArrayList<String> getSchedule(String speakerUsername){
+        return usernameToSpeaker.get(speakerUsername).getSchedule();
+    }
+
+    // Add event's id to speaker's schedule
+    public void updateSchedule(String speakerUsername, String eventId){
+        getSchedule(speakerUsername).add(eventId);
+    }
+
+    // adds a person's username to Speaker's contact list
+    public void addToContactList(String speakerUsername, String contact) {
+        usernameToSpeaker.get(speakerUsername).getContactList().add(contact);
+    }
+
+    // remove a person's username from Speaker's contact list
+    public void removeFromContactList(String speakerUsername, String contact){
+        usernameToSpeaker.get(speakerUsername).getContactList().remove(contact);
+    }
+
+    // See if a person is in contacts
+    public boolean isContact(String speakerUsername, String personUsername){
+        return usernameToSpeaker.get(speakerUsername).getContactList().contains(personUsername);
+    }
+
+    // add attendees of Event event to contact list
+    public void addAttendeesToContactList(String speakerUsername, Event event){
+        // EVENT SHOULD NOT BE USED (ONLY THE ID)
+        ArrayList<String> contactList = usernameToSpeaker.get(speakerUsername).getContactList();
+        List<String> attendeeList = event.getInEvent();
+
+        for (String attendeeUsername: attendeeList){
+            if (!(contactList.contains(attendeeUsername))){
+                addToContactList(speakerUsername, attendeeUsername);
+            }
+        }
     }
 
     // remove attendees of talk from contact list

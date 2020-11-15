@@ -4,6 +4,9 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         loadAndSave las = new loadAndSave();
+        EventScheduler scheduler = new EventScheduler();
+        LoginSystem login = new LoginSystem();
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         boolean userInputCorrect = true;
         do {
@@ -11,10 +14,10 @@ public class Main {
             String input = br.readLine();
             //System.out.println(input);
             if(input.equals("load")){
-                las.loadAll();
+                las.loadAll(scheduler, login);
             }
             else if(input.equals("save")){
-                las.saveAll();
+                las.saveAll(scheduler, login);
             }
             else if (input.equals("done")){
                 userInputCorrect = false;

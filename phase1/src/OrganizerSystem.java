@@ -1,20 +1,24 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class OrganizerSystem {
     // Controller class (gets input from user)
-    SpeakerManager sm;
+    AttendeeManager am;
     EventScheduler es;
-    public Map<String, Speaker> usernameToSpeaker;
+    SpeakerManager sm;
 
     // Enter rooms (events) into the system
-    public void createEvent(String id, int time, String speakerUsername){
-        es.updateEvents(id, time, speakerUsername);
+    public void createEvent(String eventId, int time, String speakerUsername){
+        // Create the event
+        es.updateEvents(eventId, time, speakerUsername);
+        // Add event to speaker's schedule
+        sm.updateSchedule(speakerUsername, eventId);
     }
 
     // Create speaker accounts
-    public void createSpeaker(String username, String password){
-        sm.createSpeaker(username, password);
+    public void createSpeaker(String speakerUsername, String password){
+        sm.createSpeaker(speakerUsername, password);
     }
 
     // Get all speakers
@@ -22,6 +26,17 @@ public class OrganizerSystem {
         return sm.getAllSpeakers();
     }
 
-    // Get map for username -> object
-
+    // Cancel event
+    public void cancelEvent(String eventId){
+        // Remove event from EventScheduler
+        es.removeEvent(eventId);
+        // Remove event from speaker's schedule
+        String speakerUsername = es.getIdToEvent().get(eventId).getSpeaker();
+        sm.updateSchedule(speakerUsername, eventId);
+        // Remove event from all attendees' schedule
+        List<String> attendeeList = es.getIdToEvent().get(eventId).getInEvent();
+        for (String attendeeUsername: attendeeList){
+            am.eventCancel(attendeeUsername, eventId);
+        }
+    }
 }
