@@ -5,13 +5,13 @@ import java.util.Map;
 
 public class EventScheduler {
 
-    private List<String> ListOfStrings;
+    private List<String> ListOfEvents;
     private Map<String, Event> idToEvent;
 
     // Constructor for EventScheduler
     // Contains the main list of events
     public EventScheduler(){
-        ListOfStrings =  new ArrayList<String>();
+        ListOfEvents =  new ArrayList<String>();
         idToEvent = new HashMap<>();
     }
 
@@ -19,7 +19,7 @@ public class EventScheduler {
     public boolean updateEvents(String roomNum, String id, int time, String speakerUsername, String speakerPassword){
         if(validEvent(roomNum, id, time, speakerUsername)){
             Event s = new Event(roomNum, id, time, speakerUsername, speakerPassword);
-            ListOfStrings.add(id);
+            ListOfEvents.add(id);
             idToEvent.put(id, s);
             System.out.println(idToEvent);
             return true;
@@ -29,8 +29,8 @@ public class EventScheduler {
 
     // Removes an event from list of events and idToEvent
     public void removeEvent(String id){
-        if (ListOfStrings.contains(id)){
-            ListOfStrings.remove(id);
+        if (ListOfEvents.contains(id)){
+            ListOfEvents.remove(id);
             idToEvent.remove(id);
         }
     }
@@ -45,7 +45,7 @@ public class EventScheduler {
         if(time < 9 || time > 16){
             return false;
         }
-        for(String i : ListOfStrings){
+        for(String i : ListOfEvents){
             // Check for double booking room
             if(time == idToEvent.get(i).getTime() && roomNum.equals(idToEvent.get(i).getRoomNum())){
                 return false;
@@ -65,14 +65,14 @@ public class EventScheduler {
 
     // Returns the main list of event ids
     public List<String> getEventList(){
-        return ListOfStrings;
+        return ListOfEvents;
     }
 
     // Converts the list of events into a List<List<String>>
     // in order to be saved to txt file
     public List<List<String>> eventToString(){
         List<List<String>> convertedEvents = new ArrayList<List<String>>();
-        for (String i : ListOfStrings){
+        for (String i : ListOfEvents){
             List<String> tempConvert = new ArrayList<String>();
             tempConvert.add(idToEvent.get(i).getRoomNum() + ","+ i + "," + idToEvent.get(i).getTime() + ","
                     + idToEvent.get(i).getSpeaker() + ","+ idToEvent.get(i).getSpeakerPassword());
