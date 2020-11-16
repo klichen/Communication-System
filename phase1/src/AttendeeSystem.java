@@ -17,7 +17,7 @@ public class AttendeeSystem {
 
     // can attendee add a contact
     public boolean canAddContact(String username, String contact){
-        return this.am.canAddToContactList(username, contact);
+        return this.pm.usernameToPerson.containsKey(contact) && this.am.canAddToContactList(username, contact);
     }
 
     // add a contact
