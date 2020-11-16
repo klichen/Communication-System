@@ -3,7 +3,6 @@ import java.util.List;
 
 public class SpeakerSystem {
     // Controller class (gets input from user)
-    EventScheduler es;
     SpeakerManager sm;
 
     // Get list of talks they are giving (schedule)

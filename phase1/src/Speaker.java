@@ -25,5 +25,4 @@ public class Speaker extends Person {
     public void addToContact(String contact){
         this.contactList.add(contact);
     }
-
 }

@@ -2,29 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SpeakerManager {
-    // Change after so that this is a String for the speakerUsername
-    private ArrayList<Speaker> allSpeakers;
-    private Map<String, Speaker> usernameToSpeaker;
-
+public class SpeakerManager extends PersonManager {
     //  Log in
-
-    // Create speaker accounts
-    public void createSpeaker(String username, String password){
-        Speaker speaker = new Speaker(username, password);
-        allSpeakers.add(speaker);
-        usernameToSpeaker.put(username, speaker);
-    }
-
-    // Get all speakers
-    public ArrayList<Speaker> getAllSpeakers(){
-        return allSpeakers;
-    }
-
-    // Get map (username -> Speaker object)
-    public Map<String, Speaker> getUsernameToSpeaker() {
-        return usernameToSpeaker;
-    }
 
     // Get schedule
     public ArrayList<String> getSchedule(String speakerUsername){

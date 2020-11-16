@@ -7,6 +7,7 @@ public class OrganizerSystem {
     AttendeeManager am;
     EventScheduler es;
     SpeakerManager sm;
+    PersonManager pm;
 
     // Enter rooms (events) into the system
     public void createEvent(String eventId, int time, String speakerUsername){
@@ -18,12 +19,12 @@ public class OrganizerSystem {
 
     // Create speaker accounts
     public void createSpeaker(String speakerUsername, String password){
-        sm.createSpeaker(speakerUsername, password);
+        pm.createSpeaker(speakerUsername, password);
     }
 
     // Get all speakers
     public ArrayList<Speaker> getAllSpeakers(){
-        return sm.getAllSpeakers();
+        return pm.getAllSpeakers();
     }
 
     // Cancel event
