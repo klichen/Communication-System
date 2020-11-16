@@ -3,16 +3,16 @@ public class Event {
     private String id;
     private int time;
     private String speakerUsername;
-    private String speakerPassword;
+    //private String speakerPassword;
     private String roomNum;
     private List<String> inEvent;
 
-    public Event(String roomNum, String id, int time, String speakerUsername, String speakerPassword){
+    public Event(String roomNum, String id, int time, String speakerUsername){//}, String speakerPassword){
         this.id = id;
         this.roomNum = roomNum;
         this.time = time;
         this.speakerUsername = speakerUsername;
-        this.speakerPassword = speakerPassword;
+        //this.speakerPassword = speakerPassword;
         inEvent = null; // Contains Persons who signed up for event
     }
 
@@ -35,9 +35,9 @@ public class Event {
     }
 
     // Returns the password of the speaker of the event
-    public String getSpeakerPassword(){
+    /*public String getSpeakerPassword(){
         return speakerPassword;
-    }
+    }*/
 
     // Return how many people in certain Event
     public int getCountInEvent(){
