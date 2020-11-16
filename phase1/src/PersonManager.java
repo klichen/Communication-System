@@ -40,7 +40,7 @@ public class PersonManager {
 
     }
 
-    // Get Person object
+    // Get Person object with a username
     public Person getPersonObject(String username) {
         if (usernameToAttendee.containsKey(username)) {
             return usernameToAttendee.get(username);
