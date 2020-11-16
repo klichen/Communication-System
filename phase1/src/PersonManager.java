@@ -41,15 +41,15 @@ public class PersonManager {
     }
 
     // Get Person object with a username
-    public Person getPersonObject(String username) {
-        if (usernameToAttendee.containsKey(username)) {
-            return usernameToAttendee.get(username);
-        } else if (usernameToOrganizer.containsKey(username)) {
-            return usernameToOrganizer.get(username);
-        } else if (usernameToSpeaker.containsKey(username)) {
-            return usernameToSpeaker.get(username);
+    public String getPersonType(String username, String password) {
+        if (usernameToAttendee.containsKey(username) && usernameToAttendee.get(username).getPassword().equals(password)) {
+            return "Attendee";
+        } else if (usernameToOrganizer.containsKey(username) && usernameToOrganizer.get(username).getPassword().equals(password)) {
+            return "Organizer";
+        } else if (usernameToSpeaker.containsKey(username) && usernameToSpeaker.get(username).getPassword().equals(password)) {
+            return "Speaker";
         } else {
-            System.out.println("This username does not exist.");
+            //System.out.println("This username does not exist.");
             return null;
         }
     }
