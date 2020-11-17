@@ -55,15 +55,16 @@ public class PersonManager {
     }
 
     // Create attendee accounts
-    public void createAttendee(String username, String password){
+    public boolean createAttendee(String username, String password){
         if (!usernameToAttendee.containsKey(username)) {
             Attendee attendee = new Attendee(username, password);
             allAttendees.add(attendee);
             allPersons.add(attendee);
             usernameToAttendee.put(username, attendee);
             usernameToPerson.put(username, attendee);
+            return true;
         } else {
-            System.out.println("This username already exists.");
+            return false;
         }
     }
 
@@ -78,15 +79,16 @@ public class PersonManager {
     }
 
     // Create organizer accounts
-    public void createOrganizer(String username, String password){
+    public boolean createOrganizer(String username, String password){
         if (!usernameToOrganizer.containsKey(username)) {
             Organizer organizer = new Organizer(username, password);
             allOrganizers.add(organizer);
             allPersons.add(organizer);
             usernameToOrganizer.put(username, organizer);
             usernameToPerson.put(username, organizer);
+            return true;
         } else {
-            System.out.println("This username already exists.");
+            return false;
         }
     }
 
@@ -101,15 +103,16 @@ public class PersonManager {
     }
 
     // Create speaker accounts
-    public void createSpeaker(String username, String password){
+    public boolean createSpeaker(String username, String password){
         if (!usernameToSpeaker.containsKey(username)) {
             Speaker speaker = new Speaker(username, password);
             allSpeakers.add(speaker);
             allPersons.add(speaker);
             usernameToSpeaker.put(username, speaker);
             usernameToPerson.put(username, speaker);
+            return true;
         } else {
-            System.out.println("This username already exists.");
+            return false;
         }
     }
 

@@ -28,11 +28,13 @@ public class EventScheduler {
     }
 
     // Removes an event from list of events and idToEvent
-    public void removeEvent(String id){
+    public boolean removeEvent(String id){
         if (ListOfEvents.contains(id)){
             ListOfEvents.remove(id);
             idToEvent.remove(id);
+            return true;
         }
+        return false;
     }
 
     // Map (ID to Event)
