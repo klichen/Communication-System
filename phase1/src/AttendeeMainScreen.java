@@ -20,6 +20,7 @@ public class AttendeeMainScreen {
         System.out.println("7 - Log out");
 
         String response = scan.nextLine();
+        scan.close();
 
         // returns schedule of user
         switch (response) {
@@ -30,6 +31,7 @@ public class AttendeeMainScreen {
             case "2": {
                 System.out.println("Please enter the id of the event you would like to register for: ");
                 String eventID = scan.nextLine();
+                scan.close();
 
                 // adds the event
                 if (this.as.canAddEvent(username, eventID)) {
@@ -46,6 +48,7 @@ public class AttendeeMainScreen {
             case "3": {
                 System.out.println("Please enter the id of the event you would like to unregister for: ");
                 String eventID = scan.nextLine();
+                scan.close();
 
                 // cancels the event
                 if (this.as.canCancelEnrollment(username, eventID)) {
@@ -62,6 +65,8 @@ public class AttendeeMainScreen {
             case "4": {
                 System.out.println("Please enter the username of the contact you would like to add: ");
                 String contactID = scan.nextLine();
+                scan.close();
+                
                 // adds contact
                 if(this.as.canAddContact(username, contactID)){
                     this.as.addContact(username, contactID);
