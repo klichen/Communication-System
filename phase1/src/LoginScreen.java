@@ -2,17 +2,12 @@ import java.util.List;
 
 public class LoginScreen {
 
-    private List<Person> users;
-    public LoginScreen(List<Person> logins){
-        users = logins;
-    }
-
-    public void run(){
+    public void run(PersonManager pManager){
         System.out.println("Enter username");
         LoginType login = new LoginType();
         login.readUsername();
         System.out.println("Enter password");
         login.readPassword();
-        login.checkLogin(users);
+        login.checkLogin(pManager);
     }
 }

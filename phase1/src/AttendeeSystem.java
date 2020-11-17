@@ -7,21 +7,17 @@ public class AttendeeSystem {
     // Controller class (gets input from user)
     AttendeeManager am;
     EventScheduler es;
-    SpeakerManager sm;
+    PersonManager pm;
 
-    // can attendee create an account
-    public boolean canCreateAccount(String username){
-        return this.am.canCreateAccount(username);
-    }
 
     // create attendee account
     public void createAccount(String username, String password){
-        this.am.createAccount(username, password);
+        pm.createAttendee(username, password);
     }
 
     // can attendee add a contact
     public boolean canAddContact(String username, String contact){
-        return this.am.canAddToContactList(username, contact);
+        return this.pm.usernameToPerson.containsKey(contact) && this.am.canAddToContactList(username, contact);
     }
 
     // add a contact
@@ -83,7 +79,7 @@ public class AttendeeSystem {
         boolean canAdd = canAddEvent(username, eventID);
         Event event = getEventMap().get(eventID);
         String speakerID = event.getSpeaker();
-        Speaker eventSpeaker = this.sm.getUsernameToSpeaker().get(speakerID);
+        Speaker eventSpeaker = pm.getUsernameToSpeaker().get(speakerID);
         if(canAdd){
             this.am.eventSignUp(username,eventID);
             event.updateInEvent(username);

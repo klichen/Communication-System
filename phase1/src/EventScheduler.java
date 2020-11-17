@@ -16,9 +16,9 @@ public class EventScheduler {
     }
 
     // Updates the main list of events
-    public boolean updateEvents(String roomNum, String id, int time, String speakerUsername, String speakerPassword){
+    public boolean updateEvents(String roomNum, String id, int time, String speakerUsername){//}, String speakerPassword){
         if(validEvent(roomNum, id, time, speakerUsername)){
-            Event s = new Event(roomNum, id, time, speakerUsername, speakerPassword);
+            Event s = new Event(roomNum, id, time, speakerUsername);//, speakerPassword);
             ListOfEvents.add(id);
             idToEvent.put(id, s);
             System.out.println(idToEvent);
@@ -28,11 +28,13 @@ public class EventScheduler {
     }
 
     // Removes an event from list of events and idToEvent
-    public void removeEvent(String id){
+    public boolean removeEvent(String id){
         if (ListOfEvents.contains(id)){
             ListOfEvents.remove(id);
             idToEvent.remove(id);
+            return true;
         }
+        return false;
     }
 
     // Map (ID to Event)
@@ -70,12 +72,13 @@ public class EventScheduler {
 
     // Converts the list of events into a List<List<String>>
     // in order to be saved to txt file
-    public List<List<String>> eventToString(){
+    public List<List<String>> eventToString(PersonManager personManager){
         List<List<String>> convertedEvents = new ArrayList<List<String>>();
         for (String i : ListOfEvents){
             List<String> tempConvert = new ArrayList<String>();
             tempConvert.add(idToEvent.get(i).getRoomNum() + ","+ i + "," + idToEvent.get(i).getTime() + ","
-                    + idToEvent.get(i).getSpeaker() + ","+ idToEvent.get(i).getSpeakerPassword());
+                    + idToEvent.get(i).getSpeaker() + ","
+                    + personManager.usernameToPerson.get(idToEvent.get(i).getSpeaker()).getPassword());
             convertedEvents.add(tempConvert);
         }
         return convertedEvents;

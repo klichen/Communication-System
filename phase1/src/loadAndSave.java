@@ -8,7 +8,7 @@ public class loadAndSave{
     //private LoginSystem login = new LoginSystem();
 
     // Load events from text file
-    public void loadAll(EventScheduler scheduler, LoginSystem login) throws IOException {
+    public void loadAll(EventScheduler scheduler, PersonManager personManager) throws IOException {
         List<List<String>> arrEvents = new ArrayList<List<String>>();
         List<List<String>> arrLogins = new ArrayList<List<String>>();
         BufferedReader inputReader;
@@ -55,24 +55,25 @@ public class loadAndSave{
             for (String l : i){
                 String[] splitText = l.split(",");
                 boolean update = scheduler.updateEvents(splitText[0], splitText[1], Integer.valueOf(splitText[2]),
-                        splitText[3], splitText[4]);
+                        splitText[3]);//, splitText[4]);
                 if(update){
-                    login.updateLogins("speaker", splitText[3], splitText[4]);
+                    personManager.updateLogins("speaker", splitText[3], splitText[4]);
                 }
             }
         }
         for(List<String> i : arrLogins){
             for (String l : i){
                 String[] splitText = l.split(",");
-                login.updateLogins(splitText[0], splitText[1], splitText[2]);
+                personManager.updateLogins(splitText[0], splitText[1], splitText[2]);
             }
         }
-        System.out.println(login.getLoginList());
+        System.out.println(personManager.allPersons);
+        System.out.println(personManager.usernameToPerson);
         System.out.println("MAP" + scheduler.getIdToEvent());
     }
 
     // Save events to text file
-    public void saveAll(EventScheduler scheduler, LoginSystem login) throws IOException {
+    public void saveAll(EventScheduler scheduler, PersonManager personManager) throws IOException {
         List<List<String>> convertedEvents = new ArrayList<List<String>>();
         List<List<String>> convertedLogins = new ArrayList<List<String>>();
         System.out.println("Enter file name to save to (.txt):");
@@ -81,8 +82,8 @@ public class loadAndSave{
 
         try {
             outputWriter = new BufferedWriter(new FileWriter(new File("phase1/src/" +input)));
-            convertedEvents = scheduler.eventToString();
-            convertedLogins = login.loginToString();
+            convertedEvents = scheduler.eventToString(personManager);
+            convertedLogins = personManager.loginToString();
 
             // Write Events to txt file
             outputWriter.write("Events");

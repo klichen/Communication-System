@@ -7,36 +7,41 @@ public class OrganizerSystem {
     AttendeeManager am;
     EventScheduler es;
     SpeakerManager sm;
+    PersonManager pm;
+
+    // Checks if
 
     // Enter rooms (events) into the system
-    public void createEvent(String eventId, int time, String speakerUsername){
+    public boolean createEvent(String roomNum, String eventId, int time, String speakerUsername){
+        boolean eventCreated;
         // Create the event
-        es.updateEvents(eventId, time, speakerUsername);
-        // Add event to speaker's schedule
-        sm.updateSchedule(speakerUsername, eventId);
+        eventCreated = es.updateEvents(roomNum, eventId, time, speakerUsername);
+        if (eventCreated){
+            // Add event to speaker's schedule
+            sm.updateSchedule(speakerUsername, eventId);
+        }
+        return eventCreated;
     }
 
     // Create speaker accounts
-    public void createSpeaker(String speakerUsername, String password){
-        sm.createSpeaker(speakerUsername, password);
-    }
-
-    // Get all speakers
-    public ArrayList<Speaker> getAllSpeakers(){
-        return sm.getAllSpeakers();
+    public boolean createSpeaker(String speakerUsername, String password){
+        return pm.createSpeaker(speakerUsername, password);
     }
 
     // Cancel event
-    public void cancelEvent(String eventId){
+    public boolean cancelEvent(String eventId){
         // Remove event from EventScheduler
-        es.removeEvent(eventId);
-        // Remove event from speaker's schedule
-        String speakerUsername = es.getIdToEvent().get(eventId).getSpeaker();
-        sm.updateSchedule(speakerUsername, eventId);
-        // Remove event from all attendees' schedule
-        List<String> attendeeList = es.getIdToEvent().get(eventId).getInEvent();
-        for (String attendeeUsername: attendeeList){
-            am.eventCancel(attendeeUsername, eventId);
+        boolean eventCancelled = es.removeEvent(eventId);
+        if (eventCancelled){
+            // Remove event from speaker's schedule
+            String speakerUsername = es.getIdToEvent().get(eventId).getSpeaker();
+            sm.updateSchedule(speakerUsername, eventId);
+            // Remove event from all attendees' schedule
+            List<String> attendeeList = es.getIdToEvent().get(eventId).getInEvent();
+            for (String attendeeUsername: attendeeList){
+                am.eventCancel(attendeeUsername, eventId);
+            }
         }
+        return eventCancelled;
     }
 }
