@@ -2,8 +2,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class SpeakerManager extends PersonManager {
-    //  Log in
+public class SpeakerManager {
+    private ArrayList<Speaker> allSpeakers;
+    private Map<String, Speaker> usernameToSpeaker;
+
+    // Create speaker accounts
+    public boolean createSpeaker(String username, String password){
+        if (!usernameToSpeaker.containsKey(username)) {
+            Speaker speaker = new Speaker(username, password);
+            allSpeakers.add(speaker);
+            usernameToSpeaker.put(username, speaker);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Get all speakers
+    public ArrayList<Speaker> getAllSpeakers(){
+        return allSpeakers;
+    }
+
+    // Get Map (String -> Speaker)
+    public Map<String, Speaker> getUsernameToSpeaker() {
+        return usernameToSpeaker;
+    }
 
     // Get schedule
     public ArrayList<String> getSchedule(String speakerUsername){

@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class OrganizerMainScreen {
     OrganizerSystem os;
+    OrganizerText ot;
     LoginType lt;
 
     public void run(){
@@ -65,6 +66,7 @@ public class OrganizerMainScreen {
                 } else {
                     System.out.println("This Speaker account can not be created.");
                 }
+                break;
             case "3":
                 // Cancel an event
                 System.out.println("Please enter the id of your event: ");
@@ -77,17 +79,39 @@ public class OrganizerMainScreen {
                 } else {
                     System.out.println("The Event could not be cancelled.");
                 }
+                break;
             case "4":
                 // Send message to a specific contact
+                System.out.println("Please enter the message you would like to send: ");
+                String msg = scan.nextLine();
+                scan.close();
 
+                System.out.println("Please enter the username of the contact you want to message: ");
+                String receiver = scan.nextLine();
+                scan.close();
+
+                ot.messageSingleRecipient(msg, username, receiver); // Needs to be fixed in ot so that it uses String
+                break;
             case "5":
                 // Send message to all Speakers
+                System.out.println("Please enter the message you would like to send: ");
+                String msgSpeakers = scan.nextLine();
+                scan.close();
 
+                ot.messageAllSpeakers(msgSpeakers, username); // Needs to be fixed in ot so that it uses String
+                break;
             case "6":
                 // Send message to all Attendees
+                System.out.println("Please enter the message you would like to send: ");
+                String msgAttendees = scan.nextLine();
+                scan.close();
 
+                ot.messageAllAttendees(msgAttendees, username); // Needs to be fixed in ot so that it uses String
+                break;
             case "7":
                 // Log out
+
+                break;
         }
     }
 }

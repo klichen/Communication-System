@@ -6,8 +6,8 @@ public class OrganizerSystem {
     // Controller class (gets input from user)
     AttendeeManager am;
     EventScheduler es;
+    OrganizerManager om;
     SpeakerManager sm;
-    PersonManager pm;
 
     // Checks if
 
@@ -25,7 +25,12 @@ public class OrganizerSystem {
 
     // Create speaker accounts
     public boolean createSpeaker(String speakerUsername, String password){
-        return pm.createSpeaker(speakerUsername, password);
+        return sm.createSpeaker(speakerUsername, password);
+    }
+
+    // Create organizer accounts
+    public boolean createOrganizer(String organizerUsername, String password){
+        return om.createOrganizer(organizerUsername, password);
     }
 
     // Cancel event
