@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class OrganizerSystem {
     // Controller class (gets input from user)
@@ -8,8 +9,6 @@ public class OrganizerSystem {
     EventScheduler es;
     OrganizerManager om;
     SpeakerManager sm;
-
-    // Checks if
 
     // Enter rooms (events) into the system
     public boolean createEvent(String roomNum, String eventId, int time, String speakerUsername){
@@ -49,4 +48,24 @@ public class OrganizerSystem {
         }
         return eventCancelled;
     }
+
+    // Read string from user input
+    public String readString() {
+        Scanner scan = new Scanner(System.in);
+        String str = scan.nextLine();
+        scan.close();
+
+        return str;
+    }
+
+    // Read int starts from user input
+    public int readInt() {
+        Scanner scan = new Scanner(System.in);
+        String strInput = scan.nextLine();
+        int intInput = Integer.parseInt(strInput);
+        scan.close();
+
+        return intInput;
+    }
 }
+
