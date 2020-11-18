@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class SpeakerText {
-    private Person[] people;
+    private ArrayList<Person> people;
 
-    public SpeakerText(Person[] people){
+    public SpeakerText(ArrayList<Person> people){
         this.people = people;
     }
 
@@ -13,8 +13,8 @@ public class SpeakerText {
                 boolean sent = false; //so a message is not sent twice if an attendee is signed up for multiple talks
                 for (Event talk: events){
                     if (((Attendee) user).getSchedule().contains(talk) && !sent){
-                        Message m = new Message(message, currentPerson, user);
-                        user.addToMessageStorage(m.getMessage(), m.getSender().getUsername());
+                        Message m = new Message(message, currentPerson.getUsername(), user.getUsername());
+                        user.addToMessageStorage(m.getMessage(), m.getSender());
                         sent = true;
                     }
                 }

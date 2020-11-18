@@ -1,9 +1,9 @@
 public class Message {
     private String message;
-    private Person sender;
-    private Person receiver;
+    private String sender;
+    private String receiver;
 
-    public Message(String message, Person sender, Person receiver){
+    public Message(String message, String sender, String receiver){
         this.message = message;
         this.sender = sender;
         this.receiver = receiver;
@@ -13,11 +13,11 @@ public class Message {
         return message;
     }
 
-    public Person getSender(){
+    public String getSender(){
         return sender;
     }
 
-    public Person getReceiver(){
+    public String getReceiver(){
         return receiver;
     }
 }

@@ -7,7 +7,7 @@ public class AttendeeText {
         this.people = people;
     }
     public void sendMessage(String message, Person currentPerson, Person recipient){
-        Message m = new Message(message, currentPerson, recipient);
+        Message m = new Message(message, currentPerson.getUsername(), recipient.getUsername());
         recipient.addToMessageStorage(m.getMessage(), m.getSender());
     }
 }

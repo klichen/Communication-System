@@ -19,7 +19,7 @@ public class OrganizerText {
     public void messageAllSpeakers(String message, Person currentPerson) {
         for (Person user : people) {
             if (user.isSpeakerType()) {
-                Message m = new Message(message, currentPerson, user);
+                Message m = new Message(message, currentPerson.getUsername(), user.getUsername());
                 user.addToMessageStorage(m.getMessage(), m.getSender());
                 // defined in Person Class
             }
@@ -35,7 +35,7 @@ public class OrganizerText {
     public void messageAllAttendees(String message, Person currentPerson) {
         for (Person user : people) {
             if (user.isAttendeeType()) {
-                Message m = new Message(message, currentPerson, user);
+                Message m = new Message(message, currentPerson.getUsername(), user.getUsername());
                 user.addToMessageStorage(m.getMessage(), m.getSender());
             }
         }
@@ -49,7 +49,7 @@ public class OrganizerText {
      * @param recipient The recipient of the message
      */
     public void messageSingleRecipient(String message, Person currentPerson, Person recipient) {
-        Message m = new Message(message, currentPerson, recipient);
+        Message m = new Message(message, currentPerson.getUsername(), recipient.getUsername());
         recipient.addToMessageStorage(m.getMessage(), m.getSender()); //this method will be the setter method
     }
 }

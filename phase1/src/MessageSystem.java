@@ -2,9 +2,11 @@ import java.util.ArrayList;
 
 public class MessageSystem {
     private final ArrayList<Person> users;
+    private final ArrayList<Event> events;
 
-    public MessageSystem(ArrayList<Person> users){
+    public MessageSystem(ArrayList<Person> users, ArrayList<Event> events){
         this.users = users;
+        this.events = events;
     }
 
     private Person findPerson(ArrayList<Person> people, String name){
@@ -39,7 +41,15 @@ public class MessageSystem {
         else if(sender.isSpeakerType()){
             Speaker speaker = (Speaker) sender;
             SpeakerText text = new SpeakerText(users);
-            text.messageAllAttendees(speaker.getSchedule(), message, currPerson);
+            ArrayList<Event> eventArrayList = new ArrayList<Event>();
+            for(String eventName:speaker.getSchedule()){
+                for(Event event:events){
+                    if(eventName.equals(event.getID())){
+                        eventArrayList.add(event);
+                    }
+                }
+            }
+            text.messageAllAttendees(eventArrayList, message, currPerson);
         }
     }
 
