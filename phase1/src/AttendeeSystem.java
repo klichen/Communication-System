@@ -2,6 +2,7 @@ import com.sun.org.apache.xml.internal.utils.StringVector;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Scanner;
 
 public class AttendeeSystem {
     // Controller class (gets input from user)
@@ -9,6 +10,26 @@ public class AttendeeSystem {
     EventScheduler es;
     OrganizerManager om;
     SpeakerManager sm;
+
+    // read eventID and return it
+    public String readEventID(){
+        String eventID;
+        Scanner scan = new Scanner(System.in);
+        eventID = scan.nextLine();
+        scan.close();
+
+        return eventID;
+    }
+
+    // read eventID and return it
+    public String readContactUsername(){
+        String contactID;
+        Scanner scan = new Scanner(System.in);
+        contactID = scan.nextLine();
+        scan.close();
+
+        return contactID;
+    }
 
     // create attendee account
     public void createAccount(String username, String password){
@@ -90,6 +111,7 @@ public class AttendeeSystem {
         Speaker eventSpeaker = sm.getUsernameToSpeaker().get(speakerID);
         if(canAdd){
             this.am.eventSignUp(username,eventID);
+            this.addContact(username, speakerID);
             event.updateInEvent(username);
             eventSpeaker.addToContact(username);
         }

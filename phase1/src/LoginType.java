@@ -46,4 +46,9 @@ public class LoginType {
 
 
     }
+
+    public void logOut(){
+        this.username = "";
+        this.password = "";
+    }
 }

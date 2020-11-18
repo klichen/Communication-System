@@ -13,10 +13,10 @@ public class loadAndSave{
         List<List<String>> arrEvents = new ArrayList<List<String>>();
         List<List<String>> arrLogins = new ArrayList<List<String>>();
         BufferedReader inputReader;
-        System.out.println("Enter file name to load from (.txt):");
-        String input = br.readLine();
+        //System.out.println("Enter file name to load from (.txt):");
+        //String input = br.readLine();
         try {
-            inputReader = new BufferedReader(new FileReader(new File("phase1/src/" + input)));
+            inputReader = new BufferedReader(new FileReader(new File("phase1/src/data.txt")));
 
             String line;
             // Load events
@@ -99,12 +99,12 @@ public class loadAndSave{
         List<List<String>> convertedSpeakerLogins = new ArrayList<List<String>>();
         List<List<String>> convertedAttendeeLogins = new ArrayList<List<String>>();
         List<List<String>> convertedOrganizerLogins = new ArrayList<List<String>>();
-        System.out.println("Enter file name to save to (.txt):");
-        String input = br.readLine();
+        //System.out.println("Enter file name to save to (.txt):");
+        //String input = br.readLine();
         BufferedWriter outputWriter;
 
         try {
-            outputWriter = new BufferedWriter(new FileWriter(new File("phase1/src/" +input)));
+            outputWriter = new BufferedWriter(new FileWriter(new File("phase1/src/saved.txt")));
             convertedEvents = scheduler.eventToString(speakerManager);
             convertedSpeakerLogins = speakerManager.loginToString();
             convertedAttendeeLogins = attendeeManager.loginToString();
