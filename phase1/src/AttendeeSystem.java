@@ -21,7 +21,15 @@ public class AttendeeSystem {
         return eventID;
     }
 
+    // read eventID and return it
+    public String readContactUsername(){
+        String contactID;
+        Scanner scan = new Scanner(System.in);
+        contactID = scan.nextLine();
+        scan.close();
 
+        return contactID;
+    }
 
     // create attendee account
     public void createAccount(String username, String password){

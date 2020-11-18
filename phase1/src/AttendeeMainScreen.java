@@ -48,8 +48,7 @@ public class AttendeeMainScreen {
             // if applicable removes an event from the users schedule, otherwise tells them they cannot
             case "3": {
                 System.out.println("Please enter the id of the event you would like to unregister for: ");
-                String eventID = scan.nextLine();
-                scan.close();
+                String eventID = this.as.readEventID();
 
                 // cancels the event
                 if (this.as.canCancelEnrollment(username, eventID)) {
@@ -66,8 +65,7 @@ public class AttendeeMainScreen {
             // adds a contact to contact list
             case "4": {
                 System.out.println("Please enter the username of the contact you would like to add: ");
-                String contactID = scan.nextLine();
-                scan.close();
+                String contactID = this.as.readContactUsername();
                 
                 // adds contact
                 if(this.as.canAddContact(username, contactID)){
