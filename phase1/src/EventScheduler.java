@@ -28,13 +28,11 @@ public class EventScheduler {
     }
 
     // Removes an event from list of events and idToEvent
-    public boolean removeEvent(String id){
+    public void removeEvent(String id){
         if (ListOfEvents.contains(id)){
             ListOfEvents.remove(id);
             idToEvent.remove(id);
-            return true;
         }
-        return false;
     }
 
     // Map (ID to Event)
@@ -72,13 +70,13 @@ public class EventScheduler {
 
     // Converts the list of events into a List<List<String>>
     // in order to be saved to txt file
-    public List<List<String>> eventToString(PersonManager personManager){
+    public List<List<String>> eventToString(SpeakerManager speakerManager){
         List<List<String>> convertedEvents = new ArrayList<List<String>>();
         for (String i : ListOfEvents){
             List<String> tempConvert = new ArrayList<String>();
             tempConvert.add(idToEvent.get(i).getRoomNum() + ","+ i + "," + idToEvent.get(i).getTime() + ","
                     + idToEvent.get(i).getSpeaker() + ","
-                    + personManager.usernameToPerson.get(idToEvent.get(i).getSpeaker()).getPassword());
+                    + speakerManager.getUsernameToSpeaker().get(idToEvent.get(i).getSpeaker()).getPassword());
             convertedEvents.add(tempConvert);
         }
         return convertedEvents;

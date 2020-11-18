@@ -6,7 +6,10 @@ public class Main {
         loadAndSave las = new loadAndSave();
         EventScheduler scheduler = new EventScheduler();
         //LoginSystem login = new LoginSystem();
-        PersonManager personManager = new PersonManager();
+        //PersonManager personManager = new PersonManager();
+        SpeakerManager speakerManager = new SpeakerManager();
+        AttendeeManager attendeeManager = new AttendeeManager();
+        OrganizerManager organizerManager = new OrganizerManager();
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         boolean userInputCorrect = true;
@@ -15,10 +18,12 @@ public class Main {
             String input = br.readLine();
             //System.out.println(input);
             if(input.equals("load")){
-                las.loadAll(scheduler, personManager);
+                las.loadAll(scheduler, speakerManager,
+                        attendeeManager, organizerManager);
             }
             else if(input.equals("save")){
-                las.saveAll(scheduler, personManager);
+                las.saveAll(scheduler, speakerManager,
+                        attendeeManager, organizerManager);
             }
             else if (input.equals("done")){
                 userInputCorrect = false;

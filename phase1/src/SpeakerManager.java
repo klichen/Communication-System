@@ -1,10 +1,16 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SpeakerManager {
     private ArrayList<Speaker> allSpeakers;
     private Map<String, Speaker> usernameToSpeaker;
+
+    public SpeakerManager(){
+        allSpeakers = new ArrayList<>();
+        usernameToSpeaker = new HashMap<>();
+    }
 
     // Create speaker accounts
     public boolean createSpeaker(String username, String password){
@@ -26,6 +32,14 @@ public class SpeakerManager {
     // Get Map (String -> Speaker)
     public Map<String, Speaker> getUsernameToSpeaker() {
         return usernameToSpeaker;
+    }
+
+    // Check login for logging in
+    public boolean checkLogin(String username, String password){
+        for (Speaker user: allSpeakers){
+            return user.getUsername().equals(username) && user.getPassword().equals(password);
+        }
+        return false;
     }
 
     // Get schedule
@@ -51,5 +65,18 @@ public class SpeakerManager {
     // See if a person is in contacts
     public boolean isContact(String speakerUsername, String personUsername){
         return usernameToSpeaker.get(speakerUsername).getContactList().contains(personUsername);
+    }
+
+    // Convert all list of speakers to list of string
+    public List<List<String>> loginToString(){
+        List<List<String>> convertedEvents = new ArrayList<List<String>>();
+        System.out.println(usernameToSpeaker);
+        for (String i : usernameToSpeaker.keySet()){
+            List<String> tempConvert = new ArrayList<String>();
+            tempConvert.add("speaker" + "," + usernameToSpeaker.get(i).getUsername()
+                    + "," + usernameToSpeaker.get(i).getPassword());
+            convertedEvents.add(tempConvert);
+        }
+        return convertedEvents;
     }
 }

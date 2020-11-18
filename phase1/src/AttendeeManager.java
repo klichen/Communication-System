@@ -1,9 +1,16 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AttendeeManager{
     private Map<String, Attendee> usernameToAttendee;
     private ArrayList<Attendee> allAttendees;
+
+    public AttendeeManager(){
+        allAttendees = new ArrayList<>();
+        usernameToAttendee = new HashMap<>();
+    }
 
     // Create attendee accounts
     public boolean createAttendee(String username, String password){
@@ -25,6 +32,14 @@ public class AttendeeManager{
     // Get Map (String -> Attendee)
     public Map<String, Attendee> getUsernameToAttendee() {
         return usernameToAttendee;
+    }
+
+    // Check login for logging in
+    public boolean checkLogin(String username, String password){
+        for (Attendee user: allAttendees){
+            return user.getUsername().equals(username) && user.getPassword().equals(password);
+        }
+        return false;
     }
 
 
@@ -59,6 +74,19 @@ public class AttendeeManager{
     public ArrayList<String> getSchedule(String username){
         Attendee attendee = usernameToAttendee.get(username);
         return attendee.getSchedule();
+    }
+
+    // Convert all list of attendee to list of string
+    public List<List<String>> loginToString(){
+        List<List<String>> convertedEvents = new ArrayList<List<String>>();
+        System.out.println(usernameToAttendee);
+        for (String i : usernameToAttendee.keySet()){
+            List<String> tempConvert = new ArrayList<String>();
+            tempConvert.add("attendee" + "," + usernameToAttendee.get(i).getUsername()
+                    + "," + usernameToAttendee.get(i).getPassword());
+            convertedEvents.add(tempConvert);
+        }
+        return convertedEvents;
     }
 
 }
