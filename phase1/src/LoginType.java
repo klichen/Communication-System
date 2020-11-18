@@ -28,16 +28,16 @@ public class LoginType {
         return this.username;
     }
 
-    public void checkLogin(PersonManager pManager) {
+    public void checkLogin(AttendeeManager am, OrganizerManager om, SpeakerManager sm) {
 
-        if (pManager.getPersonType(username, password).equals("Attendee")) {
+        if (am.checkLogin(username, password)) {
             //show attendee presenter
         }
-        else if (pManager.getPersonType(username, password).equals("Speaker")) {
+        else if (om.checkLogin(username, password)) {
             //show speaker presenter
             SpeakerMainScreen speakerMainScreen = new SpeakerMainScreen(username);
         }
-        else if (pManager.getPersonType(username, password).equals("Organizer")) {
+        else if (sm.checkLogin(username, password)) {
             //show organizer presenter
         }
         else{
