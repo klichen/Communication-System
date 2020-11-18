@@ -1,9 +1,31 @@
 import java.util.ArrayList;
 import java.util.Map;
 
-public class AttendeeManager extends PersonManager{
-    // Change after so that this is a String for the attendeeUsername
-    // private String attendeeUsername;
+public class AttendeeManager{
+    private Map<String, Attendee> usernameToAttendee;
+    private ArrayList<Attendee> allAttendees;
+
+    // Create attendee accounts
+    public boolean createAttendee(String username, String password){
+        if (!usernameToAttendee.containsKey(username)) {
+            Attendee attendee = new Attendee(username, password);
+            allAttendees.add(attendee);
+            usernameToAttendee.put(username, attendee);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Get all attendees
+    public ArrayList<Attendee> getAllAttendees(){
+        return allAttendees;
+    }
+
+    // Get Map (String -> Attendee)
+    public Map<String, Attendee> getUsernameToAttendee() {
+        return usernameToAttendee;
+    }
 
 
     // returns whether a contact can be added (if contact is already in list)
