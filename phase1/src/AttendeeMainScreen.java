@@ -31,8 +31,7 @@ public class AttendeeMainScreen {
             // if applicable adds an event to the users schedule, otherwise tells them they cannot
             case "2": {
                 System.out.println("Please enter the id of the event you would like to register for: ");
-                String eventID = scan.nextLine();
-                scan.close();
+                String eventID = this.as.readEventID();
 
                 // adds the event
                 if (this.as.canAddEvent(username, eventID)) {
