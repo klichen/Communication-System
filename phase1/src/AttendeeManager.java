@@ -61,13 +61,13 @@ public class AttendeeManager{
     // Signup for events
     public void eventSignUp(String username, String eventID){
         Attendee attendee = usernameToAttendee.get(username);
-        attendee.schedule.add(eventID);
+        attendee.addToSchedule(eventID);
     }
 
     // Cancel their enrolment in an event
     public void eventCancel(String username, String eventID){
         Attendee attendee = usernameToAttendee.get(username);
-        attendee.schedule.remove(eventID);
+        attendee.removeFromSchedule(eventID);
     }
 
     // See schedule of the events for which they signed up
@@ -88,5 +88,7 @@ public class AttendeeManager{
         }
         return convertedEvents;
     }
+
+
 
 }

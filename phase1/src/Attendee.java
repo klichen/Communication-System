@@ -3,17 +3,16 @@ import java.util.ArrayList;
 
 public class Attendee extends Person{
     private ArrayList<String> contactList;
-    protected ArrayList<String> schedule;
-    protected ArrayList<Integer> eventTimes;
+    private ArrayList<String> schedule;
+
 
     public Attendee(String username, String password) {
         super(username, password);
-        this.contactList = new ArrayList<String>();
+        this.contactList = new ArrayList<>();
         this.isSpeaker = false;
         this.isAttendee = true;
         this.isOrganizer = false;
-        this.schedule = new ArrayList<String>();
-        this.eventTimes = new ArrayList<Integer>();
+        this.schedule = new ArrayList<>();
     }
 
     // returns the list of people the Person can message
@@ -29,11 +28,13 @@ public class Attendee extends Person{
         return this.schedule;
     }
 
-    public ArrayList<Integer> getEventTimes(){
-        return this.eventTimes;
+    public void addToSchedule(String eventID){
+        this.schedule.add(eventID);
     }
 
-    //public void updateSchedule(Event event){
-        //this.schedule.add(event);
-    //}
+    public void removeFromSchedule(String eventID){
+        this.schedule.remove(eventID);
+    }
+
+
 }
