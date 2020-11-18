@@ -15,9 +15,9 @@ public class OrganizerMessageScreen {
         MessageSystem messageSystem = new MessageSystem(am, om, sm, loginType);
         System.out.println("Enter the username of the recipient. Enter \"All Attendees\" to message all attendees, and" +
                 " enter \" All Speakers\" to message all speakers.");
-        String receiver = messageSystem.inputReceiver();
-        System.out.println("Enter your message.");
-        String message = messageSystem.inputMessage();
+        String receiver = messageSystem.userInput();
+        System.out.println("Enter your message:");
+        String message = messageSystem.userInput();
         messageSystem.createMessage(message, receiver);
     }
 }

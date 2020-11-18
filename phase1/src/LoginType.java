@@ -35,7 +35,7 @@ public class LoginType {
         }
         else if (om.checkLogin(username, password)) {
             //show speaker presenter
-            SpeakerMainScreen speakerMainScreen = new SpeakerMainScreen(username);
+            SpeakerMainScreen speakerMainScreen = new SpeakerMainScreen(username); //Fix this.
         }
         else if (sm.checkLogin(username, password)) {
             //show organizer presenter

@@ -1,16 +1,11 @@
-import com.sun.org.apache.xpath.internal.operations.Or;
-
-import javax.management.modelmbean.InvalidTargetObjectTypeException;
-import java.awt.event.ComponentListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MessageSystem {
-    private AttendeeManager am;
-    private OrganizerManager om;
-    private SpeakerManager sm;
-    private LoginType loginType;
+    private final AttendeeManager am;
+    private final OrganizerManager om;
+    private final SpeakerManager sm;
+    private final LoginType loginType;
 
     public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, LoginType loginType){
         this.am = am;
@@ -19,22 +14,39 @@ public class MessageSystem {
         this.loginType =loginType;
     }
 
-    public String inputMessage(){
+    public String userInput(){
         Scanner scan = new Scanner(System.in);
         String m = scan.nextLine();
         scan.close();
         return m;
     }
 
-    public String inputReceiver(){
-        Scanner scan = new Scanner(System.in);
-        String n = scan.nextLine();
-        scan.close();
-        return n;
-    }
-
     public void createMessage(String message, String receiver){
         this.sendMessage(message, receiver, loginType.getUsername());
+    }
+
+    public String readMessage(String currPerson) {
+        ArrayList<Attendee> attendees = am.getAllAttendees();
+        ArrayList<Organizer> organizers = om.getAllOrganizers();
+        ArrayList<Speaker> speakers = sm.getAllSpeakers();
+
+        ReadMessageManager readMessageManager = new ReadMessageManager(currPerson);
+        try {
+            if (am.getUsernameToAttendee().containsKey(currPerson)) {
+                readMessageManager.addUsers(attendees);
+                return readMessageManager.readMessage();
+            } else if (om.getUsernameToOrganizer().containsKey(currPerson)) {
+                readMessageManager.addUsers(organizers);
+                return readMessageManager.readMessage();
+            } else if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
+                readMessageManager.addUsers(speakers);
+                return readMessageManager.readMessage();
+            } else {
+                throw new NullPointerException();
+            }
+        } catch (NullPointerException e) {
+            return "Current user is invalid";
+        }
     }
 
     private void sendMessage(String message, String receiver, String currPerson){
