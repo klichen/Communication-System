@@ -26,6 +26,7 @@ public class AttendeeMainScreen {
         switch (response) {
             case "1":
                 System.out.println(this.as.getSchedule(username));
+
                 break;
             // if applicable adds an event to the users schedule, otherwise tells them they cannot
             case "2": {
@@ -42,6 +43,7 @@ public class AttendeeMainScreen {
                 else {
                     System.out.println("Sorry this action cannot be done.");
                 }
+
                 break;
             }
             // if applicable removes an event from the users schedule, otherwise tells them they cannot
@@ -59,6 +61,7 @@ public class AttendeeMainScreen {
                 else {
                     System.out.println("Sorry this action cannot be done.");
                 }
+
                 break;
             }
             // adds a contact to contact list
@@ -76,22 +79,25 @@ public class AttendeeMainScreen {
                 else{
                     System.out.println("Sorry this action cannot be done.");
                 }
+
                 break;
             }
             // Sends a message to a contact
             case "5":{
-                // umm i don't know how message system works so Juan do this
+                // transfer to AttendeeMessageScreen
+
                 break;
             }
             // View previous messages
             case "6":{
                 // Juan also do this thx boo
+
                 break;
             }
             // Log off
             case "7":{
-                // Yeah Juan this is also all you, but I think you just set the username and password in login back to
-                // empty string
+                lt.logOut();
+                //pass screen back to login screen
                 break;
             }
 

@@ -90,6 +90,7 @@ public class AttendeeSystem {
         Speaker eventSpeaker = sm.getUsernameToSpeaker().get(speakerID);
         if(canAdd){
             this.am.eventSignUp(username,eventID);
+            this.addContact(username, speakerID);
             event.updateInEvent(username);
             eventSpeaker.addToContact(username);
         }

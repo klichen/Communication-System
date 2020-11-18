@@ -109,7 +109,7 @@ public class OrganizerMainScreen {
                 ot.messageAllAttendees(msgAttendees, username); // Needs to be fixed in ot so that it uses String
                 break;
             case "7":
-                // Log out
+                lt.logOut();
 
                 break;
         }
