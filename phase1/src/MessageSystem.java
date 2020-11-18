@@ -4,19 +4,40 @@ import javax.management.modelmbean.InvalidTargetObjectTypeException;
 import java.awt.event.ComponentListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MessageSystem {
     private AttendeeManager am;
     private OrganizerManager om;
     private SpeakerManager sm;
+    private LoginType loginType;
 
-    public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm){
+    public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, LoginType loginType){
         this.am = am;
         this. om = om;
         this. sm = sm;
+        this.loginType =loginType;
     }
 
-    public void sendMessage(String message, String receiver, String currPerson){
+    public String inputMessage(){
+        Scanner scan = new Scanner(System.in);
+        String m = scan.nextLine();
+        scan.close();
+        return m;
+    }
+
+    public String inputReceiver(){
+        Scanner scan = new Scanner(System.in);
+        String n = scan.nextLine();
+        scan.close();
+        return n;
+    }
+
+    public void createMessage(String message, String receiver){
+        this.sendMessage(message, receiver, loginType.getUsername());
+    }
+
+    private void sendMessage(String message, String receiver, String currPerson){
         ArrayList<Attendee> attendees = am.getAllAttendees();
         ArrayList<Organizer> organizers = om.getAllOrganizers();
         ArrayList<Speaker> speakers = sm.getAllSpeakers();
@@ -32,7 +53,13 @@ public class MessageSystem {
                 } else {
                     text.addPeopleToList(attendees);
                     text.addPeopleToList(speakers);
-                    text.messageSingleRecipient(message, currPerson, receiver);
+                    if(am.getUsernameToAttendee().containsKey(receiver) ||
+                            sm.getUsernameToSpeaker().containsKey(receiver)) {
+                        text.messageSingleRecipient(message, currPerson, receiver);
+                    }
+                    else{
+                        throw new NullPointerException();
+                    }
                 }
             } else if (sender.isAttendeeType()) {
                 AttendeeText text = new AttendeeText(users);

@@ -48,13 +48,10 @@ public class OrganizerText {
      */
     public void messageSingleRecipient(String message, String currentPerson, String recipient) {
         Person user = null;
-        for(Person person: people){
-            if(person.getUsername().equals(recipient)){
+        for(Person person: people) {
+            if (person.getUsername().equals(recipient)) {
                 user = person;
             }
-        }
-        if(user == null){
-            throw new NullPointerException();
         }
         user.addToMessageStorage(message, currentPerson);
     }
