@@ -11,8 +11,8 @@ public class AttendeeSystem {
     OrganizerManager om;
     SpeakerManager sm;
 
-    // read eventID and return it
-    public String readEventID(){
+    // read string and return it
+    public String readString(){
         String eventID;
         Scanner scan = new Scanner(System.in);
         eventID = scan.nextLine();
@@ -21,15 +21,6 @@ public class AttendeeSystem {
         return eventID;
     }
 
-    // read eventID and return it
-    public String readContactUsername(){
-        String contactID;
-        Scanner scan = new Scanner(System.in);
-        contactID = scan.nextLine();
-        scan.close();
-
-        return contactID;
-    }
 
     // create attendee account
     public void createAccount(String username, String password){

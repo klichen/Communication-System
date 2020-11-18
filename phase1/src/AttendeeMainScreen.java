@@ -4,6 +4,17 @@ import java.util.Scanner;
 public class AttendeeMainScreen {
     AttendeeSystem as;
     LoginType lt;
+    AttendeeManager am;
+    OrganizerManager om;
+    SpeakerManager sm;
+
+    public AttendeeMainScreen(LoginType lt, AttendeeSystem as, AttendeeManager am, OrganizerManager om, SpeakerManager sm){
+        this.as = as;
+        this.lt = lt;
+        this.am = am;
+        this.om = om;
+        this.sm = sm;
+    }
 
     public void run(){
         String username = lt.getUsername();
@@ -31,7 +42,7 @@ public class AttendeeMainScreen {
             // if applicable adds an event to the users schedule, otherwise tells them they cannot
             case "2": {
                 System.out.println("Please enter the id of the event you would like to register for: ");
-                String eventID = this.as.readEventID();
+                String eventID = this.as.readString();
 
                 // adds the event
                 if (this.as.canAddEvent(username, eventID)) {
@@ -48,7 +59,7 @@ public class AttendeeMainScreen {
             // if applicable removes an event from the users schedule, otherwise tells them they cannot
             case "3": {
                 System.out.println("Please enter the id of the event you would like to unregister for: ");
-                String eventID = this.as.readEventID();
+                String eventID = this.as.readString();
 
                 // cancels the event
                 if (this.as.canCancelEnrollment(username, eventID)) {
@@ -65,7 +76,7 @@ public class AttendeeMainScreen {
             // adds a contact to contact list
             case "4": {
                 System.out.println("Please enter the username of the contact you would like to add: ");
-                String contactID = this.as.readContactUsername();
+                String contactID = this.as.readString();
                 
                 // adds contact
                 if(this.as.canAddContact(username, contactID)){
@@ -81,13 +92,15 @@ public class AttendeeMainScreen {
             }
             // Sends a message to a contact
             case "5":{
-                // transfer to AttendeeMessageScreen
+                // AttendeeMessageScreen messageScreen = new AttendeeMessageScreen();
+                // messageScreen.run();
 
                 break;
             }
             // View previous messages
             case "6":{
-                // Juan also do this thx boo
+                ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt);
+                messageScreen.run();
 
                 break;
             }
