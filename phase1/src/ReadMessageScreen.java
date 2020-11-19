@@ -2,19 +2,19 @@ public class ReadMessageScreen {
     private AttendeeManager am;
     private OrganizerManager om;
     private SpeakerManager sm;
-    private LoginType loginType;
+    private String username;
 
-    public ReadMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, LoginType loginType){
+    public ReadMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username){
         this.am = am;
         this.om = om;
         this.sm = sm;
-        this.loginType =loginType;
+        this.username = username;
     }
 
     public void run(){
-        MessageSystem messageSystem = new MessageSystem(am, om, sm, loginType);
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
         System.out.println("Here are your messages:");
-        String messages = messageSystem.readMessage(loginType.getUsername());
+        String messages = messageSystem.readMessage(username);
         System.out.println(messages);
 
         System.out.println("To reply, Enter the username of the person you wish to respond to:");
@@ -25,7 +25,7 @@ public class ReadMessageScreen {
 
         messageSystem.createMessage(message, receiver);
 
-        System.out.println("Type \"main menu\" to return to the main screen.");
+        System.out.println("Enter anything to return to the main screen.");
         messageSystem.userInput();
     }
 }

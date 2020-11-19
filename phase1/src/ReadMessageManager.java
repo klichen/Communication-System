@@ -1,15 +1,15 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReadMessageManager<T> {
-    private final ArrayList<Person> people = new ArrayList<>();
+    private final List<Person> people = new ArrayList<>();
     private final String currPerson;
 
     public ReadMessageManager(String currPerson){
         this.currPerson = currPerson;
     }
 
-    public void addUsers(ArrayList<T> people){
+    public void addUsers(List<T> people){
         for(T person: people){
             this.people.add((Person) person);
         }

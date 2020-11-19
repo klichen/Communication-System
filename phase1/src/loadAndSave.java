@@ -12,7 +12,7 @@ public class loadAndSave{
      * @param organizerManager Instance of OrganizerManager in order to add the list of organizers
      */
     public void loadAll(EventScheduler scheduler, SpeakerManager speakerManager,
-                        AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {
+                        AttendeeManager attendeeManager, OrganizerManager organizerManager) {
         List<List<String>> arrEvents = new ArrayList<List<String>>();
         List<List<String>> arrLogins = new ArrayList<List<String>>();
         BufferedReader inputReader;
