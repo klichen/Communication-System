@@ -13,6 +13,9 @@ public class
         this.username = username;
     }
 
+    /**
+     * Prints the available actions to the screen, and takes in inputs accordingly.
+     */
     public void run(){
         MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
         System.out.println("Enter the username of the recipient. Enter \"All Attendees\" to message all attendees, and" +

@@ -15,20 +15,40 @@ public class MessageSystem {
         this.username = username;
     }
 
+
+    /**
+     * Reads the keyboard input.
+     * @return The keyboard input as a string.
+     */
     public String userInput(){
         Scanner scan = new Scanner(System.in);
         String m = scan.nextLine();
         return m;
     }
 
+    /**
+     * Calls the send message function and only requires a message and a receiver.
+     *
+     * @param message The message to be sent.
+     * @param receiver The username of the recipient.
+     */
     public void createMessage(String message, String receiver){
         this.sendMessage(message, receiver, username);
     }
 
+    /**
+     *
+     * @param message
+     * @param talks
+     */
     public void createMessage(String message, List<String> talks){
         this.sendMessage(message, talks, username);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> readTalks(){
         Scanner scan = new Scanner(System.in);
         String e = "";
@@ -41,6 +61,13 @@ public class MessageSystem {
         return events;
     }
 
+    /**
+     * Returns all the messages sent to currPerson.
+     *
+     * @param currPerson The username of the user that is currently logged in.
+     * @return A string of the messages sent to currPerson in the form
+     *         sender1: message1, sender2: message2, ...
+     */
     public String readMessage(String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
@@ -65,9 +92,15 @@ public class MessageSystem {
         }
     }
 
+    /**
+     * Sends a message to other other user(s).
+     *
+     * @param message The message to be sent.
+     * @param receiver The recipient of the message.
+     * @param currPerson The sender of the message.
+     */
     private void sendMessage(String message, String receiver, String currPerson){
         List<Attendee> attendees = am.getAllAttendees();
-        List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();
         try{
             if (om.getUsernameToOrganizer().containsKey(currPerson)) {
@@ -103,8 +136,6 @@ public class MessageSystem {
 
     private void sendMessage(String message, List<String> talks, String currPerson){
         List<Attendee> attendees = am.getAllAttendees();
-        List<Organizer> organizers = om.getAllOrganizers();
-        List<Speaker> speakers = sm.getAllSpeakers();
         try{
             if (sm.getUsernameToSpeaker().containsKey(currPerson)){
                 SpeakerText st = new SpeakerText();

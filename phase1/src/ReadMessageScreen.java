@@ -11,6 +11,9 @@ public class ReadMessageScreen {
         this.username = username;
     }
 
+    /**
+     * Prints the texts for the user to see, and takes in inputs accordingly.
+     */
     public void run(){
         MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
         System.out.println("Here are your messages:");

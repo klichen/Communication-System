@@ -11,7 +11,7 @@ public class SpeakerSystem {
     }
 
     // Get list of talks they are giving (schedule)
-    public ArrayList<String> getSchedule(String speakerUsername){
+    public List<String> getSchedule(String speakerUsername){
         return sm.getSchedule(speakerUsername);
     }
 

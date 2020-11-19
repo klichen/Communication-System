@@ -65,7 +65,7 @@ public abstract class Person<Public> {
             messages.add(messageContent);
             senderToMessages.put(messageSender, messages);
         }
-        storedMessages.add(messageContent);
+        storedMessages.add(messageSender +": " + messageContent);
     }
 }
 
