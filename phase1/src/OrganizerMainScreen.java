@@ -8,13 +8,14 @@ public class OrganizerMainScreen {
     OrganizerSystem os;
     LoginType lt;
     SpeakerManager sm;
+    String username;
 
-    public OrganizerMainScreen(AttendeeManager am, EventScheduler es, OrganizerManager om, LoginType lt,
+    public OrganizerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                                SpeakerManager sm){
+        this.username = username;
         this.am = am;
         this.es = es;
         this.om = om;
-        this.lt = lt;
         this.sm = sm;
         this.os = new OrganizerSystem(am, es, om, sm);
     }
@@ -22,7 +23,6 @@ public class OrganizerMainScreen {
     public void run() {
         boolean logOut = false;
         while (!logOut) {
-            String username = lt.getUsername();
 
             System.out.println("Hello " + username + ".");
             System.out.println("To do an action, please press the corresponding number:");
@@ -83,18 +83,17 @@ public class OrganizerMainScreen {
                     break;
                 case "4":
                     // Send message
-                    OrganizerMessageScreen oMsg = new OrganizerMessageScreen(am, om, sm, lt);
+                    OrganizerMessageScreen oMsg = new OrganizerMessageScreen(am, om, sm, lt); // Check after if needs lt
                     oMsg.run();
                     break;
                 case "5":
                     // Read messages received
-                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt);
+                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt); // Check after if needs lt
                     messageScreen.run();
                     break;
 
                 case "6":
                     // Log out
-                    lt.logOut();
                     logOut = true;
             }
         }
