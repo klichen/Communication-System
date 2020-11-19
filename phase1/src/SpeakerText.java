@@ -1,18 +1,16 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class SpeakerText {
-    private ArrayList<Person> people;
+    private List<Person> people = new ArrayList<>();
 
-    public <T> void addPeopleToList(ArrayList<T> list){
+    public <T> void addPeopleToList(List<T> list){
         for(T person: list){
             people.add((Person) person);
         }
     }
-//    public SpeakerText(ArrayList<Person> people){
-//        this.people = people;
-//    }
 
-    public void messageAllAttendees(ArrayList<String> events, String message, String sender) {
+    public void messageAllAttendees(List<String> events, String message, String sender) {
 
         for (Person user : people){
             if (user.isAttendeeType()) {

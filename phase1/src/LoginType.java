@@ -18,8 +18,8 @@ public class LoginType {
     }
 
     public void readPassword() {
-        Scanner scan = new Scanner(System.in);
-        password = scan.nextLine();
+        Scanner scan1 = new Scanner(System.in);
+        password = scan1.nextLine();
     }
 
     public String getUsername() {
@@ -40,8 +40,8 @@ public class LoginType {
         }
         else if (om.checkLogin(username, password)) {
             //show organizer presenter
-            OrganizerMainScreen oms = new OrganizerMainScreen(am, es, om, this, sm);
-            oms.run();
+            //OrganizerMainScreen oms = new OrganizerMainScreen(am, es, om, username, sm);
+            //oms.run();
         }
         else{
             System.out.println("Invalid username or password");
