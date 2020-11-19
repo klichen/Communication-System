@@ -1,6 +1,4 @@
-import sun.rmi.runtime.Log;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class OrganizerMainScreen {
