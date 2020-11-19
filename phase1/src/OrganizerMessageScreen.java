@@ -1,4 +1,5 @@
-public class OrganizerMessageScreen {
+public class
+        OrganizerMessageScreen {
     private AttendeeManager am;
     private OrganizerManager om;
     private SpeakerManager sm;

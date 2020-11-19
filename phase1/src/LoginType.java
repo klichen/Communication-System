@@ -15,13 +15,11 @@ public class LoginType {
     public void readUsername() {
         Scanner scan = new Scanner(System.in);
         username = scan.nextLine();
-        scan.close();
     }
 
     public void readPassword() {
-        Scanner scan1 = new Scanner(System.in);
-        password = scan1.nextLine();
-        scan1.close();
+        Scanner scan = new Scanner(System.in);
+        password = scan.nextLine();
     }
 
     public String getUsername() {
@@ -42,8 +40,8 @@ public class LoginType {
         }
         else if (om.checkLogin(username, password)) {
             //show organizer presenter
-            //OrganizerMainScreen oms = new OrganizerMainScreen(am, es, om, username, sm);
-            //oms.run();
+            OrganizerMainScreen oms = new OrganizerMainScreen(am, es, om, this, sm);
+            oms.run();
         }
         else{
             System.out.println("Invalid username or password");

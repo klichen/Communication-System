@@ -17,7 +17,6 @@ public class MessageSystem {
     public String userInput(){
         Scanner scan = new Scanner(System.in);
         String m = scan.nextLine();
-        scan.close();
         return m;
     }
 
