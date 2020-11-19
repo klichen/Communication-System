@@ -42,6 +42,11 @@ public class AttendeeManager{
         return false;
     }
 
+    // return contact list
+    public ArrayList<String> getContactList(String username){
+        Attendee attendee = usernameToAttendee.get(username);
+        return attendee.getContactList();
+    }
 
     // returns whether a contact can be added (if contact is already in list)
     // same as checking if they are in your contacts

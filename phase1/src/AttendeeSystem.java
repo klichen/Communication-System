@@ -21,7 +21,6 @@ public class AttendeeSystem {
         return eventID;
     }
 
-
     // create attendee account
     public void createAccount(String username, String password){
         am.createAttendee(username, password);
