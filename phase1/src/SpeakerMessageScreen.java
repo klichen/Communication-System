@@ -5,18 +5,18 @@ public class SpeakerMessageScreen {
     private AttendeeManager am;
     private OrganizerManager om;
     private SpeakerManager sm;
-    private LoginType loginType;
+    private String username;
 
-    public SpeakerMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, LoginType loginType){
+    public SpeakerMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username){
         this.am = am;
         this.om = om;
         this.sm = sm;
-        this.loginType = loginType;
+        this.username = username;
     }
 
     public void run(){
-        MessageSystem messageSystem = new MessageSystem(am, om, sm, loginType);
-        List<String> events = sm.getSchedule(loginType.getUsername());
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
+        List<String> events = sm.getSchedule(username);
         System.out.println("This a list of the talk(s) in your schedule");
         for (String talks: events){
             System.out.println(talks);
@@ -41,7 +41,7 @@ public class SpeakerMessageScreen {
                 messageSystem.createMessage(message, talks);
             }
             case "2":{
-                ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, loginType);
+                ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, username);
                 currMessages.run();
             }
             default:
