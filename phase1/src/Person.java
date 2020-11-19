@@ -6,8 +6,8 @@ import java.util.Map;
 public abstract class Person<Public> {
     private String username;
     private String password;
-    private Map<String, ArrayList> senderToMessages;
-    private ArrayList storedMessages;
+    private Map<String, List> senderToMessages;
+    private List storedMessages;
     protected boolean isSpeaker;
     protected boolean isAttendee;
     protected boolean isOrganizer;
@@ -15,7 +15,8 @@ public abstract class Person<Public> {
     public Person(String username, String password){
         this.username = username;
         this.password = password;
-        this.senderToMessages = new HashMap<String, ArrayList>();
+        this.senderToMessages = new HashMap<String, List>();
+        this.storedMessages = new ArrayList();
     }
 
     // returns true if person is a speaker
@@ -60,7 +61,7 @@ public abstract class Person<Public> {
         if (senderToMessages.containsKey(messageSender)){
             senderToMessages.get(messageSender).add(messageContent);
         } else {
-            ArrayList messages = new ArrayList();
+            List messages = new ArrayList();
             messages.add(messageContent);
             senderToMessages.put(messageSender, messages);
         }
