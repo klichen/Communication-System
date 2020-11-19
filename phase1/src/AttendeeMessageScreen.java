@@ -21,12 +21,37 @@ public class AttendeeMessageScreen {
         for (String contact: contacts){
             System.out.println(contact);
         }
-        System.out.println("Enter the username of the person you want to message");
-        String receiver = messageSystem.userInput();
 
-        System.out.println("Enter the message");
-        String message = messageSystem.userInput();
+        System.out.println("To do an action, please enter the corresponding number:");
+        System.out.println("1 - Send a message to someone in your contact list");
+        System.out.println("2 - See and respond to your messages");
+        System.out.println("3 - Exit Messages ");
 
-        messageSystem.createMessage(message, receiver);
+        String choice = messageSystem.userInput();
+
+        switch(choice){
+            case "1": {
+                System.out.println("Enter the username of the person you want to message");
+                String receiver = messageSystem.userInput();
+
+                System.out.println("Enter the message");
+                String message = messageSystem.userInput();
+
+                messageSystem.createMessage(message, receiver);
+            }
+            case "2":{
+                ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, loginType);
+                currMessages.run();
+            }
+            case "3":{
+                //exit to main screen
+            }
+            default:
+                throw new IllegalArgumentException("input not valid");
+
+        }
+
+
+
     }
 }

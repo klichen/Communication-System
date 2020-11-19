@@ -47,6 +47,8 @@ public class SpeakerMessageScreen {
             case "3":{
                 //exit to main screen
             }
+            default:
+                throw new IllegalArgumentException("input not valid");
 
         }
 
