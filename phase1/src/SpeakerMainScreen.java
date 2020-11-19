@@ -6,6 +6,8 @@ public class SpeakerMainScreen {
     SpeakerManager sm;
     EventScheduler es;
     SpeakerMessageScreen sms;
+    AttendeeManager am;
+    OrganizerManager om;
 
     public SpeakerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                              SpeakerManager sm) {
@@ -13,6 +15,8 @@ public class SpeakerMainScreen {
         this.username = username;
         this.sm = sm;
         this.es = es;
+        this.am = am;
+        this.om = om;
     }
 
     public void run() {
@@ -29,6 +33,7 @@ public class SpeakerMainScreen {
             System.out.println("2 - Log out");
             String response = ss.readString();
             if (response.equals("1")) {
+                sms = new SpeakerMessageScreen(am, om, sm, username);
                 this.sms.run();
             }
             else if (response.equals("2")) {
