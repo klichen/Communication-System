@@ -11,6 +11,13 @@ public class AttendeeSystem {
     OrganizerManager om;
     SpeakerManager sm;
 
+    public AttendeeSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm){
+        this.am = am;
+        this.es = es;
+        this.om = om;
+        this.sm = sm;
+    }
+
     // read string and return it
     public String readString(){
         String eventID;
