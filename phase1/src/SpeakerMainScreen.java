@@ -3,9 +3,9 @@ import java.util.Scanner;
 
 public class SpeakerMainScreen {
     private List<String> schedule;
-    private SpeakerSystem ss = new SpeakerSystem();
     private SpeakerText st = new SpeakerText();
-    public SpeakerMainScreen(String username){
+    public SpeakerMainScreen(String username, SpeakerManager sm){
+        SpeakerSystem ss = new SpeakerSystem(sm);
         System.out.println("The list of talks you are giving is:");
         schedule = ss.getSchedule(username);
         for(String i: schedule){
