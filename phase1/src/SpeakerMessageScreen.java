@@ -17,6 +17,7 @@ public class SpeakerMessageScreen {
     public void run(){
         MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
         List<String> events = sm.getSchedule(username);
+
         System.out.println("This a list of the talk(s) in your schedule");
         for (String talks: events){
             System.out.println(talks);
@@ -32,7 +33,7 @@ public class SpeakerMessageScreen {
                 System.out.println("Enter \"All\" or the specific talk(s). When you are done listing, enter \"done\"");
 
                 //call messageSystem readTalks
-                ArrayList<String> talks = messageSystem.readTalks();
+                List<String> talks = messageSystem.readTalks();
 
                 System.out.println("Enter the message you wish to send:");
 
@@ -40,7 +41,7 @@ public class SpeakerMessageScreen {
                 String message = messageSystem.userInput();
                 messageSystem.createMessage(message, talks);
             }
-            case "2":{
+            case "2": {
                 ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, username);
                 currMessages.run();
             }
