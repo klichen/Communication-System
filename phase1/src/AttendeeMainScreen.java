@@ -5,12 +5,13 @@ public class AttendeeMainScreen {
     AttendeeSystem as;
     LoginType lt;
     AttendeeManager am;
+    EventScheduler es;
     OrganizerManager om;
     SpeakerManager sm;
 
-    public AttendeeMainScreen(LoginType lt, AttendeeSystem as, AttendeeManager am, OrganizerManager om,
+    public AttendeeMainScreen(LoginType lt, AttendeeManager am, EventScheduler es, OrganizerManager om,
                               SpeakerManager sm){
-        this.as = as;
+        this.as = new AttendeeSystem(am, es, om, sm);
         this.lt = lt;
         this.am = am;
         this.om = om;
