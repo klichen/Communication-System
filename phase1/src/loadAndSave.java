@@ -3,18 +3,20 @@ import java.util.*;
 
 public class loadAndSave{
 
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    //private EventScheduler scheduler = new EventScheduler();
-    //private LoginSystem login = new LoginSystem();
-
-    // Load events from text file
+    /**
+     * Method to load all events and users login that are stored in the txt file to the program
+     *
+     * @param scheduler Instance of scheduler in order to add the loaded events
+     * @param speakerManager Instance of SpeakerManager in order to add the list of speakers
+     * @param attendeeManager Instance of AttendeeManager in order to add the list of attendees
+     * @param organizerManager Instance of OrganizerManager in order to add the list of organizers
+     */
     public void loadAll(EventScheduler scheduler, SpeakerManager speakerManager,
                         AttendeeManager attendeeManager, OrganizerManager organizerManager) {
         List<List<String>> arrEvents = new ArrayList<List<String>>();
         List<List<String>> arrLogins = new ArrayList<List<String>>();
         BufferedReader inputReader;
-        //System.out.println("Enter file name to load from (.txt):");
-        //String input = br.readLine();
+
         try {
             inputReader = new BufferedReader(new FileReader(new File("phase1/src/data.txt")));
 
@@ -24,7 +26,7 @@ public class loadAndSave{
             if(line.equalsIgnoreCase("Events")){
                 while ((line = inputReader.readLine()) != null){
                     if(!line.isEmpty()){
-                        ArrayList<String> tempEvents = new ArrayList<String>();
+                        List<String> tempEvents = new ArrayList<String>();
                         tempEvents.add(line);
                         arrEvents.add(tempEvents);
                     }
@@ -38,7 +40,7 @@ public class loadAndSave{
             if(line.equalsIgnoreCase("Logins")){
                 while ((line = inputReader.readLine()) != null){
                     if(!line.isEmpty()){
-                        ArrayList<String> tempLogins = new ArrayList<String>();
+                        List<String> tempLogins = new ArrayList<String>();
                         tempLogins.add(line);
                         arrLogins.add(tempLogins);
                     }
@@ -52,16 +54,42 @@ public class loadAndSave{
         } catch (IOException e) {
             System.out.println("--Invalid file--");
         }
+        updateEvents(arrEvents, scheduler, speakerManager);
+        updateLogins(arrLogins, attendeeManager, organizerManager, speakerManager);
+    }
+
+    /**
+     * Helper method to add the generated events and its speaker from the txt file to EventScheduler
+     *
+     * @param arrEvents Current list of events loaded
+     * @param scheduler Instance of EventScheduler in order to access its methods
+     * @param speakerManager Instance of SpeakerManager in order to update the list of speakers
+     */
+    public void updateEvents(List<List<String>> arrEvents, EventScheduler scheduler,
+                             SpeakerManager speakerManager){
         for(List<String> i : arrEvents){
             for (String l : i){
                 String[] splitText = l.split(",");
                 boolean update = scheduler.updateEvents(splitText[0], splitText[1], Integer.valueOf(splitText[2]),
-                        splitText[3]);//, splitText[4]);
+                        splitText[3]);
                 if(update){
                     speakerManager.createSpeaker(splitText[3], splitText[4]);
                 }
             }
         }
+    }
+
+    /**
+     * Helper method to add the generated logins from the txt file to its respective type
+     * (Attendee, Organizer or Speaker)
+     *
+     * @param arrLogins Current list of logins loaded
+     * @param attendeeManager Instance of AttendeeManager in order to update the list of attendees
+     * @param organizerManager Instance of OrganizerManager in order to update the list of organizers
+     * @param speakerManager Instance of SpeakerManager in order to update the list of speakers
+     */
+    public void updateLogins(List<List<String>> arrLogins, AttendeeManager attendeeManager,
+                              OrganizerManager organizerManager, SpeakerManager speakerManager){
         for(List<String> i : arrLogins){
             for (String l : i){
                 String[] splitText = l.split(",");
@@ -87,20 +115,23 @@ public class loadAndSave{
 
             }
         }
-        System.out.println(speakerManager.getAllSpeakers());
-        System.out.println(attendeeManager.getAllAttendees());
-        System.out.println(organizerManager.getAllOrganizers());
     }
 
-    // Save events to text file
+    /**
+     * Method to save all events and users login that are stored in the program to a txt file
+     *
+     * @param scheduler Instance of scheduler in order to get the list of events
+     * @param speakerManager Instance of SpeakerManager in order to access the list of speakers
+     * @param attendeeManager Instance of AttendeeManager in order to access the list of attendees
+     * @param organizerManager Instance of OrganizerManager in order to access the list of organizers
+     */
     public void saveAll(EventScheduler scheduler,  SpeakerManager speakerManager,
                         AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {
         List<List<String>> convertedEvents = new ArrayList<List<String>>();
         List<List<String>> convertedSpeakerLogins = new ArrayList<List<String>>();
         List<List<String>> convertedAttendeeLogins = new ArrayList<List<String>>();
         List<List<String>> convertedOrganizerLogins = new ArrayList<List<String>>();
-        //System.out.println("Enter file name to save to (.txt):");
-        //String input = br.readLine();
+
         BufferedWriter outputWriter;
 
         try {

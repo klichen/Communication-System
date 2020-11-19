@@ -6,6 +6,7 @@ public class SpeakerMainScreen {
     SpeakerSystem ss;
     SpeakerManager sm;
     EventScheduler es;
+    SpeakerMessageScreen sms;
 
     public SpeakerMainScreen(LoginType lt, SpeakerManager sm, EventScheduler es, SpeakerSystem ss) {
         this.ss = new SpeakerSystem(sm);
@@ -25,14 +26,11 @@ public class SpeakerMainScreen {
         boolean logout = false;
         while (!logout) {
             System.out.println("To do an action, please press the corresponding number:");
-            System.out.println("1 - Message one or all attendees in the same event as yours");
+            System.out.println("1 - Message");
             System.out.println("2 - Log out");
             String response = ss.readString();
             if (response.equals("1")) {
-                System.out.println("Please enter the event ID the attendee you wish to message belongs to:");
-                String eventID = ss.readString();
-                System.out.println("Please write the name of the attendee you wish to talk to:");
-                String theirUsername = ss.readString();
+                this.sms.run();
             }
             else if (response.equals("2")) {
                 logout = true;
