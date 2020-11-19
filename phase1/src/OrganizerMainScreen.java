@@ -5,18 +5,20 @@ import java.util.Scanner;
 
 public class OrganizerMainScreen {
     AttendeeManager am;
+    EventScheduler es;
     OrganizerManager om;
     OrganizerSystem os;
     LoginType lt;
     SpeakerManager sm;
 
-    public OrganizerMainScreen(AttendeeManager am, OrganizerManager om, OrganizerSystem os, LoginType lt,
+    public OrganizerMainScreen(AttendeeManager am, EventScheduler es, OrganizerManager om, LoginType lt,
                                SpeakerManager sm){
         this.am = am;
+        this.es = es;
         this.om = om;
-        this.os = os;
         this.lt = lt;
         this.sm = sm;
+        this.os = new OrganizerSystem(am, es, om, sm);
     }
 
     public void run(){

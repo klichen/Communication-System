@@ -10,7 +10,12 @@ public class OrganizerSystem {
     OrganizerManager om;
     SpeakerManager sm;
 
-    public OrganizerSystem()
+    public OrganizerSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm){
+        this.am = am;
+        this.es = es;
+        this.om = om;
+        this.sm = sm;
+    }
 
 
     // Enter rooms (events) into the system
