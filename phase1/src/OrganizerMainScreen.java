@@ -2,9 +2,19 @@ import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class OrganizerMainScreen {
-    OrganizerMessageScreen om;
+    OrganizerManager om;
     OrganizerSystem os;
     LoginType lt;
+    AttendeeManager am;
+    SpeakerManager sm;
+
+    public OrganizerMainScreen(OrganizerManager om, OrganizerSystem os, LoginType lt, AttendeeManager am, SpeakerManager sm){
+        this.om = om;
+        this.os = os;
+        this.lt = lt;
+        this.am = am;
+        this.sm = sm;
+    }
 
     public void run(){
         String username = lt.getUsername();
@@ -16,7 +26,8 @@ public class OrganizerMainScreen {
         System.out.println("2 - Create speaker account");
         System.out.println("3 - Cancel an event");
         System.out.println("4 - Send message");
-        System.out.println("5 - Log out");
+        System.out.println("5 - View messages");
+        System.out.println("6 - Log out");
 
         String response = scan.nextLine();
         scan.close();
@@ -69,10 +80,17 @@ public class OrganizerMainScreen {
                 break;
             case "4":
                 // Send message
-                om.run(); // Not sure if this is right
+                OrganizerMessageScreen oms = new OrganizerMessageScreen(am,om, sm,lt);
+                oms.run(); // Not sure if this is right
 
                 break;
             case "5":
+                // read message
+                ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt);
+                messageScreen.run();
+
+                break;
+            case "6":
                 // Log out
                 lt.logOut();
 
