@@ -21,7 +21,6 @@ public class AttendeeMainScreen {
 
     public void run(){
         String username = lt.getUsername();
-        Scanner scan = new Scanner(System.in);
 
         System.out.println("Hello " + username + ".");
         System.out.println("To do an action, please press the corresponding number:");
@@ -33,8 +32,7 @@ public class AttendeeMainScreen {
         System.out.println("6 - View previous messages");
         System.out.println("7 - Log out");
 
-        String response = scan.nextLine();
-        scan.close();
+        String response = as.readString();
 
         // returns schedule of user
         switch (response) {

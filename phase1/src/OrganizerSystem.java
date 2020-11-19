@@ -61,7 +61,6 @@ public class OrganizerSystem {
     public String readString() {
         Scanner scan = new Scanner(System.in);
         String str = scan.nextLine();
-        scan.close();
 
         return str;
     }
@@ -71,7 +70,6 @@ public class OrganizerSystem {
         Scanner scan = new Scanner(System.in);
         String strInput = scan.nextLine();
         int intInput = Integer.parseInt(strInput);
-        scan.close();
 
         return intInput;
     }

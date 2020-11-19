@@ -22,7 +22,7 @@ public class AttendeeSystem {
         String eventID;
         Scanner scan = new Scanner(System.in);
         eventID = scan.nextLine();
-        scan.close();
+
 
         return eventID;
     }

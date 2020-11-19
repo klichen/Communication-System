@@ -21,7 +21,6 @@ public class OrganizerMainScreen {
 
     public void run(){
         String username = lt.getUsername();
-        Scanner scan = new Scanner(System.in);
 
         System.out.println("Hello " + username + ".");
         System.out.println("To do an action, please press the corresponding number:");
@@ -32,8 +31,7 @@ public class OrganizerMainScreen {
         System.out.println("5 - Read messages received");
         System.out.println("6 - Log out");
 
-        String response = scan.nextLine();
-        scan.close();
+        String response = os.readString();
 
         switch (response) {
             case "1":
