@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class SpeakerMessageScreen {
     private AttendeeManager am;
@@ -16,7 +15,7 @@ public class SpeakerMessageScreen {
 
     public void run(){
         MessageSystem messageSystem = new MessageSystem(am, om, sm, loginType);
-        List<String> events = sm.getSchedule(loginType.getUsername());
+        ArrayList<String> events = sm.getSchedule(loginType.getUsername());
         System.out.println("This a list of the talk(s) in your schedule");
         for (String talks: events){
             System.out.println(talks);
@@ -24,6 +23,7 @@ public class SpeakerMessageScreen {
         System.out.println("To do an action, please enter the corresponding number:");
         System.out.println("1 - Send a message to all attendees in all your talks or specific talks");
         System.out.println("2 - See and respond to your messages");
+        System.out.println("3 - Exit Messages ");
 
         String choice = messageSystem.userInput();
 
@@ -43,6 +43,9 @@ public class SpeakerMessageScreen {
             case "2":{
                 ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, loginType);
                 currMessages.run();
+            }
+            case "3":{
+                //exit to main screen
             }
             default:
                 throw new IllegalArgumentException("input not valid");

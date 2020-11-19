@@ -6,13 +6,13 @@ public class MessageSystem {
     private final AttendeeManager am;
     private final OrganizerManager om;
     private final SpeakerManager sm;
-    private final LoginType loginType;
+    private final String username;
 
-    public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, LoginType loginType){
+    public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username){
         this.am = am;
         this. om = om;
         this. sm = sm;
-        this.loginType =loginType;
+        this.username = username;
     }
 
     public String userInput(){
@@ -22,11 +22,11 @@ public class MessageSystem {
     }
 
     public void createMessage(String message, String receiver){
-        this.sendMessage(message, receiver, loginType.getUsername());
+        this.sendMessage(message, receiver, username);
     }
 
     public void createMessage(String message, List<String> talks){
-        this.sendMessage(message, talks, loginType.getUsername());
+        this.sendMessage(message, talks, username);
     }
 
     public List<String> readTalks(){
