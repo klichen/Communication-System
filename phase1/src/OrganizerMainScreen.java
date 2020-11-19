@@ -6,7 +6,6 @@ public class OrganizerMainScreen {
     EventScheduler es;
     OrganizerManager om;
     OrganizerSystem os;
-    LoginType lt;
     SpeakerManager sm;
     String username;
 
@@ -83,12 +82,12 @@ public class OrganizerMainScreen {
                     break;
                 case "4":
                     // Send message
-                    OrganizerMessageScreen oMsg = new OrganizerMessageScreen(am, om, sm, lt); // Check after if needs lt
+                    OrganizerMessageScreen oMsg = new OrganizerMessageScreen(username, am, om, sm);
                     oMsg.run();
                     break;
                 case "5":
                     // Read messages received
-                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt); // Check after if needs lt
+                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, username);
                     messageScreen.run();
                     break;
 

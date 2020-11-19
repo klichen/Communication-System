@@ -1,6 +1,3 @@
-import java.sql.SQLOutput;
-import java.util.Scanner;
-
 public class AttendeeMainScreen {
     AttendeeSystem as;
     String username;
