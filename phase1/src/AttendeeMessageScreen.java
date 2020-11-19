@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.List;
+
 public class AttendeeMessageScreen {
     private AttendeeManager am;
     private OrganizerManager om;
@@ -17,7 +19,7 @@ public class AttendeeMessageScreen {
         System.out.println("This is your contact list:");
 
         //need method from attendee manager
-        ArrayList<String> contacts = am.getContactList(loginType.getUsername());
+        List<String> contacts = am.getContactList(loginType.getUsername());
         for (String contact: contacts){
             System.out.println(contact);
         }
@@ -25,7 +27,6 @@ public class AttendeeMessageScreen {
         System.out.println("To do an action, please enter the corresponding number:");
         System.out.println("1 - Send a message to someone in your contact list");
         System.out.println("2 - See and respond to your messages");
-        System.out.println("3 - Exit Messages ");
 
         String choice = messageSystem.userInput();
 
@@ -43,14 +44,10 @@ public class AttendeeMessageScreen {
                 ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, loginType);
                 currMessages.run();
             }
-            case "3":{
-                //exit to main screen
-            }
             default:
                 throw new IllegalArgumentException("input not valid");
 
         }
-
 
 
     }

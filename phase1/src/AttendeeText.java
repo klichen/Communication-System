@@ -1,17 +1,15 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class AttendeeText {
-    private ArrayList<Person> people;
+    private List<Person> people = new ArrayList<>();
 
-    public <T> void addPeopleToList(ArrayList<T> list){
+    public <T> void addPeopleToList(List<T> list){
         for(T person: list){
             people.add((Person) person);
         }
     }
 
-//    public AttendeeText(ArrayList<Person> people){
-//        this.people = people;
-//    }
     public void sendMessage(String message, String sender, String recipient){
         //Message m = new Message(message, currentPerson.getUsername(), recipient.getUsername());
         //recipient.addToMessageStorage(m.getMessage(), m.getSender());
