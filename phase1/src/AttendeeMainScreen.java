@@ -14,6 +14,7 @@ public class AttendeeMainScreen {
         this.as = new AttendeeSystem(am, es, om, sm);
         this.lt = lt;
         this.am = am;
+        this.es = es;
         this.om = om;
         this.sm = sm;
     }
