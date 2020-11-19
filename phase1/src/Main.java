@@ -12,7 +12,7 @@ public class Main {
         las.loadAll(scheduler, speakerManager, attendeeManager, organizerManager);
 
         LoginScreen loginScreen = new LoginScreen();
-        loginScreen.run(attendeeManager, organizerManager, speakerManager);
+        loginScreen.run(attendeeManager, organizerManager, speakerManager, scheduler);
 
 
         las.saveAll(scheduler, speakerManager, attendeeManager, organizerManager);

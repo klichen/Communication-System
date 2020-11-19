@@ -28,17 +28,22 @@ public class LoginType {
         return this.username;
     }
 
-    public void checkLogin(AttendeeManager am, OrganizerManager om, SpeakerManager sm) {
+    public void checkLogin(AttendeeManager am, OrganizerManager om, SpeakerManager sm, EventScheduler es) {
 
         if (am.checkLogin(username, password)) {
             //show attendee presenter
-        }
-        else if (om.checkLogin(username, password)) {
-            //show speaker presenter
-            SpeakerMainScreen speakerMainScreen = new SpeakerMainScreen(username); //Fix this.
+            //AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm);
+            //ams.run();
         }
         else if (sm.checkLogin(username, password)) {
+            //show speaker presenter
+            //SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm); // assuming its implemented like other presenters
+            //sms.run();
+        }
+        else if (om.checkLogin(username, password)) {
             //show organizer presenter
+            //OrganizerMainScreen oms = new OrganizerMainScreen(am, es, om, username, sm);
+            //oms.run();
         }
         else{
             System.out.println("Invalid username or password");
