@@ -8,7 +8,8 @@ public class AttendeeMainScreen {
     OrganizerManager om;
     SpeakerManager sm;
 
-    public AttendeeMainScreen(LoginType lt, AttendeeSystem as, AttendeeManager am, OrganizerManager om, SpeakerManager sm){
+    public AttendeeMainScreen(LoginType lt, AttendeeSystem as, AttendeeManager am, OrganizerManager om,
+                              SpeakerManager sm){
         this.as = as;
         this.lt = lt;
         this.am = am;

@@ -10,6 +10,9 @@ public class OrganizerSystem {
     OrganizerManager om;
     SpeakerManager sm;
 
+    public OrganizerSystem()
+
+
     // Enter rooms (events) into the system
     public boolean createEvent(String roomNum, String eventId, int time, String speakerUsername){
         boolean eventCreated;
