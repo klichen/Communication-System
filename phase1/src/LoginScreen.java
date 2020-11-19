@@ -1,5 +1,3 @@
-import java.util.List;
-
 public class LoginScreen {
 
     public void run(AttendeeManager am, OrganizerManager om, SpeakerManager sm, EventScheduler es){
