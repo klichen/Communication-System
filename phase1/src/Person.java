@@ -1,9 +1,12 @@
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public abstract class Person<Public> {
     private String username;
     private String password;
-    private ArrayList<String> messageStorage;
+    private Map<String, ArrayList> senderToMessages;
     protected boolean isSpeaker;
     protected boolean isAttendee;
     protected boolean isOrganizer;
@@ -11,7 +14,7 @@ public abstract class Person<Public> {
     public Person(String username, String password){
         this.username = username;
         this.password = password;
-        this.messageStorage = new ArrayList<>();
+        this.senderToMessages = new HashMap<String, ArrayList>();
     }
 
     // returns true if person is a speaker
@@ -53,7 +56,13 @@ public abstract class Person<Public> {
     // adds a message that was sent to Person to their storage
     // uses senders username
     public void addToMessageStorage(String messageContent, String messageSender){
-        this.messageStorage.add(("Sender: " + messageSender + " Message Contents: " + messageContent));
+        if (senderToMessages.containsKey(messageSender)){
+            senderToMessages.get(messageSender).add(messageContent);
+        } else {
+            ArrayList messages = new ArrayList();
+            messages.add(messageContent);
+            senderToMessages.put(messageSender, messages);
+        }
     }
 }
 
