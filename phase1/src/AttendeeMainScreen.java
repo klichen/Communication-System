@@ -102,7 +102,7 @@ public class AttendeeMainScreen {
             case "6":{
                 ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt);
                 messageScreen.run();
-
+                
                 break;
             }
             // Log off

@@ -1,11 +1,12 @@
 import javax.management.modelmbean.InvalidTargetObjectTypeException;
 import java.io.InvalidObjectException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrganizerText {
-    private ArrayList<Person> people = new ArrayList<>();
+    private List<Person> people = new ArrayList<>();
 
-    public <T> void addPeopleToList(ArrayList<T> list){
+    public <T> void addPeopleToList(List<T> list){
         for(T person: list){
             people.add((Person) person);
         }

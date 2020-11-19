@@ -25,7 +25,7 @@ public class ReadMessageScreen {
 
         messageSystem.createMessage(message, receiver);
 
-        System.out.println("Type \"main menu\" to return to the main screen.");
+        System.out.println("Enter anything to return to the main screen.");
         messageSystem.userInput();
     }
 }
