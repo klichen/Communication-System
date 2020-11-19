@@ -1,10 +1,23 @@
+import sun.rmi.runtime.Log;
+
 import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class OrganizerMainScreen {
-    OrganizerMessageScreen om;
+    AttendeeManager am;
+    OrganizerManager om;
     OrganizerSystem os;
     LoginType lt;
+    SpeakerManager sm;
+
+    public OrganizerMainScreen(AttendeeManager am, OrganizerManager om, OrganizerSystem os, LoginType lt,
+                               SpeakerManager sm){
+        this.am = am;
+        this.om = om;
+        this.os = os;
+        this.lt = lt;
+        this.sm = sm;
+    }
 
     public void run(){
         String username = lt.getUsername();
@@ -69,7 +82,8 @@ public class OrganizerMainScreen {
                 break;
             case "4":
                 // Send message
-                om.run(); // Not sure if this is right
+                ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt);
+                messageScreen.run(); // Not sure if this is right
 
                 break;
             case "5":
