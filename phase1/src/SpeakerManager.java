@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SpeakerManager {
-    private ArrayList<Speaker> allSpeakers;
+    private List<Speaker> allSpeakers;
     private Map<String, Speaker> usernameToSpeaker;
 
     public SpeakerManager(){
@@ -25,7 +25,7 @@ public class SpeakerManager {
     }
 
     // Get all speakers
-    public ArrayList<Speaker> getAllSpeakers(){
+    public List<Speaker> getAllSpeakers(){
         return allSpeakers;
     }
 
@@ -36,14 +36,17 @@ public class SpeakerManager {
 
     // Check login for logging in
     public boolean checkLogin(String username, String password){
+        boolean valid = false;
         for (Speaker user: allSpeakers){
-            return user.getUsername().equals(username) && user.getPassword().equals(password);
+            if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+                valid = true;
+            }
         }
-        return false;
+        return valid;
     }
 
     // Get schedule
-    public ArrayList<String> getSchedule(String speakerUsername){
+    public List<String> getSchedule(String speakerUsername){
         return usernameToSpeaker.get(speakerUsername).getSchedule();
     }
 
