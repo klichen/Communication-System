@@ -7,6 +7,7 @@ public abstract class Person<Public> {
     private String username;
     private String password;
     private Map<String, ArrayList> senderToMessages;
+    private ArrayList storedMessages;
     protected boolean isSpeaker;
     protected boolean isAttendee;
     protected boolean isOrganizer;
@@ -50,7 +51,7 @@ public abstract class Person<Public> {
     // returns messages that has been sent to Person
     public String getStoredMessages(){
         String delim = " ,";
-        return String.join(delim, this.messageStorage);
+        return String.join(delim, storedMessages);
     }
 
     // adds a message that was sent to Person to their storage
@@ -63,6 +64,7 @@ public abstract class Person<Public> {
             messages.add(messageContent);
             senderToMessages.put(messageSender, messages);
         }
+        storedMessages.add(messageContent);
     }
 }
 
