@@ -91,8 +91,8 @@ public class AttendeeMainScreen {
                 }
                 // Sends a message to a contact
                 case "5": {
-                    // AttendeeMessageScreen messageScreen = new AttendeeMessageScreen();
-                    // messageScreen.run();
+                    AttendeeMessageScreen messageScreen = new AttendeeMessageScreen(am, om, sm, username);
+                    messageScreen.run();
 
                     break;
                 }
