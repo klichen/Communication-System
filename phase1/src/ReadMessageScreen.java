@@ -16,6 +16,15 @@ public class ReadMessageScreen {
         System.out.println("Here are your messages:");
         String messages = messageSystem.readMessage(loginType.getUsername());
         System.out.println(messages);
+
+        System.out.println("To reply, Enter the username of the person you wish to respond to:");
+        String receiver = messageSystem.userInput();
+
+        System.out.println("Now enter the message you wish to send:");
+        String message = messageSystem.userInput();
+
+        messageSystem.createMessage(message, receiver);
+
         System.out.println("Type \"main menu\" to return to the main screen.");
         messageSystem.userInput();
     }

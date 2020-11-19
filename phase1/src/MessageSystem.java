@@ -25,6 +25,22 @@ public class MessageSystem {
         this.sendMessage(message, receiver, loginType.getUsername());
     }
 
+    public void createMessage(String message, ArrayList<String> talks){
+        this.sendMessage(message, talks, loginType.getUsername());
+    }
+
+    public ArrayList<String> readTalks(){
+        Scanner scan = new Scanner(System.in);
+        String e = "";
+        ArrayList<String> events = new ArrayList<>();
+        while(!e.equals("done")){
+            e = scan.nextLine();
+            events.add(e);
+        }
+        events.remove("done");
+        return events;
+    }
+
     public String readMessage(String currPerson) {
         ArrayList<Attendee> attendees = am.getAllAttendees();
         ArrayList<Organizer> organizers = om.getAllOrganizers();
@@ -73,23 +89,27 @@ public class MessageSystem {
                         throw new NullPointerException();
                     }
                 }
-            } else if (sender.isAttendeeType()) {
-                AttendeeText text = new AttendeeText(users);
-                Person recipient = this.findPerson(users, receiver);
-                text.sendMessage(message, currPerson, recipient); // Assuming AttendeeText is implemented similar to
-                // OrganizerText
-            } else if (sender.isSpeakerType()) {
-                Speaker speaker = (Speaker) sender;
-                SpeakerText text = new SpeakerText(users);
-                ArrayList<Event> eventArrayList = new ArrayList<Event>();
-                for (String eventName : speaker.getSchedule()) {
-                    for (Event event : events) {
-                        if (eventName.equals(event.getID())) {
-                            eventArrayList.add(event);
-                        }
-                    }
-                }
-                text.messageAllAttendees(eventArrayList, message, currPerson);
+            } else if (am.getUsernameToAttendee().containsKey(currPerson)) {
+                AttendeeText text = new AttendeeText();
+                text.addPeopleToList(attendees);
+                text.addPeopleToList(speakers);
+                text.sendMessage(message, currPerson, receiver);
+            }
+        }
+        catch (NullPointerException n){
+            System.out.println("Invalid User.");
+        }
+    }
+
+    private void sendMessage(String message, ArrayList<String> talks, String currPerson){
+        ArrayList<Attendee> attendees = am.getAllAttendees();
+        ArrayList<Organizer> organizers = om.getAllOrganizers();
+        ArrayList<Speaker> speakers = sm.getAllSpeakers();
+        try{
+            if (sm.getUsernameToSpeaker().containsKey(currPerson)){
+                SpeakerText st = new SpeakerText();
+                st.addPeopleToList(attendees);
+                st.messageAllAttendees(talks, message, currPerson);
             }
         }
         catch (NullPointerException n){
