@@ -29,7 +29,8 @@ public class OrganizerMainScreen {
         System.out.println("2 - Create speaker account");
         System.out.println("3 - Cancel an event");
         System.out.println("4 - Send message");
-        System.out.println("5 - Log out");
+        System.out.println("5 - Read messages received");
+        System.out.println("6 - Log out");
 
         String response = scan.nextLine();
         scan.close();
@@ -82,14 +83,18 @@ public class OrganizerMainScreen {
                 break;
             case "4":
                 // Send message
-                ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt);
-                messageScreen.run(); // Not sure if this is right
-
+                OrganizerMessageScreen oMsg = new OrganizerMessageScreen(am, om, sm, lt);
+                oMsg.run();
                 break;
             case "5":
+                // Read messages received
+                ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, lt);
+                messageScreen.run();
+                break;
+
+            case "6":
                 // Log out
                 lt.logOut();
-
                 break;
         }
     }
