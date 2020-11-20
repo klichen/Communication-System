@@ -6,6 +6,14 @@ public class AttendeeMainScreen {
     OrganizerManager om;
     SpeakerManager sm;
 
+    /**
+     * Constructor for the presenter showing all of the Actions Attendee can do
+     * @param username The username of the Attendee as a String
+     * @param am Instance of AttendeeManager with loaded information
+     * @param es Instance of EventScheduler with loaded information
+     * @param om Instance of OrganizerManager with loaded information
+     * @param sm Instance of SpeakerManager with loaded information
+     */
     public AttendeeMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                               SpeakerManager sm){
         this.as = new AttendeeSystem(am, es, om, sm);
@@ -16,6 +24,9 @@ public class AttendeeMainScreen {
         this.sm = sm;
     }
 
+    /**
+     * Prints the texts for the Attendee to see, and takes in inputs accordingly.
+     */
     public void run(){
         boolean logOut = false;
         while (!logOut) {
