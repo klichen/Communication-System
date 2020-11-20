@@ -23,8 +23,8 @@ public class Attendee extends Person{
     }
 
     /**
-     * returns the usernames of all the people that the Attendee could can message
-     * @return An ArrayList containing each contacts username as a String
+     * returns the usernames of all the people that the Attendee can message
+     * @return A List containing each contacts username as a String
      */
     public List<String> getContactList() {
         return this.contactList;
