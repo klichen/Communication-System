@@ -1,23 +1,25 @@
 import java.util.ArrayList;
-public class AttendeeMessageScreen {
-    private AttendeeManager am;
-    private OrganizerManager om;
-    private SpeakerManager sm;
-    private LoginType loginType;
+import java.util.List;
 
-    public AttendeeMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, LoginType loginType){
+public class AttendeeMessageScreen {
+    private final AttendeeManager am;
+    private final OrganizerManager om;
+    private final SpeakerManager sm;
+    private final String username;
+
+    public AttendeeMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username){
         this.am = am;
         this.om = om;
         this.sm = sm;
-        this.loginType = loginType;
+        this.username = username;
     }
 
     public void run() {
-        MessageSystem messageSystem = new MessageSystem(am, om, sm, loginType);
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
         System.out.println("This is your contact list:");
 
         //need method from attendee manager
-        ArrayList<String> contacts = am.getContactList(loginType.getUsername());
+        List<String> contacts = am.getContactList(username);
         for (String contact: contacts){
             System.out.println(contact);
         }
@@ -25,7 +27,6 @@ public class AttendeeMessageScreen {
         System.out.println("To do an action, please enter the corresponding number:");
         System.out.println("1 - Send a message to someone in your contact list");
         System.out.println("2 - See and respond to your messages");
-        System.out.println("3 - Exit Messages ");
 
         String choice = messageSystem.userInput();
 
@@ -40,17 +41,13 @@ public class AttendeeMessageScreen {
                 messageSystem.createMessage(message, receiver);
             }
             case "2":{
-                ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, loginType);
+                ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, username);
                 currMessages.run();
-            }
-            case "3":{
-                //exit to main screen
             }
             default:
                 throw new IllegalArgumentException("input not valid");
 
         }
-
 
 
     }

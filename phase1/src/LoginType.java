@@ -1,6 +1,4 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
-import java.util.List;
 
 public class LoginType {
     private String username;
@@ -30,17 +28,17 @@ public class LoginType {
 
         if (am.checkLogin(username, password)) {
             //show attendee presenter
-            //AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm);
-            //ams.run();
+            AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm);
+            ams.run();
         }
         else if (sm.checkLogin(username, password)) {
             //show speaker presenter
-            //SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm); // assuming its implemented like other presenters
-            //sms.run();
+            SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm); // assuming its implemented like other presenters
+            sms.run();
         }
         else if (om.checkLogin(username, password)) {
             //show organizer presenter
-            OrganizerMainScreen oms = new OrganizerMainScreen(am, es, om, this, sm);
+            OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm);
             oms.run();
         }
         else{
@@ -48,10 +46,5 @@ public class LoginType {
         }
 
 
-    }
-
-    public void logOut(){
-        this.username = "";
-        this.password = "";
     }
 }

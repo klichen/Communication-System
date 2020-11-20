@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class AttendeeManager{
     private Map<String, Attendee> usernameToAttendee;
-    private ArrayList<Attendee> allAttendees;
+    private List<Attendee> allAttendees;
 
     public AttendeeManager(){
         allAttendees = new ArrayList<>();
@@ -25,7 +25,7 @@ public class AttendeeManager{
     }
 
     // Get all attendees
-    public ArrayList<Attendee> getAllAttendees(){
+    public List<Attendee> getAllAttendees(){
         return allAttendees;
     }
 
@@ -36,14 +36,17 @@ public class AttendeeManager{
 
     // Check login for logging in
     public boolean checkLogin(String username, String password){
+        boolean valid = false;
         for (Attendee user: allAttendees){
-            return user.getUsername().equals(username) && user.getPassword().equals(password);
+            if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+                valid = true;
+            }
         }
-        return false;
+        return valid;
     }
 
     // return contact list
-    public ArrayList<String> getContactList(String username){
+    public List<String> getContactList(String username){
         Attendee attendee = usernameToAttendee.get(username);
         return attendee.getContactList();
     }
@@ -76,7 +79,7 @@ public class AttendeeManager{
     }
 
     // See schedule of the events for which they signed up
-    public ArrayList<String> getSchedule(String username){
+    public List<String> getSchedule(String username){
         Attendee attendee = usernameToAttendee.get(username);
         return attendee.getSchedule();
     }

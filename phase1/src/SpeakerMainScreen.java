@@ -1,22 +1,25 @@
 import java.util.List;
-import java.util.Scanner;
 
 public class SpeakerMainScreen {
-    LoginType lt;
+    String username;
     SpeakerSystem ss;
     SpeakerManager sm;
     EventScheduler es;
     SpeakerMessageScreen sms;
+    AttendeeManager am;
+    OrganizerManager om;
 
-    public SpeakerMainScreen(LoginType lt, SpeakerManager sm, EventScheduler es, SpeakerSystem ss) {
+    public SpeakerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
+                             SpeakerManager sm) {
         this.ss = new SpeakerSystem(sm);
-        this.lt = lt;
+        this.username = username;
         this.sm = sm;
         this.es = es;
+        this.am = am;
+        this.om = om;
     }
 
     public void run() {
-        String username = lt.getUsername();
         System.out.println("Hello " + username + ".");
         System.out.println("The list of talks you are giving is:");
         List<String> schedule = ss.getSchedule(username);
@@ -30,6 +33,7 @@ public class SpeakerMainScreen {
             System.out.println("2 - Log out");
             String response = ss.readString();
             if (response.equals("1")) {
+                sms = new SpeakerMessageScreen(am, om, sm, username);
                 this.sms.run();
             }
             else if (response.equals("2")) {

@@ -1,5 +1,5 @@
-
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -56,10 +56,10 @@ public class AttendeeSystem {
     }
 
     // get attendee Schedule
-    public ArrayList<Event> getSchedule(String username){
-        ArrayList<String> idSchedule =  this.am.getSchedule(username);
+    public List<Event> getSchedule(String username){
+        List<String> idSchedule =  this.am.getSchedule(username);
         Map<String, Event> eventMap = getEventMap();
-        ArrayList<Event> fullSchedule = new ArrayList<>();
+        List<Event> fullSchedule = new ArrayList<>();
 
         for (String i: idSchedule){
             if (eventMap.containsKey(i)){
@@ -76,8 +76,8 @@ public class AttendeeSystem {
 
     // checks whether this event can be added
     public boolean canAddEvent(String username, String eventID){
-        ArrayList<String> idSchedule =  this.am.getSchedule(username);
-        ArrayList<Event> fullSchedule = getSchedule(username);
+        List<String> idSchedule =  this.am.getSchedule(username);
+        List<Event> fullSchedule = getSchedule(username);
         boolean canAdd = false;
         int eventTime;
         if (validEvent(eventID)) {
@@ -115,7 +115,7 @@ public class AttendeeSystem {
 
     // check whether this event enrolment can be cancelled
     public boolean canCancelEnrollment(String username, String eventID){
-        ArrayList<String> idSchedule =  this.am.getSchedule(username);
+        List<String> idSchedule =  this.am.getSchedule(username);
         boolean validEvent = validEvent(eventID);
         return (validEvent && idSchedule.contains(eventID));
     }

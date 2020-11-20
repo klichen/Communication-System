@@ -3,17 +3,21 @@ public class
     private AttendeeManager am;
     private OrganizerManager om;
     private SpeakerManager sm;
-    private LoginType loginType;
+    private String username;
 
-    public OrganizerMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, LoginType loginType){
+    public OrganizerMessageScreen(String username, AttendeeManager am, OrganizerManager om,
+                                  SpeakerManager sm){
         this.am = am;
         this.om = om;
         this.sm = sm;
-        this.loginType =loginType;
+        this.username = username;
     }
 
+    /**
+     * Prints the available actions to the screen, and takes in inputs accordingly.
+     */
     public void run(){
-        MessageSystem messageSystem = new MessageSystem(am, om, sm, loginType);
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
         System.out.println("Enter the username of the recipient. Enter \"All Attendees\" to message all attendees, and" +
                 " enter \" All Speakers\" to message all speakers.");
         String receiver = messageSystem.userInput();

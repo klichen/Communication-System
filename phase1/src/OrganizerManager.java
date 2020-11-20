@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class OrganizerManager{
-    private ArrayList<Organizer> allOrganizers;
+    private List<Organizer> allOrganizers;
     private Map<String, Organizer> usernameToOrganizer;
 
     public OrganizerManager(){
@@ -22,7 +22,7 @@ public class OrganizerManager{
     }
 
     // Get all organizers
-    public ArrayList<Organizer> getAllOrganizers(){
+    public List<Organizer> getAllOrganizers(){
         return allOrganizers;
     }
 
@@ -33,10 +33,13 @@ public class OrganizerManager{
 
     // Check login for logging in
     public boolean checkLogin(String username, String password){
+        boolean valid = false;
         for (Organizer user: allOrganizers){
-            return user.getUsername().equals(username) && user.getPassword().equals(password);
+            if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+                valid = true;
+            }
         }
-        return false;
+        return valid;
     }
 
     // Convert all list of attendee to list of string

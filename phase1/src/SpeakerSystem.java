@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,10 +14,9 @@ public class SpeakerSystem {
     public List<String> getSchedule(String speakerUsername){
         return sm.getSchedule(speakerUsername);
     }
+
     public String readString(){
-        String str;
         Scanner scan = new Scanner(System.in);
-        str = scan.nextLine();
-        return str;
+        return scan.nextLine();
     }
 }

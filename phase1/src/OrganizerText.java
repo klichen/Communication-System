@@ -1,11 +1,20 @@
 import javax.management.modelmbean.InvalidTargetObjectTypeException;
 import java.io.InvalidObjectException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OrganizerText {
-    private ArrayList<Person> people = new ArrayList<>();
+    private List<Person> people = new ArrayList<>();
 
-    public <T> void addPeopleToList(ArrayList<T> list){
+
+    /**
+     * Precondition: T is a subtype of Person
+     *
+     * Extends a list of Person to people.
+     * @param list The list of Person to add into people.
+     * @param <T> The type of list. It is assumed to be a subtype of Person.
+     */
+    public <T> void addPeopleToList(List<T> list){
         for(T person: list){
             people.add((Person) person);
         }
@@ -47,12 +56,11 @@ public class OrganizerText {
      * @param recipient The recipient of the message
      */
     public void messageSingleRecipient(String message, String currentPerson, String recipient) {
-        Person user = null;
         for(Person person: people) {
             if (person.getUsername().equals(recipient)) {
-                user = person;
+                person.addToMessageStorage(message, currentPerson);
+                break;
             }
         }
-        user.addToMessageStorage(message, currentPerson);
     }
 }
