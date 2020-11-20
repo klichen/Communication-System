@@ -54,7 +54,7 @@ public class AttendeeManager{
     // returns whether a contact can be added (if contact is already in list)
     // same as checking if they are in your contacts
     public boolean canAddToContactList(String username, String contact){
-        ArrayList<String> contactList = usernameToAttendee.get(username).getContactList();
+        List<String> contactList = usernameToAttendee.get(username).getContactList();
         return !contactList.contains(contact);
     }
 
