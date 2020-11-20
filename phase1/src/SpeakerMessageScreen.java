@@ -29,7 +29,7 @@ public class SpeakerMessageScreen {
         String choice = messageSystem.userInput();
 
         switch(choice){
-            case "1": {
+            case "1":
                 System.out.println("Enter \"All\" or the specific talk(s). When you are done listing, enter \"done\"");
 
                 //call messageSystem readTalks
@@ -40,12 +40,11 @@ public class SpeakerMessageScreen {
                 //call messageSystem readMessage
                 String message = messageSystem.userInput();
                 messageSystem.createMessage(message, talks);
-            }
-            case "2": {
+                break;
+            case "2":
                 ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, username);
                 currMessages.run();
-            }
-
+                break;
         }
     }
 

@@ -54,4 +54,8 @@ public class OrganizerManager{
         }
         return convertedEvents;
     }
+
+    public void updateOrganizerObjects(Organizer a){
+        createOrganizer(a.getUsername(), a.getPassword());
+    }
 }

@@ -4,10 +4,10 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         loadAndSave las = new loadAndSave();
-        EventScheduler scheduler = new EventScheduler();
         SpeakerManager speakerManager = new SpeakerManager();
         AttendeeManager attendeeManager = new AttendeeManager();
         OrganizerManager organizerManager = new OrganizerManager();
+        EventScheduler scheduler = new EventScheduler();
 
         las.loadAll(scheduler, speakerManager, attendeeManager, organizerManager);
 

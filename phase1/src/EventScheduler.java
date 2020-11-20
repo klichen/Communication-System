@@ -17,6 +17,7 @@ public class EventScheduler {
     public EventScheduler(){
         ListOfEvents =  new ArrayList<String>();
         idToEvent = new HashMap<>();
+
     }
 
     // Updates the main list of events
@@ -116,6 +117,10 @@ public class EventScheduler {
             convertedEvents.add(tempConvert);
         }
         return convertedEvents;
+    }
+
+    public void updateEventObjects(Event e){
+        updateEvents(e.getRoomNum(), e.getID(), e.getTime(), e.getSpeaker());
     }
 
 }

@@ -82,4 +82,7 @@ public class SpeakerManager {
         }
         return convertedEvents;
     }
+    public void updateSpeakerObjects(Speaker a){
+        createSpeaker(a.getUsername(), a.getPassword());
+    }
 }

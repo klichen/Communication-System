@@ -54,8 +54,8 @@ public class loadAndSave{
         } catch (IOException e) {
             System.out.println("--Invalid file--");
         }
-        updateEvents(arrEvents, scheduler, speakerManager);
         updateLogins(arrLogins, attendeeManager, organizerManager, speakerManager);
+        updateEvents(arrEvents, scheduler, speakerManager);
     }
 
     /**
@@ -74,6 +74,7 @@ public class loadAndSave{
                         splitText[3]);
                 if(update){
                     speakerManager.createSpeaker(splitText[3], splitText[4]);
+                    speakerManager.updateSchedule(splitText[3], splitText[1]);
                 }
             }
         }
