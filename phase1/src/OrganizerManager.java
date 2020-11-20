@@ -31,7 +31,7 @@ public class OrganizerManager{
     }
 
     /**
-     * Adds Organizer object to ArrayList allOrganizers, and HashMap usernameToOrganizer.
+     * Adds Organizer object to List allOrganizers, and Map usernameToOrganizer.
      * @param o Organizer object
      */
     public void updateOrganizerObjects(Organizer o){
@@ -71,8 +71,6 @@ public class OrganizerManager{
         }
         return valid;
     }
-
-    // Convert all list of attendee to list of string
 
     /**
      * Returns a List of Lists of Strings representing all Organizers in usernameTOrganizer as Strings
