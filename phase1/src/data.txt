@@ -1,14 +1,13 @@
 Events
-1,unique event,9,user,ADD
-1,unique event,9,user,NOT ADD
-1,new event,9,user,NOT ADD
-1,new event,10,user,ADD
-2,another,9,user,NOT ADD
-2,another,11,user,ADD
+1,event 1,9,speaker,pass
+1,event 2,10,speaker2,pass
+2,event 3,11,speaker2,pass
 
 Logins
-attendee,attendee,pass
-attendee,user,pass
+speaker,speaker,password
+speaker,speaker2,pass
+attendee,attendee,password
+attendee,attendee2,pass
 organizer,organizer,pass
-speaker,test1,pass
-speaker,speaker,pass
+organizer,organizer2,password
+
