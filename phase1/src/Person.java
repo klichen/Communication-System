@@ -2,8 +2,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.Serializable;
 
-public abstract class Person<Public> {
+
+public abstract class Person<Public> implements Serializable{
     private String username;
     private String password;
     private Map<String, List> senderToMessages;
