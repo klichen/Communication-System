@@ -19,23 +19,18 @@ public class LoadAndSaveObjects{
             FileOutputStream f = new FileOutputStream(new File("phase1/src/allObjects.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
-            //o.writeBytes("Events");
-            //o.write('\n');
             for (String i : scheduler.getEventList()){
                 o.writeObject(scheduler.getIdToEvent().get(i));
             }
-            //o.writeBytes("Speakers");
-            //o.write('\n');
+
             for(Speaker i : speakerManager.getAllSpeakers()){
                 o.writeObject(i);
             }
-            //o.writeBytes("Attendees");
-            //o.write('\n');
+
             for(Attendee i : attendeeManager.getAllAttendees()){
                 o.writeObject(i);
             }
-            //o.writeBytes("Organizers");
-            //o.write('\n');
+
             for(Organizer i : organizerManager.getAllOrganizers()){
                 o.writeObject(i);
             }
