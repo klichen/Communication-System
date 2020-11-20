@@ -69,6 +69,10 @@ public class AttendeeSystem {
         return fullSchedule;
     }
 
+    public List<String> getScheduleIds(String username){
+        return this.am.getSchedule(username);
+    }
+
     // checks if valid event id
     private boolean validEvent(String eventID) {
         return getEventMap().containsKey(eventID);
@@ -78,7 +82,7 @@ public class AttendeeSystem {
     public boolean canAddEvent(String username, String eventID){
         List<String> idSchedule =  this.am.getSchedule(username);
         List<Event> fullSchedule = getSchedule(username);
-        boolean canAdd = false;
+        boolean canAdd = true;
         int eventTime;
         if (validEvent(eventID)) {
             eventTime = getEventMap().get(eventID).getTime();

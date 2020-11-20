@@ -43,18 +43,23 @@ public class OrganizerSystem {
     // Cancel event
     public boolean cancelEvent(String eventId){
         // Remove event from EventScheduler
-        boolean eventCancelled = es.removeEvent(eventId);
-        if (eventCancelled){
-            // Remove event from speaker's schedule
+        try {
             String speakerUsername = es.getIdToEvent().get(eventId).getSpeaker();
-            sm.updateSchedule(speakerUsername, eventId);
-            // Remove event from all attendees' schedule
             List<String> attendeeList = es.getIdToEvent().get(eventId).getInEvent();
-            for (String attendeeUsername: attendeeList){
-                am.eventCancel(attendeeUsername, eventId);
+            boolean eventCancelled = es.removeEvent(eventId);
+            if (eventCancelled) {
+                // Remove event from speaker's schedule
+                sm.removeFromSchedule(speakerUsername, eventId);
+                // Remove event from all attendees' schedule
+                for (String attendeeUsername : attendeeList) {
+                    am.eventCancel(attendeeUsername, eventId);
+                }
             }
+            return eventCancelled;
         }
-        return eventCancelled;
+        catch(NullPointerException e){
+            return false;
+        }
     }
 
     // Read string from user input

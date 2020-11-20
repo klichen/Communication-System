@@ -35,7 +35,7 @@ public class AttendeeMainScreen {
             // returns schedule of user
             switch (response) {
                 case "1":
-                    System.out.println(this.as.getSchedule(username));
+                    System.out.println(this.as.getScheduleIds(username));
 
                     break;
                 // if applicable adds an event to the users schedule, otherwise tells them they cannot

@@ -53,7 +53,7 @@ public class LoadAndSaveObjects{
                         AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {
         try{
             FileInputStream  f = new FileInputStream (new File("phase1/src/allObjects.txt"));
-            ObjectInputStream  o = new ObjectInputStream (f);
+            ObjectInputStream  o = new ObjectInputStream(f);
 
             while(true){
                 Object obj=null;
@@ -72,7 +72,7 @@ public class LoadAndSaveObjects{
                     speakerManager.updateSpeakerObjects((Speaker) obj);
                 }
                 else if(obj instanceof Organizer){
-                    organizerManager.updateOrganizerObjects((Organizer) obj);
+                    organizerManager.updateOrganizerObjects ((Organizer) obj);
                 }
                 else
                     break;

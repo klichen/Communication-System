@@ -35,7 +35,9 @@ public class MessageSystem {
     public boolean createMessage(String message, String receiver){
         if(am.getUsernameToAttendee().containsKey(receiver) ||
                 sm.getUsernameToSpeaker().containsKey(receiver) ||
-                om.getUsernameToOrganizer().containsKey(receiver)){
+                om.getUsernameToOrganizer().containsKey(receiver) ||
+                receiver.equals("All Speakers") ||
+                receiver.equals("All Attendees")){
             this.sendMessage(message, receiver, username);
             return true;
         }
