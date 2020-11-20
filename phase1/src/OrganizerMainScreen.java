@@ -9,6 +9,15 @@ public class OrganizerMainScreen {
     SpeakerManager sm;
     String username;
 
+    /**
+     * Create an OrganizerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
+     * the constructor.
+     * @param username String representing a Person's username.
+     * @param am AttendeeManager object
+     * @param es EventScheduler object
+     * @param om OrganizerManager object
+     * @param sm SpeakerManager object
+     */
     public OrganizerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                                SpeakerManager sm){
         this.username = username;
@@ -19,6 +28,9 @@ public class OrganizerMainScreen {
         this.os = new OrganizerSystem(am, es, om, sm);
     }
 
+    /**
+     * Prints the available actions to the screen, and takes in inputs accordingly.
+     */
     public void run() {
         boolean logOut = false;
         while (!logOut) {

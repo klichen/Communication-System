@@ -10,6 +10,14 @@ public class OrganizerSystem {
     OrganizerManager om;
     SpeakerManager sm;
 
+    /**
+     * Creates an OrganizerSystem object and sets its variables am, es, om, and sm to the ones passed in the
+     * constructor.
+     * @param am AttendeeManager object
+     * @param es EvenScheduler object
+     * @param om OrganizerManager object
+     * @param sm SpeakerManager object
+     */
     public OrganizerSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm){
         this.am = am;
         this.es = es;
@@ -17,8 +25,14 @@ public class OrganizerSystem {
         this.sm = sm;
     }
 
-
-    // Enter rooms (events) into the system
+    /**
+     * Create an Event object and add it to the schedule of Speaker with speakerUsername, if the event is valid.
+     * @param roomNum String representing the room number of where the event is
+     * @param eventId String representing the id of the event
+     * @param time int representing the time the event starts
+     * @param speakerUsername String representing the username of the speaker
+     * @return boolean; true if the Event was created, false if it was not created.
+     */
     public boolean createEvent(String roomNum, String eventId, int time, String speakerUsername){
         boolean eventCreated;
         // Create the event
@@ -30,17 +44,31 @@ public class OrganizerSystem {
         return eventCreated;
     }
 
-    // Create speaker accounts
+    /**
+     * Create a Speaker object.
+     * @param speakerUsername String representing the Speaker's username
+     * @param password String representing the Speaker's password
+     * @return boolean; true if the Speaker was created, false if it was not created.
+     */
     public boolean createSpeaker(String speakerUsername, String password){
         return sm.createSpeaker(speakerUsername, password);
     }
 
-    // Create organizer accounts
+    /**
+     * Create an Organizer object.
+     * @param organizerUsername String representing Organizer's username
+     * @param password String representing Organizer's password
+     * @return boolean; true if Organizer object was created, false if it was not created
+     */
     public boolean createOrganizer(String organizerUsername, String password){
         return om.createOrganizer(organizerUsername, password);
     }
 
-    // Cancel event
+    /**
+     * Removes the Event with eventId from EventScheduler, Speaker's schedule, and all of its Attendees' schedule.
+     * @param eventId String representing the id of the event
+     * @return boolean; true if event was cancelled, false if it was not cancelled.
+     */
     public boolean cancelEvent(String eventId){
         // Remove event from EventScheduler
         try {
@@ -62,21 +90,25 @@ public class OrganizerSystem {
         }
     }
 
-    // Read string from user input
+    /**
+     * Reads user input and returns it as a String
+     * @return String representing user input
+     */
     public String readString() {
         Scanner scan = new Scanner(System.in);
-        String str = scan.nextLine();
 
-        return str;
+        return scan.nextLine();
     }
 
-    // Read int starts from user input
+    /**
+     * Reads user input and returns it as an int
+     * @return int representing user input
+     */
     public int readInt() {
         Scanner scan = new Scanner(System.in);
         String strInput = scan.nextLine();
-        int intInput = Integer.parseInt(strInput);
 
-        return intInput;
+        return Integer.parseInt(strInput);
     }
 }
 

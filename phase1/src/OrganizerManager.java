@@ -4,12 +4,21 @@ public class OrganizerManager{
     private List<Organizer> allOrganizers;
     private Map<String, Organizer> usernameToOrganizer;
 
+    /**
+     * Creates an OrganizerManager object and initializes allOrganizers as an empty ArrayList and
+     * usernameToOrganizer as an empty HashMap.
+     */
     public OrganizerManager(){
         allOrganizers = new ArrayList<>();
         usernameToOrganizer = new HashMap<>();
     }
 
-    // Create organizer accounts
+    /**
+     * Creates an Organizer object, if the username does not already exist.
+     * @param username String representing Organizer's username
+     * @param password String representing Organizer's password
+     * @return boolean; true if Organizer object was created, false if it was not created
+     */
     public boolean createOrganizer(String username, String password){
         if (!usernameToOrganizer.containsKey(username)) {
             Organizer organizer = new Organizer(username, password);
@@ -21,33 +30,54 @@ public class OrganizerManager{
         }
     }
 
+    /**
+     * Adds Organizer object to ArrayList allOrganizers, and HashMap usernameToOrganizer.
+     * @param o Organizer object
+     */
     public void updateOrganizerObjects(Organizer o){
         allOrganizers.add(o);
         usernameToOrganizer.put(o.getUsername(), o);
     }
 
-    // Get all organizers
+    /**
+     * Get the List allOrganizers.
+     * @return List allOrganizers
+     */
     public List<Organizer> getAllOrganizers(){
         return allOrganizers;
     }
 
-    // Get Map (String -> Organizer)
+    /**
+     * Get the Map usernameToOrganizer.
+     * @return Map usernameToOrganizer
+     */
     public Map<String, Organizer> getUsernameToOrganizer() {
         return usernameToOrganizer;
     }
 
-    // Check login for logging in
+    /**
+     * Checks if the username exists and if it's password is correct.
+     * @param username String representing Organizer's username
+     * @param password String representing Organizer's password
+     * @return boolean; true if username exists and it's password is correct, false if otherwise.
+     */
     public boolean checkLogin(String username, String password){
         boolean valid = false;
         for (Organizer user: allOrganizers){
-            if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 valid = true;
+                break;
             }
         }
         return valid;
     }
 
     // Convert all list of attendee to list of string
+
+    /**
+     * Returns a List of Lists of Strings representing all Organizers in usernameTOrganizer as Strings
+     * @return List of Lists of Strings
+     */
     public List<List<String>> loginToString(){
         List<List<String>> convertedEvents = new ArrayList<List<String>>();
         System.out.println(usernameToOrganizer);
