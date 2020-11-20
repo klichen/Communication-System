@@ -4,7 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.*;
 
 public class LoadAndSaveObjects{
-
+    /**
+     * Saves all objects (Events, Attendees, Speakers, and Organizers) and their
+     * stored data into a .txt file
+     *
+     * @param scheduler Instance of EventScheduler to access the list of events
+     * @param speakerManager Instance of SpeakerManager to access the list of speakers
+     * @param attendeeManager Instance of AttendeeManager to access the list of attendees
+     * @param organizerManager Instance of OrganizerManager to access the list of organizers
+     * */
     public void saveAll(EventScheduler scheduler,  SpeakerManager speakerManager,
                         AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {
         try{
@@ -37,6 +45,15 @@ public class LoadAndSaveObjects{
         }
     }
 
+    /**
+     * Loads all objects (Events, Attendees, Speakers, and Organizers) and their
+     * stored data from a .txt file
+     *
+     * @param scheduler Instance of EventScheduler to save the list of events
+     * @param speakerManager Instance of SpeakerManager to save the list of speakers
+     * @param attendeeManager Instance of AttendeeManager to save the list of attendees
+     * @param organizerManager Instance of OrganizerManager to save the list of organizers
+     * */
     public void loadAll(EventScheduler scheduler,  SpeakerManager speakerManager,
                         AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {
         try{
@@ -52,11 +69,9 @@ public class LoadAndSaveObjects{
                 }
                 if(obj instanceof Event){
                     scheduler.updateEventObjects((Event)obj);
-                    System.out.println(scheduler.getEventList());
                 }
                 else if(obj instanceof Attendee){
                     attendeeManager.updateAttendeeObjects((Attendee) obj);
-                    System.out.println(attendeeManager.getAllAttendees());
                 }
                 else if(obj instanceof Speaker){
                     speakerManager.updateSpeakerObjects((Speaker) obj);
