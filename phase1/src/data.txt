@@ -7,8 +7,8 @@ Events
 2,another,11,user,ADD
 
 Logins
-attendee,user1,pass
+attendee,attendee,pass
 attendee,user,pass
-organizer,test,pass
+organizer,organizer,pass
 speaker,test1,pass
-speaker,speak,123asd
+speaker,speaker,pass

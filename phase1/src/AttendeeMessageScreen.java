@@ -39,16 +39,14 @@ public class AttendeeMessageScreen {
                 String message = messageSystem.userInput();
 
                 messageSystem.createMessage(message, receiver);
+                break;
             }
             case "2":{
                 ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, username);
                 currMessages.run();
+                break;
             }
-            default:
-                throw new IllegalArgumentException("input not valid");
 
         }
-
-
     }
 }
