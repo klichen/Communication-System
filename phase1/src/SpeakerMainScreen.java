@@ -9,6 +9,16 @@ public class SpeakerMainScreen {
     AttendeeManager am;
     OrganizerManager om;
 
+    /**
+     * Create a SpeakerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
+     * the constructor.
+     *
+     * @param username String representing a Person's username.
+     * @param am AttendeeManager object
+     * @param es EventScheduler object
+     * @param om OrganizerManager object
+     * @param sm SpeakerManager object
+     */
     public SpeakerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                              SpeakerManager sm) {
         this.ss = new SpeakerSystem(sm);
@@ -18,7 +28,9 @@ public class SpeakerMainScreen {
         this.am = am;
         this.om = om;
     }
-
+    /**
+     * Prints the available actions to the screen, and takes in inputs accordingly.
+     */
     public void run() {
         System.out.println("Hello " + username + ".");
         System.out.println("The list of talks you are giving is:");

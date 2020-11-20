@@ -31,6 +31,8 @@ public class Event implements Serializable{
     // Returns the Event's id (Unique to each event)
     /**
      * Returns the name of this event
+     *
+     * @return the name of the event
      */
     public String getID(){
         return id;
@@ -39,6 +41,8 @@ public class Event implements Serializable{
     // Returns the start time of the event
     /**
      * Returns the time that this event starts
+     *
+     * @return the time of the event
      */
     public int getTime(){
         return time;
@@ -47,12 +51,16 @@ public class Event implements Serializable{
     //Returns the room number
     /**
      * Returns the room number of this event
+     *
+     * @return the room number of the event
      */
     public String getRoomNum(){ return roomNum; }
 
     // Returns the username of the speaker of the event
     /**
      * Returns the speaker's username of this event
+     *
+     * @return the speaker's username
      */
     public String getSpeaker(){
         return speakerUsername;
@@ -65,7 +73,9 @@ public class Event implements Serializable{
 
     // Return how many people in certain Event
     /**
-     * Returns the number of people in this event.
+     * Returns the number of people in this event
+     *
+     * @return the sizeof the list of people in the event
      */
     public int getCountInEvent(){
         return inEvent.size();
