@@ -8,19 +8,28 @@ public class MessageSystem {
     private final SpeakerManager sm;
     private final String username;
 
-    public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username){
+    /**
+     * Constructor for controller class, reads user input and decides if messaging can be done
+     *
+     * @param am       Instance of AttendeeManager with loaded information
+     * @param om       Instance of OrganizerManager with loaded information
+     * @param sm       Instance of SpeakerManager with loaded information
+     * @param username String of the username of current user logged in
+     */
+    public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username) {
         this.am = am;
-        this. om = om;
-        this. sm = sm;
+        this.om = om;
+        this.sm = sm;
         this.username = username;
     }
 
 
     /**
      * Reads the keyboard input.
+     *
      * @return The keyboard input as a string.
      */
-    public String userInput(){
+    public String userInput() {
         Scanner scan = new Scanner(System.in);
         String m = scan.nextLine();
         return m;
@@ -29,15 +38,15 @@ public class MessageSystem {
     /**
      * Calls the send message function and only requires a message and a receiver.
      *
-     * @param message The message to be sent.
+     * @param message  The message to be sent.
      * @param receiver The username of the recipient.
      */
-    public boolean createMessage(String message, String receiver){
-        if(am.getUsernameToAttendee().containsKey(receiver) ||
+    public boolean createMessage(String message, String receiver) {
+        if (am.getUsernameToAttendee().containsKey(receiver) ||
                 sm.getUsernameToSpeaker().containsKey(receiver) ||
                 om.getUsernameToOrganizer().containsKey(receiver) ||
                 receiver.equals("All Speakers") ||
-                receiver.equals("All Attendees")){
+                receiver.equals("All Attendees")) {
             this.sendMessage(message, receiver, username);
             return true;
         }
@@ -45,23 +54,41 @@ public class MessageSystem {
     }
 
     /**
+     * Overloaded method: for speaker messaging
      *
-     * @param message
-     * @param talks
+     * @param message Content of the message being sent
+     * @param talks   the talks that the speaker wants to send messages
      */
-    public void createMessage(String message, List<String> talks){
-        this.sendMessage(message, talks, username);
+    public boolean createMessage(String message, List<String> talks) {
+        boolean validTalks = true;
+
+        if (talks.contains("All")) {
+            List<String> allTalks = sm.getSchedule(username);
+            this.sendMessage(message, allTalks, username);
+        } else {
+            for (String talk : talks) {
+                if (!sm.getSchedule(username).contains(talk)) {
+                    validTalks = false;
+                }
+            }
+            if (validTalks) {
+                this.sendMessage(message, talks, username);
+            }
+        }
+
+        return validTalks;
     }
 
     /**
+     * Reads multiple user inputs and adds them to a list
      *
-     * @return
+     * @return A list containing each input from user
      */
-    public List<String> readTalks(){
+    public List<String> readList() {
         Scanner scan = new Scanner(System.in);
         String e = "";
         List<String> events = new ArrayList<>();
-        while(!e.equals("done")){
+        while (!e.equals("done")) {
             e = scan.nextLine();
             events.add(e);
         }
@@ -74,44 +101,43 @@ public class MessageSystem {
      *
      * @param currPerson The username of the user that is currently logged in.
      * @return A string of the messages sent to currPerson in the form
-     *         sender1: message1, sender2: message2, ...
+     * sender1: message1, sender2: message2, ...
      */
-    public String readMessage(String currPerson) {
+    public List readMessage(String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();
 
         ReadMessageManager readMessageManager = new ReadMessageManager(currPerson);
-        try {
-            if (am.getUsernameToAttendee().containsKey(currPerson)) {
-                readMessageManager.addUsers(attendees);
-                return readMessageManager.readMessage();
-            } else if (om.getUsernameToOrganizer().containsKey(currPerson)) {
-                readMessageManager.addUsers(organizers);
-                return readMessageManager.readMessage();
-            } else if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
-                readMessageManager.addUsers(speakers);
-                return readMessageManager.readMessage();
-            } else {
-                throw new NullPointerException();
-            }
-        } catch (NullPointerException e) {
-            return "Current user is invalid";
+
+        if (am.getUsernameToAttendee().containsKey(currPerson)) {
+            readMessageManager.addUsers(attendees);
+            return readMessageManager.readMessage();
+        } else if (om.getUsernameToOrganizer().containsKey(currPerson)) {
+            readMessageManager.addUsers(organizers);
+            return readMessageManager.readMessage();
+        } else if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
+            readMessageManager.addUsers(speakers);
+            return readMessageManager.readMessage();
+        } else {
+            throw new NullPointerException();
         }
+
     }
 
     /**
      * Sends a message to other other user(s).
      *
-     * @param message The message to be sent.
-     * @param receiver The recipient of the message.
+     * @param message    The message to be sent.
+     * @param receiver   The recipient of the message.
      * @param currPerson The sender of the message.
      */
-    private void sendMessage(String message, String receiver, String currPerson){
-    List<Attendee> attendees = am.getAllAttendees();
-    List<Speaker> speakers = sm.getAllSpeakers();
+    private void sendMessage(String message, String receiver, String currPerson) {
+        List<Attendee> attendees = am.getAllAttendees();
+        List<Speaker> speakers = sm.getAllSpeakers();
         if (om.getUsernameToOrganizer().containsKey(currPerson)) {
-            OrganizerText text = new OrganizerText();;
+            OrganizerText text = new OrganizerText();
+            ;
             if (receiver.equals("All Speakers")) {
                 text.addPeopleToList(speakers);
                 text.messageAllSpeakers(message, currPerson);
@@ -121,31 +147,28 @@ public class MessageSystem {
             } else {
                 text.addPeopleToList(attendees);
                 text.addPeopleToList(speakers);
-                if(am.getUsernameToAttendee().containsKey(receiver) ||
+                if (am.getUsernameToAttendee().containsKey(receiver) ||
                         sm.getUsernameToSpeaker().containsKey(receiver)) {
                     text.messageSingleRecipient(message, currPerson, receiver);
-                }
-                else{
+                } else {
                     throw new NullPointerException();
                 }
             }
-        }
-        else if (am.getUsernameToAttendee().containsKey(currPerson)) {
+        } else if (am.getUsernameToAttendee().containsKey(currPerson)) {
             AttendeeText text = new AttendeeText();
             text.addPeopleToList(attendees);
             text.addPeopleToList(speakers);
             text.sendMessage(message, currPerson, receiver);
-        }
-        else if(sm.getUsernameToSpeaker().containsKey(currPerson)){
+        } else if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
             SpeakerText text = new SpeakerText();
             text.addPeopleToList(attendees);
             text.respondAttendee(message, receiver, currPerson);
         }
     }
 
-    private void sendMessage(String message, List<String> talks, String currPerson){
+    private void sendMessage(String message, List<String> talks, String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
-        if (sm.getUsernameToSpeaker().containsKey(currPerson)){
+        if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
             SpeakerText st = new SpeakerText();
             st.addPeopleToList(attendees);
             st.messageAllAttendees(talks, message, currPerson);

@@ -1,22 +1,24 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ReadMessageManager<T> {
     private final List<Person> people = new ArrayList<>();
     private final String currPerson;
 
-    public ReadMessageManager(String currPerson){
+    public ReadMessageManager(String currPerson) {
         this.currPerson = currPerson;
     }
 
     /**
      * Precondition: T is a subtype of Person.
-     *
+     * <p>
      * Extends this.people with Person objects in people
+     *
      * @param people The list of Person objects to be added.
      */
-    public void addUsers(List<T> people){
-        for(T person: people){
+    public void addUsers(List<T> people) {
+        for (T person : people) {
             this.people.add((Person) person);
         }
     }
@@ -27,12 +29,12 @@ public class ReadMessageManager<T> {
      *
      * @return Returns the string of messages sent to the current user.
      */
-    public String readMessage(){
-        for(Person person: people){
-            if(person.getUsername().equals(currPerson)){
-                return person.getStoredMessages();
+    public List readMessage() {
+        for (Person person : people) {
+            if (person.getUsername().equals(currPerson)) {
+                return person.getStoredMessagesList();
             }
         }
-        return "No messages found.";
+        return Collections.emptyList();
     }
 }

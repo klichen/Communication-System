@@ -39,6 +39,7 @@ public class AttendeeMessageScreen {
         System.out.println("To do an action, please enter the corresponding number:");
         System.out.println("1 - Send a message to someone in your contact list");
         System.out.println("2 - See and respond to your messages");
+        System.out.println("3 - Exit");
 
         String choice = messageSystem.userInput();
 
@@ -56,6 +57,9 @@ public class AttendeeMessageScreen {
             case "2":{
                 ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, username);
                 currMessages.run();
+                break;
+            }
+            case "3":{
                 break;
             }
 

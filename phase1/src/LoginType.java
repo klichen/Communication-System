@@ -32,6 +32,12 @@ public class LoginType {
         password = scan.nextLine();
     }
 
+//    public String readInput(){
+//        Scanner scan = new Scanner(System.in);
+//        String input = scan.nextLine();
+//        return input;
+//    }
+
     /**
      * Reads user input and stores it in variable "password"
      *
