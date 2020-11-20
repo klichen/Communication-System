@@ -4,12 +4,18 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AttendeeSystem {
-    // Controller class (gets input from user)
     AttendeeManager am;
     EventScheduler es;
     OrganizerManager om;
     SpeakerManager sm;
 
+    /**
+     * Constructor for controller that creates AttendeeSystem object
+     * @param am Instance of AttendeeManager with loaded information
+     * @param es Instance of EventScheduler with loaded information
+     * @param om Instance of OrganizerManager with loaded information
+     * @param sm Instance of SpeakerManager with loaded information
+     */
     public AttendeeSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm){
         this.am = am;
         this.es = es;
@@ -17,22 +23,34 @@ public class AttendeeSystem {
         this.sm = sm;
     }
 
-    // read string and return it
+    /**
+     * Reads String input from User
+     * @return The String that the User inputted
+     */
     public String readString(){
-        String eventID;
+        String str;
         Scanner scan = new Scanner(System.in);
-        eventID = scan.nextLine();
+        str = scan.nextLine();
 
-
-        return eventID;
+        return str;
     }
 
-    // create attendee account
+    /**
+     * Creates an Attendee Account
+     * @param username The Attendee's username as a String
+     * @param password The Attendee's password as a String
+     */
     public void createAccount(String username, String password){
         am.createAttendee(username, password);
     }
 
-    // can attendee add a contact
+    /**
+     * Checks whether contact can be added to Attendees contact list
+     * @param username The Attendee's username as a String
+     * @param contact The potential contact's username as a String
+     * @return a boolean that returns true if contact can be added to Attendee contact list and false if contact cannot
+     * be added
+     */
     public boolean canAddContact(String username, String contact){
         boolean userCheck = false;
         if (am.getUsernameToAttendee().containsKey(username)){
@@ -45,17 +63,28 @@ public class AttendeeSystem {
         return userCheck && this.am.canAddToContactList(username, contact);
     }
 
-    // add a contact
+    /**
+     * Adds a contact to Attendee's contact list
+     * @param username The Attendee's username as a String
+     * @param contact The contact's username as a String
+     */
     public void addContact(String username, String contact){
         this.am.addToContactList(username, contact);
     }
 
-    // get the event map
+    /**
+     * Returns the variable IdToEvent in EventScheduler
+     * @return A Map pointing Event IDS to their corresponding Event objects
+     */
     private Map<String, Event> getEventMap(){
         return this.es.getIdToEvent();
     }
 
-    // get attendee Schedule
+    /**
+     * Returns Attendee's schedule using the Event objects
+     * @param username The Attendee's username as a String
+     * @return A List of all the Events the Attendee has signed up for
+     */
     public List<Event> getSchedule(String username){
         List<String> idSchedule =  this.am.getSchedule(username);
         Map<String, Event> eventMap = getEventMap();
@@ -69,6 +98,11 @@ public class AttendeeSystem {
         return fullSchedule;
     }
 
+    /**
+     * returns Attendee's Schedule with all the information about each Event
+     * @param username The Attendee's username as a String
+     * @return A List of Event information as Strings
+     */
     public List<String> getScheduleIds(String username){
         List<Event> fullSchedule =  getSchedule(username);
         List<String> ScheduleString = new ArrayList<>();
@@ -80,12 +114,21 @@ public class AttendeeSystem {
         return ScheduleString;
     }
 
-    // checks if valid event id
+    /**
+     * Checks whether eventID exists
+     * @param eventID The ID of the Event as a String
+     * @return a boolean that returns true if the EventID exists and false otherwise
+     */
     private boolean validEvent(String eventID) {
         return getEventMap().containsKey(eventID);
     }
 
-    // checks whether this event can be added
+    /**
+     * Checks whether an Event can be added to Attendee's schedule
+     * @param username The Attendee's username as a String
+     * @param eventID The ID of the Event as a String
+     * @return a boolean that returns true if Event can be added and false otherwise
+     */
     public boolean canAddEvent(String username, String eventID){
         List<String> idSchedule =  this.am.getSchedule(username);
         List<Event> fullSchedule = getSchedule(username);
@@ -110,7 +153,11 @@ public class AttendeeSystem {
         return canAdd;
     }
 
-    // Add event to attendee schedule
+    /**
+     * Adds an event to the Attendee's schedule
+     * @param username The Attendee's username as a String
+     * @param eventID The ID of the Event as a String
+     */
     public void addEvent(String username, String eventID){
         boolean canAdd = canAddEvent(username, eventID);
         Event event = getEventMap().get(eventID);
@@ -124,14 +171,23 @@ public class AttendeeSystem {
         }
     }
 
-    // check whether this event enrolment can be cancelled
+    /**
+     * Checks whether an Event can be removed from the Attendee's Schedule
+     * @param username The Attendee's username as a String
+     * @param eventID The ID of the Event as a String
+     * @return a boolean that returns true if the event can be removed from Attendee's schedule and false otherwise
+     */
     public boolean canCancelEnrollment(String username, String eventID){
         List<String> idSchedule =  this.am.getSchedule(username);
         boolean validEvent = validEvent(eventID);
         return (validEvent && idSchedule.contains(eventID));
     }
 
-    // cancel attendee's enrolment in events
+    /**
+     * Removes an Event from the Attendee's schedule
+     * @param username The Attendee's username as a String
+     * @param eventID The ID of the Event as a String
+     */
     public void cancelEnrollment(String username, String eventID){
         boolean canCancel = canCancelEnrollment(username, eventID);
         Event event = getEventMap().get(eventID);
