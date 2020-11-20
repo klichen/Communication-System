@@ -10,8 +10,8 @@ public class Main {
         OrganizerManager organizerManager = new OrganizerManager();
         EventScheduler scheduler = new EventScheduler();
 
-        las.loadAll(scheduler, speakerManager, attendeeManager, organizerManager);
-        //laso.loadAll(scheduler, speakerManager, attendeeManager, organizerManager);
+        //las.loadAll(scheduler, speakerManager, attendeeManager, organizerManager);
+        laso.loadAll(scheduler, speakerManager, attendeeManager, organizerManager);
 
         LoginScreen loginScreen = new LoginScreen();
         loginScreen.run(attendeeManager, organizerManager, speakerManager, scheduler);
