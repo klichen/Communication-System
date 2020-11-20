@@ -35,14 +35,14 @@ public class AttendeeSystem {
         return str;
     }
 
-    /**
-     * Creates an Attendee Account
-     * @param username The Attendee's username as a String
-     * @param password The Attendee's password as a String
-     */
-    public void createAccount(String username, String password){
-        am.createAttendee(username, password);
-    }
+//    /**
+//     * Creates an Attendee Account
+//     * @param username The Attendee's username as a String
+//     * @param password The Attendee's password as a String
+//     */
+//    public void createAccount(String username, String password){
+//        am.createAttendee(username, password);
+//    }
 
     /**
      * Checks whether contact can be added to Attendees contact list
