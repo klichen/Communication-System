@@ -1,5 +1,7 @@
 import java.util.List;
-public class Event {
+import java.io.Serializable;
+
+public class Event implements Serializable{
     private String id;
     private int time;
     private String speakerUsername;
