@@ -32,8 +32,14 @@ public class MessageSystem {
      * @param message The message to be sent.
      * @param receiver The username of the recipient.
      */
-    public void createMessage(String message, String receiver){
-        this.sendMessage(message, receiver, username);
+    public boolean createMessage(String message, String receiver){
+        if(am.getUsernameToAttendee().containsKey(receiver) ||
+                sm.getUsernameToSpeaker().containsKey(receiver) ||
+                om.getUsernameToOrganizer().containsKey(receiver)){
+            this.sendMessage(message, receiver, username);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -100,52 +106,47 @@ public class MessageSystem {
      * @param currPerson The sender of the message.
      */
     private void sendMessage(String message, String receiver, String currPerson){
-        List<Attendee> attendees = am.getAllAttendees();
-        List<Speaker> speakers = sm.getAllSpeakers();
-        try{
-            if (om.getUsernameToOrganizer().containsKey(currPerson)) {
-                OrganizerText text = new OrganizerText();;
-                if (receiver.equals("All Speakers")) {
-                    text.addPeopleToList(speakers);
-                    text.messageAllSpeakers(message, currPerson);
-                } else if (receiver.equals("All Attendees")) {
-                    text.addPeopleToList(attendees);
-                    text.messageAllAttendees(message, currPerson);
-                } else {
-                    text.addPeopleToList(attendees);
-                    text.addPeopleToList(speakers);
-                    if(am.getUsernameToAttendee().containsKey(receiver) ||
-                            sm.getUsernameToSpeaker().containsKey(receiver)) {
-                        text.messageSingleRecipient(message, currPerson, receiver);
-                    }
-                    else{
-                        throw new NullPointerException();
-                    }
-                }
-            } else if (am.getUsernameToAttendee().containsKey(currPerson)) {
-                AttendeeText text = new AttendeeText();
+    List<Attendee> attendees = am.getAllAttendees();
+    List<Speaker> speakers = sm.getAllSpeakers();
+        if (om.getUsernameToOrganizer().containsKey(currPerson)) {
+            OrganizerText text = new OrganizerText();;
+            if (receiver.equals("All Speakers")) {
+                text.addPeopleToList(speakers);
+                text.messageAllSpeakers(message, currPerson);
+            } else if (receiver.equals("All Attendees")) {
+                text.addPeopleToList(attendees);
+                text.messageAllAttendees(message, currPerson);
+            } else {
                 text.addPeopleToList(attendees);
                 text.addPeopleToList(speakers);
-                text.sendMessage(message, currPerson, receiver);
+                if(am.getUsernameToAttendee().containsKey(receiver) ||
+                        sm.getUsernameToSpeaker().containsKey(receiver)) {
+                    text.messageSingleRecipient(message, currPerson, receiver);
+                }
+                else{
+                    throw new NullPointerException();
+                }
             }
         }
-        catch (NullPointerException n){
-            System.out.println("Invalid User.");
+        else if (am.getUsernameToAttendee().containsKey(currPerson)) {
+            AttendeeText text = new AttendeeText();
+            text.addPeopleToList(attendees);
+            text.addPeopleToList(speakers);
+            text.sendMessage(message, currPerson, receiver);
+        }
+        else if(sm.getUsernameToSpeaker().containsKey(currPerson)){
+            SpeakerText text = new SpeakerText();
+            text.addPeopleToList(attendees);
+            text.respondAttendee(message, receiver, currPerson);
         }
     }
 
     private void sendMessage(String message, List<String> talks, String currPerson){
         List<Attendee> attendees = am.getAllAttendees();
-        try{
-            if (sm.getUsernameToSpeaker().containsKey(currPerson)){
-                SpeakerText st = new SpeakerText();
-                st.addPeopleToList(attendees);
-                st.messageAllAttendees(talks, message, currPerson);
-            }
-        }
-        catch (NullPointerException n){
-            System.out.println("Invalid User.");
+        if (sm.getUsernameToSpeaker().containsKey(currPerson)){
+            SpeakerText st = new SpeakerText();
+            st.addPeopleToList(attendees);
+            st.messageAllAttendees(talks, message, currPerson);
         }
     }
-
 }

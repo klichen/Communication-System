@@ -11,3 +11,4 @@ attendee,user1,pass
 attendee,user,pass
 organizer,test,pass
 speaker,test1,pass
+speaker,speak,123asd

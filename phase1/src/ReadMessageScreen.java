@@ -15,6 +15,7 @@ public class ReadMessageScreen {
      * Prints the texts for the user to see, and takes in inputs accordingly.
      */
     public void run(){
+        boolean successful = true;
         MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
         System.out.println("Here are your messages:");
         String messages = messageSystem.readMessage(username);
@@ -26,9 +27,14 @@ public class ReadMessageScreen {
         System.out.println("Now enter the message you wish to send:");
         String message = messageSystem.userInput();
 
-        messageSystem.createMessage(message, receiver);
+        successful = messageSystem.createMessage(message, receiver);
 
-        System.out.println("Enter anything to return to the main screen.");
-        messageSystem.userInput();
+        if(successful) {
+            System.out.println("Enter anything to return to the main screen.");
+            messageSystem.userInput();
+        }
+        else{
+            System.out.println("Invalid User");
+        }
     }
 }

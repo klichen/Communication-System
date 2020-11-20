@@ -1,9 +1,10 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Attendee extends Person{
-    private ArrayList<String> contactList;
-    private ArrayList<String> schedule;
+    private List<String> contactList;
+    private List<String> schedule;
 
 
     public Attendee(String username, String password) {
@@ -16,7 +17,7 @@ public class Attendee extends Person{
     }
 
     // returns the list of people the Person can message
-    ArrayList<String> getContactList() {
+    List<String> getContactList() {
         return this.contactList;
     }
 
@@ -24,7 +25,7 @@ public class Attendee extends Person{
         this.contactList.add(contact);
     }
 
-    public ArrayList<String> getSchedule(){
+    public List<String> getSchedule(){
         return this.schedule;
     }
 

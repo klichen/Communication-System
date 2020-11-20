@@ -45,13 +45,8 @@ public class SpeakerMessageScreen {
                 ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, username);
                 currMessages.run();
             }
-            default:
-                throw new IllegalArgumentException("input not valid");
 
         }
-
-
-
     }
 
 }
