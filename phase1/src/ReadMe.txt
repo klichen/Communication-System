@@ -1,14 +1,20 @@
 -----READ ALL BEFORE STARTING-----
 
 *IMPORTANT* ONE MUST LOGOUT EACH TIME AFTER THEY USE THE PROGRAM AND
-NOT PRESS THE STOP 'MAIN' BUTTON. This ensures the files are saved
+NEVER PRESS THE STOP 'MAIN' BUTTON. This ensures the files are saved
 correctly each time one logs in and out of an account.
 
 -----CLONING REPO-----
-The user must first clone our repository (make sure the link ends with
+IMPORTANT - The user must first clone our repository (make sure the link ends with
 .../group_0047) and in the folder there should be a "phase1" folder
-followed by our "src" folder. This is just to ensure the filepath
-is read correctly by our methods.
+followed by our "src" folder. This means the main project folder is "group_0047".
+This is just to ensure the filepath is read correctly by our methods.
+
+In case when you cloned our repository and the project folder is "phase1"
+instead of "group_0047", meaning that the top left most folder on the project pane
+reads "phase1" instead of "group_0047", then in the LoadAndSaveObjects.java class
+you would have to change the file path for BOTH methods to
+"src/allObjects.txt" from "phase1/src/allObjects.txt" for the program to function.
 
 -----RUNNING THE PROGRAM-----
 To run our program, the user must run our Main method. A prompt will

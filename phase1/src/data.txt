@@ -1,5 +1,5 @@
 Events
-1,event 1,9,speaker,pass
+1,event 1,9,speaker3,pass
 1,event 2,10,speaker2,pass
 2,event 3,11,speaker2,pass
 
