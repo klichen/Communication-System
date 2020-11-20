@@ -124,8 +124,4 @@ public class EventScheduler {
         return convertedEvents;
     }
 
-    public void updateEventObjects(Event e){
-        updateEvents(e.getRoomNum(), e.getID(), e.getTime(), e.getSpeaker());
-    }
-
 }

@@ -102,9 +102,5 @@ public class AttendeeManager{
         return convertedEvents;
     }
 
-    public void updateAttendeeObjects(Attendee a){
-        createAttendee(a.getUsername(), a.getPassword());
-    }
-
 
 }
