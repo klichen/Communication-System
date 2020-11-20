@@ -34,6 +34,7 @@ public class LoadAndSaveObjects{
             for(Organizer i : organizerManager.getAllOrganizers()){
                 o.writeObject(i);
             }
+            o.close();
         }
         catch (FileNotFoundException e) {
             System.out.println("File not found");

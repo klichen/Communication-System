@@ -129,20 +129,4 @@ public class SpeakerManager {
     public boolean isContact(String speakerUsername, String personUsername){
         return usernameToSpeaker.get(speakerUsername).getContactList().contains(personUsername);
     }
-
-    /**
-     * Returns a List of Lists of Strings representing all Organizers in usernameTOrganizer as Strings
-     * @return List of Lists of Strings
-     */
-    public List<List<String>> loginToString(){
-        List<List<String>> convertedEvents = new ArrayList<List<String>>();
-        System.out.println(usernameToSpeaker);
-        for (String i : usernameToSpeaker.keySet()){
-            List<String> tempConvert = new ArrayList<String>();
-            tempConvert.add("speaker" + "," + usernameToSpeaker.get(i).getUsername()
-                    + "," + usernameToSpeaker.get(i).getPassword());
-            convertedEvents.add(tempConvert);
-        }
-        return convertedEvents;
-    }
 }

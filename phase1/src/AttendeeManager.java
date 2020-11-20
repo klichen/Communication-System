@@ -139,23 +139,4 @@ public class AttendeeManager{
         Attendee attendee = usernameToAttendee.get(username);
         return attendee.getSchedule();
     }
-
-    /**
-     * Converts the variable allAttendees into a List<List<String>>
-     * @return a List of a List of Strings that contain all Attendee's username and password
-     */
-    // Convert all list of attendee to list of string
-    public List<List<String>> loginToString(){
-        List<List<String>> convertedEvents = new ArrayList<List<String>>();
-        System.out.println(usernameToAttendee);
-        for (String i : usernameToAttendee.keySet()){
-            List<String> tempConvert = new ArrayList<String>();
-            tempConvert.add("attendee" + "," + usernameToAttendee.get(i).getUsername()
-                    + "," + usernameToAttendee.get(i).getPassword());
-            convertedEvents.add(tempConvert);
-        }
-        return convertedEvents;
-    }
-
-
 }

@@ -121,18 +121,4 @@ public class EventScheduler {
         return ListOfEvents;
     }
 
-    // Converts the list of events into a List<List<String>>
-    // in order to be saved to txt file
-    public List<List<String>> eventToString(SpeakerManager speakerManager){
-        List<List<String>> convertedEvents = new ArrayList<List<String>>();
-        for (String i : ListOfEvents){
-            List<String> tempConvert = new ArrayList<String>();
-            tempConvert.add(idToEvent.get(i).getRoomNum() + ","+ i + "," + idToEvent.get(i).getTime() + ","
-                    + idToEvent.get(i).getSpeaker() + ","
-                    + speakerManager.getUsernameToSpeaker().get(idToEvent.get(i).getSpeaker()).getPassword());
-            convertedEvents.add(tempConvert);
-        }
-        return convertedEvents;
-    }
-
 }

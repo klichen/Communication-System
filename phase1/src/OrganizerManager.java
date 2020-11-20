@@ -72,19 +72,4 @@ public class OrganizerManager{
         return valid;
     }
 
-    /**
-     * Returns a List of Lists of Strings representing all Organizers in usernameTOrganizer as Strings
-     * @return List of Lists of Strings
-     */
-    public List<List<String>> loginToString(){
-        List<List<String>> convertedEvents = new ArrayList<List<String>>();
-        System.out.println(usernameToOrganizer);
-        for (String i : usernameToOrganizer.keySet()){
-            List<String> tempConvert = new ArrayList<String>();
-            tempConvert.add("organizer" + "," + usernameToOrganizer.get(i).getUsername()
-                    + "," + usernameToOrganizer.get(i).getPassword());
-            convertedEvents.add(tempConvert);
-        }
-        return convertedEvents;
-    }
 }
