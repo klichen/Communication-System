@@ -21,6 +21,11 @@ public class OrganizerManager{
         }
     }
 
+    public void updateOrganizerObjects(Organizer o){
+        allOrganizers.add(o);
+        usernameToOrganizer.put(o.getUsername(), o);
+    }
+
     // Get all organizers
     public List<Organizer> getAllOrganizers(){
         return allOrganizers;

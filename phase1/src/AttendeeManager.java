@@ -24,6 +24,11 @@ public class AttendeeManager{
         }
     }
 
+    public void updateAttendeeObjects(Attendee a){
+        allAttendees.add(a);
+        usernameToAttendee.put(a.getUsername(), a);
+    }
+
     // Get all attendees
     public List<Attendee> getAllAttendees(){
         return allAttendees;

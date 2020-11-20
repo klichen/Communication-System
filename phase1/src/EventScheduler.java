@@ -41,6 +41,11 @@ public class EventScheduler {
         return false;
     }
 
+    public void updateEventObjects(Event e){
+        ListOfEvents.add(e.getID());
+        idToEvent.put(e.getID(), e);
+    }
+
     // Removes an event from list of events and idToEvent
     /**
      * Removes the event object from the list of all events using the name of the event.

@@ -24,6 +24,11 @@ public class SpeakerManager {
         }
     }
 
+    public void updateSpeakerObjects(Speaker s){
+        allSpeakers.add(s);
+        usernameToSpeaker.put(s.getUsername(), s);
+    }
+
     // Get all speakers
     public List<Speaker> getAllSpeakers(){
         return allSpeakers;
