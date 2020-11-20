@@ -4,26 +4,52 @@ public class LoginType {
     private String username;
     private String password;
 
+    /**
+     * Constructor, saves login information of current user
+     *
+     */
     public LoginType() {
         username = "";
         password = "";
 
     }
 
+    /**
+     * Reads user input and stores it in variable "username"
+     *
+     */
     public void readUsername() {
         Scanner scan = new Scanner(System.in);
         username = scan.nextLine();
     }
 
+    /**
+     * Reads user input and stores it in variable "password"
+     *
+     */
     public void readPassword() {
         Scanner scan = new Scanner(System.in);
         password = scan.nextLine();
     }
 
+    /**
+     * Reads user input and stores it in variable "password"
+     *
+     * @return variable username
+     */
     public String getUsername() {
         return this.username;
     }
 
+    /**
+     * Matches username and password to an Attendee, Organizer or Speaker.
+     * Shows the respective presenter.
+     *
+     * @param am AttendeeManager instance passed from Main method
+     * @param om OrganizerManager instance passed from Main method
+     * @param sm SpeakerManager instance passed from Main method
+     * @param es EventScheduler instance passed from Main method
+     */
     public void checkLogin(AttendeeManager am, OrganizerManager om, SpeakerManager sm, EventScheduler es) {
 
         if (am.checkLogin(username, password)) {

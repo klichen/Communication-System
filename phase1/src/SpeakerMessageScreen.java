@@ -7,6 +7,14 @@ public class SpeakerMessageScreen {
     private SpeakerManager sm;
     private String username;
 
+    /**
+     * Creates instance of SpeakerMessageScreen, the presenter class for the messaging hub of a speaker user.
+     *
+     * @param am Instance of AttendeeManager with loaded information
+     * @param om Instance of OrganizerManager with loaded information
+     * @param sm Instance of SpeakerManager with loaded information
+     * @param username String of the username of current user logged in
+     */
     public SpeakerMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username){
         this.am = am;
         this.om = om;
@@ -14,6 +22,10 @@ public class SpeakerMessageScreen {
         this.username = username;
     }
 
+    /**
+     * Outputs the options that the current user can perform
+     *
+     */
     public void run(){
         MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
         List<String> events = sm.getSchedule(username);
