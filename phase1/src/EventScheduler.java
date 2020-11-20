@@ -8,8 +8,6 @@ public class EventScheduler {
     private List<String> ListOfEvents;
     private Map<String, Event> idToEvent;
 
-    // Constructor for EventScheduler
-    // Contains the main list of events
     /**
      * Creates an EventScheduler object that stores the list of all Events and stores the nap where the item is the
      * name of the Event and the value is the event object corresponding to the name.
@@ -20,7 +18,6 @@ public class EventScheduler {
 
     }
 
-    // Updates the main list of events
     /**
      * Updates the list of all Events by creating a new Event object that stores the room number, the name,
      * the time and the speaker's username and then adding it to the list.
@@ -29,6 +26,7 @@ public class EventScheduler {
      * @param id The name of the event
      * @param time The time the event starts
      * @param speakerUsername The username of the speaker
+     * @return true if Event was updated into main list/map
      */
     public boolean updateEvents(String roomNum, String id, int time, String speakerUsername){//}, String speakerPassword){
         if(validEvent(roomNum, id, time, speakerUsername)){
@@ -51,7 +49,6 @@ public class EventScheduler {
         idToEvent.put(e.getID(), e);
     }
 
-    // Removes an event from list of events and idToEvent
     /**
      * Return true if the event is removed from the list of all events using the name of the event. Otherwise, returns
      * false.
@@ -68,7 +65,6 @@ public class EventScheduler {
         return false;
     }
 
-    // Map (ID to Event)
     /**
      * Returns the map where the key is the name of the event and the value corresponded is the event object.
      *
@@ -78,7 +74,6 @@ public class EventScheduler {
         return idToEvent;
     }
 
-    // Checks whether the events being added are valid or not
     /**
      * Returns true if an event object created using room number, name, time and speaker's username has overlapping
      * times with any events in the list of all events, has name not identical with any other and whether the speaker's
@@ -111,7 +106,6 @@ public class EventScheduler {
         return true;
     }
 
-    // Returns the main list of event ids
     /**
      * Returns the list of all events.
      *
