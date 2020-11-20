@@ -17,22 +17,22 @@ public class AttendeeManager{
         usernameToAttendee = new HashMap<>();
     }
 
-//    /**
-//     * Creates an Attendee account if the username does not already exist
-//     * @param username The Attendee's username as a String
-//     * @param password The Attendee's password as a String
-//     * @return A boolean returning true if the Attendee account was created and false if it was not created
-//     */
-//    public boolean createAttendee(String username, String password){
-//        if (!usernameToAttendee.containsKey(username)) {
-//            Attendee attendee = new Attendee(username, password);
-//            allAttendees.add(attendee);
-//            usernameToAttendee.put(username, attendee);
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    /**
+     * Creates an Attendee account if the username does not already exist
+     * @param username The Attendee's username as a String
+     * @param password The Attendee's password as a String
+     * @return A boolean returning true if the Attendee account was created and false if it was not created
+     */
+    public boolean createAttendee(String username, String password){
+        if (!usernameToAttendee.containsKey(username)) {
+            Attendee attendee = new Attendee(username, password);
+            allAttendees.add(attendee);
+            usernameToAttendee.put(username, attendee);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Adds an Attendee to allAttendees and to usernameToAttendee
