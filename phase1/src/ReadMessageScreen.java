@@ -30,8 +30,7 @@ public class ReadMessageScreen {
         successful = messageSystem.createMessage(message, receiver);
 
         if(successful) {
-            System.out.println("Enter anything to return to the main screen.");
-            messageSystem.userInput();
+            System.out.println("Message sent!");
         }
         else{
             System.out.println("Invalid User");

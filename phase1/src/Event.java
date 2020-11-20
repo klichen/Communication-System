@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 
@@ -24,7 +25,7 @@ public class Event implements Serializable{
         this.time = time;
         this.speakerUsername = speakerUsername;
         //this.speakerPassword = speakerPassword;
-        inEvent = null; // Contains Persons who signed up for event
+        this.inEvent = new ArrayList<>();
     }
 
     // Returns the Event's id (Unique to each event)

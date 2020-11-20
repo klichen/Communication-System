@@ -60,6 +60,10 @@ public class SpeakerManager {
         getSchedule(speakerUsername).add(eventId);
     }
 
+    public void removeFromSchedule(String speakerUsername, String eventId){
+        getSchedule(speakerUsername).remove(eventId);
+    }
+
     // adds a person's username to Speaker's contact list
     public void addToContactList(String speakerUsername, String contact) {
         usernameToSpeaker.get(speakerUsername).getContactList().add(contact);
