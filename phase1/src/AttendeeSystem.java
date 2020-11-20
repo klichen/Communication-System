@@ -70,7 +70,14 @@ public class AttendeeSystem {
     }
 
     public List<String> getScheduleIds(String username){
-        return this.am.getSchedule(username);
+        List<Event> fullSchedule =  getSchedule(username);
+        List<String> ScheduleString = new ArrayList<>();
+
+        for (Event i: fullSchedule){
+            ScheduleString.add("Event: " + i.getID() + ", Room Number: " + i.getRoomNum() + ", Time: " + i.getTime()
+                    + ", Speaker: " + i.getSpeaker());
+        }
+        return ScheduleString;
     }
 
     // checks if valid event id

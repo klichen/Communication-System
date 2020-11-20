@@ -7,6 +7,12 @@ public class Attendee extends Person{
     private List<String> schedule;
 
 
+    /**
+     * Creates an Attendee object that inherits from Person and initializes the Attendees contactList and schedule as an
+     * empty ArrayList, sets variables isSpeaker and isOrganizer to false, while isAttendee is set to true.
+     * @param username The Attendee's username as a String
+     * @param password The Attendee's password as a String
+     */
     public Attendee(String username, String password) {
         super(username, password);
         this.contactList = new ArrayList<>();
