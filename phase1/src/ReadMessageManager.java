@@ -6,6 +6,10 @@ public class ReadMessageManager<T> {
     private final List<Person> people = new ArrayList<>();
     private final String currPerson;
 
+    /**
+     * The constructor for ReadMessageManager. The only parameter is the username if the logged-in user.
+     * @param currPerson The username of the logged-in user.
+     */
     public ReadMessageManager(String currPerson) {
         this.currPerson = currPerson;
     }
