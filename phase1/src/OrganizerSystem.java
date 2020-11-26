@@ -35,13 +35,19 @@ public class OrganizerSystem {
      */
     public boolean createEvent(String roomNum, String eventId, int time, String speakerUsername){
         boolean eventCreated;
-        // Create the event
-        eventCreated = es.updateEvents(roomNum, eventId, time, speakerUsername);
-        if (eventCreated){
-            // Add event to speaker's schedule
-            sm.updateSchedule(speakerUsername, eventId);
+        // Check if Speaker exists
+        if (!sm.getUsernameToSpeaker().containsKey(speakerUsername)) {
+            return false;
+        } else {
+            // The speaker exists
+            // Create the event
+            eventCreated = es.updateEvents(roomNum, eventId, time, speakerUsername);
+            if (eventCreated){
+                // Add event to speaker's schedule
+                sm.updateSchedule(speakerUsername, eventId);
+            }
+            return eventCreated;
         }
-        return eventCreated;
     }
 
     /**

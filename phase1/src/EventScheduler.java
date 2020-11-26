@@ -19,6 +19,8 @@ public class EventScheduler {
     }
 
     /**
+     * Precondition: The Speaker with speakerUsername exists
+     *
      * Updates the list of all Events by creating a new Event object that stores the room number, the name,
      * the time and the speaker's username and then adding it to the list.
      *

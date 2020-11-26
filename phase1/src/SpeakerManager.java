@@ -85,6 +85,8 @@ public class SpeakerManager {
     }
 
     /**
+     * Precondition: The Speaker with speakerUsername and the Event with evendId exist
+     *
      * Add an Event with eventId to the schedule of Speaker with speakerUsername.
      * @param speakerUsername String representing Speaker's username
      * @param eventId String representing the id of the event
