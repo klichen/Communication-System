@@ -71,8 +71,8 @@ public abstract class Person<Public> implements Serializable {
      * Returns the Person's password
      * @return The password of Person as a String
      */
-    public String getPassword() {
-        return this.password;
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
     }
 
     // returns messages that has been sent to Person

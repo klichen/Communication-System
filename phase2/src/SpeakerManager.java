@@ -67,7 +67,7 @@ public class SpeakerManager {
     public boolean checkLogin(String username, String password){
         boolean valid = false;
         for (Speaker user: allSpeakers){
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            if (user.getUsername().equals(username) && user.checkPassword(password)) {
                 valid = true;
                 break;
             }

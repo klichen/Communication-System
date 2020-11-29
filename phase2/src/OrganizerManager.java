@@ -67,7 +67,7 @@ public class OrganizerManager{
     public boolean checkLogin(String username, String password){
         boolean valid = false;
         for (Organizer user: allOrganizers){
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            if (user.getUsername().equals(username) && user.checkPassword(password)) {
                 valid = true;
                 break;
             }

@@ -68,7 +68,7 @@ public class AttendeeManager{
     public boolean checkLogin(String username, String password){
         boolean valid = false;
         for (Attendee user: allAttendees){
-            if(user.getUsername().equals(username) && user.getPassword().equals(password)){
+            if(user.getUsername().equals(username) && user.checkPassword(password)){
                 valid = true;
             }
         }
