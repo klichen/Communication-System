@@ -13,6 +13,7 @@ public abstract class Person<Public> implements Serializable {
     protected boolean isSpeaker;
     protected boolean isAttendee;
     protected boolean isOrganizer;
+    protected boolean isVip;
 
     /**
      * Constructor for entity class that creates a Person object

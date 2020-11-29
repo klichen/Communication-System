@@ -18,6 +18,7 @@ public class Attendee extends Person{
         this.isSpeaker = false;
         this.isAttendee = true;
         this.isOrganizer = false;
+        this.isVip = false;
         this.schedule = new ArrayList<>();
     }
 

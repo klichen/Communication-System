@@ -16,6 +16,7 @@ public class Speaker extends Person {
         this.isSpeaker = true;
         this.isAttendee = false;
         this.isOrganizer = false;
+        this.isVip = false;
         this.schedule = new ArrayList<>();
     }
 

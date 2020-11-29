@@ -10,6 +10,7 @@ public class Organizer extends Person{
         this.isSpeaker = false;
         this.isAttendee = false;
         this.isOrganizer = true;
+        this.isVip = false;
     }
     // Since Organizer has every Person in its contact list,
     // the methods that check if a certain Person is in its contact list
