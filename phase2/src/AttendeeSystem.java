@@ -134,13 +134,17 @@ public class AttendeeSystem {
         List<Event> fullSchedule = getSchedule(username);
         boolean canAdd = true;
         int eventTime;
+        boolean vipOnly;
         if (validEvent(eventID)) {
             eventTime = getEventMap().get(eventID).getTime();
+            vipOnly = getEventMap().get(eventID).getIsVip();
         }
         else{
             return false;
         }
-
+        if (vipOnly){
+            return false;
+        }
         for (Event i: fullSchedule){
             if(i.getTime() != eventTime && !idSchedule.contains(eventID)){
                 canAdd = true;
