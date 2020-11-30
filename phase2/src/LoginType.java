@@ -55,12 +55,13 @@ public class LoginType {
      * @param om OrganizerManager instance passed from Main method
      * @param sm SpeakerManager instance passed from Main method
      * @param es EventScheduler instance passed from Main method
+     * @param vm VipManager instance passed from Main method
      */
-    public void checkLogin(AttendeeManager am, OrganizerManager om, SpeakerManager sm, EventScheduler es) {
+    public void checkLogin(AttendeeManager am, OrganizerManager om, SpeakerManager sm, EventScheduler es, VipManager vm) {
 
         if (am.checkLogin(username, password)) {
             //show attendee presenter
-            AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm);
+            AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm);
             ams.run();
         }
         else if (sm.checkLogin(username, password)) {
@@ -72,6 +73,10 @@ public class LoginType {
             //show organizer presenter
             OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm);
             oms.run();
+        }
+        else if(vm.checkLogin(username, password)){
+            //show VIP presenter
+            VipMainScreen vms = new VipMainScreen(username, am, es, om, sm, vm);
         }
         else{
             System.out.println("Invalid username or password");

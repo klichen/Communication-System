@@ -5,6 +5,7 @@ public class AttendeeMainScreen {
     EventScheduler es;
     OrganizerManager om;
     SpeakerManager sm;
+    VipManager vm;
 
     /**
      * Constructor for the presenter showing all of the Actions Attendee can do
@@ -13,15 +14,17 @@ public class AttendeeMainScreen {
      * @param es Instance of EventScheduler with loaded information
      * @param om Instance of OrganizerManager with loaded information
      * @param sm Instance of SpeakerManager with loaded information
+     * @param vm Instance of VipManager with loaded information
      */
     public AttendeeMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
-                              SpeakerManager sm){
-        this.as = new AttendeeSystem(am, es, om, sm);
+                              SpeakerManager sm, VipManager vm){
+        this.as = new AttendeeSystem(am, es, om, sm, vm);
         this.username = username;
         this.am = am;
         this.es = es;
         this.om = om;
         this.sm = sm;
+        this.vm = vm;
     }
 
     /**
