@@ -8,6 +8,7 @@ public class AttendeeSystem {
     EventScheduler es;
     OrganizerManager om;
     SpeakerManager sm;
+    VipManager vm;
 
     /**
      * Constructor for controller that creates AttendeeSystem object
@@ -16,11 +17,12 @@ public class AttendeeSystem {
      * @param om Instance of OrganizerManager with loaded information
      * @param sm Instance of SpeakerManager with loaded information
      */
-    public AttendeeSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm){
+    public AttendeeSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm, VipManager vm){
         this.am = am;
         this.es = es;
         this.om = om;
         this.sm = sm;
+        this.vm = vm;
     }
 
     /**
@@ -58,6 +60,8 @@ public class AttendeeSystem {
         } else if (om.getUsernameToOrganizer().containsKey(username)){
             userCheck = true;
         } else if (sm.getUsernameToSpeaker().containsKey(username)){
+            userCheck = true;
+        } else if (vm.getUsernameToVip().containsKey(username)){
             userCheck = true;
         }
         return userCheck && this.am.canAddToContactList(username, contact);
