@@ -77,6 +77,7 @@ public class LoginType {
         else if(vm.checkLogin(username, password)){
             //show VIP presenter
             VipMainScreen vms = new VipMainScreen(username, am, es, om, sm, vm);
+            vms.run();
         }
         else{
             System.out.println("Invalid username or password");

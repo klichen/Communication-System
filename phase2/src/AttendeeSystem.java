@@ -146,8 +146,11 @@ public class AttendeeSystem {
         else{
             return false;
         }
+        if (vipOnly){
+            return false;
+        }
         for (Event i: fullSchedule){
-            if(i.getTime() != eventTime && !idSchedule.contains(eventID) && !vipOnly){
+            if(i.getTime() != eventTime && !idSchedule.contains(eventID)){
                 canAdd = true;
             }
             else{

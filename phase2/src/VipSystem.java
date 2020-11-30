@@ -105,7 +105,7 @@ public class VipSystem {
 
         for (Event i: fullSchedule){
             ScheduleString.add("[Event: " + i.getID() + ", Room Number: " + i.getRoomNum() + ", Time: " + i.getTime()
-                    + ", Speaker: " + i.getSpeaker() + ", VIP Only: " + i.getIsVip() + "]");
+                    + ", Speaker: " + i.getSpeaker() + " , VIP Event: "  + i.getIsVip() + "]");
         }
         return ScheduleString;
     }
