@@ -48,6 +48,7 @@ public class MessageSystem {
         if (am.getUsernameToAttendee().containsKey(receiver) ||
                 sm.getUsernameToSpeaker().containsKey(receiver) ||
                 om.getUsernameToOrganizer().containsKey(receiver) ||
+                vm.getUsernameToVip().containsKey(receiver) ||
                 receiver.equals("All Speakers") ||
                 receiver.equals("All Attendees")) {
             this.sendMessage(message, receiver, username);
@@ -142,6 +143,7 @@ public class MessageSystem {
     private void sendMessage(String message, String receiver, String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Speaker> speakers = sm.getAllSpeakers();
+        List<Vip> vips = vm.getAllVips();
         if (om.getUsernameToOrganizer().containsKey(currPerson)) {
             OrganizerText text = new OrganizerText();
             ;
@@ -154,8 +156,10 @@ public class MessageSystem {
             } else {
                 text.addPeopleToList(attendees);
                 text.addPeopleToList(speakers);
+                text.addPeopleToList(vips);
                 if (am.getUsernameToAttendee().containsKey(receiver) ||
-                        sm.getUsernameToSpeaker().containsKey(receiver)) {
+                        sm.getUsernameToSpeaker().containsKey(receiver) ||
+                        vm.getUsernameToVip().containsKey(receiver)){
                     text.messageSingleRecipient(message, currPerson, receiver);
                 } else {
                     throw new NullPointerException();
@@ -170,6 +174,8 @@ public class MessageSystem {
             SpeakerText text = new SpeakerText();
             text.addPeopleToList(attendees);
             text.respondAttendee(message, receiver, currPerson);
+        } else if (vm.getUsernameToVip().containsKey(currPerson)) {
+            // Not sure how to implement this for VIP
         }
     }
 
