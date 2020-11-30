@@ -28,6 +28,7 @@ public class EventScheduler {
      * @param id The name of the event
      * @param time The time the event starts
      * @param speakerUsername The username of the speaker
+     * @param isVip true if the event is for VIP's only, false otherwise
      * @return true if Event was updated into main list/map
      */
     public boolean updateEvents(String roomNum, String id, int time, String speakerUsername, boolean isVip){//}, String speakerPassword){
