@@ -141,12 +141,12 @@ public class OrganizerMainScreen {
                     break;
                 case "7":
                     // Send message
-                    OrganizerMessageScreen oMsg = new OrganizerMessageScreen(username, am, om, sm);
+                    OrganizerMessageScreen oMsg = new OrganizerMessageScreen(username, am, om, sm, vm);
                     oMsg.run();
                     break;
                 case "8":
                     // Read messages received
-                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, username);
+                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
                     messageScreen.run();
                     break;
 

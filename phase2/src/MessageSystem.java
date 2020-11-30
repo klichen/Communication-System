@@ -6,6 +6,7 @@ public class MessageSystem {
     private final AttendeeManager am;
     private final OrganizerManager om;
     private final SpeakerManager sm;
+    private final VipManager vm;
     private final String username;
 
     /**
@@ -14,12 +15,14 @@ public class MessageSystem {
      * @param am       Instance of AttendeeManager with loaded information
      * @param om       Instance of OrganizerManager with loaded information
      * @param sm       Instance of SpeakerManager with loaded information
+     * @param vm       Instance of VipManager with loaded information
      * @param username String of the username of current user logged in
      */
-    public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username) {
+    public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, VipManager vm, String username) {
         this.am = am;
         this.om = om;
         this.sm = sm;
+        this.vm = vm;
         this.username = username;
     }
 
@@ -107,6 +110,7 @@ public class MessageSystem {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();
+        List<Vip> vips = vm.getAllVips();
 
         ReadMessageManager readMessageManager = new ReadMessageManager(currPerson);
 
@@ -118,6 +122,9 @@ public class MessageSystem {
             return readMessageManager.readMessage();
         } else if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
             readMessageManager.addUsers(speakers);
+            return readMessageManager.readMessage();
+        } else if (vm.getUsernameToVip().containsKey(currPerson)) {
+            readMessageManager.addUsers(vips);
             return readMessageManager.readMessage();
         } else {
             throw new NullPointerException();

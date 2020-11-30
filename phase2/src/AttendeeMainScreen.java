@@ -105,14 +105,14 @@ public class AttendeeMainScreen {
                 }
                 // Sends a message to a contact
                 case "5": {
-                    AttendeeMessageScreen messageScreen = new AttendeeMessageScreen(am, om, sm, username);
+                    AttendeeMessageScreen messageScreen = new AttendeeMessageScreen(am, om, sm, vm, username);
                     messageScreen.run();
 
                     break;
                 }
                 // View previous messages
                 case "6": {
-                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, username);
+                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
                     messageScreen.run();
 
                     break;

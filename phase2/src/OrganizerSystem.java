@@ -139,10 +139,18 @@ public class OrganizerSystem {
         return Integer.parseInt(strInput);
     }
 
+    /**
+     * Precondition: The user input is either 'true' or 'false'
+     *
+     * Reads user input and returns it as a boolean
+     * @return boolean representing user input
+     */
     public boolean readBoolean() {
         Scanner scan = new Scanner(System.in);
+        String strInput = scan.nextLine();
 
-        return scan.nextBoolean();
+        // if input isn't 'true', Boolean.parseBoolean will return false
+        return Boolean.parseBoolean(strInput);
     }
 }
 

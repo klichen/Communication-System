@@ -4,6 +4,7 @@ public class AttendeeMessageScreen {
     private final AttendeeManager am;
     private final OrganizerManager om;
     private final SpeakerManager sm;
+    private final VipManager vm;
     private final String username;
 
     /**
@@ -12,12 +13,15 @@ public class AttendeeMessageScreen {
      * @param am Instance of AttendeeManager with loaded information
      * @param om Instance of OrganizerManager with loaded information
      * @param sm Instance of SpeakerManager with loaded information
+     * @param vm Instance of VipManager with loaded information
      * @param username String of the username of current user logged in
      */
-    public AttendeeMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username){
+    public AttendeeMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, VipManager vm,
+                                 String username){
         this.am = am;
         this.om = om;
         this.sm = sm;
+        this.vm = vm;
         this.username = username;
     }
 
@@ -26,7 +30,7 @@ public class AttendeeMessageScreen {
      *
      */
     public void run() {
-        MessageSystem messageSystem = new MessageSystem(am, om, sm, username);
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
         System.out.println("This is your contact list:");
 
         //need method from attendee manager
@@ -54,7 +58,7 @@ public class AttendeeMessageScreen {
                 break;
             }
             case "2":{
-                ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, username);
+                ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, vm, username);
                 currMessages.run();
                 break;
             }

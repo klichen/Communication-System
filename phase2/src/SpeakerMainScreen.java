@@ -48,7 +48,7 @@ public class SpeakerMainScreen {
             System.out.println("2 - Log out");
             String response = ss.readString();
             if (response.equals("1")) {
-                sms = new SpeakerMessageScreen(am, om, sm, username);
+                sms = new SpeakerMessageScreen(am, om, sm, vm, username);
                 this.sms.run();
             }
             else if (response.equals("2")) {

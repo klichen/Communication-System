@@ -14,6 +14,7 @@ public class VipMainScreen {
      * @param es Instance of EventScheduler with loaded information
      * @param om Instance of OrganizerManager with loaded information
      * @param sm Instance of SpeakerManager with loaded information
+     * @param vm Instance of VipManager with loaded information
      */
     public VipMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                               SpeakerManager sm, VipManager vm){
@@ -104,14 +105,14 @@ public class VipMainScreen {
                 }
                 // Sends a message to a contact
                 case "5": {
-                    AttendeeMessageScreen messageScreen = new AttendeeMessageScreen(am, om, sm, username);
+                    VipMessageScreen messageScreen = new VipMessageScreen(am, om, sm, vm, username);
                     messageScreen.run();
 
                     break;
                 }
                 // View previous messages
                 case "6": {
-                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, username);
+                    ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
                     messageScreen.run();
 
                     break;
