@@ -11,9 +11,10 @@ public class LoadAndSaveObjects{
      * @param organizerManager Instance of OrganizerManager to access the list of organizers
      * */
     public void saveAll(EventScheduler scheduler,  SpeakerManager speakerManager,
-                        AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {
+                        AttendeeManager attendeeManager, OrganizerManager organizerManager,
+                        VipManager vp) throws IOException {
         try{
-            FileOutputStream f = new FileOutputStream(new File("phase1/src/allObjects.txt"));
+            FileOutputStream f = new FileOutputStream(new File("phase2/src/allObjects.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             for (String i : scheduler.getEventList()){
@@ -29,6 +30,9 @@ public class LoadAndSaveObjects{
             }
 
             for(Organizer i : organizerManager.getAllOrganizers()){
+                o.writeObject(i);
+            }
+            for(Vip i : vp.getAllVips()){
                 o.writeObject(i);
             }
             o.close();
@@ -48,9 +52,10 @@ public class LoadAndSaveObjects{
      * @param organizerManager Instance of OrganizerManager to save the list of organizers
      * */
     public void loadAll(EventScheduler scheduler,  SpeakerManager speakerManager,
-                        AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {
+                        AttendeeManager attendeeManager, OrganizerManager organizerManager,
+                        VipManager vp) throws IOException {
         try{
-            FileInputStream  f = new FileInputStream (new File("phase1/src/allObjects.txt"));
+            FileInputStream  f = new FileInputStream (new File("phase2/src/allObjects.txt"));
             ObjectInputStream  o = new ObjectInputStream(f);
 
             while(true){
@@ -71,6 +76,9 @@ public class LoadAndSaveObjects{
                 }
                 else if(obj instanceof Organizer){
                     organizerManager.updateOrganizerObjects ((Organizer) obj);
+                }
+                else if (obj instanceof Vip){
+                    vp.updateVipObjects((Vip) obj);
                 }
                 else
                     break;

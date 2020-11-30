@@ -16,13 +16,14 @@ public class loadAndSave{
      * @param organizerManager Instance of OrganizerManager in order to add the list of organizers
      */
     public void loadAll(EventScheduler scheduler, SpeakerManager speakerManager,
-                        AttendeeManager attendeeManager, OrganizerManager organizerManager) {
+                        AttendeeManager attendeeManager, OrganizerManager organizerManager,
+                        VipManager vp) {
         List<List<String>> arrEvents = new ArrayList<List<String>>();
         List<List<String>> arrLogins = new ArrayList<List<String>>();
         BufferedReader inputReader;
 
         try {
-            inputReader = new BufferedReader(new FileReader(new File("phase1/src/data.txt")));
+            inputReader = new BufferedReader(new FileReader(new File("phase2/src/data.txt")));
 
             String line;
             // Load events
@@ -58,7 +59,7 @@ public class loadAndSave{
         } catch (IOException e) {
             System.out.println("--Invalid file--");
         }
-        updateLogins(arrLogins, attendeeManager, organizerManager, speakerManager);
+        updateLogins(arrLogins, attendeeManager, organizerManager, speakerManager, vp);
         updateEvents(arrEvents, scheduler, speakerManager);
     }
 
@@ -74,8 +75,9 @@ public class loadAndSave{
         for(List<String> i : arrEvents){
             for (String l : i){
                 String[] splitText = l.split(",");
+                boolean isVip = Boolean.parseBoolean(splitText[5]);
                 boolean update = scheduler.updateEvents(splitText[0], splitText[1], Integer.valueOf(splitText[2]),
-                        splitText[3]);
+                        splitText[3], isVip);
                 if(update){
                     speakerManager.createSpeaker(splitText[3], splitText[4]);
                     speakerManager.updateSchedule(splitText[3], splitText[1]);
@@ -94,27 +96,38 @@ public class loadAndSave{
      * @param speakerManager Instance of SpeakerManager in order to update the list of speakers
      */
     public void updateLogins(List<List<String>> arrLogins, AttendeeManager attendeeManager,
-                              OrganizerManager organizerManager, SpeakerManager speakerManager){
+                             OrganizerManager organizerManager, SpeakerManager speakerManager,
+                             VipManager vp){
         for(List<String> i : arrLogins){
             for (String l : i){
                 String[] splitText = l.split(",");
                 if(splitText[0].equalsIgnoreCase("speaker")){
                     if(!attendeeManager.getUsernameToAttendee().containsKey(splitText[1]) &&
-                            !organizerManager.getUsernameToOrganizer().containsKey(splitText[1])){
+                            !organizerManager.getUsernameToOrganizer().containsKey(splitText[1])&&
+                            !vp.getUsernameToVip().containsKey(splitText[1])){
                         speakerManager.createSpeaker(splitText[1], splitText[2]);
                     }
                 }
                 else if (splitText[0].equalsIgnoreCase("attendee")){
                     if(!speakerManager.getUsernameToSpeaker().containsKey(splitText[1]) &&
-                            !organizerManager.getUsernameToOrganizer().containsKey(splitText[1])){
+                            !organizerManager.getUsernameToOrganizer().containsKey(splitText[1])&&
+                            !vp.getUsernameToVip().containsKey(splitText[1])){
                         attendeeManager.createAttendee(splitText[1], splitText[2]);
                     }
 
                 }
                 else if (splitText[0].equalsIgnoreCase("organizer")){
                     if(!attendeeManager.getUsernameToAttendee().containsKey(splitText[1]) &&
-                            !speakerManager.getUsernameToSpeaker().containsKey(splitText[1])){
+                            !speakerManager.getUsernameToSpeaker().containsKey(splitText[1])&&
+                            !vp.getUsernameToVip().containsKey(splitText[1])){
                         organizerManager.createOrganizer(splitText[1], splitText[2]);
+                    }
+                }
+                else if (splitText[0].equalsIgnoreCase("vip")){
+                    if(!attendeeManager.getUsernameToAttendee().containsKey(splitText[1]) &&
+                            !speakerManager.getUsernameToSpeaker().containsKey(splitText[1])&&
+                            !organizerManager.getUsernameToOrganizer().containsKey(splitText[1])){
+                        vp.createVip(splitText[1], splitText[2]);
                     }
                 }
 

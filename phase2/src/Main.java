@@ -8,6 +8,7 @@ public class Main {
         AttendeeManager attendeeManager = new AttendeeManager();
         OrganizerManager organizerManager = new OrganizerManager();
         EventScheduler scheduler = new EventScheduler();
+        VipManager vp = new VipManager();
 
         /*
         * In case allObjects.txt becomes corrupted you can re-download the file OR
@@ -18,12 +19,12 @@ public class Main {
         * Once this is done comment out las.loadall... again and uncomment laso.loadall...
         * The program should work fine now.
         * */
-        //las.loadAll(scheduler, speakerManager, attendeeManager, organizerManager);
-        laso.loadAll(scheduler, speakerManager, attendeeManager, organizerManager);
+        //las.loadAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);
+        laso.loadAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);
 
         LoginScreen loginScreen = new LoginScreen();
-        loginScreen.run(attendeeManager, organizerManager, speakerManager, scheduler);
+        loginScreen.run(attendeeManager, organizerManager, speakerManager, scheduler, vp);
 
-        laso.saveAll(scheduler, speakerManager, attendeeManager, organizerManager);
+        laso.saveAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);
     }
 }

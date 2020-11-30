@@ -1,7 +1,7 @@
 Events
-1,event 1,9,speaker3,pass
-1,event 2,10,speaker2,pass
-2,event 3,11,speaker2,pass
+1,event 1,9,speaker3,pass,true
+1,event 2,10,speaker2,pass,false
+2,event 3,11,speaker2,pass,false
 
 Logins
 speaker,speaker,password
@@ -10,4 +10,5 @@ attendee,attendee,password
 attendee,attendee2,pass
 organizer,organizer,pass
 organizer,organizer2,password
+vip,vip,pass
 
