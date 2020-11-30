@@ -63,6 +63,26 @@ public class OrganizerSystem {
     }
 
     /**
+     * Create a Attendee object.
+     * @param attendeeUsername String representing the Attendee's username
+     * @param password String representing the Attendee's password
+     * @return boolean; true if the Attendee was created, false if it was not created.
+     */
+    public boolean createAttendee(String attendeeUsername, String password){
+        return am.createAttendee(attendeeUsername, password);
+    }
+
+    /**
+     * Create a VIP object.
+     * @param vipUsername String representing the VIP's username
+     * @param password String representing the VIP's password
+     * @return boolean; true if the VIP was created, false if it was not created.
+     */
+    public boolean createVip(String vipUsername, String password){
+        return vm.createVip(vipUsername, password);
+    }
+
+    /**
      * Create an Organizer object.
      * @param organizerUsername String representing Organizer's username
      * @param password String representing Organizer's password
