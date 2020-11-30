@@ -8,6 +8,7 @@ public class SpeakerMainScreen {
     SpeakerMessageScreen sms;
     AttendeeManager am;
     OrganizerManager om;
+    VipManager vm;
 
     /**
      * Create a SpeakerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
@@ -18,15 +19,17 @@ public class SpeakerMainScreen {
      * @param es EventScheduler object
      * @param om OrganizerManager object
      * @param sm SpeakerManager object
+     * @param vm VipManager object
      */
     public SpeakerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
-                             SpeakerManager sm) {
+                             SpeakerManager sm, VipManager vm) {
         this.ss = new SpeakerSystem(sm);
         this.username = username;
         this.sm = sm;
         this.es = es;
         this.am = am;
         this.om = om;
+        this.vm = vm;
     }
     /**
      * Prints the available actions to the screen, and takes in inputs accordingly.

@@ -66,12 +66,12 @@ public class LoginType {
         }
         else if (sm.checkLogin(username, password)) {
             //show speaker presenter
-            SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm); // assuming its implemented like other presenters
+            SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm, vm); // assuming its implemented like other presenters
             sms.run();
         }
         else if (om.checkLogin(username, password)) {
             //show organizer presenter
-            OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm);
+            OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm, vm);
             oms.run();
         }
         else if(vm.checkLogin(username, password)){

@@ -4,6 +4,7 @@ public class OrganizerMainScreen {
     OrganizerManager om;
     OrganizerSystem os;
     SpeakerManager sm;
+    VipManager vm;
     String username;
 
     /**
@@ -14,15 +15,16 @@ public class OrganizerMainScreen {
      * @param es EventScheduler object
      * @param om OrganizerManager object
      * @param sm SpeakerManager object
+     * @param vm VipManager object
      */
     public OrganizerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
-                               SpeakerManager sm){
+                               SpeakerManager sm, VipManager vm){
         this.username = username;
         this.am = am;
         this.es = es;
         this.om = om;
         this.sm = sm;
-        this.os = new OrganizerSystem(am, es, om, sm);
+        this.os = new OrganizerSystem(am, es, om, sm, vm);
     }
 
     /**

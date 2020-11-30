@@ -8,6 +8,7 @@ public class OrganizerSystem {
     EventScheduler es;
     OrganizerManager om;
     SpeakerManager sm;
+    VipManager vm;
 
     /**
      * Creates an OrganizerSystem object and sets its variables am, es, om, and sm to the ones passed in the
@@ -17,11 +18,12 @@ public class OrganizerSystem {
      * @param om OrganizerManager object
      * @param sm SpeakerManager object
      */
-    public OrganizerSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm){
+    public OrganizerSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm, VipManager vm){
         this.am = am;
         this.es = es;
         this.om = om;
         this.sm = sm;
+        this.vm = vm;
     }
 
     /**
