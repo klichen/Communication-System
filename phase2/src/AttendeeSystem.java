@@ -112,8 +112,8 @@ public class AttendeeSystem {
         List<String> ScheduleString = new ArrayList<>();
 
         for (Event i: fullSchedule){
-            ScheduleString.add("Event: " + i.getID() + ", Room Number: " + i.getRoomNum() + ", Time: " + i.getTime()
-                    + ", Speaker: " + i.getSpeaker());
+            ScheduleString.add("[Event: " + i.getID() + ", Room Number: " + i.getRoomNum() + ", Time: " + i.getTime()
+                    + ", Speaker: " + i.getSpeaker() + "]");
         }
         return ScheduleString;
     }
@@ -146,11 +146,8 @@ public class AttendeeSystem {
         else{
             return false;
         }
-        if (vipOnly){
-            return false;
-        }
         for (Event i: fullSchedule){
-            if(i.getTime() != eventTime && !idSchedule.contains(eventID)){
+            if(i.getTime() != eventTime && !idSchedule.contains(eventID) && !vipOnly){
                 canAdd = true;
             }
             else{
