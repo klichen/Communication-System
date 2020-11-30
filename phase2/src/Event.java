@@ -9,6 +9,7 @@ public class Event implements Serializable{
     //private String speakerPassword;
     private String roomNum;
     private List<String> inEvent;
+    private boolean isVip;
 
     /**
      * Creates an Event object that stores the room number, the name, the time, and the
@@ -18,14 +19,16 @@ public class Event implements Serializable{
      * @param id the name of the event
      * @param time the time the event starts
      * @param speakerUsername the username of the speaker
+     * @param isVip true if the event is for VIP's only, false otherwise
      */
-    public Event(String roomNum, String id, int time, String speakerUsername){//}, String speakerPassword){
+    public Event(String roomNum, String id, int time, String speakerUsername, boolean isVip){//}, String speakerPassword){
         this.id = id;
         this.roomNum = roomNum;
         this.time = time;
         this.speakerUsername = speakerUsername;
         //this.speakerPassword = speakerPassword;
         this.inEvent = new ArrayList<>();
+        this.isVip = isVip;
     }
 
     // Returns the Event's id (Unique to each event)
@@ -109,4 +112,6 @@ public class Event implements Serializable{
     public List<String> getInEvent(){
         return inEvent;
     }
+
+    public boolean getIsVip(){return isVip;}
 }

@@ -30,9 +30,9 @@ public class EventScheduler {
      * @param speakerUsername The username of the speaker
      * @return true if Event was updated into main list/map
      */
-    public boolean updateEvents(String roomNum, String id, int time, String speakerUsername){//}, String speakerPassword){
+    public boolean updateEvents(String roomNum, String id, int time, String speakerUsername, boolean isVip){//}, String speakerPassword){
         if(validEvent(roomNum, id, time, speakerUsername)){
-            Event s = new Event(roomNum, id, time, speakerUsername);//, speakerPassword);
+            Event s = new Event(roomNum, id, time, speakerUsername, isVip);//, speakerPassword);
             ListOfEvents.add(id);
             idToEvent.put(id, s);
             System.out.println(idToEvent);
