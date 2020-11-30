@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,9 +30,10 @@ public class OrganizerSystem {
      * @param eventId String representing the id of the event
      * @param time int representing the time the event starts
      * @param speakerUsername String representing the username of the speaker
+     * @param isVip boolean; true if the Event is VIP only, false otherwise
      * @return boolean; true if the Event was created, false if it was not created.
      */
-    public boolean createEvent(String roomNum, String eventId, int time, String speakerUsername){
+    public boolean createEvent(String roomNum, String eventId, int time, String speakerUsername, boolean isVip){
         boolean eventCreated;
         // Check if Speaker exists
         if (!sm.getUsernameToSpeaker().containsKey(speakerUsername)) {
@@ -39,7 +41,7 @@ public class OrganizerSystem {
         } else {
             // The speaker exists
             // Create the event
-            eventCreated = es.updateEvents(roomNum, eventId, time, speakerUsername);
+            eventCreated = es.updateEvents(roomNum, eventId, time, speakerUsername, isVip);
             if (eventCreated){
                 // Add event to speaker's schedule
                 sm.updateSchedule(speakerUsername, eventId);
@@ -113,6 +115,12 @@ public class OrganizerSystem {
         String strInput = scan.nextLine();
 
         return Integer.parseInt(strInput);
+    }
+
+    public boolean readBoolean() {
+        Scanner scan = new Scanner(System.in);
+
+        return scan.nextBoolean();
     }
 }
 

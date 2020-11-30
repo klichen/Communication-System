@@ -52,11 +52,13 @@ public class OrganizerMainScreen {
                     String eventId = os.readString();
                     System.out.println("Please enter the hour (military time) your event starts at: ");
                     int time = os.readInt();
-
                     System.out.println("Please enter the username of the Speaker of this event: ");
                     String eventSpeaker = os.readString();
+                    System.out.println("Please enter whether the event is VIP only or not ('true'/'false' input " +
+                            "needed)");
+                    boolean isVip = os.readBoolean();
 
-                    boolean eventCreated = os.createEvent(roomNum, eventId, time, eventSpeaker);
+                    boolean eventCreated = os.createEvent(roomNum, eventId, time, eventSpeaker, isVip);
                     if (eventCreated) {
                         System.out.println("Your Event was created successfully.");
                     } else {
