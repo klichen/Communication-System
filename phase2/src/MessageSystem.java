@@ -169,13 +169,19 @@ public class MessageSystem {
             AttendeeText text = new AttendeeText();
             text.addPeopleToList(attendees);
             text.addPeopleToList(speakers);
+            text.addPeopleToList(vips);
             text.sendMessage(message, currPerson, receiver);
         } else if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
             SpeakerText text = new SpeakerText();
             text.addPeopleToList(attendees);
+            text.addPeopleToList(vips);
             text.respondAttendee(message, receiver, currPerson);
         } else if (vm.getUsernameToVip().containsKey(currPerson)) {
-            // Not sure how to implement this for VIP
+            AttendeeText text = new AttendeeText();
+            text.addPeopleToList(attendees);
+            text.addPeopleToList(speakers);
+            text.addPeopleToList(vips);
+            text.sendMessage(message, currPerson, receiver);
         }
     }
 
