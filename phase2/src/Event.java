@@ -5,30 +5,35 @@ import java.util.List;
 public class Event implements Serializable{
     private String id;
     private int time;
-    private String speakerUsername;
+    private List<String> listSpeakerUsername;
     //private String speakerPassword;
     private String roomNum;
     private List<String> inEvent;
     private boolean isVip;
+    private int duration;
+    private int capacity;
 
     /**
-     * Creates an Event object that stores the room number, the name, the time, and the
-     * speaker's username.
+     * Creates an Event object that stores the room number, the name, the time, the Vip quality, the duration, the
+     * capacity and the list of speakers' usernames
      *
      * @param roomNum the room number of where the event is
      * @param id the name of the event
      * @param time the time the event starts
-     * @param speakerUsername the username of the speaker
      * @param isVip true if the event is for VIP's only, false otherwise
+     * @param duration number of hours this event lasts
+     * @param max maximum number of people in the event
      */
-    public Event(String roomNum, String id, int time, String speakerUsername, boolean isVip){//}, String speakerPassword){
+    public Event(String roomNum, String id, int time, List<String> lst, boolean isVip, int duration, int max){//}, String speakerPassword){
         this.id = id;
         this.roomNum = roomNum;
         this.time = time;
-        this.speakerUsername = speakerUsername;
+        this.listSpeakerUsername = lst;
         //this.speakerPassword = speakerPassword;
         this.inEvent = new ArrayList<>();
         this.isVip = isVip;
+        this.duration = duration;
+        this.capacity = max;
     }
 
     // Returns the Event's id (Unique to each event)
@@ -51,6 +56,15 @@ public class Event implements Serializable{
         return time;
     }
 
+    /**
+     * Returns the list of speakers' usernames
+     *
+     * @return the list of speakers' usernames
+     */
+    public List<String> getSpeaker(){
+        return listSpeakerUsername;
+    }
+
     //Returns the room number
     /**
      * Returns the room number of this event
@@ -58,16 +72,6 @@ public class Event implements Serializable{
      * @return the room number of the event
      */
     public String getRoomNum(){ return roomNum; }
-
-    // Returns the username of the speaker of the event
-    /**
-     * Returns the speaker's username of this event
-     *
-     * @return the speaker's username
-     */
-    public String getSpeaker(){
-        return speakerUsername;
-    }
 
     // Returns the password of the speaker of the event
     /*public String getSpeakerPassword(){
@@ -91,7 +95,7 @@ public class Event implements Serializable{
      * @param person the person who is signing up for the event but hasn't joined yet
      */
     public void updateInEvent(String person){
-        if(getCountInEvent() != 2){
+        if(getCountInEvent() != 2 && getCountInEvent() <= getCapacity()){
             inEvent.add(person);
         }
     }
@@ -114,4 +118,8 @@ public class Event implements Serializable{
     }
 
     public boolean getIsVip(){return isVip;}
+
+    public int getDuration(){return duration;}
+
+    public int getCapacity(){return capacity;}
 }

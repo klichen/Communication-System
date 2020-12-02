@@ -29,11 +29,13 @@ public class EventScheduler {
      * @param time The time the event starts
      * @param speakerUsername The username of the speaker
      * @param isVip true if the event is for VIP's only, false otherwise
+     * @param duration number of hours this event lasts
      * @return true if Event was updated into main list/map
      */
-    public boolean updateEvents(String roomNum, String id, int time, String speakerUsername, boolean isVip){//}, String speakerPassword){
-        if(validEvent(roomNum, id, time, speakerUsername)){
-            Event s = new Event(roomNum, id, time, speakerUsername, isVip);//, speakerPassword);
+    public boolean updateEvents(String roomNum, String id, int time, List<String> speakerUsername, boolean isVip,
+                                int duration, int max){
+        if(validEvent(roomNum, id, time, speakerUsername, duration)){
+            Event s = new Event(roomNum, id, time, speakerUsername, isVip, duration, max);//, speakerPassword);
             ListOfEvents.add(id);
             idToEvent.put(id, s);
             System.out.println(idToEvent);
@@ -86,23 +88,30 @@ public class EventScheduler {
      * @param id The name of the Event.
      * @param time The time the Event starts.
      * @param speakerUsername The username of the Speaker.
+     * @param duration number of hours this event lasts.
      */
-    public boolean validEvent(String roomNum, String id, int time, String speakerUsername){
+    public boolean validEvent(String roomNum, String id, int time, List<String> speakerUsername, int duration){
         if(time < 9 || time > 16){
             return false;
         }
         for(String i : ListOfEvents){
             // Check for double booking room
-            if(time == idToEvent.get(i).getTime() && roomNum.equals(idToEvent.get(i).getRoomNum())){
+            Event e = idToEvent.get(i);
+            if(time >= e.getTime() && time < e.getTime() + e.getDuration() &&
+                    roomNum.equals(idToEvent.get(i).getRoomNum())){
+                return false;
+            }
+            if (time + duration > e.getTime() && time + duration <= e.getTime() + e.getDuration() &&
+                    roomNum.equals(idToEvent.get(i).getRoomNum())){
                 return false;
             }
             // ID for each event must be unique
-            if(id.equals(idToEvent.get(i).getID())){
+            if(id.equals(e.getID())){
                 return false;
             }
             // Check for speaker at two places at same time
-            if(time == idToEvent.get(i).getTime() &&
-                    speakerUsername.equals(idToEvent.get(i).getSpeaker())){
+            if(time == e.getTime() &&
+                    speakerUsername.equals(e.getSpeaker())){
                 return false;
             }
         }
