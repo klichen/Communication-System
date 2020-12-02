@@ -2,13 +2,13 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        loadAndSave las = new loadAndSave();
-        LoadAndSaveObjects laso = new LoadAndSaveObjects();
-        SpeakerManager speakerManager = new SpeakerManager();
-        AttendeeManager attendeeManager = new AttendeeManager();
-        OrganizerManager organizerManager = new OrganizerManager();
-        EventScheduler scheduler = new EventScheduler();
-        VipManager vp = new VipManager();
+//        loadAndSave las = new loadAndSave();
+//        LoadAndSaveObjects laso = new LoadAndSaveObjects();
+//        SpeakerManager speakerManager = new SpeakerManager();
+//        AttendeeManager attendeeManager = new AttendeeManager();
+//        OrganizerManager organizerManager = new OrganizerManager();
+//        EventScheduler scheduler = new EventScheduler();
+//        VipManager vp = new VipManager();
 
         /*
         * In case allObjects.txt becomes corrupted you can re-download the file OR
@@ -20,11 +20,14 @@ public class Main {
         * The program should work fine now.
         * */
         //las.loadAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);
-        laso.loadAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);
+//        laso.loadAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);
 
-        LoginScreen loginScreen = new LoginScreen();
-        loginScreen.run(attendeeManager, organizerManager, speakerManager, scheduler, vp);
+        LoginType loginType = new LoginType();
+        loginType.run();
 
-        laso.saveAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);
+//        LoginScreen loginScreen = new LoginScreen();
+//        loginScreen.run(attendeeManager, organizerManager, speakerManager, scheduler, vp);
+
+//        laso.saveAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);
     }
 }

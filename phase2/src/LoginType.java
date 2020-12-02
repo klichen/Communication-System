@@ -1,17 +1,43 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class LoginType {
     private String username;
     private String password;
+    private loadAndSave las;
+    private LoadAndSaveObjects laso;
+    private SpeakerManager sm;
+    private AttendeeManager am;
+    private OrganizerManager om;
+    private EventScheduler es;
+    private VipManager vm;
 
     /**
      * Constructor, saves login information of current user
      *
      */
-    public LoginType() {
+    public LoginType() throws IOException {
         username = "";
         password = "";
+        las = new loadAndSave();
+        laso = new LoadAndSaveObjects();
+        sm = new SpeakerManager();
+        am = new AttendeeManager();
+        om = new OrganizerManager();
+        es = new EventScheduler();
+        vm = new VipManager();
+        laso.loadAll(es, sm, am, om, vm);
 
+    }
+
+    public void run() throws IOException {
+        LoginScreen loginScreen = new LoginScreen();
+        loginScreen.enterUsername();
+        this.readUsername();
+        loginScreen.enterPw();
+        this.readPassword();
+        this.checkLogin();
+        laso.saveAll(es, sm, am, om, vm);
     }
 
     /**
@@ -51,13 +77,13 @@ public class LoginType {
      * Matches username and password to an Attendee, Organizer or Speaker.
      * Shows the respective presenter.
      *
-     * @param am AttendeeManager instance passed from Main method
-     * @param om OrganizerManager instance passed from Main method
-     * @param sm SpeakerManager instance passed from Main method
-     * @param es EventScheduler instance passed from Main method
-     * @param vm VipManager instance passed from Main method
+//     * @param am AttendeeManager instance passed from Main method
+//     * @param om OrganizerManager instance passed from Main method
+//     * @param sm SpeakerManager instance passed from Main method
+//     * @param es EventScheduler instance passed from Main method
+//     * @param vm VipManager instance passed from Main method
      */
-    public void checkLogin(AttendeeManager am, OrganizerManager om, SpeakerManager sm, EventScheduler es, VipManager vm) {
+    public void checkLogin() {
 
         if (am.checkLogin(username, password)) {
             //show attendee presenter
