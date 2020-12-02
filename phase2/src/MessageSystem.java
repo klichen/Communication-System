@@ -113,20 +113,20 @@ public class MessageSystem {
         List<Speaker> speakers = sm.getAllSpeakers();
         List<Vip> vips = vm.getAllVips();
 
-        ReadMessageManager readMessageManager = new ReadMessageManager(currPerson);
+        UserText uText = new UserText();
 
         if (am.getUsernameToAttendee().containsKey(currPerson)) {
-            readMessageManager.addUsers(attendees);
-            return readMessageManager.readMessage();
+            uText.addPeopleToList(attendees);
+            return uText.readMessage(currPerson);
         } else if (om.getUsernameToOrganizer().containsKey(currPerson)) {
-            readMessageManager.addUsers(organizers);
-            return readMessageManager.readMessage();
+            uText.addPeopleToList(organizers);
+            return uText.readMessage(currPerson);
         } else if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
-            readMessageManager.addUsers(speakers);
-            return readMessageManager.readMessage();
+            uText.addPeopleToList(speakers);
+            return uText.readMessage(currPerson);
         } else if (vm.getUsernameToVip().containsKey(currPerson)) {
-            readMessageManager.addUsers(vips);
-            return readMessageManager.readMessage();
+            uText.addPeopleToList(vips);
+            return uText.readMessage(currPerson);
         } else {
             throw new NullPointerException();
         }
@@ -145,7 +145,7 @@ public class MessageSystem {
         List<Speaker> speakers = sm.getAllSpeakers();
         List<Vip> vips = vm.getAllVips();
         if (om.getUsernameToOrganizer().containsKey(currPerson)) {
-            OrganizerText text = new OrganizerText();
+            UserText text = new UserText();
             ;
             if (receiver.equals("All Speakers")) {
                 text.addPeopleToList(speakers);
@@ -160,37 +160,44 @@ public class MessageSystem {
                 if (am.getUsernameToAttendee().containsKey(receiver) ||
                         sm.getUsernameToSpeaker().containsKey(receiver) ||
                         vm.getUsernameToVip().containsKey(receiver)){
-                    text.messageSingleRecipient(message, currPerson, receiver);
+                    text.sendSingleMessage(message, currPerson, receiver);
                 } else {
                     throw new NullPointerException();
                 }
             }
         } else if (am.getUsernameToAttendee().containsKey(currPerson)) {
-            AttendeeText text = new AttendeeText();
+            UserText text = new UserText();
             text.addPeopleToList(attendees);
             text.addPeopleToList(speakers);
             text.addPeopleToList(vips);
-            text.sendMessage(message, currPerson, receiver);
+            text.sendSingleMessage(message, currPerson, receiver);
         } else if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
-            SpeakerText text = new SpeakerText();
+            UserText text = new UserText();
             text.addPeopleToList(attendees);
             text.addPeopleToList(vips);
-            text.respondAttendee(message, receiver, currPerson);
+            text.sendSingleMessage(message, receiver, currPerson);
         } else if (vm.getUsernameToVip().containsKey(currPerson)) {
-            AttendeeText text = new AttendeeText();
+            UserText text = new UserText();
             text.addPeopleToList(attendees);
             text.addPeopleToList(speakers);
             text.addPeopleToList(vips);
-            text.sendMessage(message, currPerson, receiver);
+            text.sendSingleMessage(message, currPerson, receiver);
         }
     }
 
+    /**
+     * Overloaded method for speaker messaging
+     *
+     * @param message    The message to be sent.
+     * @param talks   The talk(s) the speaker is giving
+     * @param currPerson The sender of the message.
+     */
     private void sendMessage(String message, List<String> talks, String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
         if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
-            SpeakerText st = new SpeakerText();
+            UserText st = new UserText();
             st.addPeopleToList(attendees);
-            st.messageAllAttendees(talks, message, currPerson);
+            st.messageAllAttendeesInEvents(talks, message, currPerson);
         }
     }
 }
