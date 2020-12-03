@@ -72,14 +72,22 @@ public class loadAndSave{
      */
     public void updateEvents(List<List<String>> arrEvents, EventScheduler scheduler,
                              SpeakerManager speakerManager){
+        List<String> tempPeople = new ArrayList<>();
         for(List<String> i : arrEvents){
             for (String l : i){
                 String[] splitText = l.split(",");
+                if(splitText.length > 7){ // Check for empty speakers
+                    for(int j = 0; j < Integer.valueOf(splitText[6]); j++){
+                        tempPeople.add(splitText[7+j]);
+                    }
+                }
+
                 boolean isVip = Boolean.parseBoolean(splitText[5]);
-                boolean update = scheduler.updateEvents(splitText[0], splitText[1], Integer.valueOf(splitText[2]),
-                        splitText[3], isVip);
+                boolean update = scheduler.updateEvents(splitText[0],
+                        splitText[1], Integer.valueOf(splitText[2]), tempPeople, isVip,
+                        Integer.valueOf(splitText[3]), Integer.valueOf(splitText[4]));
                 if(update){
-                    speakerManager.createSpeaker(splitText[3], splitText[4]);
+                    //speakerManager.createSpeaker(splitText[3], splitText[4]);
                     speakerManager.updateSchedule(splitText[3], splitText[1]);
                 }
             }
