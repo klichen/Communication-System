@@ -72,10 +72,11 @@ public class loadAndSave{
      */
     public void updateEvents(List<List<String>> arrEvents, EventScheduler scheduler,
                              SpeakerManager speakerManager){
-        List<String> tempPeople = new ArrayList<>();
         for(List<String> i : arrEvents){
             for (String l : i){
+                List<String> tempPeople = new ArrayList<>();
                 String[] splitText = l.split(",");
+                //System.out.println(splitText.length);
                 if(splitText.length > 7){ // Check for empty speakers
                     for(int j = 0; j < Integer.valueOf(splitText[6]); j++){
                         tempPeople.add(splitText[7+j]);
@@ -88,8 +89,12 @@ public class loadAndSave{
                         Integer.valueOf(splitText[3]), Integer.valueOf(splitText[4]));
                 if(update){
                     //speakerManager.createSpeaker(splitText[3], splitText[4]);
-                    speakerManager.updateSchedule(splitText[3], splitText[1]);
+                    for(String k : tempPeople){
+                        speakerManager.updateSchedule(k, splitText[1]);
+                    }
+
                 }
+
             }
         }
     }
@@ -140,6 +145,8 @@ public class loadAndSave{
                 }
 
             }
+
         }
+        System.out.println(speakerManager.getUsernameToSpeaker());
     }
 }
