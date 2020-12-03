@@ -95,7 +95,7 @@ public class Event implements Serializable{
      * @param person the person who is signing up for the event but hasn't joined yet
      */
     public void updateInEvent(String person){
-        if(getCountInEvent() != 2 && getCountInEvent() <= getCapacity()){
+        if(getCountInEvent() < getCapacity()){
             inEvent.add(person);
         }
     }
