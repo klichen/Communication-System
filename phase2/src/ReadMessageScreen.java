@@ -9,10 +9,11 @@ public class ReadMessageScreen {
 
     /**
      * The constructor for ReadMessageScreen. It takes 4 parameters.
-     * @param am The AttendeeManager object that contains information from the file.
-     * @param om The OrganizerManager object that contains information from the file.
-     * @param sm The SpeakerManager object that contains information from the file.
-     * @param vm The VipManager object that contains information from the file.
+     *
+     * @param am       The AttendeeManager object that contains information from the file.
+     * @param om       The OrganizerManager object that contains information from the file.
+     * @param sm       The SpeakerManager object that contains information from the file.
+     * @param vm       The VipManager object that contains information from the file.
      * @param username The username of the logged-in/current user.
      */
     public ReadMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, VipManager vm,
@@ -34,7 +35,7 @@ public class ReadMessageScreen {
 
         List messages = messageSystem.readMessage(username);
 
-        for (Object message: messages) {
+        for (Object message : messages) {
             System.out.println(message);
         }
 
@@ -78,7 +79,7 @@ public class ReadMessageScreen {
                 System.out.println("Here are the messages you've sent");
                 List sentMsgs = messageSystem.seeSentMessages(username);
 
-                for (Object msg: messages) {
+                for (Object msg : messages) {
                     System.out.println(msg);
                 }
                 break;

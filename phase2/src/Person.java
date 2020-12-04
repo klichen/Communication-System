@@ -17,6 +17,7 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Constructor for entity class that creates a Person object
+     *
      * @param username The Person's username as a String
      * @param password The Person's password as a String
      */
@@ -29,6 +30,7 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Returns whether the Person is a Speaker
+     *
      * @return a boolean that returns true if Person is a Speaker and false otherwise
      */
     boolean isSpeakerType() {
@@ -37,6 +39,7 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Returns whether the Person is an Attendee
+     *
      * @return a boolean that returns true if Person is an Attendee and false otherwise
      */
     boolean isAttendeeType() {
@@ -45,6 +48,7 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Returns whether the Person is an Organizer
+     *
      * @return a boolean that returns true if Person is an Organizer and false otherwise
      */
     boolean isOrganizerType() {
@@ -53,6 +57,7 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Returns whether the Person is a Vip
+     *
      * @return a boolean that returns true if Person is an Vip and false otherwise
      */
     boolean isVipType() {
@@ -62,6 +67,7 @@ public abstract class Person<Public> implements Serializable {
     /**
      * Returns whether a Person is a Person
      * always true
+     *
      * @return true as a Person is always a Person
      */
     boolean isPersonType() {
@@ -70,6 +76,7 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Returns the Person's username
+     *
      * @return The username of Person as a String
      */
     public String getUsername() {
@@ -78,6 +85,7 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Returns the Person's password
+     *
      * @return The password of Person as a String
      */
     public boolean checkPassword(String password) {
@@ -90,26 +98,38 @@ public abstract class Person<Public> implements Serializable {
 //        return String.join(delim, storedMessages);
 //    }
 
-    public Map<String, List<String>> getSenderToMessages(){
+    /**
+     * Returns variable senderToMessages
+     *
+     * @return A Map containing the senders as keys and the messages they sent as values
+     */
+    public Map<String, List<String>> getSenderToMessages() {
         return this.senderToMessages;
     }
 
     /**
      * Returns variable storedMessages
+     *
      * @return A List containing all the Messages Person has been sent as Strings
      */
     public List<String> getStoredMessagesList() {
         return this.storedMessages;
     }
 
-    public void setStoredMessagesList(List<String> messages){
+    /**
+     * Changes the variable senderToMessages
+     *
+     * @param messages The new List that replaces the current storedMessages
+     */
+    public void setStoredMessagesList(List<String> messages) {
         this.storedMessages = messages;
     }
 
     /**
      * Adds a message and it's sender to variable storedMessages and to senderToMessages
+     *
      * @param messageContent The message that was sent to Person as a String
-     * @param messageSender The username of the Person who sent the message to Person as a String
+     * @param messageSender  The username of the Person who sent the message to Person as a String
      */
     public void addToMessageStorage(String messageContent, String messageSender) {
         if (senderToMessages.containsKey(messageSender)) {
@@ -119,7 +139,7 @@ public abstract class Person<Public> implements Serializable {
             messages.add(messageContent);
             senderToMessages.put(messageSender, messages);
         }
-        storedMessages.add(storedMessages.size()+1 + ". " + messageSender + ": " + messageContent + "---Sent");
+        storedMessages.add(storedMessages.size() + 1 + ". " + messageSender + ": " + messageContent + "---Sent");
     }
 }
 

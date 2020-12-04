@@ -66,6 +66,13 @@ public class UserText {
         }
     }
 
+    /**
+     * Creates a message object and stores in the every Attendee's message list, and the sender's message list.
+     *
+     * @param events  The events the speakers want to message
+     * @param message The message being sent.
+     * @param sender  The sender of the message.
+     */
     public void messageAllAttendeesInEvents(List<String> events, String message, String sender) {
         for (Person user : people) {
             if (user.isAttendeeType() || user.isVipType()) {
@@ -148,6 +155,12 @@ public class UserText {
 
     }
 
+    /**
+     * Deletes the messages selected
+     *
+     * @param currPerson Current person logged in
+     * @param messages   The messages they want to mark as unread
+     */
     public void deleteMessages(String currPerson, List<String> messages) {
         for (Person person : people) {
             if (person.getUsername().equals(currPerson)) {

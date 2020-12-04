@@ -138,7 +138,7 @@ public class MessageSystem {
      *
      * @return Returns the string of messages sent by the current user.
      */
-    public List seeSentMessages(String currPerson){
+    public List seeSentMessages(String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();
@@ -156,9 +156,9 @@ public class MessageSystem {
      * Marks the messages selected as unread: ("Sent" in this design")
      *
      * @param currPerson Current person logged in
-     * @param messages The messages they want to mark as unread
+     * @param messages   The messages they want to mark as unread
      */
-    public void markUnread(String currPerson, List<String> messages){
+    public void markUnread(String currPerson, List<String> messages) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();
@@ -171,7 +171,13 @@ public class MessageSystem {
         uText.markUnread(currPerson, messages);
     }
 
-    public void deleteMessage(String currPerson, List<String> messages){
+    /**
+     * Deletes the messages selected
+     *
+     * @param currPerson Current person logged in
+     * @param messages   The messages they want to mark as unread
+     */
+    public void deleteMessage(String currPerson, List<String> messages) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();
@@ -210,7 +216,7 @@ public class MessageSystem {
                 text.addPeopleToList(vips);
                 if (am.getUsernameToAttendee().containsKey(receiver) ||
                         sm.getUsernameToSpeaker().containsKey(receiver) ||
-                        vm.getUsernameToVip().containsKey(receiver)){
+                        vm.getUsernameToVip().containsKey(receiver)) {
                     text.sendSingleMessage(message, currPerson, receiver);
                 } else {
                     throw new NullPointerException();
@@ -240,7 +246,7 @@ public class MessageSystem {
      * Overloaded method for speaker messaging
      *
      * @param message    The message to be sent.
-     * @param talks   The talk(s) the speaker is giving
+     * @param talks      The talk(s) the speaker is giving
      * @param currPerson The sender of the message.
      */
     private void sendMessage(String message, List<String> talks, String currPerson) {

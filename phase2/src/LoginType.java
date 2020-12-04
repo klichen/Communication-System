@@ -14,9 +14,8 @@ public class LoginType {
 
     /**
      * Constructor, saves login information of current user
-     *
      */
-    public LoginType() throws IOException {
+    public LoginType() {
         username = "";
         password = "";
         las = new loadAndSave();
@@ -26,11 +25,16 @@ public class LoginType {
         om = new OrganizerManager();
         es = new EventScheduler();
         vm = new VipManager();
-        laso.loadAll(es, sm, am, om, vm);
+        //las.loadAll(es, sm, am, om, vm);
+
 
     }
 
+    /**
+     * Outputs requests for user to enter username and password. Starts hierarchy of program.
+     */
     public void run() throws IOException {
+        laso.loadAll(es, sm, am, om, vm);
         LoginScreen loginScreen = new LoginScreen();
         loginScreen.enterUsername();
         this.readUsername();
@@ -42,7 +46,6 @@ public class LoginType {
 
     /**
      * Reads user input and stores it in variable "username"
-     *
      */
     public void readUsername() {
         Scanner scan = new Scanner(System.in);
@@ -51,7 +54,6 @@ public class LoginType {
 
     /**
      * Reads user input and stores it in variable "password"
-     *
      */
     public void readPassword() {
         Scanner scan = new Scanner(System.in);
@@ -76,12 +78,12 @@ public class LoginType {
     /**
      * Matches username and password to an Attendee, Organizer or Speaker.
      * Shows the respective presenter.
-     *
-//     * @param am AttendeeManager instance passed from Main method
-//     * @param om OrganizerManager instance passed from Main method
-//     * @param sm SpeakerManager instance passed from Main method
-//     * @param es EventScheduler instance passed from Main method
-//     * @param vm VipManager instance passed from Main method
+     * <p>
+     * //     * @param am AttendeeManager instance passed from Main method
+     * //     * @param om OrganizerManager instance passed from Main method
+     * //     * @param sm SpeakerManager instance passed from Main method
+     * //     * @param es EventScheduler instance passed from Main method
+     * //     * @param vm VipManager instance passed from Main method
      */
     public void checkLogin() {
 
@@ -89,23 +91,19 @@ public class LoginType {
             //show attendee presenter
             AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm);
             ams.run();
-        }
-        else if (sm.checkLogin(username, password)) {
+        } else if (sm.checkLogin(username, password)) {
             //show speaker presenter
             SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm, vm); // assuming its implemented like other presenters
             sms.run();
-        }
-        else if (om.checkLogin(username, password)) {
+        } else if (om.checkLogin(username, password)) {
             //show organizer presenter
-            OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm, vm);
+            OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om, sm, vm);
             oms.run();
-        }
-        else if(vm.checkLogin(username, password)){
+        } else if (vm.checkLogin(username, password)) {
             //show VIP presenter
             VipMainScreen vms = new VipMainScreen(username, am, es, om, sm, vm);
             vms.run();
-        }
-        else{
+        } else {
             System.out.println("Invalid username or password");
         }
 

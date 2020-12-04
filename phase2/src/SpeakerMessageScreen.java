@@ -21,7 +21,7 @@ public class SpeakerMessageScreen {
         this.am = am;
         this.om = om;
         this.sm = sm;
-        this.vm =vm;
+        this.vm = vm;
         this.username = username;
     }
 
