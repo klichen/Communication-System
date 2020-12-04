@@ -10,13 +10,13 @@ public class OrganizerMainScreen {
     String username;
 
     /**
-     * Create an OrganizerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
+     * Create an ControllerLayer.OrganizerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
      * the constructor.
-     * @param username String representing a Person's username.
-     * @param am AttendeeManager object
-     * @param es EventScheduler object
-     * @param om OrganizerManager object
-     * @param sm SpeakerManager object
+     * @param username String representing a Entities.Person's username.
+     * @param am UseCases.AttendeeManager object
+     * @param es UseCases.EventScheduler object
+     * @param om UseCases.OrganizerManager object
+     * @param sm UseCases.SpeakerManager object
      */
     public OrganizerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                                SpeakerManager sm){
@@ -56,28 +56,28 @@ public class OrganizerMainScreen {
                     System.out.println("Please enter the hour (military time) your event starts at: ");
                     int time = os.readInt();
 
-                    System.out.println("Please enter the username of the Speaker of this event: ");
+                    System.out.println("Please enter the username of the Entities.Speaker of this event: ");
                     String eventSpeaker = os.readString();
 
                     boolean eventCreated = os.createEvent(roomNum, eventId, time, eventSpeaker);
                     if (eventCreated) {
-                        System.out.println("Your Event was created successfully.");
+                        System.out.println("Your Entities.Event was created successfully.");
                     } else {
-                        System.out.println("This Event can not be created.");
+                        System.out.println("This Entities.Event can not be created.");
                     }
                     break;
                 case "2":
                     // Create speaker account
-                    System.out.println("Please username of the Speaker account: ");
+                    System.out.println("Please username of the Entities.Speaker account: ");
                     String speakerUsername = os.readString();
-                    System.out.println("Please enter the password of the Speaker account: ");
+                    System.out.println("Please enter the password of the Entities.Speaker account: ");
                     String speakerPass = os.readString();
 
                     boolean speakerCreated = os.createSpeaker(speakerUsername, speakerPass);
                     if (speakerCreated) {
-                        System.out.println("The Speaker account was created successfully.");
+                        System.out.println("The Entities.Speaker account was created successfully.");
                     } else {
-                        System.out.println("This Speaker account can not be created.");
+                        System.out.println("This Entities.Speaker account can not be created.");
                     }
                     break;
                 case "3":
@@ -87,9 +87,9 @@ public class OrganizerMainScreen {
 
                     boolean eventCancelled = os.cancelEvent(eventId2);
                     if (eventCancelled) {
-                        System.out.println("The Event was cancelled successfully.");
+                        System.out.println("The Entities.Event was cancelled successfully.");
                     } else {
-                        System.out.println("The Event could not be cancelled.");
+                        System.out.println("The Entities.Event could not be cancelled.");
                     }
                     break;
                 case "4":

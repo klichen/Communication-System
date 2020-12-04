@@ -8,10 +8,10 @@ public class LoadAndSaveObjects{
      * Saves all objects (Events, Attendees, Speakers, and Organizers) and their
      * stored data into a .txt file
      *
-     * @param scheduler Instance of EventScheduler to access the list of events
-     * @param speakerManager Instance of SpeakerManager to access the list of speakers
-     * @param attendeeManager Instance of AttendeeManager to access the list of attendees
-     * @param organizerManager Instance of OrganizerManager to access the list of organizers
+     * @param scheduler Instance of UseCases.EventScheduler to access the list of events
+     * @param speakerManager Instance of UseCases.SpeakerManager to access the list of speakers
+     * @param attendeeManager Instance of UseCases.AttendeeManager to access the list of attendees
+     * @param organizerManager Instance of UseCases.OrganizerManager to access the list of organizers
      * */
     public void saveAll(EventScheduler scheduler,  SpeakerManager speakerManager,
                         AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {
@@ -45,10 +45,10 @@ public class LoadAndSaveObjects{
      * Loads all objects (Events, Attendees, Speakers, and Organizers) and their
      * stored data from a .txt file
      *
-     * @param scheduler Instance of EventScheduler to save the list of events
-     * @param speakerManager Instance of SpeakerManager to save the list of speakers
-     * @param attendeeManager Instance of AttendeeManager to save the list of attendees
-     * @param organizerManager Instance of OrganizerManager to save the list of organizers
+     * @param scheduler Instance of UseCases.EventScheduler to save the list of events
+     * @param speakerManager Instance of UseCases.SpeakerManager to save the list of speakers
+     * @param attendeeManager Instance of UseCases.AttendeeManager to save the list of attendees
+     * @param organizerManager Instance of UseCases.OrganizerManager to save the list of organizers
      * */
     public void loadAll(EventScheduler scheduler,  SpeakerManager speakerManager,
                         AttendeeManager attendeeManager, OrganizerManager organizerManager) throws IOException {

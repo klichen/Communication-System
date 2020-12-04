@@ -10,14 +10,14 @@ public class SpeakerMainScreen {
     OrganizerManager om;
 
     /**
-     * Create a SpeakerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
+     * Create a ControllerLayer.SpeakerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
      * the constructor.
      *
-     * @param username String representing a Person's username.
-     * @param am AttendeeManager object
-     * @param es EventScheduler object
-     * @param om OrganizerManager object
-     * @param sm SpeakerManager object
+     * @param username String representing a Entities.Person's username.
+     * @param am UseCases.AttendeeManager object
+     * @param es UseCases.EventScheduler object
+     * @param om UseCases.OrganizerManager object
+     * @param sm UseCases.SpeakerManager object
      */
     public SpeakerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                              SpeakerManager sm) {

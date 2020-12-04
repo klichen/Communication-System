@@ -15,9 +15,9 @@ public abstract class Person<Public> implements Serializable {
     protected boolean isOrganizer;
 
     /**
-     * Constructor for entity class that creates a Person object
-     * @param username The Person's username as a String
-     * @param password The Person's password as a String
+     * Constructor for entity class that creates a Entities.Person object
+     * @param username The Entities.Person's username as a String
+     * @param password The Entities.Person's password as a String
      */
     public Person(String username, String password) {
         this.username = username;
@@ -27,55 +27,55 @@ public abstract class Person<Public> implements Serializable {
     }
 
     /**
-     * Returns whether the Person is a Speaker
-     * @return a boolean that returns true if Person is a Speaker and false otherwise
+     * Returns whether the Entities.Person is a Entities.Speaker
+     * @return a boolean that returns true if Entities.Person is a Entities.Speaker and false otherwise
      */
     boolean isSpeakerType() {
         return this.isSpeaker;
     }
 
     /**
-     * Returns whether the Person is an Attendee
-     * @return a boolean that returns true if Person is an Attendee and false otherwise
+     * Returns whether the Entities.Person is an Entities.Attendee
+     * @return a boolean that returns true if Entities.Person is an Entities.Attendee and false otherwise
      */
     boolean isAttendeeType() {
         return this.isAttendee;
     }
 
     /**
-     * Returns whether the Person is an Organizer
-     * @return a boolean that returns true if Person is an Organizer and false otherwise
+     * Returns whether the Entities.Person is an Entities.Organizer
+     * @return a boolean that returns true if Entities.Person is an Entities.Organizer and false otherwise
      */
     boolean isOrganizerType() {
         return this.isOrganizer;
     }
 
     /**
-     * Returns whether a Person is a Person
+     * Returns whether a Entities.Person is a Entities.Person
      * always true
-     * @return true as a Person is always a Person
+     * @return true as a Entities.Person is always a Entities.Person
      */
     boolean isPersonType() {
         return true;
     }
 
     /**
-     * Returns the Person's username
-     * @return The username of Person as a String
+     * Returns the Entities.Person's username
+     * @return The username of Entities.Person as a String
      */
     public String getUsername() {
         return this.username;
     }
 
     /**
-     * Returns the Person's password
-     * @return The password of Person as a String
+     * Returns the Entities.Person's password
+     * @return The password of Entities.Person as a String
      */
     public String getPassword() {
         return this.password;
     }
 
-    // returns messages that has been sent to Person
+    // returns messages that has been sent to Entities.Person
 //    public String getStoredMessages() {
 //        String delim = " ,";
 //        return String.join(delim, storedMessages);
@@ -83,7 +83,7 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Returns variable storedMessages
-     * @return A List containing all the Messages Person has been sent as Strings
+     * @return A List containing all the Messages Entities.Person has been sent as Strings
      */
     public List<String> getStoredMessagesList() {
         return this.storedMessages;
@@ -91,8 +91,8 @@ public abstract class Person<Public> implements Serializable {
 
     /**
      * Adds a message and it's sender to variable storedMessages and to senderToMessages
-     * @param messageContent The message that was sent to Person as a String
-     * @param messageSender The username of the Person who sent the message to Person as a String
+     * @param messageContent The message that was sent to Entities.Person as a String
+     * @param messageSender The username of the Entities.Person who sent the message to Entities.Person as a String
      */
     public void addToMessageStorage(String messageContent, String messageSender) {
         if (senderToMessages.containsKey(messageSender)) {

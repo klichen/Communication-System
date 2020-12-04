@@ -7,12 +7,12 @@ public class AttendeeMainScreen {
     SpeakerManager sm;
 
     /**
-     * Constructor for the presenter showing all of the Actions Attendee can do
-     * @param username The username of the Attendee as a String
-     * @param am Instance of AttendeeManager with loaded information
-     * @param es Instance of EventScheduler with loaded information
-     * @param om Instance of OrganizerManager with loaded information
-     * @param sm Instance of SpeakerManager with loaded information
+     * Constructor for the presenter showing all of the Actions Entities.Attendee can do
+     * @param username The username of the Entities.Attendee as a String
+     * @param am Instance of UseCases.AttendeeManager with loaded information
+     * @param es Instance of UseCases.EventScheduler with loaded information
+     * @param om Instance of UseCases.OrganizerManager with loaded information
+     * @param sm Instance of UseCases.SpeakerManager with loaded information
      */
     public AttendeeMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                               SpeakerManager sm){
@@ -25,7 +25,7 @@ public class AttendeeMainScreen {
     }
 
     /**
-     * Prints the texts for the Attendee to see, and takes in inputs accordingly.
+     * Prints the texts for the Entities.Attendee to see, and takes in inputs accordingly.
      */
     public void run(){
         boolean logOut = false;

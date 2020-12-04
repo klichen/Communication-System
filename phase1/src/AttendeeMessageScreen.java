@@ -8,11 +8,11 @@ public class AttendeeMessageScreen {
     private final String username;
 
     /**
-     * Creates instance of AttendeeMessageScreen, the presenter class for the messaging hub of an attendee user.
+     * Creates instance of ControllerLayer.AttendeeMessageScreen, the presenter class for the messaging hub of an attendee user.
      *
-     * @param am Instance of AttendeeManager with loaded information
-     * @param om Instance of OrganizerManager with loaded information
-     * @param sm Instance of SpeakerManager with loaded information
+     * @param am Instance of UseCases.AttendeeManager with loaded information
+     * @param om Instance of UseCases.OrganizerManager with loaded information
+     * @param sm Instance of UseCases.SpeakerManager with loaded information
      * @param username String of the username of current user logged in
      */
     public AttendeeMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username){

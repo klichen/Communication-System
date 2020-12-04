@@ -7,10 +7,10 @@ public class ReadMessageScreen {
     private String username;
 
     /**
-     * The constructor for ReadMessageScreen. It takes 4 paramaters.
-     * @param am The AttendeeManager object that contains information from the file.
-     * @param om The OrganizerManager object that contains information from the file.
-     * @param sm The SpeakerManager object that contains information from the file.
+     * The constructor for ControllerLayer.ReadMessageScreen. It takes 4 paramaters.
+     * @param am The UseCases.AttendeeManager object that contains information from the file.
+     * @param om The UseCases.OrganizerManager object that contains information from the file.
+     * @param sm The UseCases.SpeakerManager object that contains information from the file.
      * @param username The username of the logged-in/current user.
      */
     public ReadMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username) {

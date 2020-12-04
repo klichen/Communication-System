@@ -1,14 +1,16 @@
+import ControllerLayer.LoginType;
+
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-//        loadAndSave las = new loadAndSave();
-//        LoadAndSaveObjects laso = new LoadAndSaveObjects();
-//        SpeakerManager speakerManager = new SpeakerManager();
-//        AttendeeManager attendeeManager = new AttendeeManager();
-//        OrganizerManager organizerManager = new OrganizerManager();
-//        EventScheduler scheduler = new EventScheduler();
-//        VipManager vp = new VipManager();
+//        ControllerLayer.loadAndSave las = new ControllerLayer.loadAndSave();
+//        ControllerLayer.LoadAndSaveObjects laso = new ControllerLayer.LoadAndSaveObjects();
+//        UseCases.SpeakerManager speakerManager = new UseCases.SpeakerManager();
+//        UseCases.AttendeeManager attendeeManager = new UseCases.AttendeeManager();
+//        UseCases.OrganizerManager organizerManager = new UseCases.OrganizerManager();
+//        UseCases.EventScheduler scheduler = new UseCases.EventScheduler();
+//        UseCases.VipManager vp = new UseCases.VipManager();
 
         /*
         * In case allObjects.txt becomes corrupted you can re-download the file OR
@@ -25,7 +27,7 @@ public class Main {
         LoginType loginType = new LoginType();
         loginType.run();
 
-//        LoginScreen loginScreen = new LoginScreen();
+//        ControllerLayer.LoginScreen loginScreen = new ControllerLayer.LoginScreen();
 //        loginScreen.run(attendeeManager, organizerManager, speakerManager, scheduler, vp);
 
 //        laso.saveAll(scheduler, speakerManager, attendeeManager, organizerManager, vp);

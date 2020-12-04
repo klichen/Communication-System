@@ -6,9 +6,9 @@ public class Speaker extends Person {
     private List<String> schedule;
 
     /**
-     * Creates a Speaker object that inherits from Person
-     * @param username The Speaker's username as a String
-     * @param password The Speaker's password as a String
+     * Creates a Entities.Speaker object that inherits from Entities.Person
+     * @param username The Entities.Speaker's username as a String
+     * @param password The Entities.Speaker's password as a String
      */
     public Speaker(String username, String password) {
         super(username, password);
@@ -20,7 +20,7 @@ public class Speaker extends Person {
     }
 
     /**
-     * returns the usernames of all the people that the Speaker can message
+     * returns the usernames of all the people that the Entities.Speaker can message
      * @return A List containing each contacts username as a String
      */
     List<String> getContactList() {
@@ -28,7 +28,7 @@ public class Speaker extends Person {
     }
 
     /**
-     * returns the ids of all the events that the Speaker is speaking at
+     * returns the ids of all the events that the Entities.Speaker is speaking at
      * @return An Arraylist containing the event ids as a String
      */
     public List<String> getSchedule(){
@@ -36,8 +36,8 @@ public class Speaker extends Person {
     }
 
     /**
-     * Adds another persons username to Speaker's contactList
-     * @param contact The username of the person the Attendee wants to add to their contactList
+     * Adds another persons username to Entities.Speaker's contactList
+     * @param contact The username of the person the Entities.Attendee wants to add to their contactList
      */
     public void addToContact(String contact){
         this.contactList.add(contact);

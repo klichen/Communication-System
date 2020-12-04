@@ -7,9 +7,9 @@ public class loadAndSave{
      * Method to load all events and users login that are stored in the txt file to the program
      *
      * @param scheduler Instance of scheduler in order to add the loaded events
-     * @param speakerManager Instance of SpeakerManager in order to add the list of speakers
-     * @param attendeeManager Instance of AttendeeManager in order to add the list of attendees
-     * @param organizerManager Instance of OrganizerManager in order to add the list of organizers
+     * @param speakerManager Instance of UseCases.SpeakerManager in order to add the list of speakers
+     * @param attendeeManager Instance of UseCases.AttendeeManager in order to add the list of attendees
+     * @param organizerManager Instance of UseCases.OrganizerManager in order to add the list of organizers
      */
     public void loadAll(EventScheduler scheduler, SpeakerManager speakerManager,
                         AttendeeManager attendeeManager, OrganizerManager organizerManager) {
@@ -59,11 +59,11 @@ public class loadAndSave{
     }
 
     /**
-     * Helper method to add the generated events and its speaker from the txt file to EventScheduler
+     * Helper method to add the generated events and its speaker from the txt file to UseCases.EventScheduler
      *
      * @param arrEvents Current list of events loaded
-     * @param scheduler Instance of EventScheduler in order to access its methods
-     * @param speakerManager Instance of SpeakerManager in order to update the list of speakers
+     * @param scheduler Instance of UseCases.EventScheduler in order to access its methods
+     * @param speakerManager Instance of UseCases.SpeakerManager in order to update the list of speakers
      */
     public void updateEvents(List<List<String>> arrEvents, EventScheduler scheduler,
                              SpeakerManager speakerManager){
@@ -82,12 +82,12 @@ public class loadAndSave{
 
     /**
      * Helper method to add the generated logins from the txt file to its respective type
-     * (Attendee, Organizer or Speaker)
+     * (Entities.Attendee, Entities.Organizer or Entities.Speaker)
      *
      * @param arrLogins Current list of logins loaded
-     * @param attendeeManager Instance of AttendeeManager in order to update the list of attendees
-     * @param organizerManager Instance of OrganizerManager in order to update the list of organizers
-     * @param speakerManager Instance of SpeakerManager in order to update the list of speakers
+     * @param attendeeManager Instance of UseCases.AttendeeManager in order to update the list of attendees
+     * @param organizerManager Instance of UseCases.OrganizerManager in order to update the list of organizers
+     * @param speakerManager Instance of UseCases.SpeakerManager in order to update the list of speakers
      */
     public void updateLogins(List<List<String>> arrLogins, AttendeeManager attendeeManager,
                               OrganizerManager organizerManager, SpeakerManager speakerManager){
