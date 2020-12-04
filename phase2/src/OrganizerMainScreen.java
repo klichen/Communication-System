@@ -1,3 +1,9 @@
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.SQLOutput;
+
 public class OrganizerMainScreen {
     AttendeeManager am;
     EventScheduler es;
@@ -58,13 +64,26 @@ public class OrganizerMainScreen {
                     String eventId = os.readString();
                     System.out.println("Please enter the hour (military time) your event starts at: ");
                     int time = os.readInt();
-                    System.out.println("Please enter the username of the Speaker of this event: ");
-                    String eventSpeaker = os.readString();
+                    System.out.println("Please enter the number of Speakers that will be at this event: ");
+                    int numSpeaker = os.readInt();
+                    List<String> speakers = new ArrayList<>();
+                    if(numSpeaker != 0){
+                        while(numSpeaker > 0){
+                            System.out.println("Please enter the username of Speaker " + numSpeaker + " of this " +
+                                    "event:");
+                            String eventSpeaker = os.readString();
+                            speakers.add(eventSpeaker);
+                            numSpeaker -= 1;
+                        }
+                    }
                     System.out.println("Please enter whether the event is VIP only or not ('true'/'false' input " +
                             "needed)");
                     boolean isVip = os.readBoolean();
-
-                    boolean eventCreated = os.createEvent(roomNum, eventId, time, eventSpeaker, isVip);
+                    System.out.println("Please enter the duration of this event: ");
+                    int duration = os.readInt();
+                    System.out.println("Please enter the maximum number of people allowed in this event: ");
+                    int maxPeople = os.readInt();
+                    boolean eventCreated = os.createEvent(roomNum, eventId, time, speakers, isVip, duration, maxPeople);
                     if (eventCreated) {
                         System.out.println("Your Event was created successfully.");
                     } else {

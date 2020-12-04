@@ -157,13 +157,21 @@ public class VipSystem {
     public void addEvent(String username, String eventID){
         boolean canAdd = canAddEvent(username, eventID);
         Event event = getEventMap().get(eventID);
-        String speakerID = event.getSpeaker();
-        Speaker eventSpeaker = sm.getUsernameToSpeaker().get(speakerID);
+        List<String> speakersID = new ArrayList<>(event.getSpeaker());
+        List<Speaker> speakers = new ArrayList<>();
+        for(String id: speakersID){
+            Speaker eventSpeaker = sm.getUsernameToSpeaker().get(id);
+            speakers.add(eventSpeaker);
+        }
         if(canAdd){
             this.vm.eventSignUp(username,eventID);
-            this.addContact(username, speakerID);
+            for (String id: speakersID){
+                this.addContact(username, id);
+            }
             event.updateInEvent(username);
-            eventSpeaker.addToContact(username);
+            for(Speaker speaker: speakers){
+                speaker.addToContact(username);
+            }
         }
     }
 

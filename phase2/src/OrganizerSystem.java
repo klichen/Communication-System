@@ -31,26 +31,31 @@ public class OrganizerSystem {
      * @param roomNum String representing the room number of where the event is
      * @param eventId String representing the id of the event
      * @param time int representing the time the event starts
-     * @param speakerUsername String representing the username of the speaker
+     * @param speakers List of Strings representing the username of the speakers
      * @param isVip boolean; true if the Event is VIP only, false otherwise
      * @return boolean; true if the Event was created, false if it was not created.
      */
-    public boolean createEvent(String roomNum, String eventId, int time, String speakerUsername, boolean isVip){
+    public boolean createEvent(String roomNum, String eventId, int time, List<String> speakers, boolean isVip,
+                               int duration, int maxPeople){
         boolean eventCreated;
-        // Check if Speaker exists
-        if (!sm.getUsernameToSpeaker().containsKey(speakerUsername)) {
-            return false;
-        } else {
-            // The speaker exists
-            // Create the event
-            eventCreated = es.updateEvents(roomNum, eventId, time, speakerUsername, isVip);
-            if (eventCreated){
-                // Add event to speaker's schedule
-                sm.updateSchedule(speakerUsername, eventId);
+        // Check if Speakers exists
+        if(speakers.size() >=1){
+            for (String speakerID: speakers) {
+                if (!sm.getUsernameToSpeaker().containsKey(speakerID)) {
+                    return false;
+                }
             }
-            return eventCreated;
         }
-    }
+        //create event
+        eventCreated = es.updateEvents(roomNum, eventId, time, speakers, isVip, duration, maxPeople);
+        if (eventCreated){
+            // Add event to speaker's schedule
+            for(String speakerID: speakers){
+                sm.updateSchedule(speakerID, eventId);
+            }
+        }
+        return eventCreated;
+        }
 
     /**
      * Create a Speaker object.
@@ -100,12 +105,14 @@ public class OrganizerSystem {
     public boolean cancelEvent(String eventId){
         // Remove event from EventScheduler
         try {
-            String speakerUsername = es.getIdToEvent().get(eventId).getSpeaker();
+            List<String> speakerIDs = es.getIdToEvent().get(eventId).getSpeaker();
             List<String> attendeeList = es.getIdToEvent().get(eventId).getInEvent();
             boolean eventCancelled = es.removeEvent(eventId);
             if (eventCancelled) {
                 // Remove event from speaker's schedule
-                sm.removeFromSchedule(speakerUsername, eventId);
+                for(String speakerID: speakerIDs) {
+                    sm.removeFromSchedule(speakerID, eventId);
+                }
                 // Remove event from all attendees' schedule
                 for (String attendeeUsername : attendeeList) {
                     am.eventCancel(attendeeUsername, eventId);
@@ -152,5 +159,6 @@ public class OrganizerSystem {
         // if input isn't 'true', Boolean.parseBoolean will return false
         return Boolean.parseBoolean(strInput);
     }
+
 }
 
