@@ -11,9 +11,9 @@ public class MessageSystem {
     /**
      * Constructor for controller class, reads user input and decides if messaging can be done
      *
-     * @param am       Instance of AttendeeManager with loaded information
-     * @param om       Instance of OrganizerManager with loaded information
-     * @param sm       Instance of SpeakerManager with loaded information
+     * @param am       Instance of UseCases.AttendeeManager with loaded information
+     * @param om       Instance of UseCases.OrganizerManager with loaded information
+     * @param sm       Instance of UseCases.SpeakerManager with loaded information
      * @param username String of the username of current user logged in
      */
     public MessageSystem(AttendeeManager am, OrganizerManager om, SpeakerManager sm, String username) {

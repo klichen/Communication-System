@@ -8,8 +8,8 @@ public class AttendeeManager{
     private List<Attendee> allAttendees;
 
     /**
-     * Creates an AttendeeManager object that initializes an empty ArrayList that will store all Attendee objects and
-     * it initializes an empty Hashmap that will store Attendee usernames as the value and the corresponding Attendee
+     * Creates an UseCases.AttendeeManager object that initializes an empty ArrayList that will store all Entities.Attendee objects and
+     * it initializes an empty Hashmap that will store Entities.Attendee usernames as the value and the corresponding Entities.Attendee
      * object as the key.
      */
     public AttendeeManager(){
@@ -18,10 +18,10 @@ public class AttendeeManager{
     }
 
     /**
-     * Creates an Attendee account if the username does not already exist
-     * @param username The Attendee's username as a String
-     * @param password The Attendee's password as a String
-     * @return A boolean returning true if the Attendee account was created and false if it was not created
+     * Creates an Entities.Attendee account if the username does not already exist
+     * @param username The Entities.Attendee's username as a String
+     * @param password The Entities.Attendee's password as a String
+     * @return A boolean returning true if the Entities.Attendee account was created and false if it was not created
      */
     public boolean createAttendee(String username, String password){
         if (!usernameToAttendee.containsKey(username)) {
@@ -35,8 +35,8 @@ public class AttendeeManager{
     }
 
     /**
-     * Adds an Attendee to allAttendees and to usernameToAttendee
-     * @param a The Attendee object to be added to allAttendees and usernameToAttendee
+     * Adds an Entities.Attendee to allAttendees and to usernameToAttendee
+     * @param a The Entities.Attendee object to be added to allAttendees and usernameToAttendee
      */
     public void updateAttendeeObjects(Attendee a){
         allAttendees.add(a);
@@ -53,16 +53,16 @@ public class AttendeeManager{
 
     /**
      * Returns the variable usernameToAttendee
-     * @return a Map pointing all the usernames of the Attendees to its corresponding Attendee object
+     * @return a Map pointing all the usernames of the Attendees to its corresponding Entities.Attendee object
      */
     public Map<String, Attendee> getUsernameToAttendee() {
         return usernameToAttendee;
     }
 
     /**
-     * Checks the username and password of the Attendee who logs in to ensure that it is a real account
-     * @param username The Attendee's username as a String
-     * @param password The Attendee's password as a String
+     * Checks the username and password of the Entities.Attendee who logs in to ensure that it is a real account
+     * @param username The Entities.Attendee's username as a String
+     * @param password The Entities.Attendee's password as a String
      * @return a boolean returning true if the login information exists and false if it does not
      */
     public boolean checkLogin(String username, String password){
@@ -76,9 +76,9 @@ public class AttendeeManager{
     }
 
     /**
-     * returns the Attendee's list of contacts
-     * @param username The Attendee's username as a String
-     * @return A List containing Attendee's contacts usernames as Strings
+     * returns the Entities.Attendee's list of contacts
+     * @param username The Entities.Attendee's username as a String
+     * @return A List containing Entities.Attendee's contacts usernames as Strings
      */
     public List<String> getContactList(String username){
         Attendee attendee = usernameToAttendee.get(username);
@@ -86,11 +86,11 @@ public class AttendeeManager{
     }
 
     /**
-     * Checks whether a contact can be added to Attendee's contact list by checking if they exist and if they are not
-     * already on Attendee's contact list
-     * @param username The Attendee's username as a String
+     * Checks whether a contact can be added to Entities.Attendee's contact list by checking if they exist and if they are not
+     * already on Entities.Attendee's contact list
+     * @param username The Entities.Attendee's username as a String
      * @param contact The potential contact's username as a String
-     * @return a boolean that returns true if contact can be added to Attendee contact list and false if contact cannot
+     * @return a boolean that returns true if contact can be added to Entities.Attendee contact list and false if contact cannot
      * be added
      */
     public boolean canAddToContactList(String username, String contact){
@@ -99,8 +99,8 @@ public class AttendeeManager{
     }
 
     /**
-     * Adds a contact to Attendee's contact list if the contact satisfies the conditions to be added
-     * @param username The Attendee's username as a String
+     * Adds a contact to Entities.Attendee's contact list if the contact satisfies the conditions to be added
+     * @param username The Entities.Attendee's username as a String
      * @param contact The contact's username as a String
      */
     public void addToContactList(String username, String contact) {
@@ -111,9 +111,9 @@ public class AttendeeManager{
     }
 
     /**
-     * Adds an event to the Attendee's schedule
-     * @param username The Attendee's username as a String
-     * @param eventID The ID of the event the Attendee is signing up for
+     * Adds an event to the Entities.Attendee's schedule
+     * @param username The Entities.Attendee's username as a String
+     * @param eventID The ID of the event the Entities.Attendee is signing up for
      */
     public void eventSignUp(String username, String eventID){
         Attendee attendee = usernameToAttendee.get(username);
@@ -121,9 +121,9 @@ public class AttendeeManager{
     }
 
     /**
-     * Removes an event from the Attendee's schedule
-     * @param username The Attendee's username as a String
-     * @param eventID The Id of the event the Attendee is signing up for
+     * Removes an event from the Entities.Attendee's schedule
+     * @param username The Entities.Attendee's username as a String
+     * @param eventID The Id of the event the Entities.Attendee is signing up for
      */
     public void eventCancel(String username, String eventID){
         Attendee attendee = usernameToAttendee.get(username);
@@ -131,9 +131,9 @@ public class AttendeeManager{
     }
 
     /**
-     * Returns the schedule of the Attendee
-     * @param username The Attendee's username as a String
-     * @return A List containing the ids of all the Events Attendee has signed up for as a String
+     * Returns the schedule of the Entities.Attendee
+     * @param username The Entities.Attendee's username as a String
+     * @return A List containing the ids of all the Events Entities.Attendee has signed up for as a String
      */
     public List<String> getSchedule(String username){
         Attendee attendee = usernameToAttendee.get(username);

@@ -11,7 +11,7 @@ public class Event implements Serializable{
     private List<String> inEvent;
 
     /**
-     * Creates an Event object that stores the room number, the name, the time, and the
+     * Creates an Entities.Event object that stores the room number, the name, the time, and the
      * speaker's username.
      *
      * @param roomNum the room number of where the event is
@@ -28,7 +28,7 @@ public class Event implements Serializable{
         this.inEvent = new ArrayList<>();
     }
 
-    // Returns the Event's id (Unique to each event)
+    // Returns the Entities.Event's id (Unique to each event)
     /**
      * Returns the name of this event
      *
@@ -71,7 +71,7 @@ public class Event implements Serializable{
         return speakerPassword;
     }*/
 
-    // Return how many people in certain Event
+    // Return how many people in certain Entities.Event
     /**
      * Returns the number of people in this event
      *

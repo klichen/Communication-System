@@ -5,7 +5,7 @@ public class OrganizerManager{
     private Map<String, Organizer> usernameToOrganizer;
 
     /**
-     * Creates an OrganizerManager object and initializes allOrganizers as an empty ArrayList and
+     * Creates an UseCases.OrganizerManager object and initializes allOrganizers as an empty ArrayList and
      * usernameToOrganizer as an empty HashMap.
      */
     public OrganizerManager(){
@@ -14,10 +14,10 @@ public class OrganizerManager{
     }
 
     /**
-     * Creates an Organizer object, if the username does not already exist.
-     * @param username String representing Organizer's username
-     * @param password String representing Organizer's password
-     * @return boolean; true if Organizer object was created, false if it was not created
+     * Creates an Entities.Organizer object, if the username does not already exist.
+     * @param username String representing Entities.Organizer's username
+     * @param password String representing Entities.Organizer's password
+     * @return boolean; true if Entities.Organizer object was created, false if it was not created
      */
     public boolean createOrganizer(String username, String password){
         if (!usernameToOrganizer.containsKey(username)) {
@@ -31,8 +31,8 @@ public class OrganizerManager{
     }
 
     /**
-     * Adds Organizer object to List allOrganizers, and Map usernameToOrganizer.
-     * @param o Organizer object
+     * Adds Entities.Organizer object to List allOrganizers, and Map usernameToOrganizer.
+     * @param o Entities.Organizer object
      */
     public void updateOrganizerObjects(Organizer o){
         allOrganizers.add(o);
@@ -57,8 +57,8 @@ public class OrganizerManager{
 
     /**
      * Checks if the username exists and if it's password is correct.
-     * @param username String representing Organizer's username
-     * @param password String representing Organizer's password
+     * @param username String representing Entities.Organizer's username
+     * @param password String representing Entities.Organizer's password
      * @return boolean; true if username exists and it's password is correct, false if otherwise.
      */
     public boolean checkLogin(String username, String password){

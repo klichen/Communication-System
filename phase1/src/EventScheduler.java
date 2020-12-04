@@ -9,8 +9,8 @@ public class EventScheduler {
     private Map<String, Event> idToEvent;
 
     /**
-     * Creates an EventScheduler object that stores the list of all Events and stores the nap where the item is the
-     * name of the Event and the value is the event object corresponding to the name.
+     * Creates an UseCases.EventScheduler object that stores the list of all Events and stores the nap where the item is the
+     * name of the Entities.Event and the value is the event object corresponding to the name.
      */
     public EventScheduler(){
         ListOfEvents =  new ArrayList<String>();
@@ -19,16 +19,16 @@ public class EventScheduler {
     }
 
     /**
-     * Precondition: The Speaker with speakerUsername exists
+     * Precondition: The Entities.Speaker with speakerUsername exists
      *
-     * Updates the list of all Events by creating a new Event object that stores the room number, the name,
+     * Updates the list of all Events by creating a new Entities.Event object that stores the room number, the name,
      * the time and the speaker's username and then adding it to the list.
      *
      * @param roomNum The room number of where the event is
      * @param id The name of the event
      * @param time The time the event starts
      * @param speakerUsername The username of the speaker
-     * @return true if Event was updated into main list/map
+     * @return true if Entities.Event was updated into main list/map
      */
     public boolean updateEvents(String roomNum, String id, int time, String speakerUsername){//}, String speakerPassword){
         if(validEvent(roomNum, id, time, speakerUsername)){
@@ -81,10 +81,10 @@ public class EventScheduler {
      * times with any events in the list of all events, has name not identical with any other and whether the speaker's
      * username can join. Otherwise, returns false.
      *
-     * @param roomNum The room number of where the Event is.
-     * @param id The name of the Event.
-     * @param time The time the Event starts.
-     * @param speakerUsername The username of the Speaker.
+     * @param roomNum The room number of where the Entities.Event is.
+     * @param id The name of the Entities.Event.
+     * @param time The time the Entities.Event starts.
+     * @param speakerUsername The username of the Entities.Speaker.
      */
     public boolean validEvent(String roomNum, String id, int time, String speakerUsername){
         if(time < 9 || time > 16){

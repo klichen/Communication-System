@@ -48,13 +48,13 @@ public class LoginType {
     }
 
     /**
-     * Matches username and password to an Attendee, Organizer or Speaker.
+     * Matches username and password to an Entities.Attendee, Entities.Organizer or Entities.Speaker.
      * Shows the respective presenter.
      *
-     * @param am AttendeeManager instance passed from Main method
-     * @param om OrganizerManager instance passed from Main method
-     * @param sm SpeakerManager instance passed from Main method
-     * @param es EventScheduler instance passed from Main method
+     * @param am UseCases.AttendeeManager instance passed from Main method
+     * @param om UseCases.OrganizerManager instance passed from Main method
+     * @param sm UseCases.SpeakerManager instance passed from Main method
+     * @param es UseCases.EventScheduler instance passed from Main method
      */
     public void checkLogin(AttendeeManager am, OrganizerManager om, SpeakerManager sm, EventScheduler es) {
 

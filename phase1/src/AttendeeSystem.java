@@ -10,11 +10,11 @@ public class AttendeeSystem {
     SpeakerManager sm;
 
     /**
-     * Constructor for controller that creates AttendeeSystem object
-     * @param am Instance of AttendeeManager with loaded information
-     * @param es Instance of EventScheduler with loaded information
-     * @param om Instance of OrganizerManager with loaded information
-     * @param sm Instance of SpeakerManager with loaded information
+     * Constructor for controller that creates ControllerLayer.AttendeeSystem object
+     * @param am Instance of UseCases.AttendeeManager with loaded information
+     * @param es Instance of UseCases.EventScheduler with loaded information
+     * @param om Instance of UseCases.OrganizerManager with loaded information
+     * @param sm Instance of UseCases.SpeakerManager with loaded information
      */
     public AttendeeSystem(AttendeeManager am, EventScheduler es, OrganizerManager om, SpeakerManager sm){
         this.am = am;
@@ -36,9 +36,9 @@ public class AttendeeSystem {
     }
 
     /**
-     * Creates an Attendee Account
-     * @param username The Attendee's username as a String
-     * @param password The Attendee's password as a String
+     * Creates an Entities.Attendee Account
+     * @param username The Entities.Attendee's username as a String
+     * @param password The Entities.Attendee's password as a String
      */
     public void createAccount(String username, String password){
         am.createAttendee(username, password);
@@ -46,9 +46,9 @@ public class AttendeeSystem {
 
     /**
      * Checks whether contact can be added to Attendees contact list
-     * @param username The Attendee's username as a String
+     * @param username The Entities.Attendee's username as a String
      * @param contact The potential contact's username as a String
-     * @return a boolean that returns true if contact can be added to Attendee contact list and false if contact cannot
+     * @return a boolean that returns true if contact can be added to Entities.Attendee contact list and false if contact cannot
      * be added
      */
     public boolean canAddContact(String username, String contact){
@@ -64,8 +64,8 @@ public class AttendeeSystem {
     }
 
     /**
-     * Adds a contact to Attendee's contact list
-     * @param username The Attendee's username as a String
+     * Adds a contact to Entities.Attendee's contact list
+     * @param username The Entities.Attendee's username as a String
      * @param contact The contact's username as a String
      */
     public void addContact(String username, String contact){
@@ -73,17 +73,17 @@ public class AttendeeSystem {
     }
 
     /**
-     * Returns the variable IdToEvent in EventScheduler
-     * @return A Map pointing Event IDS to their corresponding Event objects
+     * Returns the variable IdToEvent in UseCases.EventScheduler
+     * @return A Map pointing Entities.Event IDS to their corresponding Entities.Event objects
      */
     private Map<String, Event> getEventMap(){
         return this.es.getIdToEvent();
     }
 
     /**
-     * Returns Attendee's schedule using the Event objects
-     * @param username The Attendee's username as a String
-     * @return A List of all the Events the Attendee has signed up for
+     * Returns Entities.Attendee's schedule using the Entities.Event objects
+     * @param username The Entities.Attendee's username as a String
+     * @return A List of all the Events the Entities.Attendee has signed up for
      */
     public List<Event> getSchedule(String username){
         List<String> idSchedule =  this.am.getSchedule(username);
@@ -99,24 +99,24 @@ public class AttendeeSystem {
     }
 
     /**
-     * returns Attendee's Schedule with all the information about each Event
-     * @param username The Attendee's username as a String
-     * @return A List of Event information as Strings
+     * returns Entities.Attendee's Schedule with all the information about each Entities.Event
+     * @param username The Entities.Attendee's username as a String
+     * @return A List of Entities.Event information as Strings
      */
     public List<String> getScheduleIds(String username){
         List<Event> fullSchedule =  getSchedule(username);
         List<String> ScheduleString = new ArrayList<>();
 
         for (Event i: fullSchedule){
-            ScheduleString.add("Event: " + i.getID() + ", Room Number: " + i.getRoomNum() + ", Time: " + i.getTime()
-                    + ", Speaker: " + i.getSpeaker());
+            ScheduleString.add("Entities.Event: " + i.getID() + ", Room Number: " + i.getRoomNum() + ", Time: " + i.getTime()
+                    + ", Entities.Speaker: " + i.getSpeaker());
         }
         return ScheduleString;
     }
 
     /**
      * Checks whether eventID exists
-     * @param eventID The ID of the Event as a String
+     * @param eventID The ID of the Entities.Event as a String
      * @return a boolean that returns true if the EventID exists and false otherwise
      */
     private boolean validEvent(String eventID) {
@@ -124,10 +124,10 @@ public class AttendeeSystem {
     }
 
     /**
-     * Checks whether an Event can be added to Attendee's schedule
-     * @param username The Attendee's username as a String
-     * @param eventID The ID of the Event as a String
-     * @return a boolean that returns true if Event can be added and false otherwise
+     * Checks whether an Entities.Event can be added to Entities.Attendee's schedule
+     * @param username The Entities.Attendee's username as a String
+     * @param eventID The ID of the Entities.Event as a String
+     * @return a boolean that returns true if Entities.Event can be added and false otherwise
      */
     public boolean canAddEvent(String username, String eventID){
         List<String> idSchedule =  this.am.getSchedule(username);
@@ -154,9 +154,9 @@ public class AttendeeSystem {
     }
 
     /**
-     * Adds an event to the Attendee's schedule
-     * @param username The Attendee's username as a String
-     * @param eventID The ID of the Event as a String
+     * Adds an event to the Entities.Attendee's schedule
+     * @param username The Entities.Attendee's username as a String
+     * @param eventID The ID of the Entities.Event as a String
      */
     public void addEvent(String username, String eventID){
         boolean canAdd = canAddEvent(username, eventID);
@@ -172,10 +172,10 @@ public class AttendeeSystem {
     }
 
     /**
-     * Checks whether an Event can be removed from the Attendee's Schedule
-     * @param username The Attendee's username as a String
-     * @param eventID The ID of the Event as a String
-     * @return a boolean that returns true if the event can be removed from Attendee's schedule and false otherwise
+     * Checks whether an Entities.Event can be removed from the Entities.Attendee's Schedule
+     * @param username The Entities.Attendee's username as a String
+     * @param eventID The ID of the Entities.Event as a String
+     * @return a boolean that returns true if the event can be removed from Entities.Attendee's schedule and false otherwise
      */
     public boolean canCancelEnrollment(String username, String eventID){
         List<String> idSchedule =  this.am.getSchedule(username);
@@ -184,9 +184,9 @@ public class AttendeeSystem {
     }
 
     /**
-     * Removes an Event from the Attendee's schedule
-     * @param username The Attendee's username as a String
-     * @param eventID The ID of the Event as a String
+     * Removes an Entities.Event from the Entities.Attendee's schedule
+     * @param username The Entities.Attendee's username as a String
+     * @param eventID The ID of the Entities.Event as a String
      */
     public void cancelEnrollment(String username, String eventID){
         boolean canCancel = canCancelEnrollment(username, eventID);

@@ -8,11 +8,11 @@ public class OrganizerText {
 
 
     /**
-     * Precondition: T is a subtype of Person
+     * Precondition: T is a subtype of Entities.Person
      *
-     * Extends a list of Person to people.
-     * @param list The list of Person to add into people.
-     * @param <T> The type of list. It is assumed to be a subtype of Person.
+     * Extends a list of Entities.Person to people.
+     * @param list The list of Entities.Person to add into people.
+     * @param <T> The type of list. It is assumed to be a subtype of Entities.Person.
      */
     public <T> void addPeopleToList(List<T> list){
         for(T person: list){
@@ -20,7 +20,7 @@ public class OrganizerText {
         }
     }
     /**
-     * Creates a message object and stores in the every Speaker's message list, and the sender's message list.
+     * Creates a message object and stores in the every Entities.Speaker's message list, and the sender's message list.
      *
      * @param message The String message to be sent.
      * @param currentPerson The sender of the message.
@@ -29,13 +29,13 @@ public class OrganizerText {
         for (Person user : people) {
             if (user.isSpeakerType()) {
                 user.addToMessageStorage(message, currentPerson);
-                // defined in Person Class
+                // defined in Entities.Person Class
             }
         }
     }
 
     /**
-     * Creates a message object and stores in the every Attendee's message list, and the sender's message list.
+     * Creates a message object and stores in the every Entities.Attendee's message list, and the sender's message list.
      *
      * @param message The String message to be sent.
      * @param currentPerson The sender of the message.

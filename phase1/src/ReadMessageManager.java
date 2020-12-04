@@ -15,11 +15,11 @@ public class ReadMessageManager<T> {
     }
 
     /**
-     * Precondition: T is a subtype of Person.
+     * Precondition: T is a subtype of Entities.Person.
      * <p>
-     * Extends this.people with Person objects in people
+     * Extends this.people with Entities.Person objects in people
      *
-     * @param people The list of Person objects to be added.
+     * @param people The list of Entities.Person objects to be added.
      */
     public void addUsers(List<T> people) {
         for (T person : people) {

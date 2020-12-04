@@ -6,11 +6,11 @@ public class SpeakerText {
 
 
     /**
-     * Precondition: T is a subtype of Person
+     * Precondition: T is a subtype of Entities.Person
      *
-     * Extends a list of Person to people.
-     * @param list The list of Person to add into people.
-     * @param <T> The type of list. It is assumed to be a subtype of Person.
+     * Extends a list of Entities.Person to people.
+     * @param list The list of Entities.Person to add into people.
+     * @param <T> The type of list. It is assumed to be a subtype of Entities.Person.
      */
     public <T> void addPeopleToList(List<T> list){
         for(T person: list){
@@ -21,7 +21,7 @@ public class SpeakerText {
     /**
      * Sends a message to all attendees that are signed up in each of "events".
      *
-     * Extends a list of Person to people.
+     * Extends a list of Entities.Person to people.
      * @param events A list of strings consisting of event IDs.
      * @param message The content of the message being sent.
      * @param sender The user who sends the message
@@ -45,7 +45,7 @@ public class SpeakerText {
     /**
      * Sends a message to a user
      *
-     * Extends a list of Person to people.
+     * Extends a list of Entities.Person to people.
      * @param message The content of the message being sent.
      * @param attendee The attendee that is being replied to.
      * @param sender The user that is replying
