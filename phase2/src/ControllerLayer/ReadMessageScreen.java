@@ -13,11 +13,12 @@ public class ReadMessageScreen {
     private String username;
 
     /**
-     * The constructor for ControllerLayer.ReadMessageScreen. It takes 4 parameters.
-     * @param am The UseCases.AttendeeManager object that contains information from the file.
-     * @param om The UseCases.OrganizerManager object that contains information from the file.
-     * @param sm The UseCases.SpeakerManager object that contains information from the file.
-     * @param vm The UseCases.VipManager object that contains information from the file.
+     * The constructor for ReadMessageScreen. It takes 4 parameters.
+     *
+     * @param am       The AttendeeManager object that contains information from the file.
+     * @param om       The OrganizerManager object that contains information from the file.
+     * @param sm       The SpeakerManager object that contains information from the file.
+     * @param vm       The VipManager object that contains information from the file.
      * @param username The username of the logged-in/current user.
      */
     public ReadMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, VipManager vm,
@@ -39,13 +40,16 @@ public class ReadMessageScreen {
 
         List messages = messageSystem.readMessage(username);
 
-        for (Object message: messages) {
+        for (Object message : messages) {
             System.out.println(message);
         }
 
         System.out.println("To do an action, please enter the corresponding number:");
         System.out.println("1 - Reply to a message");
-        System.out.println("2 - Exit");
+        System.out.println("2 - Mark messages as unread");
+        System.out.println("3 - Delete selected messages");
+        System.out.println("4 - View your sent messages");
+        System.out.println("5 - Exit");
 
         String choice = messageSystem.userInput();
 
@@ -66,9 +70,29 @@ public class ReadMessageScreen {
                 }
                 break;
             case "2":
+                System.out.println("Enter \"All\" or the number of the message. When you are done listing, enter \"done\" ");
+                List<String> messageNums = messageSystem.readList();
+
+                messageSystem.markUnread(username, messageNums);
+                break;
+            case "3":
+                System.out.println("Enter \"All\" or the number of the message. When you are done listing, enter \"done\" ");
+                List<String> messageNumbers = messageSystem.readList();
+
+                messageSystem.deleteMessage(username, messageNumbers);
+            case "4":
+                System.out.println("Here are the messages you've sent");
+                List sentMsgs = messageSystem.seeSentMessages(username);
+
+                for (Object msg : messages) {
+                    System.out.println(msg);
+                }
+                break;
+            case "5":
                 break;
         }
 
 
     }
 }
+

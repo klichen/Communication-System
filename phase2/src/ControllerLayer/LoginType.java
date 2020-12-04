@@ -36,6 +36,9 @@ public class LoginType {
 
     }
 
+    /**
+     * Outputs requests for user to enter username and password. Starts hierarchy of program.
+     */
     public void run() throws IOException {
         LoginScreen loginScreen = new LoginScreen();
         loginScreen.enterUsername();

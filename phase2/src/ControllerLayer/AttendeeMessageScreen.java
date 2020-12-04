@@ -12,16 +12,16 @@ public class AttendeeMessageScreen {
     private final String username;
 
     /**
-     * Creates instance of ControllerLayer.AttendeeMessageScreen, the presenter class for the messaging hub of an attendee user.
+     * Creates instance of AttendeeMessageScreen, the presenter class for the messaging hub of an attendee user.
      *
-     * @param am Instance of UseCases.AttendeeManager with loaded information
-     * @param om Instance of UseCases.OrganizerManager with loaded information
-     * @param sm Instance of UseCases.SpeakerManager with loaded information
-     * @param vm Instance of UseCases.VipManager with loaded information
+     * @param am       Instance of AttendeeManager with loaded information
+     * @param om       Instance of OrganizerManager with loaded information
+     * @param sm       Instance of SpeakerManager with loaded information
+     * @param vm       Instance of VipManager with loaded information
      * @param username String of the username of current user logged in
      */
     public AttendeeMessageScreen(AttendeeManager am, OrganizerManager om, SpeakerManager sm, VipManager vm,
-                                 String username){
+                                 String username) {
         this.am = am;
         this.om = om;
         this.sm = sm;
@@ -31,7 +31,6 @@ public class AttendeeMessageScreen {
 
     /**
      * Outputs the options that the current user can perform
-     *
      */
     public void run() {
         MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
@@ -39,7 +38,7 @@ public class AttendeeMessageScreen {
 
         //need method from attendee manager
         List<String> contacts = am.getContactList(username);
-        for (String contact: contacts){
+        for (String contact : contacts) {
             System.out.println(contact);
         }
 
@@ -50,7 +49,7 @@ public class AttendeeMessageScreen {
 
         String choice = messageSystem.userInput();
 
-        switch(choice){
+        switch (choice) {
             case "1": {
                 boolean sent = false;
                 System.out.println("Enter the username of the person you want to message");
@@ -60,20 +59,19 @@ public class AttendeeMessageScreen {
                 String message = messageSystem.userInput();
 
                 sent = messageSystem.createMessage(message, receiver);
-                if(sent){
+                if (sent) {
                     System.out.println("Message sent!");
-                }
-                else{
+                } else {
                     System.out.println("An error occurred. Message not sent.");
                 }
                 break;
             }
-            case "2":{
+            case "2": {
                 ReadMessageScreen currMessages = new ReadMessageScreen(am, om, sm, vm, username);
                 currMessages.run();
                 break;
             }
-            case "3":{
+            case "3": {
                 break;
             }
 
