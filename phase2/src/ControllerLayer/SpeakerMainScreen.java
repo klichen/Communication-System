@@ -13,6 +13,7 @@ public class SpeakerMainScreen {
     AttendeeManager am;
     OrganizerManager om;
     VipManager vm;
+    EventsToHtml eth;
 
     /**
      * Create a ControllerLayer.SpeakerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
@@ -26,7 +27,7 @@ public class SpeakerMainScreen {
      * @param vm UseCases.VipManager object
      */
     public SpeakerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
-                             SpeakerManager sm, VipManager vm) {
+                             SpeakerManager sm, VipManager vm, EventsToHtml eth) {
         this.ss = new SpeakerSystem(sm);
         this.username = username;
         this.sm = sm;
@@ -34,6 +35,7 @@ public class SpeakerMainScreen {
         this.am = am;
         this.om = om;
         this.vm = vm;
+        this.eth = eth;
     }
     /**
      * Prints the available actions to the screen, and takes in inputs accordingly.
@@ -50,6 +52,7 @@ public class SpeakerMainScreen {
             System.out.println("To do an action, please press the corresponding number:");
             System.out.println("1 - Message");
             System.out.println("2 - Log out");
+            System.out.println("3 - Save Full Schedule (HTML)");
             String response = ss.readString();
             if (response.equals("1")) {
                 sms = new SpeakerMessageScreen(am, om, sm, vm, username);
@@ -57,6 +60,9 @@ public class SpeakerMainScreen {
             }
             else if (response.equals("2")) {
                 logout = true;
+            }
+            else if (response.equals("3")){
+                eth.saveToHtml(es);
             }
         }
     }

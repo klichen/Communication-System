@@ -10,6 +10,7 @@ public class AttendeeMainScreen {
     OrganizerManager om;
     SpeakerManager sm;
     VipManager vm;
+    EventsToHtml eth;
 
     /**
      * Constructor for the presenter showing all of the Actions Entities.Attendee can do
@@ -21,7 +22,7 @@ public class AttendeeMainScreen {
      * @param vm Instance of UseCases.VipManager with loaded information
      */
     public AttendeeMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
-                              SpeakerManager sm, VipManager vm){
+                              SpeakerManager sm, VipManager vm, EventsToHtml eth){
         this.as = new AttendeeSystem(am, es, om, sm, vm);
         this.username = username;
         this.am = am;
@@ -29,6 +30,7 @@ public class AttendeeMainScreen {
         this.om = om;
         this.sm = sm;
         this.vm = vm;
+        this.eth = eth;
     }
 
     /**
@@ -46,7 +48,8 @@ public class AttendeeMainScreen {
             System.out.println("4 - Add a contact to your contact list");
             System.out.println("5 - Send a message to a contact");
             System.out.println("6 - View previous messages");
-            System.out.println("7 - Log out");
+            System.out.println("7 - Save Full Schedule (HTML)");
+            System.out.println("8 - Log out");
 
             String response = as.readString();
 
@@ -121,8 +124,13 @@ public class AttendeeMainScreen {
 
                     break;
                 }
-                // Log off
+                // Save full list of events (HTML)
                 case "7": {
+                    eth.saveToHtml(es);
+                    break;
+                }
+                // Log off
+                case "8": {
                     logOut = true;
                     //pass screen back to login screen
                     break;

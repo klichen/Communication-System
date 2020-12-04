@@ -13,6 +13,7 @@ public class OrganizerMainScreen {
     SpeakerManager sm;
     VipManager vm;
     String username;
+    EventsToHtml eth;
 
     /**
      * Create an ControllerLayer.OrganizerMainScreen object and sets its variables username, am, es, om, and sm to the ones passed in
@@ -25,13 +26,14 @@ public class OrganizerMainScreen {
      * @param vm UseCases.VipManager object
      */
     public OrganizerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
-                               SpeakerManager sm, VipManager vm){
+                               SpeakerManager sm, VipManager vm, EventsToHtml eth){
         this.username = username;
         this.am = am;
         this.es = es;
         this.om = om;
         this.sm = sm;
         this.vm = vm;
+        this.eth = eth;
         this.os = new OrganizerSystem(am, es, om, sm, vm);
     }
 
@@ -52,7 +54,8 @@ public class OrganizerMainScreen {
             System.out.println("6 - Cancel an event");
             System.out.println("7 - Send message");
             System.out.println("8 - Read messages received");
-            System.out.println("9 - Log out");
+            System.out.println("9 - Save Full Schedule (HTML)");
+            System.out.println("10 - Log out");
 
             String response = os.readString();
 
@@ -169,8 +172,10 @@ public class OrganizerMainScreen {
                     ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
                     messageScreen.run();
                     break;
-
                 case "9":
+                    eth.saveToHtml(es);
+                    break;
+                case "10":
                     // Log out
                     logOut = true;
             }

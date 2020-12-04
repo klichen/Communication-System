@@ -1,6 +1,7 @@
 Events
 1,eventOne,9,1,3,false,1,speaker
 1,eventTwo,10,1,2,false,2,speaker,speaker2
+2,eventThree,11,2,10,true,0
 
 Logins
 speaker,speaker,password

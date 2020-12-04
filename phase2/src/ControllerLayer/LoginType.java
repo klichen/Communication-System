@@ -16,6 +16,7 @@ public class LoginType {
     private OrganizerManager om;
     private EventScheduler es;
     private VipManager vm;
+    private EventsToHtml eth;
 
     /**
      * Constructor, saves login information of current user
@@ -31,8 +32,10 @@ public class LoginType {
         om = new OrganizerManager();
         es = new EventScheduler();
         vm = new VipManager();
+        eth = new EventsToHtml();
         laso.loadAll(es, sm, am, om, vm);
         //las.loadAll(es, sm, am, om, vm);
+        //eth.saveToHtml(es);
 
     }
 
@@ -107,25 +110,25 @@ public class LoginType {
 
         if (am.checkLogin(username, password)) {
             //show attendee presenter
-            AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm);
+            AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
             ams.run();
             return true;
         }
         else if (sm.checkLogin(username, password)) {
             //show speaker presenter
-            SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm, vm); // assuming its implemented like other presenters
+            SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm, vm, eth); // assuming its implemented like other presenters
             sms.run();
             return true;
         }
         else if (om.checkLogin(username, password)) {
             //show organizer presenter
-            OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm, vm);
+            OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm, vm, eth);
             oms.run();
             return true;
         }
         else if(vm.checkLogin(username, password)){
             //show VIP presenter
-            VipMainScreen vms = new VipMainScreen(username, am, es, om, sm, vm);
+            VipMainScreen vms = new VipMainScreen(username, am, es, om, sm, vm, eth);
             vms.run();
             return true;
         }
