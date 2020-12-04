@@ -32,17 +32,17 @@ public class LoginType {
         es = new EventScheduler();
         vm = new VipManager();
         laso.loadAll(es, sm, am, om, vm);
+        //las.loadAll(es, sm, am, om, vm);
 
     }
 
     public void run() throws IOException {
-        //LoginScreen loginScreen = new LoginScreen();
-        //loginScreen.enterUsername();
-        //this.readUsername();
-        //loginScreen.enterPw();
-       // this.readPassword();
-        this.checkLogin();
-        //this.save();
+        LoginScreen loginScreen = new LoginScreen();
+        loginScreen.enterUsername();
+        this.readUsername();
+        loginScreen.enterPw();
+        this.readPassword();
+        this.checkLogin(); this.save();
     }
 
     public void save() throws IOException {
