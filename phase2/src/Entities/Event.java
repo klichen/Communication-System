@@ -59,6 +59,15 @@ public class Event implements Serializable{
     }
 
     /**
+     * Returns the full time of this event
+     *
+     * @return the full time of the event (start to finish)
+     */
+    public String getFullTime(){
+        return time + "-" + (time + duration);
+    }
+
+    /**
      * Returns the list of speakers' usernames
      *
      * @return the list of speakers' usernames
@@ -114,14 +123,31 @@ public class Event implements Serializable{
 
     /**
      * Returns the list of people who are signed up to the event.
+     *
+     * @return inEvent the people who are in this event
      */
     public List<String> getInEvent(){
         return inEvent;
     }
 
+    /**
+     * Returns whether this event is VIP only
+     *
+     * @return true if the event is VIP only
+     */
     public boolean getIsVip(){return isVip;}
 
+    /**
+     * Returns the duration of this event (in hours)
+     *
+     * @return duration of the event
+     */
     public int getDuration(){return duration;}
 
+    /**
+     * Returns the capacity of this event
+     *
+     * @return capacity the number of people this event can hold
+     */
     public int getCapacity(){return capacity;}
 }
