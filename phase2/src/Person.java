@@ -8,7 +8,7 @@ import java.util.Map;
 public abstract class Person<Public> implements Serializable {
     private String username;
     private String password;
-    private Map<String, List> senderToMessages;
+    private Map<String, List<String>> senderToMessages;
     private List<String> storedMessages;
     protected boolean isSpeaker;
     protected boolean isAttendee;
@@ -52,6 +52,14 @@ public abstract class Person<Public> implements Serializable {
     }
 
     /**
+     * Returns whether the Person is a Vip
+     * @return a boolean that returns true if Person is an Vip and false otherwise
+     */
+    boolean isVipType() {
+        return this.isVip;
+    }
+
+    /**
      * Returns whether a Person is a Person
      * always true
      * @return true as a Person is always a Person
@@ -82,12 +90,20 @@ public abstract class Person<Public> implements Serializable {
 //        return String.join(delim, storedMessages);
 //    }
 
+    public Map<String, List<String>> getSenderToMessages(){
+        return this.senderToMessages;
+    }
+
     /**
      * Returns variable storedMessages
      * @return A List containing all the Messages Person has been sent as Strings
      */
     public List<String> getStoredMessagesList() {
         return this.storedMessages;
+    }
+
+    public void setStoredMessagesList(List<String> messages){
+        this.storedMessages = messages;
     }
 
     /**
@@ -103,7 +119,7 @@ public abstract class Person<Public> implements Serializable {
             messages.add(messageContent);
             senderToMessages.put(messageSender, messages);
         }
-        storedMessages.add(messageSender + ": " + messageContent);
+        storedMessages.add(storedMessages.size()+1 + ". " + messageSender + ": " + messageContent + "---Sent");
     }
 }
 

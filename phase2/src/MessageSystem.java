@@ -134,6 +134,57 @@ public class MessageSystem {
     }
 
     /**
+     * Returns the messages sent by the currently logged in user as a string.
+     *
+     * @return Returns the string of messages sent by the current user.
+     */
+    public List seeSentMessages(String currPerson){
+        List<Attendee> attendees = am.getAllAttendees();
+        List<Organizer> organizers = om.getAllOrganizers();
+        List<Speaker> speakers = sm.getAllSpeakers();
+        List<Vip> vips = vm.getAllVips();
+
+        UserText uText = new UserText();
+        uText.addPeopleToList(attendees);
+        uText.addPeopleToList(organizers);
+        uText.addPeopleToList(speakers);
+        uText.addPeopleToList(vips);
+        return uText.seeSentMessages(currPerson);
+    }
+
+    /**
+     * Marks the messages selected as unread: ("Sent" in this design")
+     *
+     * @param currPerson Current person logged in
+     * @param messages The messages they want to mark as unread
+     */
+    public void markUnread(String currPerson, List<String> messages){
+        List<Attendee> attendees = am.getAllAttendees();
+        List<Organizer> organizers = om.getAllOrganizers();
+        List<Speaker> speakers = sm.getAllSpeakers();
+        List<Vip> vips = vm.getAllVips();
+        UserText uText = new UserText();
+        uText.addPeopleToList(attendees);
+        uText.addPeopleToList(organizers);
+        uText.addPeopleToList(speakers);
+        uText.addPeopleToList(vips);
+        uText.markUnread(currPerson, messages);
+    }
+
+    public void deleteMessage(String currPerson, List<String> messages){
+        List<Attendee> attendees = am.getAllAttendees();
+        List<Organizer> organizers = om.getAllOrganizers();
+        List<Speaker> speakers = sm.getAllSpeakers();
+        List<Vip> vips = vm.getAllVips();
+        UserText uText = new UserText();
+        uText.addPeopleToList(attendees);
+        uText.addPeopleToList(organizers);
+        uText.addPeopleToList(speakers);
+        uText.addPeopleToList(vips);
+        uText.deleteMessages(currPerson, messages);
+    }
+
+    /**
      * Sends a message to other other user(s).
      *
      * @param message    The message to be sent.
@@ -194,9 +245,11 @@ public class MessageSystem {
      */
     private void sendMessage(String message, List<String> talks, String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
+        List<Vip> vips = vm.getAllVips();
         if (sm.getUsernameToSpeaker().containsKey(currPerson)) {
             UserText st = new UserText();
             st.addPeopleToList(attendees);
+            st.addPeopleToList(vips);
             st.messageAllAttendeesInEvents(talks, message, currPerson);
         }
     }

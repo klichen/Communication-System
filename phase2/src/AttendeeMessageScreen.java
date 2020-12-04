@@ -48,13 +48,20 @@ public class AttendeeMessageScreen {
 
         switch(choice){
             case "1": {
+                boolean sent = false;
                 System.out.println("Enter the username of the person you want to message");
                 String receiver = messageSystem.userInput();
 
                 System.out.println("Enter the message");
                 String message = messageSystem.userInput();
 
-                messageSystem.createMessage(message, receiver);
+                sent = messageSystem.createMessage(message, receiver);
+                if(sent){
+                    System.out.println("Message sent!");
+                }
+                else{
+                    System.out.println("An error occurred. Message not sent.");
+                }
                 break;
             }
             case "2":{
