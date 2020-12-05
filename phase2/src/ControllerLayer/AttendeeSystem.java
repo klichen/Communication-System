@@ -142,26 +142,39 @@ public class AttendeeSystem {
         List<String> idSchedule =  this.am.getSchedule(username);
         List<Event> fullSchedule = getSchedule(username);
         boolean canAdd = true;
-        int eventTime;
+        int eventStartTime;
+        int eventEndTime;
         boolean vipOnly;
+        // Checks if Event ID exists
         if (validEvent(eventID)) {
-            eventTime = getEventMap().get(eventID).getTime();
+            eventStartTime = getEventMap().get(eventID).getTime();
             vipOnly = getEventMap().get(eventID).getIsVip();
         }
         else{
+            // Event ID does not exist
             return false;
         }
+
+        // Checks if Event is for VIP's only
         if (vipOnly){
             return false;
         }
-        for (Event i: fullSchedule){
-            if(i.getTime() != eventTime && !idSchedule.contains(eventID)){
+        for (Event event: fullSchedule){
+            if(event.getTime() != eventStartTime && !idSchedule.contains(eventID)){
                 canAdd = true;
             }
             else{
                 canAdd = false;
                 break;
             }
+        }
+        for (Event event: fullSchedule){
+            // Checks if the event with eventID starts at same time/during any other event in the user's schedule
+            if(event.getTime() <= eventStartTime && eventStartTime < event.getEndTime()) {
+                canAdd = false;
+                break;
+            }
+
         }
         return canAdd;
     }

@@ -150,4 +150,12 @@ public class Event implements Serializable{
      * @return capacity the number of people this event can hold
      */
     public int getCapacity(){return capacity;}
+
+    /**
+     * Returns the time the event ends
+     * @return time the event ends
+     */
+    public int getEndTime(){
+        return this.time + this.duration;
+    }
 }
