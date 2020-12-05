@@ -143,7 +143,7 @@ public class MessageSystem {
      *
      * @return Returns the string of messages sent by the current user.
      */
-    public List seeSentMessages(String currPerson) {
+    public List<String> seeSentMessages(String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();

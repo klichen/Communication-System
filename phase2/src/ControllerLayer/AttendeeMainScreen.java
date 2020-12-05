@@ -1,8 +1,19 @@
 package ControllerLayer;
 
 import UseCases.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class AttendeeMainScreen {
+    @FXML
+    private Button viewTextButton;
     AttendeeSystem as;
     String username;
     AttendeeManager am;
@@ -31,6 +42,10 @@ public class AttendeeMainScreen {
         this.sm = sm;
         this.vm = vm;
         this.eth = eth;
+    }
+
+    public AttendeeMainScreen(){
+
     }
 
     /**
@@ -140,5 +155,18 @@ public class AttendeeMainScreen {
 
         }
 
+    }
+    public void openAttendeeMainScreen() throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("/GUI/AttendeeScreen.fxml"));
+        stage.setTitle("Welcome " + username);
+        stage.setScene(new Scene(root));
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    public void viewMessages() {
+        ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
+        messageScreen.showMessages();
     }
 }

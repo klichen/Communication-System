@@ -106,12 +106,13 @@ public class LoginType {
 //     * @param es UseCases.EventScheduler instance passed from Main method
 //     * @param vm UseCases.VipManager instance passed from Main method
      */
-    public boolean checkLogin() {
+    public boolean checkLogin() throws IOException {
 
         if (am.checkLogin(username, password)) {
             //show attendee presenter
             AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
-            ams.run();
+            //ams.run();
+            ams.openAttendeeMainScreen();
             return true;
         }
         else if (sm.checkLogin(username, password)) {

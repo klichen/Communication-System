@@ -2,9 +2,7 @@ package Backup;
 
 import java.io.IOException;
 
-import Backup.ViewInterface;
 import ControllerLayer.LoginType;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -13,7 +11,7 @@ public class MainPresenter{
     public Button logInbutton;
     private LoginType loginType;
 
-    public MainPresenter(ViewInterface view) throws IOException {
+    public MainPresenter() throws IOException {
         loginType = new LoginType();
     }
 

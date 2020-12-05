@@ -1,5 +1,6 @@
 package ControllerLayer;
 
+import GUI.AlertInterface;
 import GUI.AlertPopUp;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +33,7 @@ public class MainPresenter {
     public void clickedLogInButton() throws IOException {
         boolean valid = loginType.checkLogin();
         if(!valid){
-            AlertPopUp alertPopUp = new AlertPopUp();
+            AlertInterface alertPopUp = new AlertPopUp();
             alertPopUp.display("Log in Error", "Incorrect password/username.");
 
         }
@@ -48,7 +49,7 @@ public class MainPresenter {
             loginType.save();
             System.out.println("Saved!");
         } catch (IOException ioException) {
-            AlertPopUp alertPopUp = new AlertPopUp();
+            AlertInterface alertPopUp = new AlertPopUp();
             alertPopUp.display("Error", "Failed to save.");
         }
         stage.close();

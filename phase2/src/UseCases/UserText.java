@@ -118,7 +118,7 @@ public class UserText {
      *
      * @return Returns the string of messages sent by the current user.
      */
-    public List seeSentMessages(String currPerson) {
+    public List<String> seeSentMessages(String currPerson) {
         for (Person person : people) {
             List<String> list = person.getStoredMessagesList();
             for (String messages : list) {

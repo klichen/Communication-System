@@ -6,7 +6,7 @@ import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-public class AlertPopUp {
+public class AlertPopUp implements AlertInterface{
 
     public void display(String title, String message){
         Stage window = new Stage();

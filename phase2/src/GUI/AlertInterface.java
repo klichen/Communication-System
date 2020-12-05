@@ -1,4 +1,4 @@
-package Backup;
+package GUI;
 
 import ControllerLayer.*;
 import javafx.application.Application;
@@ -11,8 +11,8 @@ import javafx.scene.layout.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public interface ViewInterface {
-    Stage getWindow();
+import java.awt.*;
 
-    Scene logInScreen();
+public interface AlertInterface {
+    public void display(String title, String message);
 }

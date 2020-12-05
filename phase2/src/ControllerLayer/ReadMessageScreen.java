@@ -1,11 +1,13 @@
 package ControllerLayer;
 
+import GUI.ListScreenInterface;
+import GUI.MessagesScreen;
 import UseCases.*;
 import ControllerLayer.*;
-
+import java.util.ArrayList;
 import java.util.List;
 
-public class ReadMessageScreen {
+public class ReadMessageScreen{
     private AttendeeManager am;
     private OrganizerManager om;
     private SpeakerManager sm;
@@ -82,7 +84,7 @@ public class ReadMessageScreen {
                 messageSystem.deleteMessage(username, messageNumbers);
             case "4":
                 System.out.println("Here are the messages you've sent");
-                List sentMsgs = messageSystem.seeSentMessages(username);
+                List<String> sentMsgs = messageSystem.seeSentMessages(username);
 
                 for (Object msg : messages) {
                     System.out.println(msg);
@@ -91,8 +93,20 @@ public class ReadMessageScreen {
             case "5":
                 break;
         }
-
-
+    }
+    public void showMessages(){
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
+        List<String> usernames = new ArrayList<>();
+        List<String> sentMsgs = messageSystem.seeSentMessages(username);
+        List<String> reverseMsgs = new ArrayList<>();
+        for(String msg:sentMsgs){
+            int startIndex = msg.indexOf(".");
+            int endIndex = msg.indexOf(":");
+            usernames.add(0, msg.substring(startIndex + 1, endIndex));
+            reverseMsgs.add(0, msg);
+        }
+        ListScreenInterface messageScreen = new MessagesScreen();
+        messageScreen.display(usernames, reverseMsgs);
     }
 }
 

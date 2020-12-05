@@ -11,8 +11,8 @@ import javafx.scene.layout.*;
 
 import java.io.IOException;
 
-public class Main extends Application implements ViewInterface{
-    private final MainPresenter mainPresenter = new MainPresenter(this);
+public class Main extends Application{
+    private final MainPresenter mainPresenter = new MainPresenter();
     private Stage window;
     private Scene mainScreen;
 
