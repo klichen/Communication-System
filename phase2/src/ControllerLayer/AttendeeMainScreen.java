@@ -1,5 +1,7 @@
 package ControllerLayer;
 
+import GUI.AlertInterface;
+import GUI.AlertPopUp;
 import UseCases.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,11 +9,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AttendeeMainScreen {
+public class AttendeeMainScreen implements MainScreen{
+    @FXML
+    private Button logOutButton;
+    @FXML
+    private Text welcomeText;
     @FXML
     private Button viewTextButton;
     AttendeeSystem as;
@@ -34,6 +43,17 @@ public class AttendeeMainScreen {
      */
     public AttendeeMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                               SpeakerManager sm, VipManager vm, EventsToHtml eth){
+        this.as = new AttendeeSystem(am, es, om, sm, vm);
+        this.username = username;
+        this.am = am;
+        this.es = es;
+        this.om = om;
+        this.sm = sm;
+        this.vm = vm;
+        this.eth = eth;
+    }
+    public void setInstances(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
+                        SpeakerManager sm, VipManager vm, EventsToHtml eth){
         this.as = new AttendeeSystem(am, es, om, sm, vm);
         this.username = username;
         this.am = am;
@@ -150,23 +170,34 @@ public class AttendeeMainScreen {
                     //pass screen back to login screen
                     break;
                 }
-
             }
-
         }
-
     }
-    public void openAttendeeMainScreen() throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("/GUI/AttendeeScreen.fxml"));
-        stage.setTitle("Welcome " + username);
-        stage.setScene(new Scene(root));
-        stage.setResizable(false);
-        stage.show();
+
+    @Override
+    public List<Object> openMainScreen() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GUI/AttendeeScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        AttendeeMainScreen myPresenter = fxmlLoader.getController();
+        myPresenter.setInstances(username, am, es, om, sm, vm ,eth);
+        List<Object> map = new ArrayList<>();
+        map.add(new Scene(root));
+        map.add(myPresenter);
+        return map;
     }
 
     public void viewMessages() {
         ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
         messageScreen.showMessages();
+    }
+
+    public Text getWelcomeText(){
+        return welcomeText;
+    }
+
+    public void logOut() throws IOException {
+        Stage stage = (Stage) logOutButton.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("/GUI/GUI.fxml"));
+        stage.setScene(new Scene(root));
     }
 }

@@ -4,7 +4,10 @@ import UseCases.*;
 import javafx.scene.control.*;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import javafx.scene.Scene;
 
 public class LoginType {
     private String username;
@@ -106,38 +109,38 @@ public class LoginType {
 //     * @param es UseCases.EventScheduler instance passed from Main method
 //     * @param vm UseCases.VipManager instance passed from Main method
      */
-    public boolean checkLogin() throws IOException {
-
+    public List<Object> checkLogin() throws IOException {
+        AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
         if (am.checkLogin(username, password)) {
             //show attendee presenter
-            AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
+            //AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
             //ams.run();
-            ams.openAttendeeMainScreen();
-            return true;
+            return ams.openMainScreen();
         }
         else if (sm.checkLogin(username, password)) {
             //show speaker presenter
             SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm, vm, eth); // assuming its implemented like other presenters
             sms.run();
-            return true;
+            //return true;
+            return ams.openMainScreen();
         }
         else if (om.checkLogin(username, password)) {
             //show organizer presenter
             OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm, vm, eth);
             oms.run();
-            return true;
+            //return null;
+            return ams.openMainScreen();
         }
         else if(vm.checkLogin(username, password)){
             //show VIP presenter
             VipMainScreen vms = new VipMainScreen(username, am, es, om, sm, vm, eth);
             vms.run();
-            return true;
+            //return true;
+            return ams.openMainScreen();
         }
         else{
             System.out.println("Invalid username or password");
-            return false;
+            return null;
         }
-
-
     }
 }
