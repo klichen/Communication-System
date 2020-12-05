@@ -7,14 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 
 public class MainPresenter {
-    @FXML
-    private Button closeButton;
     @FXML
     private Button exitButton;
     @FXML
@@ -31,11 +32,18 @@ public class MainPresenter {
 
 
     public void clickedLogInButton() throws IOException {
-        boolean valid = loginType.checkLogin();
-        if(!valid){
+        List<Object> newMap = loginType.checkLogin();
+        Scene newScene = (Scene) newMap.get(0);
+        AttendeeMainScreen presenter = (AttendeeMainScreen) newMap.get(1);
+
+        if(newScene == null){
             AlertInterface alertPopUp = new AlertPopUp();
             alertPopUp.display("Log in Error", "Incorrect password/username.");
-
+        }
+        else{
+            Stage stage = (Stage) logInButton.getScene().getWindow();
+            presenter.getWelcomeText().setText("Welcome " + loginType.getUsername());
+            stage.setScene(newScene);
         }
     }
 
@@ -61,10 +69,5 @@ public class MainPresenter {
 
     public void setPassword() {
         loginType.setPassword(passwordInput.getText());
-    }
-
-    public void clickedCloseButton(){
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
     }
 }

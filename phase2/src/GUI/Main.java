@@ -9,14 +9,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class Main extends Application{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         MainPresenter mainPresenter = new MainPresenter();
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
+        Scene mainScene = new Scene(root);
         primaryStage.setTitle("Event Manager");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(mainScene);
         primaryStage.setResizable(false);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> {
@@ -27,8 +28,6 @@ public class Main extends Application {
             }
         });
     }
-
-
     public static void main(String[] args) {
         launch(args);
     }
