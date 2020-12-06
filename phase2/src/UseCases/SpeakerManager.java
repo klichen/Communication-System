@@ -21,20 +21,16 @@ public class SpeakerManager {
     }
 
     /**
+     * Precondition: username does not already exist
+     *
      * Creates a Entities.Speaker object, if the username does not already exist.
      * @param username String representing Entities.Speaker's username
      * @param password String representing Entities.Speaker's password
-     * @return boolean; true if Entities.Speaker object was created, false if it was not created
      */
-    public boolean createSpeaker(String username, String password){
-        if (!usernameToSpeaker.containsKey(username)) {
-            Speaker speaker = new Speaker(username, password);
-            allSpeakers.add(speaker);
-            usernameToSpeaker.put(username, speaker);
-            return true;
-        } else {
-            return false;
-        }
+    public void createSpeaker(String username, String password){
+        Speaker speaker = new Speaker(username, password);
+        allSpeakers.add(speaker);
+        usernameToSpeaker.put(username, speaker);
     }
 
     /**
@@ -134,5 +130,14 @@ public class SpeakerManager {
      */
     public boolean isContact(String speakerUsername, String personUsername){
         return usernameToSpeaker.get(speakerUsername).getContactList().contains(personUsername);
+    }
+
+    /**
+     * Returns true if a Speaker with this username already exists, false otherwise
+     * @param username The Entities.Speaker's username as a String
+     * @return true if a Speaker with this username already exists, false otherwise
+     */
+    public boolean speakerExists(String username){
+        return usernameToSpeaker.containsKey(username);
     }
 }

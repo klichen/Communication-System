@@ -61,33 +61,18 @@ public class OrganizerSystem {
         }
 
     /**
-     * Create a Entities.Speaker object.
-     * @param speakerUsername String representing the Entities.Speaker's username
-     * @param password String representing the Entities.Speaker's password
-     * @return boolean; true if the Entities.Speaker was created, false if it was not created.
-     */
-    public boolean createSpeaker(String speakerUsername, String password){
-        return sm.createSpeaker(speakerUsername, password);
-    }
-
-    /**
      * Create a Entities.Attendee object.
      * @param attendeeUsername String representing the Entities.Attendee's username
      * @param password String representing the Entities.Attendee's password
      * @return boolean; true if the Entities.Attendee was created, false if it was not created.
      */
     public boolean createAttendee(String attendeeUsername, String password){
-        return am.createAttendee(attendeeUsername, password);
-    }
-
-    /**
-     * Create a VIP object.
-     * @param vipUsername String representing the VIP's username
-     * @param password String representing the VIP's password
-     * @return boolean; true if the VIP was created, false if it was not created.
-     */
-    public boolean createVip(String vipUsername, String password){
-        return vm.createVip(vipUsername, password);
+        if (personExists(attendeeUsername)){
+            return false;
+        } else {
+            am.createAttendee(attendeeUsername, password);
+            return true;
+        }
     }
 
     /**
@@ -97,7 +82,42 @@ public class OrganizerSystem {
      * @return boolean; true if Entities.Organizer object was created, false if it was not created
      */
     public boolean createOrganizer(String organizerUsername, String password){
-        return om.createOrganizer(organizerUsername, password);
+        if (personExists(organizerUsername)){
+            return false;
+        } else {
+            om.createOrganizer(organizerUsername, password);
+            return true;
+        }
+    }
+
+    /**
+     * Create a Entities.Speaker object.
+     * @param speakerUsername String representing the Entities.Speaker's username
+     * @param password String representing the Entities.Speaker's password
+     * @return boolean; true if the Entities.Speaker was created, false if it was not created.
+     */
+    public boolean createSpeaker(String speakerUsername, String password){
+        if (personExists(speakerUsername)){
+            return false;
+        } else {
+            sm.createSpeaker(speakerUsername, password);
+            return true;
+        }
+    }
+
+    /**
+     * Create a VIP object.
+     * @param vipUsername String representing the VIP's username
+     * @param password String representing the VIP's password
+     * @return boolean; true if the VIP was created, false if it was not created.
+     */
+    public boolean createVip(String vipUsername, String password){
+        if (personExists(vipUsername)){
+            return false;
+        } else {
+            vm.createVip(vipUsername, password);
+            return true;
+        }
     }
 
     /**
@@ -126,6 +146,27 @@ public class OrganizerSystem {
         catch(NullPointerException e){
             return false;
         }
+    }
+
+    /**
+     * Returns true if a Person with this username already exists, false otherwise
+     * @param username The Entities.Person's username as a String
+     * @return true if a Person with this username already exists, false otherwise
+     */
+    public boolean personExists(String username){
+        if (am.attendeeExists(username)){
+            return true;
+        } else if (om.organizerExists(username)){
+            return true;
+        } else if (sm.speakerExists(username)){
+            return true;
+        } else if (vm.vipExists(username)){
+            return true;
+        } else {
+            // This username does not exist for any accounts
+            return false;
+        }
+
     }
 
     /**

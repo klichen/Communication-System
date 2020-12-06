@@ -21,20 +21,16 @@ public class OrganizerManager{
     }
 
     /**
+     * Precondition: username does not already exist
+     *
      * Creates an Entities.Organizer object, if the username does not already exist.
      * @param username String representing Entities.Organizer's username
      * @param password String representing Entities.Organizer's password
-     * @return boolean; true if Entities.Organizer object was created, false if it was not created
      */
-    public boolean createOrganizer(String username, String password){
-        if (!usernameToOrganizer.containsKey(username)) {
-            Organizer organizer = new Organizer(username, password);
-            allOrganizers.add(organizer);
-            usernameToOrganizer.put(username, organizer);
-            return true;
-        } else {
-            return false;
-        }
+    public void createOrganizer(String username, String password){
+        Organizer organizer = new Organizer(username, password);
+        allOrganizers.add(organizer);
+        usernameToOrganizer.put(username, organizer);
     }
 
     /**
@@ -79,4 +75,12 @@ public class OrganizerManager{
         return valid;
     }
 
+    /**
+     * Returns true if a Organizer with this username already exists, false otherwise
+     * @param username The Entities.Organizer's username as a String
+     * @return true if a Organizer with this username already exists, false otherwise
+     */
+    public boolean organizerExists(String username){
+        return usernameToOrganizer.containsKey(username);
+    }
 }

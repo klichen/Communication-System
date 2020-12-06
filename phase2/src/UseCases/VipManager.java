@@ -22,20 +22,16 @@ public class VipManager {
     }
 
     /**
+     * Precondition: username does not already exist
+     *
      * Creates a Entities.Vip account if the username does not already exist
      * @param username The Entities.Vip's username as a String
      * @param password The Entities.Vip's password as a String
-     * @return A boolean returning true if the Entities.Vip account was created and false if it was not created
      */
-    public boolean createVip(String username, String password){
-        if (!usernameToVip.containsKey(username)) {
-            Vip vip = new Vip(username, password);
-            allVips.add(vip);
-            usernameToVip.put(username, vip);
-            return true;
-        } else {
-            return false;
-        }
+    public void createVip(String username, String password){
+        Vip vip = new Vip(username, password);
+        allVips.add(vip);
+        usernameToVip.put(username, vip);
     }
 
     /**
@@ -142,5 +138,14 @@ public class VipManager {
     public List<String> getSchedule(String username){
         Vip vip = usernameToVip.get(username);
         return vip.getSchedule();
+    }
+
+    /**
+     * Returns true if a Vip with this username already exists, false otherwise
+     * @param username The Entities.Vip's username as a String
+     * @return true if a Vip with this username already exists, false otherwise
+     */
+    public boolean vipExists(String username){
+        return usernameToVip.containsKey(username);
     }
 }

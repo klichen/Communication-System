@@ -22,20 +22,16 @@ public class AttendeeManager{
     }
 
     /**
+     * Precondition: username does not already exist
+     *
      * Creates an Entities.Attendee account if the username does not already exist
      * @param username The Entities.Attendee's username as a String
      * @param password The Entities.Attendee's password as a String
-     * @return A boolean returning true if the Entities.Attendee account was created and false if it was not created
      */
-    public boolean createAttendee(String username, String password){
-        if (!usernameToAttendee.containsKey(username)) {
-            Attendee attendee = new Attendee(username, password);
-            allAttendees.add(attendee);
-            usernameToAttendee.put(username, attendee);
-            return true;
-        } else {
-            return false;
-        }
+    public void createAttendee(String username, String password){
+        Attendee attendee = new Attendee(username, password);
+        allAttendees.add(attendee);
+        usernameToAttendee.put(username, attendee);
     }
 
     /**
@@ -142,5 +138,14 @@ public class AttendeeManager{
     public List<String> getSchedule(String username){
         Attendee attendee = usernameToAttendee.get(username);
         return attendee.getSchedule();
+    }
+
+    /**
+     * Returns true if an Attendee with this username already exists, false otherwise
+     * @param username The Entities.Attendee's username as a String
+     * @return true if an Attendee with this username already exists, false otherwise
+     */
+    public boolean attendeeExists(String username){
+        return usernameToAttendee.containsKey(username);
     }
 }
