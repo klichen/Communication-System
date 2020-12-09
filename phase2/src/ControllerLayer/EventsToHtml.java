@@ -6,6 +6,9 @@ import java.io.*;
 import java.util.List;
 
 public class EventsToHtml {
+    /**
+     * Saves entire event scheduler to a HTML file
+     */
     public void saveToHtml(EventScheduler eventScheduler){
         String html = "<html>\n" +
                 "<head>\n" +
@@ -63,30 +66,55 @@ public class EventsToHtml {
             e.printStackTrace();
         }
     }
+    /**
+     * Helper method for getting the ID of the event
+     *
+     * @return the event ID
+     * */
     public String eventIdHelper(EventScheduler eventScheduler, String id){
         String html = "<th>";
         html = html + eventScheduler.getIdToEvent().get(id).getID();
         html = html + "</th>";
         return html;
     }
+    /**
+     * Helper method for getting the room number of the event
+     *
+     * @return the event room number
+     * */
     public String roomNumHelper(EventScheduler eventScheduler, String id){
         String html = "<th>";
         html = html + eventScheduler.getIdToEvent().get(id).getRoomNum();
         html = html + "</th>";
         return html;
     }
+    /**
+     * Helper method for getting the time of the event
+     *
+     * @return the event time
+     * */
     public String eventTimeHelper(EventScheduler eventScheduler, String id){
         String html = "<th>";
         html = html + eventScheduler.getIdToEvent().get(id).getFullTime();
         html = html + "</th>";
         return html;
     }
+    /**
+     * Helper method for getting the max capacity of the event
+     *
+     * @return the max capacity of the event
+     * */
     public String maxParticipantsHelper(EventScheduler eventScheduler, String id){
         String html = "<th>";
         html = html + eventScheduler.getIdToEvent().get(id).getCapacity();
         html = html + "</th>";
         return html;
     }
+    /**
+     * Helper method for getting number of current participants of the event
+     *
+     * @return the number of current participants
+     * */
     public String currentParticipantsHelper(EventScheduler eventScheduler, String id){
         List<String> temp = eventScheduler.getIdToEvent().get(id).getInEvent();
         String html = "<th>";
@@ -94,12 +122,22 @@ public class EventsToHtml {
         html = html + "</th>";
         return html;
     }
+    /**
+     * Helper method for getting whether the event is vip only or not
+     *
+     * @return true if the event is vip only
+     * */
     public String vipOnlyHelper(EventScheduler eventScheduler, String id){
         String html = "<th>";
         html = html + eventScheduler.getIdToEvent().get(id).getIsVip();
         html = html + "</th>";
         return html;
     }
+    /**
+     * Helper method for getting the speaker(s) of the event
+     *
+     * @return the speakers of the event
+     * */
     public String speakerHelper(EventScheduler eventScheduler, String id){
         String html = "<th>";
         if (eventScheduler.getIdToEvent().get(id).getSpeaker().size()==0){
