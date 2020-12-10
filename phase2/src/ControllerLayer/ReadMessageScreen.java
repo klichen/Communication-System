@@ -1,9 +1,12 @@
 package ControllerLayer;
 
+import GUI.AlertInterface;
+import GUI.AlertPopUp;
+import ControllerLayer.GUIControllers.SingleMessageScreenController;
 import GUI.ListScreenInterface;
 import GUI.MessagesScreen;
 import UseCases.*;
-import ControllerLayer.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -97,7 +100,7 @@ public class ReadMessageScreen{
     public void showMessages(){
         MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
         List<String> usernames = new ArrayList<>();
-        List<String> sentMsgs = messageSystem.seeSentMessages(username);
+        List<String> sentMsgs = messageSystem.readMessage(username);
         List<String> reverseMsgs = new ArrayList<>();
         for(String msg:sentMsgs){
             int startIndex = msg.indexOf(".");
@@ -107,6 +110,25 @@ public class ReadMessageScreen{
         }
         ListScreenInterface messageScreen = new MessagesScreen();
         messageScreen.display(usernames, reverseMsgs);
+
+        SingleMessageScreenController controller = messageScreen.getController();
+        List<String> msg = new ArrayList<>();
+        msg.add(controller.getMessage());
+
+        AlertInterface alert = new AlertPopUp();
+        if(controller.getDelete()){
+            messageSystem.deleteMessage(username, msg);
+            alert = new AlertPopUp();
+            alert.display("Success!", "Message deleted.");
+        }
+        if(!controller.getRead()){
+            messageSystem.markUnread(username, msg);
+            alert.display("Success!", "Message marked as unread.");
+        }
+        if(controller.getArchive()){
+            System.out.println("Not implemented yet");
+            alert.display("Success!", "Message Archived.");
+        }
     }
 }
 

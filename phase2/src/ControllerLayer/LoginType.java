@@ -20,6 +20,7 @@ public class LoginType {
     private EventScheduler es;
     private VipManager vm;
     private EventsToHtml eth;
+    private Scene mainScene;
 
     /**
      * Constructor, saves login information of current user
@@ -51,7 +52,8 @@ public class LoginType {
         this.readUsername();
         loginScreen.enterPw();
         this.readPassword();
-        this.checkLogin(); this.save();
+        this.checkLogin();
+        this.save();
     }
 
     public void save() throws IOException {
@@ -98,6 +100,9 @@ public class LoginType {
     public String getUsername() {
         return this.username;
     }
+    public void setMainScene(Scene mainScene){
+        this.mainScene = mainScene;
+    }
 
     /**
      * Matches username and password to an Entities.Attendee, Entities.Organizer or Entities.Speaker.
@@ -115,6 +120,7 @@ public class LoginType {
             //show attendee presenter
             //AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
             //ams.run();
+            ams.setMainScene(mainScene);
             return ams.openMainScreen();
         }
         else if (sm.checkLogin(username, password)) {

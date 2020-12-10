@@ -112,7 +112,7 @@ public class MessageSystem {
      * @return A string of the messages sent to currPerson in the form
      * sender1: message1, sender2: message2, ...
      */
-    public List readMessage(String currPerson) {
+    public List<String> readMessage(String currPerson) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();

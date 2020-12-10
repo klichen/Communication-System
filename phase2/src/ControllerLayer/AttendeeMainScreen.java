@@ -1,7 +1,6 @@
 package ControllerLayer;
 
-import GUI.AlertInterface;
-import GUI.AlertPopUp;
+import GUI.*;
 import UseCases.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,11 +17,12 @@ import java.util.List;
 
 public class AttendeeMainScreen implements MainScreen{
     @FXML
+    private Button viewEventsButton;
+    @FXML
     private Button logOutButton;
     @FXML
     private Text welcomeText;
-    @FXML
-    private Button viewTextButton;
+    private Scene mainScene;
     AttendeeSystem as;
     String username;
     AttendeeManager am;
@@ -43,14 +43,7 @@ public class AttendeeMainScreen implements MainScreen{
      */
     public AttendeeMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                               SpeakerManager sm, VipManager vm, EventsToHtml eth){
-        this.as = new AttendeeSystem(am, es, om, sm, vm);
-        this.username = username;
-        this.am = am;
-        this.es = es;
-        this.om = om;
-        this.sm = sm;
-        this.vm = vm;
-        this.eth = eth;
+        setInstances(username,am, es, om, sm, vm, eth);
     }
     public void setInstances(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                         SpeakerManager sm, VipManager vm, EventsToHtml eth){
@@ -180,6 +173,7 @@ public class AttendeeMainScreen implements MainScreen{
         Parent root = fxmlLoader.load();
         AttendeeMainScreen myPresenter = fxmlLoader.getController();
         myPresenter.setInstances(username, am, es, om, sm, vm ,eth);
+        myPresenter.setMainScene(mainScene);
         List<Object> map = new ArrayList<>();
         map.add(new Scene(root));
         map.add(myPresenter);
@@ -197,7 +191,56 @@ public class AttendeeMainScreen implements MainScreen{
 
     public void logOut() throws IOException {
         Stage stage = (Stage) logOutButton.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/GUI/GUI.fxml"));
-        stage.setScene(new Scene(root));
+        stage.setScene(mainScene);
+    }
+    public void addContact() {
+        AlertInputInterface alertInterface = new AlertPopUpInput();
+        alertInterface.display("Add a Contact", "Enter the name of the Contact you wish you add");
+        String contactID = alertInterface.getInput();
+        System.out.println(contactID);
+        if (this.as.canAddContact(username, contactID)) {
+            this.as.addContact(username, contactID);
+            AlertInterface alert = new AlertPopUp();
+            alert.display("Alert Message", "Contact added!");
+        } else {
+            AlertInterface alert = new AlertPopUp();
+            alert.display("Error", "Error occured.\n Please try again.");
+        }
+    }
+    public void sendMessage(){
+        AttendeeMessageScreen messageScreen = new AttendeeMessageScreen(am, om, sm, vm, username);
+        messageScreen.sendMessage();
+        }
+    public void setMainScene(Scene mainScene){
+        this.mainScene = mainScene;
+    }
+
+    public void viewEvents(){
+        ManageEventsViewInterface manageEventsScreen = new ManageEventsView();
+        List<String> events = this.as.getScheduleIds(username);
+        manageEventsScreen.display("My Events", events);
+        AlertInterface alert = new AlertPopUp();
+        if(manageEventsScreen.getEventController() != null && manageEventsScreen.getEventController().getCancel()){
+            if(as.canCancelEnrollment(username, manageEventsScreen.getEventController().getEventID())){
+                as.cancelEnrollment(username, manageEventsScreen.getEventController().getEventID());
+                alert.display("Success!", "Event Cancelled");
+            }
+            else{
+                alert.display("Error", "Event can not be cancelled");
+            }
+        }
+        if(manageEventsScreen.getController().getAddEvent()){
+            if(as.canAddEvent(username, manageEventsScreen.getController().getEventID())){
+                as.addEvent(username, manageEventsScreen.getController().getEventID());
+                alert.display("Success!", "Event Added!");
+            }
+            else{
+                alert.display("An Error Has Occurred", "Event could not be added.");
+            }
+        }
+        if(manageEventsScreen.getController().getSaveEvents()){
+            eth.saveToHtml(es);
+            alert.display("Downloaded", "Events downloaded as HTML.");
+        }
     }
 }

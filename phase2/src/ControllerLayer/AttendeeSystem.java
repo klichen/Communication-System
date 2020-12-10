@@ -60,13 +60,13 @@ public class AttendeeSystem {
      */
     public boolean canAddContact(String username, String contact){
         boolean userCheck = false;
-        if (am.getUsernameToAttendee().containsKey(username)){
+        if (am.getUsernameToAttendee().containsKey(contact)){
             userCheck = true;
-        } else if (om.getUsernameToOrganizer().containsKey(username)){
+        } else if (om.getUsernameToOrganizer().containsKey(contact)){
             userCheck = true;
-        } else if (sm.getUsernameToSpeaker().containsKey(username)){
+        } else if (sm.getUsernameToSpeaker().containsKey(contact)){
             userCheck = true;
-        } else if (vm.getUsernameToVip().containsKey(username)){
+        } else if (vm.getUsernameToVip().containsKey(contact)){
             userCheck = true;
         }
         return userCheck && this.am.canAddToContactList(username, contact);
@@ -230,6 +230,5 @@ public class AttendeeSystem {
             event.removeInEvent(username);
         }
     }
-
 
 }

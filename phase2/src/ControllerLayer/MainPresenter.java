@@ -27,20 +27,25 @@ public class MainPresenter {
     @FXML
     private Button logInButton;
 
+    private Scene mainScene;
+
     public MainPresenter() throws IOException {
     }
 
 
     public void clickedLogInButton() throws IOException {
+        usernameInput.setText("");
+        passwordInput.setText("");
+        loginType.setMainScene(mainScene);
         List<Object> newMap = loginType.checkLogin();
-        Scene newScene = (Scene) newMap.get(0);
-        AttendeeMainScreen presenter = (AttendeeMainScreen) newMap.get(1);
 
-        if(newScene == null){
+        if(newMap == null){
             AlertInterface alertPopUp = new AlertPopUp();
             alertPopUp.display("Log in Error", "Incorrect password/username.");
         }
         else{
+            Scene newScene = (Scene) newMap.get(0);
+            MainScreen presenter = (MainScreen) newMap.get(1);
             Stage stage = (Stage) logInButton.getScene().getWindow();
             presenter.getWelcomeText().setText("Welcome " + loginType.getUsername());
             stage.setScene(newScene);
@@ -55,7 +60,6 @@ public class MainPresenter {
     public void closeProgram(Stage stage) throws IOException {
         try {
             loginType.save();
-            System.out.println("Saved!");
         } catch (IOException ioException) {
             AlertInterface alertPopUp = new AlertPopUp();
             alertPopUp.display("Error", "Failed to save.");
@@ -69,5 +73,9 @@ public class MainPresenter {
 
     public void setPassword() {
         loginType.setPassword(passwordInput.getText());
+    }
+
+    public void setMainScene(Scene mainScene){
+        this.mainScene = mainScene;
     }
 }

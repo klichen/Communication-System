@@ -1,5 +1,6 @@
 package ControllerLayer;
 
+import GUI.*;
 import UseCases.*;
 
 import java.util.List;
@@ -75,6 +76,26 @@ public class AttendeeMessageScreen {
                 break;
             }
 
+        }
+    }
+    public void sendMessage(){
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
+        SendMessagesInterface messagesScreen = new SendMessagesScreen();
+        List<String> contactList = am.getContactList(username);
+        messagesScreen.display(contactList);
+        String message = messagesScreen.getMessage();
+        String receiver = messagesScreen.getReceiver();
+        if(message == null || receiver == null){
+            message = "";
+            receiver = "";
+        }
+        boolean sent = messageSystem.createMessage(message, receiver);
+        AlertInterface alert = new AlertPopUp();
+        if(sent){
+            alert.display("Message Sent", "Message Sent!");
+        }
+        else{
+            alert.display("Error", "Message not Sent.");
         }
     }
 }

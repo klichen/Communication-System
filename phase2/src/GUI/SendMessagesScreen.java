@@ -1,6 +1,5 @@
 package GUI;
 
-import ControllerLayer.GUIControllers.SingleMessageScreenController;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,40 +7,42 @@ import javafx.stage.*;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import ControllerLayer.ReadMessageScreen;
+import javafx.event.EventHandler;
+import javafx.event.ActionEvent;
 
 import java.util.List;
 
-public class MessagesScreen implements ListScreenInterface{
-    private SingleMessageScreenController controller;
+public class SendMessagesScreen implements SendMessagesInterface{
+    private String message;
+    private String receiver;
 
     @Override
-    public void display(List<String> names, List<String> messages) {
+    public void display(List<String> names) {
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("My Messages");
+        window.setTitle("Send a Message");
         window.setMinWidth(300);
         window.setMinHeight(500);
 
-        Label message = new Label("Choose a message to view:");
+        Label message = new Label("Choose a contact to send to:");
 
 
         VBox layout = new VBox(10);
         layout.getChildren().add(message);
         layout.setAlignment(Pos.CENTER);
-        int i = 0;
         for(String name:names){
-            Button nameButton = new Button(i+1 + name);
+            Button nameButton = new Button(name);
             layout.getChildren().add(nameButton);
-            String m = messages.get(i);
             nameButton.setOnAction(e -> {
-                SingleMessageScreen msgScreen= new SingleMessageScreen();
-                msgScreen.display("Message from " + name, m);
-
-                controller = msgScreen.getController();
-                controller.setMessage(m);
+                AlertPopUpLargeInput inputScreen = new AlertPopUpLargeInput();
+                inputScreen.display("Send Message", "Enter your message:");
+                this.message = inputScreen.getInput();
+                Button button = (Button) e.getSource();
+                receiver = button.getText();
+                window.close();
             });
-            i++;
         }
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(layout);
@@ -51,7 +52,12 @@ public class MessagesScreen implements ListScreenInterface{
         window.setScene(scene);
         window.showAndWait();
     }
-    public SingleMessageScreenController getController(){
-        return controller;
+
+    public String getMessage(){
+        return message;
+    }
+
+    public String getReceiver(){
+        return receiver;
     }
 }
