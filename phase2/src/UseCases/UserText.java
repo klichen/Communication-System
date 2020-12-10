@@ -2,6 +2,7 @@ package UseCases;
 
 import Entities.Attendee;
 import Entities.Person;
+import Entities.Vip;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,10 +81,19 @@ public class UserText {
      */
     public void messageAllAttendeesInEvents(List<String> events, String message, String sender) {
         for (Person user : people) {
-            if (user.isAttendeeType() || user.isVipType()) {
+            if (user.isAttendeeType()) {
                 boolean sent = false; //so a message is not sent twice if an attendee is signed up for multiple talks
                 for (String talk : events) {
                     if (((Attendee) user).getSchedule().contains(talk) && !sent) {
+                        user.addToMessageStorage(message, sender);
+                        sent = true;
+                    }
+                }
+            }
+            if (user.isVipType()) {
+                boolean sent = false; //so a message is not sent twice if an attendee is signed up for multiple talks
+                for (String talk : events) {
+                    if (((Vip) user).getSchedule().contains(talk) && !sent) {
                         user.addToMessageStorage(message, sender);
                         sent = true;
                     }

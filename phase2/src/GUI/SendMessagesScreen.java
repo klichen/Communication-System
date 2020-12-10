@@ -11,6 +11,7 @@ import ControllerLayer.ReadMessageScreen;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SendMessagesScreen implements SendMessagesInterface{
@@ -53,11 +54,15 @@ public class SendMessagesScreen implements SendMessagesInterface{
         window.showAndWait();
     }
 
+    @Override
     public String getMessage(){
         return message;
     }
 
-    public String getReceiver(){
-        return receiver;
+    @Override
+    public List<String> getReceivers(){
+        List<String> l = new ArrayList<>();
+        l.add(receiver);
+        return l;
     }
 }

@@ -126,9 +126,10 @@ public class LoginType {
         else if (sm.checkLogin(username, password)) {
             //show speaker presenter
             SpeakerMainScreen sms = new SpeakerMainScreen(username, am, es, om, sm, vm, eth); // assuming its implemented like other presenters
-            sms.run();
+            //sms.run();
             //return true;
-            return ams.openMainScreen();
+            sms.setMainScene(mainScene);
+            return sms.openMainScreen();
         }
         else if (om.checkLogin(username, password)) {
             //show organizer presenter

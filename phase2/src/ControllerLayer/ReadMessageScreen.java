@@ -97,12 +97,12 @@ public class ReadMessageScreen{
                 break;
         }
     }
-    public void showMessages(){
+    public void showMessages() {
         MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
         List<String> usernames = new ArrayList<>();
         List<String> sentMsgs = messageSystem.readMessage(username);
         List<String> reverseMsgs = new ArrayList<>();
-        for(String msg:sentMsgs){
+        for (String msg : sentMsgs) {
             int startIndex = msg.indexOf(".");
             int endIndex = msg.indexOf(":");
             usernames.add(0, msg.substring(startIndex + 1, endIndex));
@@ -113,21 +113,23 @@ public class ReadMessageScreen{
 
         SingleMessageScreenController controller = messageScreen.getController();
         List<String> msg = new ArrayList<>();
-        msg.add(controller.getMessage());
+        if (controller != null) {
+            msg.add(controller.getMessage());
 
-        AlertInterface alert = new AlertPopUp();
-        if(controller.getDelete()){
-            messageSystem.deleteMessage(username, msg);
-            alert = new AlertPopUp();
-            alert.display("Success!", "Message deleted.");
-        }
-        if(!controller.getRead()){
-            messageSystem.markUnread(username, msg);
-            alert.display("Success!", "Message marked as unread.");
-        }
-        if(controller.getArchive()){
-            System.out.println("Not implemented yet");
-            alert.display("Success!", "Message Archived.");
+            AlertInterface alert = new AlertPopUp();
+            if (controller.getDelete()) {
+                messageSystem.deleteMessage(username, msg);
+                alert = new AlertPopUp();
+                alert.display("Success!", "Message deleted.");
+            }
+            if (!controller.getRead()) {
+                messageSystem.markUnread(username, msg);
+                alert.display("Success!", "Message marked as unread.");
+            }
+            if (controller.getArchive()) {
+                System.out.println("Not implemented yet");
+                alert.display("Success!", "Message Archived.");
+            }
         }
     }
 }

@@ -1,10 +1,27 @@
 package ControllerLayer;
 
+import GUI.AlertInterface;
+import GUI.AlertPopUp;
 import UseCases.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class SpeakerMainScreen {
+public class SpeakerMainScreen implements MainScreen {
+    @FXML
+    private Button logOutButton;
+    @FXML
+    private Text welcomeText;
+    private Scene mainScene;
     String username;
     SpeakerSystem ss;
     SpeakerManager sm;
@@ -28,6 +45,10 @@ public class SpeakerMainScreen {
      */
     public SpeakerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                              SpeakerManager sm, VipManager vm, EventsToHtml eth) {
+        setInstances(username, am, es, om, sm, vm, eth);
+    }
+    public void setInstances(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
+                             SpeakerManager sm, VipManager vm, EventsToHtml eth){
         this.ss = new SpeakerSystem(sm);
         this.username = username;
         this.sm = sm;
@@ -37,6 +58,7 @@ public class SpeakerMainScreen {
         this.vm = vm;
         this.eth = eth;
     }
+    public SpeakerMainScreen(){}
     /**
      * Prints the available actions to the screen, and takes in inputs accordingly.
      */
@@ -65,5 +87,49 @@ public class SpeakerMainScreen {
                 eth.saveToHtml(es);
             }
         }
+    }
+
+    public void viewMessages() {
+        ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
+        messageScreen.showMessages();
+
+    }
+
+    public void viewTalks() {
+        SpeakerMessageScreen messageScreen = new SpeakerMessageScreen(am, om, sm, vm, username);
+        messageScreen.sendMessage();
+    }
+
+    public void logOut() {
+        Stage stage = (Stage) logOutButton.getScene().getWindow();
+        stage.setScene(mainScene);
+    }
+
+    @Override
+    public List<Object> openMainScreen() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GUI/SpeakerScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        SpeakerMainScreen myPresenter = fxmlLoader.getController();
+        myPresenter.setInstances(username, am, es, om, sm, vm ,eth);
+        myPresenter.setMainScene(mainScene);
+        List<Object> map = new ArrayList<>();
+        map.add(new Scene(root));
+        map.add(myPresenter);
+        return map;
+    }
+    public void setMainScene(Scene mainScene){
+        this.mainScene = mainScene;
+    }
+
+
+    @Override
+    public Text getWelcomeText() {
+        return welcomeText;
+    }
+
+    public void getAllEvents() {
+        eth.saveToHtml(es);
+        AlertInterface alert = new AlertPopUp();
+        alert.display("Downloaded", "Events saved as HTML file.");
     }
 }

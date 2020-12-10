@@ -84,7 +84,7 @@ public class AttendeeMessageScreen {
         List<String> contactList = am.getContactList(username);
         messagesScreen.display(contactList);
         String message = messagesScreen.getMessage();
-        String receiver = messagesScreen.getReceiver();
+        String receiver = messagesScreen.getReceivers().get(0);
         if(message == null || receiver == null){
             message = "";
             receiver = "";
