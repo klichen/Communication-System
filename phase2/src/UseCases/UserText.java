@@ -2,6 +2,7 @@ package UseCases;
 
 import Entities.Attendee;
 import Entities.Person;
+import Entities.Vip;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -80,10 +81,18 @@ public class UserText {
      */
     public void messageAllAttendeesInEvents(List<String> events, String message, String sender) {
         for (Person user : people) {
-            if (user.isAttendeeType() || user.isVipType()) {
+            if (user.isAttendeeType()) {
                 boolean sent = false; //so a message is not sent twice if an attendee is signed up for multiple talks
                 for (String talk : events) {
                     if (((Attendee) user).getSchedule().contains(talk) && !sent) {
+                        user.addToMessageStorage(message, sender);
+                        sent = true;
+                    }
+                }
+            } else if (user.isVipType()) {
+                boolean sent = false;
+                for (String talk : events) {
+                    if (((Vip) user).getSchedule().contains(talk) && !sent) {
                         user.addToMessageStorage(message, sender);
                         sent = true;
                     }
@@ -122,7 +131,7 @@ public class UserText {
         for (Person person : people) {
             List<String> list = person.getStoredMessagesList();
             for (String messages : list) {
-                if (messages.contains(currPerson)) {
+                if (messages.contains(currPerson + ":")) {
                     this.sentMessages.add(messages.replaceFirst("[0-9]+\\.", ""));
                 }
             }
@@ -147,7 +156,7 @@ public class UserText {
                     }
                 } else {
                     for (String msg : list) {
-                        if (stringContainsItemFromList(msg, messages))
+                        if (stringContainsItemFromList(msg + ".", messages))
                             newList.add(replaceLast("---Seen", "---Sent", msg));
                         else {
                             newList.add(msg);
@@ -166,18 +175,28 @@ public class UserText {
      * @param currPerson Current person logged in
      * @param messages   The messages they want to mark as unread
      */
-    public void deleteMessages(String currPerson, List<String> messages) {
+    public void deleteMessages(String currPerson, List<String> messages, boolean archived) {
         for (Person person : people) {
             if (person.getUsername().equals(currPerson)) {
                 List<String> list = person.getStoredMessagesList();
                 List<String> newList = new ArrayList<>();
+                List<String> archivedList = new ArrayList<>();
                 if (messages.contains("All")) {
                     person.setStoredMessagesList(newList);
+                    if (archived) {
+                        person.addToArchivedMessagesList(list);
+                    }
                 } else {
                     for (String msg : list) {
-                        if (!stringContainsItemFromList(msg, messages))
+                        if (!stringContainsItemFromList(msg + ".", messages))
                             newList.add(msg);
+                        else {
+                            archivedList.add(msg);
+                        }
                     }
+                }
+                if (archived) {
+                    person.addToArchivedMessagesList(archivedList);
                 }
                 person.setStoredMessagesList(newList);
             }

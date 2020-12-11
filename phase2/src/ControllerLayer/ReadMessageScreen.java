@@ -50,8 +50,9 @@ public class ReadMessageScreen{
         System.out.println("1 - Reply to a message");
         System.out.println("2 - Mark messages as unread");
         System.out.println("3 - Delete selected messages");
-        System.out.println("4 - View your sent messages");
-        System.out.println("5 - Exit");
+        System.out.println("4 - Archive selected messages");
+        System.out.println("5 - View your sent messages");
+        System.out.println("6 - Exit");
 
         String choice = messageSystem.userInput();
 
@@ -81,16 +82,23 @@ public class ReadMessageScreen{
                 System.out.println("Enter \"All\" or the number of the message. When you are done listing, enter \"done\" ");
                 List<String> messageNumbers = messageSystem.readList();
 
-                messageSystem.deleteMessage(username, messageNumbers);
+                messageSystem.deleteMessage(username, messageNumbers, false);
+                break;
             case "4":
-                System.out.println("Here are the messages you've sent");
+                System.out.println("Enter \"All\" or the number of the message. When you are done listing, enter \"done\" ");
+                List<String> msgNums = messageSystem.readList();
+
+                messageSystem.deleteMessage(username, msgNums, true);
+                break;
+            case "5":
+                System.out.println("Here are the messages you've sent:");
                 List<String> sentMsgs = messageSystem.seeSentMessages(username);
 
-                for (Object msg : messages) {
+                for (Object msg : sentMsgs) {
                     System.out.println(msg);
                 }
                 break;
-            case "5":
+            case "6":
                 break;
         }
     }

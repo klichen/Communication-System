@@ -182,7 +182,7 @@ public class MessageSystem {
      * @param currPerson Current person logged in
      * @param messages   The messages they want to mark as unread
      */
-    public void deleteMessage(String currPerson, List<String> messages) {
+    public void deleteMessage(String currPerson, List<String> messages, boolean archive) {
         List<Attendee> attendees = am.getAllAttendees();
         List<Organizer> organizers = om.getAllOrganizers();
         List<Speaker> speakers = sm.getAllSpeakers();
@@ -192,7 +192,12 @@ public class MessageSystem {
         uText.addPeopleToList(organizers);
         uText.addPeopleToList(speakers);
         uText.addPeopleToList(vips);
-        uText.deleteMessages(currPerson, messages);
+        if(archive){
+            uText.deleteMessages(currPerson, messages, true);
+        }
+        else{
+            uText.deleteMessages(currPerson, messages, false);
+        }
     }
 
     /**
