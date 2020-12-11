@@ -1,4 +1,5 @@
 package Entities;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public abstract class Person<Public> implements Serializable {
     private String password;
     private Map<String, List<String>> senderToMessages;
     private List<String> storedMessages;
+    private List<String> archivedMessages;
     protected boolean isSpeaker;
     protected boolean isAttendee;
     protected boolean isOrganizer;
@@ -27,6 +29,7 @@ public abstract class Person<Public> implements Serializable {
         this.password = password;
         this.senderToMessages = new HashMap<>();
         this.storedMessages = new ArrayList<>();
+        this.archivedMessages = new ArrayList<>();
     }
 
     /**
@@ -118,12 +121,31 @@ public abstract class Person<Public> implements Serializable {
     }
 
     /**
-     * Changes the variable senderToMessages
+     * Returns variable archivedMessages
+     *
+     * @return A List containing all the archives messages Person has been sent as Strings
+     */
+    public List<String> getArchivedMessages() {
+        return this.archivedMessages;
+    }
+
+    /**
+     * Changes the variable storedMessages
      *
      * @param messages The new List that replaces the current storedMessages
      */
     public void setStoredMessagesList(List<String> messages) {
         this.storedMessages = messages;
+    }
+
+
+    /**
+     * Changes the variable archivedMessages
+     *
+     * @param messages The new List that replaces the current archivedMessages
+     */
+    public void addToArchivedMessagesList(List<String> messages) {
+        this.archivedMessages.addAll(messages);
     }
 
     /**
@@ -135,6 +157,12 @@ public abstract class Person<Public> implements Serializable {
     public void addToMessageStorage(String messageContent, String messageSender) {
         if (senderToMessages.containsKey(messageSender)) {
             senderToMessages.get(messageSender).add(messageContent);
+            for (String archived : this.archivedMessages) {
+                if(archived.contains(messageSender + ":"))
+                {
+                    storedMessages.add(archived);
+                }
+            }
         } else {
             List<String> messages = new ArrayList<>();
             messages.add(messageContent);
