@@ -1,8 +1,27 @@
 package ControllerLayer;
 
+import GUI.*;
 import UseCases.*;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class VipMainScreen {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class VipMainScreen implements MainScreen{
+    @FXML
+    private Button viewEventsButton;
+    @FXML
+    private Text welcomeText;
+    @FXML
+    private Button logOutButton;
+    private Scene mainScene;
     VipSystem vs;
     String username;
     AttendeeManager am;
@@ -23,6 +42,11 @@ public class VipMainScreen {
      */
     public VipMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                               SpeakerManager sm, VipManager vm, EventsToHtml eth){
+        setInstances(username, am, es, om, sm, vm, eth);
+    }
+
+    private void setInstances(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
+                              SpeakerManager sm, VipManager vm, EventsToHtml eth) {
         this.vs = new VipSystem(am, es, om, sm, vm);
         this.username = username;
         this.am = am;
@@ -32,6 +56,7 @@ public class VipMainScreen {
         this.vm = vm;
         this.eth = eth;
     }
+    public VipMainScreen(){}
 
     /**
      * Prints the texts for the VIP to see, and takes in inputs accordingly.
@@ -140,6 +165,81 @@ public class VipMainScreen {
 
         }
 
+    }
+    public List<Object> openMainScreen() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GUI/VipScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        VipMainScreen myPresenter = fxmlLoader.getController();
+        myPresenter.setInstances(username, am, es, om, sm, vm ,eth);
+        myPresenter.setMainScene(mainScene);
+        List<Object> map = new ArrayList<>();
+        map.add(new Scene(root));
+        map.add(myPresenter);
+        return map;
+    }
+
+    public void viewMessages() {
+        ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
+        messageScreen.showMessages();
+    }
+
+    public Text getWelcomeText(){
+        return welcomeText;
+    }
+
+    public void logOut() throws IOException {
+        Stage stage = (Stage) logOutButton.getScene().getWindow();
+        stage.setScene(mainScene);
+    }
+    public void addContact() {
+        AlertInputInterface alertInterface = new AlertPopUpInput();
+        alertInterface.display("Add a Contact", "Enter the name of the Contact you wish you add");
+        String contactID = alertInterface.getInput();
+        System.out.println(contactID);
+        if (this.vs.canAddContact(username, contactID)) {
+            this.vs.addContact(username, contactID);
+            AlertInterface alert = new AlertPopUp();
+            alert.display("Alert Message", "Contact added!");
+        } else {
+            AlertInterface alert = new AlertPopUp();
+            alert.display("Error", "Error occured.\n Please try again.");
+        }
+    }
+    public void sendMessage(){
+        VipMessageScreen messageScreen = new VipMessageScreen(am, om, sm, vm, username);
+        messageScreen.sendMessage();
+    }
+    public void setMainScene(Scene mainScene){
+        this.mainScene = mainScene;
+    }
+
+    public void viewEvents(){
+        ManageEventsViewInterface manageEventsScreen = new ManageEventsView();
+        List<String> events = this.vs.getScheduleIds(username);
+        manageEventsScreen.display("My Events", events);
+        AlertInterface alert = new AlertPopUp();
+        if(manageEventsScreen.getEventController() != null && manageEventsScreen.getEventController().getCancel()){
+            if(vs.canCancelEnrollment(username, manageEventsScreen.getEventController().getEventID())){
+                vs.cancelEnrollment(username, manageEventsScreen.getEventController().getEventID());
+                alert.display("Success!", "Event Cancelled");
+            }
+            else{
+                alert.display("Error", "Event can not be cancelled");
+            }
+        }
+        if(manageEventsScreen.getController().getAddEvent()){
+            if(vs.canAddEvent(username, manageEventsScreen.getController().getEventID())){
+                vs.addEvent(username, manageEventsScreen.getController().getEventID());
+                alert.display("Success!", "Event Added!");
+            }
+            else{
+                alert.display("An Error Has Occurred", "Event could not be added.");
+            }
+        }
+        if(manageEventsScreen.getController().getSaveEvents()){
+            eth.saveToHtml(es);
+            alert.display("Downloaded", "Events downloaded as HTML.");
+        }
     }
 }
 

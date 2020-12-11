@@ -1,5 +1,9 @@
 package ControllerLayer;
 
+import GUI.AlertInterface;
+import GUI.AlertPopUp;
+import GUI.SendMessagesInterface;
+import GUI.SendMessagesScreen;
 import UseCases.AttendeeManager;
 import UseCases.OrganizerManager;
 import UseCases.SpeakerManager;
@@ -79,6 +83,26 @@ public class VipMessageScreen {
                 break;
             }
 
+        }
+    }
+    public void sendMessage(){
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
+        SendMessagesInterface messagesScreen = new SendMessagesScreen();
+        List<String> contactList = vm.getContactList(username);
+        messagesScreen.display(contactList);
+        String message = messagesScreen.getMessage();
+        String receiver = messagesScreen.getReceivers().get(0);
+        if(message == null || receiver == null){
+            message = "";
+            receiver = "";
+        }
+        boolean sent = messageSystem.createMessage(message, receiver);
+        AlertInterface alert = new AlertPopUp();
+        if(sent){
+            alert.display("Message Sent", "Message Sent!");
+        }
+        else{
+            alert.display("Error", "Message not Sent.");
         }
     }
 }

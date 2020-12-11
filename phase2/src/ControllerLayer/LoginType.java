@@ -115,10 +115,9 @@ public class LoginType {
 //     * @param vm UseCases.VipManager instance passed from Main method
      */
     public List<Object> checkLogin() throws IOException {
-        AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
         if (am.checkLogin(username, password)) {
             //show attendee presenter
-            //AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
+            AttendeeMainScreen ams = new AttendeeMainScreen(username, am, es, om, sm, vm, eth);
             //ams.run();
             ams.setMainScene(mainScene);
             return ams.openMainScreen();
@@ -142,9 +141,10 @@ public class LoginType {
         else if(vm.checkLogin(username, password)){
             //show VIP presenter
             VipMainScreen vms = new VipMainScreen(username, am, es, om, sm, vm, eth);
-            vms.run();
+            //vms.run();
             //return true;
-            return ams.openMainScreen();
+            vms.setMainScene(mainScene);
+            return vms.openMainScreen();
         }
         else{
             System.out.println("Invalid username or password");
