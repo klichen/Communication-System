@@ -1,5 +1,8 @@
 package ControllerLayer.GUIControllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SingleMessageScreenController {
     private String message;
     private boolean read = true;
@@ -36,6 +39,4 @@ public class SingleMessageScreenController {
     public String getMessage(){
         return message;
     }
-
-
 }

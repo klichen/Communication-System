@@ -1,11 +1,33 @@
 package ControllerLayer;
 
+import ControllerLayer.GUIControllers.ManageEventController;
+import ControllerLayer.GUIControllers.MessageScreenController;
+import ControllerLayer.GUIControllers.SingleMessageScreenController;
+import GUI.*;
 import UseCases.*;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrganizerMainScreen {
+public class OrganizerMainScreen implements MainScreen{
+    public Button viewEventsButton;
+    @FXML
+    private Button backButton;
+    @FXML
+    private Button logOutButton;
+    @FXML
+    private Text welcomeText;
+    private Scene mainScene;
+    private Scene organizerScene;
     AttendeeManager am;
     EventScheduler es;
     OrganizerManager om;
@@ -27,6 +49,10 @@ public class OrganizerMainScreen {
      */
     public OrganizerMainScreen(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
                                SpeakerManager sm, VipManager vm, EventsToHtml eth){
+        setInstances(username, am, es, om, sm, vm, eth);
+    }
+    public void setInstances(String username, AttendeeManager am, EventScheduler es, OrganizerManager om,
+                        SpeakerManager sm, VipManager vm, EventsToHtml eth){
         this.username = username;
         this.am = am;
         this.es = es;
@@ -37,13 +63,14 @@ public class OrganizerMainScreen {
         this.os = new OrganizerSystem(am, es, om, sm, vm);
     }
 
+    public OrganizerMainScreen(){}
+
     /**
      * Prints the available actions to the screen, and takes in inputs accordingly.
      */
     public void run() {
         boolean logOut = false;
         while (!logOut) {
-
             System.out.println("Hello " + username + ".");
             System.out.println("To do an action, please press the corresponding number:");
             System.out.println("1 - Schedule an event (enter room into system)");
@@ -180,5 +207,162 @@ public class OrganizerMainScreen {
                     logOut = true;
             }
         }
+    }
+
+    public void viewMessages() {
+        ReadMessageScreen messageScreen = new ReadMessageScreen(am, om, sm, vm, username);
+        messageScreen.showMessages();
+    }
+
+    public void viewEvents() {
+        List<String> events = os.getEventList();
+
+        ManageEventsInterface screen = new ManageEventsScreen();
+        screen.display(events);
+        ManageEventController controller = screen.getController();
+        AlertInterface alert = new AlertPopUp();
+        if(controller.getAddEvent()){
+            boolean created = os.createEvent(controller.getRoomNum(), controller.getId(), controller.getTime(),
+                    controller.getListSpeakerUsername(), controller.getVIP(), controller.getDuration(),
+                    controller.getCapacity());
+            if(created){
+                alert.display("Success!", "Event Created.");
+            }
+            else{
+                alert.display("Error", "Event could not be created.");
+            }
+        }
+        if(controller.getCancelEvent()){
+            boolean created = os.cancelEvent(controller.getId());
+            if(created){
+                alert.display("Success!", "Event Cancelled.");
+            }
+            else{
+                alert.display("Error", "Event could not be cancelled.");
+            }
+        }
+        if(controller.getDownloadEvent()){
+            eth.saveToHtml(es);
+            alert.display("Success!", "Events downloaded as HTML");
+        }
+    }
+
+    public void createAccount() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GUI/CreateAccountScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        OrganizerMainScreen myPresenter = fxmlLoader.getController();
+        myPresenter.setInstances(username, am, es, om, sm, vm ,eth);
+        myPresenter.setMainScene(mainScene);
+        Stage window = (Stage) logOutButton.getScene().getWindow();
+        myPresenter.setOrganizerScene(window.getScene());
+        window.setScene(new Scene(root));
+    }
+
+    public void sendMessage(ActionEvent event) {
+        OrganizerMessageScreen messageScreen = new OrganizerMessageScreen(username, am, om, sm, vm);
+        messageScreen.sendMessage();
+    }
+
+    public void logOut(ActionEvent event) {
+        Stage stage = (Stage) logOutButton.getScene().getWindow();
+        stage.setScene(mainScene);
+    }
+
+    @Override
+    public List<Object> openMainScreen() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/GUI/OrganizerScreen.fxml"));
+        Parent root = fxmlLoader.load();
+        OrganizerMainScreen myPresenter = fxmlLoader.getController();
+        myPresenter.setInstances(username, am, es, om, sm, vm ,eth);
+        myPresenter.setMainScene(mainScene);
+        List<Object> map = new ArrayList<>();
+        map.add(new Scene(root));
+        map.add(myPresenter);
+        return map;
+    }
+
+    @Override
+    public Text getWelcomeText() {
+        return welcomeText;
+    }
+    public void setMainScene(Scene mainScene){
+        this.mainScene = mainScene;
+    }
+
+    public void createVIP() {
+        CreateAccountInterface createScreen = new CreatingAccountGUI();
+        createScreen.display("Creating VIP User", "Creating VIP user");
+        String user = createScreen.getUsernameValue();
+        String pass = createScreen.getPasswordValue();
+        if(user != null && pass != null){
+            boolean created = os.createVip(user, pass);
+            AlertInterface alert = new AlertPopUp();
+            if(created){
+                alert.display("Success!", "Account created!");
+            }
+            else{
+                alert.display("Error", "Account could not be created.");
+            }
+        }
+    }
+
+    public void createAttendee(ActionEvent event) {
+        CreateAccountInterface createScreen = new CreatingAccountGUI();
+        createScreen.display("Creating Attendee User", "Creating Attendee user");
+        String user = createScreen.getUsernameValue();
+        String pass = createScreen.getPasswordValue();
+        if(user != null && pass != null){
+            boolean created = os.createVip(user, pass);
+            AlertInterface alert = new AlertPopUp();
+            if(created){
+                alert.display("Success!", "Account created!");
+            }
+            else{
+                alert.display("Error", "Account could not be created.");
+            }
+        }
+    }
+
+    public void createSpeaker(ActionEvent event) {
+        CreateAccountInterface createScreen = new CreatingAccountGUI();
+        createScreen.display("Creating Speaker User", "Creating Speaker user");
+        String user = createScreen.getUsernameValue();
+        String pass = createScreen.getPasswordValue();
+        if(user != null && pass != null){
+            boolean created = os.createVip(user, pass);
+            AlertInterface alert = new AlertPopUp();
+            if(created){
+                alert.display("Success!", "Account created!");
+            }
+            else{
+                alert.display("Error", "Account could not be created.");
+            }
+        }
+    }
+
+    public void createOrganizer() {
+        CreateAccountInterface createScreen = new CreatingAccountGUI();
+        createScreen.display("Creating Organizer User", "Creating Organizer user");
+        String user = createScreen.getUsernameValue();
+        String pass = createScreen.getPasswordValue();
+        if(user != null && pass != null){
+            boolean created = os.createVip(user, pass);
+            AlertInterface alert = new AlertPopUp();
+            if(created){
+                alert.display("Success!", "Account created!");
+            }
+            else{
+                alert.display("Error", "Account could not be created.");
+            }
+        }
+    }
+
+    public void backButton() {
+        Stage window =  (Stage) backButton.getScene().getWindow();
+        window.setScene(organizerScene);
+    }
+
+    public void setOrganizerScene(Scene scene){
+        organizerScene = scene;
     }
 }

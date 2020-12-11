@@ -28,7 +28,7 @@ public class AlertPopUp implements AlertInterface{
         layout.setAlignment(Pos.CENTER);
         layout.setFillWidth(true);
 
-        Scene scene = new Scene(layout, 250, 150);
+        Scene scene = new Scene(layout, 600, 300);
         errorMessage.prefWidthProperty().bind(scene.widthProperty());
         window.setScene(scene);
         window.showAndWait();

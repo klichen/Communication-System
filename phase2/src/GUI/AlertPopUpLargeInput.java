@@ -15,7 +15,7 @@ public class AlertPopUpLargeInput implements AlertInputInterface{
 
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle(title);
-        window.setMinWidth(300);
+        window.setMinWidth(250);
         window.setMinHeight(150);
 
         Label msg = new Label(message);
@@ -24,11 +24,11 @@ public class AlertPopUpLargeInput implements AlertInputInterface{
         input.setPromptText("Enter here");
 
         input.setOnKeyReleased(e ->{
-            if(e.getCode() == KeyCode.ENTER){
+            if(e.getCode().equals(KeyCode.ENTER)){
                 inputValue = input.getText();
                 window.close();
             }
-            else if(e.getCode() == KeyCode.TAB){
+            else if(e.getCode().equals(KeyCode.TAB)){
                 String newLine = "\n";
                 input.appendText(newLine);
             }
@@ -37,9 +37,9 @@ public class AlertPopUpLargeInput implements AlertInputInterface{
         VBox layout = new VBox(10);
         layout.getChildren().addAll(msg, input, exitButton);
         layout.setAlignment(Pos.CENTER);
-        layout.setFillWidth(true);
+        layout.setFillWidth(false);
 
-        Scene scene = new Scene(layout, 250, 150);
+        Scene scene = new Scene(layout, 250, 400);
         window.setScene(scene);
         window.showAndWait();
     }

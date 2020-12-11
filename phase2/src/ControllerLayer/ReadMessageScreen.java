@@ -1,10 +1,8 @@
 package ControllerLayer;
 
-import GUI.AlertInterface;
-import GUI.AlertPopUp;
+import ControllerLayer.GUIControllers.MessageScreenController;
+import GUI.*;
 import ControllerLayer.GUIControllers.SingleMessageScreenController;
-import GUI.ListScreenInterface;
-import GUI.MessagesScreen;
 import UseCases.*;
 
 import java.util.ArrayList;
@@ -121,12 +119,18 @@ public class ReadMessageScreen{
 
         SingleMessageScreenController controller = messageScreen.getController();
         List<String> msg = new ArrayList<>();
+        MessageScreenController thisController = messageScreen.getThisController();
+
+        if(thisController.getOpenSent()){
+            openSent();
+        }
+
         if (controller != null) {
             msg.add(controller.getMessage());
 
             AlertInterface alert = new AlertPopUp();
             if (controller.getDelete()) {
-                messageSystem.deleteMessage(username, msg);
+                messageSystem.deleteMessage(username, msg, false);
                 alert = new AlertPopUp();
                 alert.display("Success!", "Message deleted.");
             }
@@ -135,10 +139,24 @@ public class ReadMessageScreen{
                 alert.display("Success!", "Message marked as unread.");
             }
             if (controller.getArchive()) {
-                System.out.println("Not implemented yet");
+                messageSystem.deleteMessage(username, msg, true);
                 alert.display("Success!", "Message Archived.");
             }
         }
     }
+    public void openSent(){
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
+        List<String> usernames = new ArrayList<>();
+        List<String> sentMsgs = messageSystem.seeSentMessages(username);
+        List<String> reverseMsgs = new ArrayList<>();
+        for (String msg : sentMsgs) {
+            usernames.add("");
+            reverseMsgs.add(0, msg);
+        }
+        SentMessageInterface messageScreen = new SentMessageScreen() {
+        };
+        messageScreen.display(usernames, reverseMsgs);
+    }
+
 }
 

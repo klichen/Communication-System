@@ -1,7 +1,10 @@
 package ControllerLayer;
 
+import GUI.*;
 import UseCases.*;
 import ControllerLayer.*;
+
+import java.util.List;
 
 public class
         OrganizerMessageScreen {
@@ -46,6 +49,30 @@ public class
         }
         else{
             System.out.println("An error occurred. Message not sent.");
+        }
+    }
+    public void sendMessage(){
+        MessageSystem messageSystem = new MessageSystem(am, om, sm, vm, username);
+        AlertInputInterface input = new AlertPopUpInput();
+        input.display("Choose Recipient", "Enter the username of the recipient.\n " +
+                "Enter \"All Attendees\" to message all Attendes.\nEnter \"All Speakers\" to message all Speakers ");
+        String receiver = input.getInput();
+        
+        AlertInputInterface messageInput = new AlertPopUpLargeInput();
+        messageInput.display("Send Message", "Enter your message.\nPress \"Enter\" when finished.");
+        String message = messageInput.getInput();
+
+        if(message == null || receiver == null){
+            message = "";
+            receiver = "";
+        }
+        boolean sent = messageSystem.createMessage(message, receiver);
+        AlertInterface alert = new AlertPopUp();
+        if(sent){
+            alert.display("Message Sent", "Message Sent!");
+        }
+        else{
+            alert.display("Error", "Message not Sent.");
         }
     }
 }

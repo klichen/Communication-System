@@ -1,6 +1,7 @@
 package GUI;
 
 import javafx.scene.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.*;
 import javafx.geometry.*;
 import javafx.scene.control.*;
@@ -22,19 +23,18 @@ public class AlertPopUpInput implements AlertInputInterface{
         TextField input = new TextField();
         input.setPromptText("Enter here");
 
-        input.setOnAction(e ->{
-            inputValue = input.getText();
-            window.close();
+        input.setOnKeyReleased(e ->{
+            if(e.getCode().equals(KeyCode.ENTER)) {
+                inputValue = input.getText();
+                window.close();
+            }
         });
         exitButton.setOnAction(e-> window.close());
         VBox layout = new VBox(10);
         layout.getChildren().addAll(msg, input, exitButton);
         layout.setAlignment(Pos.CENTER);
-        layout.setFillWidth(true);
-        msg.setWrapText(true);
 
-        Scene scene = new Scene(layout, 250, 150);
-        msg.prefWidthProperty().bind(scene.widthProperty());
+        Scene scene = new Scene(layout, 350, 150);
         window.setScene(scene);
         window.showAndWait();
     }

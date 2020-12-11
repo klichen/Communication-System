@@ -46,6 +46,7 @@ public class ManageEventsView implements ManageEventsViewInterface{
             controller.setEventID(alert.getInput());
             window.close();
         });
+        exitButton.setOnAction(e -> window.close());
 
         HBox buttonLayout = new HBox(8);
         buttonLayout.getChildren().addAll(addEventButton, saveEventButton,exitButton);

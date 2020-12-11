@@ -134,9 +134,10 @@ public class LoginType {
         else if (om.checkLogin(username, password)) {
             //show organizer presenter
             OrganizerMainScreen oms = new OrganizerMainScreen(username, am, es, om ,sm, vm, eth);
-            oms.run();
+            //oms.run();
             //return null;
-            return ams.openMainScreen();
+            oms.setMainScene(mainScene);
+            return oms.openMainScreen();
         }
         else if(vm.checkLogin(username, password)){
             //show VIP presenter

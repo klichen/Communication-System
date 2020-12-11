@@ -203,6 +203,9 @@ public class OrganizerSystem {
         // if input isn't 'true', Boolean.parseBoolean will return false
         return Boolean.parseBoolean(strInput);
     }
+    public List<String> getEventList(){
+        return es.getEventList();
+    }
 
 }
 

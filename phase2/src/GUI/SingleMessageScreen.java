@@ -28,6 +28,8 @@ public class SingleMessageScreen{
 
         archiveMessageButton.setOnAction(e -> {
             controller.setArchive(true);
+            AlertPopUp alert2 = new AlertPopUp();
+            alert2.display("Alert", "Message archived.\nExit view message window to see changes.");
             window.close();
         });
         deleteMessageButton.setOnAction(e -> {
@@ -47,6 +49,8 @@ public class SingleMessageScreen{
             }
         });
         unreadButton.setOnAction(e-> {
+            AlertPopUp alert2 = new AlertPopUp();
+            alert2.display("Alert", "Message marked as unread.\nExit view message window to see changes.");
             controller.setRead(false);
             window.close();
         });
